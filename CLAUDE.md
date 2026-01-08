@@ -167,7 +167,9 @@ BODE-shopify (this repo)          ← Master framework
 | Project | Repo | Store | Status |
 |---------|------|-------|--------|
 | KeyBar | `bodenburgc/keybar-2026` | TBD | In Development |
-| FishArmor | `bodenburgc/FishArmorBackup` | fisharmorusa-com.myshopify.com | Live |
+| FishArmor | TBD | fisharmorusa-com.myshopify.com | Pending Migration |
+
+> **Note:** FishArmor is currently live at `bodenburgc/FishArmorBackup`. It will be migrated to use BODE as upstream, following the same pattern as KeyBar (separate repo with origin + upstream remotes). Until then, BODE improvements should be manually synced to FishArmor as needed.
 
 ### Creating a New Project
 
