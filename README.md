@@ -1,42 +1,78 @@
-# BODE
+# KeyBar 2026
 
-A modern Shopify theme framework designed for deployment across multiple client projects.
+Shopify theme for **KeyBar** - premium EDC (everyday carry) key organizers, crafted in the USA.
+
+## Store
+
+- **URL:** TBD
+- **Framework:** [BODE](https://github.com/bodenburgc/BODE-shopify)
+- **Migration:** From WordPress (71 plugins → Shopify native)
 
 ## Quick Start
 
 ```bash
-# Clone
-git clone https://github.com/bodenburgc/BODE-shopify.git
-cd BODE-shopify
+# Install Shopify CLI (if needed)
+npm install -g @shopify/cli
 
-# Development
+# Authenticate (update store URL when available)
+shopify auth login --store your-store.myshopify.com
+
+# Start local development
 shopify theme dev
-
-# Deploy
-shopify theme push
 ```
 
-## For New Projects
+## Commands
 
-Use BODE as a template for new Shopify stores:
+| Command | Description |
+|---------|-------------|
+| `shopify theme dev` | Local development server with hot reload |
+| `shopify theme push` | Deploy to store |
+| `shopify theme pull` | Pull live theme changes |
+| `shopify theme check` | Lint and validate theme |
+| `shopify theme share` | Generate preview link |
+
+## Framework Updates
+
+This project uses BODE as its upstream framework. To pull framework improvements:
 
 ```bash
-# Create from template
-gh repo create project-name --template bodenburgc/BODE-shopify
-cd project-name
-
-# Add upstream for framework updates
-git remote add upstream https://github.com/bodenburgc/BODE-shopify.git
-
-# Pull framework updates (periodic)
 git fetch upstream
 git merge upstream/main
+# Resolve any conflicts in brand-specific files
+git push origin main
 ```
+
+## Project Structure
+
+```
+keybar-2026/
+├── assets/          # CSS, JS, images
+├── blocks/          # Reusable block components
+├── config/          # Theme settings
+├── layout/          # Theme layouts
+├── locales/         # Translations (English only)
+├── sections/        # Page sections
+├── snippets/        # Reusable Liquid snippets
+├── templates/       # Page templates (JSON)
+└── .docs/           # Brand documentation
+```
+
+## Git Remotes
+
+| Remote | URL | Purpose |
+|--------|-----|---------|
+| origin | `bodenburgc/keybar-2026` | Push project changes |
+| upstream | `bodenburgc/BODE-shopify` | Pull framework updates |
 
 ## Documentation
 
-See [CLAUDE.md](CLAUDE.md) for detailed architecture and development guidelines.
+- `CLAUDE.md` - AI assistant guidance
+- `.docs/brand/` - Brand guidelines (colors, voice, typography)
 
-## License
+## Migration Notes
 
-Private - BODE Design
+KeyBar is migrating from WordPress to Shopify. Key considerations:
+- URL redirects from old WordPress structure
+- Product data migration
+- Customer account migration
+- SEO preservation
