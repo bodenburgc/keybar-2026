@@ -60,7 +60,24 @@ These files come from BODE and should generally not be modified directly:
 - `assets/theme.js`, `assets/theme.css` - Core JS/CSS
 - `config/settings_schema.json` - Settings definitions
 
-If you need changes to framework files, make them in BODE-shopify first, then pull upstream.
+**If you need changes to framework files, make them in BODE-shopify first, then pull upstream.**
+
+### Development Workflow
+
+```
+Need to fix a bug?           → Go to BODE, fix it, pull upstream here
+Need to add a feature?       → Go to BODE, add it, pull upstream here
+Need to change KeyBar brand? → Do it HERE in KeyBar
+```
+
+| Change Type | Where |
+|-------------|-------|
+| Bug fix in section/snippet | BODE → pull upstream |
+| New reusable section | BODE → pull upstream |
+| Improve JS/CSS | BODE → pull upstream |
+| KeyBar colors/fonts | HERE |
+| KeyBar homepage | HERE |
+| KeyBar logos | HERE |
 
 ## Shopify CLI Commands
 
