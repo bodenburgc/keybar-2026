@@ -4,14 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-**Shopify theme for FishArmor** - ice fishing equipment brand specializing in protective shuttles for expensive sonar electronics.
+**BODE** - A modern Shopify theme framework designed for deployment across multiple client projects.
 
 | Key Info | Value |
 |----------|-------|
-| Theme Framework | BODE 2024 v1.0.0 |
-| Store URL | fisharmorusa-com.myshopify.com |
+| Theme Framework | BODE 1.0.0 |
 | Shopify API | 2024-01 |
-| Target Market | Serious ice fishermen, USA-made premium |
+| Architecture | Liquid + Web Components |
+| CSS System | CSS Variables + Utility Classes |
 
 ## Shopify CLI Commands
 
@@ -43,11 +43,6 @@ Section groups render across all pages. Defined in JSON files:
 - `footer-group.json` - Footer, mobile dock, cookie banner
 - `overlay-group.json` - Cart drawer, search drawer, age verification, newsletter popup
 
-Context variants override defaults per market:
-- `.context.us.json` - US market (primary)
-- `.context.eu.json` - EU market (GDPR considerations)
-- `.context.b2b.json` - Wholesale/dealer features
-
 ### Template → Section Flow
 
 Templates are JSON files referencing sections:
@@ -65,7 +60,6 @@ templates/product.json → sections/main-product.liquid
 | `snippets/js-variables.liquid` | JavaScript config (routes, feature flags) |
 | `config/settings_schema.json` | Theme settings definitions |
 | `config/settings_data.json` | Current setting values (auto-generated, DO NOT edit) |
-| `.shopify/metafields.json` | Metafield definitions |
 | `locales/en.default.json` | Translation strings (English only) |
 
 ### Asset Loading
@@ -78,66 +72,55 @@ CSS loads in `<head>` (blocking), JS loads with `defer`:
 
 Feature-specific assets load conditionally in sections (e.g., `cart.css`, `cart.js`).
 
-## Third-Party Integrations
+## Core Sections
 
-| Prefix/Files | Integration |
-|--------------|-------------|
-| `wcp_*` snippets | Wholesale/Volume Discount app (cart, discount, variant) |
-| `wlm-*` snippets | Password Lock / Member Access |
-| `freegifts-*` | Free Gifts program |
-| Judge.me | Product reviews (stored in `reviews.*` metafields) |
-| Google Maps | Dealer locator (`sections/dealer-locator.liquid`, `assets/dealer-locator.js`) |
-| PhotoSwipe | Image galleries |
+### Essential (Always Needed)
+- `main-product.liquid` - Product page
+- `main-collection.liquid` - Collection listing
+- `main-cart.liquid` - Cart page
+- `cart-drawer.liquid` - Cart sidebar
+- `header.liquid` - Navigation header
+- `footer.liquid` - Site footer
+- `mobile-dock.liquid` - Mobile bottom nav
+- `search-drawer.liquid` - Search interface
+- `announcement-bar.liquid` - Top banner
+- `cookie-banner.liquid` - Cookie consent
 
-## Custom FishArmor Sections
+### Specialized
+- `dealer-locator.liquid` - Google Maps store finder
+- `product-bundle.liquid` - Bundle builder
+- `product-comparison.liquid` - Feature comparison tables
+- `pro-staff.liquid` - Team/ambassador showcase
 
-Notable custom sections beyond the standard BODE theme:
-- `dealer-locator.liquid` - Google Maps-based store finder with dealer list
-- `pro-staff.liquid` - Pro staff/ambassador showcase
-- `product-comparison.liquid` / `comparison-table.liquid` - Product feature comparison
-- `floating-product-collection.liquid` - Floating product display for collections
+## JavaScript Architecture
 
-## Brand Guidelines
+**Pattern:** Vanilla JavaScript with Web Components (Custom Elements API)
 
-**Full documentation:** `/.docs/brand/` (READ THIS for any content/design work)
+**Core Components:**
+- `cart-drawer`, `drawer-element`, `modal-element` - Overlays
+- `quantity-input`, `product-recommendations` - Product features
+- `sticky-header`, `custom-navigation` - Navigation
+- `accordion-details`, `dropdown-element` - UI elements
+- `loading-bar`, `animate-element` - Feedback/animation
 
-| File | Contents |
-|------|----------|
-| `VOICE.md` | Personality, tone, messaging hierarchy, vocabulary |
-| `COLORS.md` | OKLCH palette (Safety Red, Steel Ice, Frozen Lake, etc.) |
-| `TYPOGRAPHY.md` | Gazzetta + Barlow fluid type system |
-| `COMPONENTS.md` | Buttons, forms, cards with Tailwind classes |
-| `LAYOUT.md` | 12-column grid, containers, spacing scale |
-| `ASSETS.md` | Logo specs, file naming, badge system |
-| `ICONS.md` | Icon system with mobile-friendly touch targets |
-| `PHOTOGRAPHY.md` | Ice fishing imagery, Minnesota winters, real anglers |
+**Global Config:** `window.theme` object initialized via `js-variables.liquid`
 
-**Quick Reference:**
-- **Voice:** Confident, rugged, technical. "Protect Your Investment" messaging
-- **Vocabulary:** "Shuttle" (not case), "roto-molded" (not plastic), "USA-made"
-- **Primary CTA:** Safety Red (#D32F2F) background, white text, uppercase
-- **Typography:** Gazzetta (headlines, uppercase) + Barlow (body)
-- **Mobile-first:** 48x48px touch targets, high contrast for snow conditions
+## CSS Architecture
 
-## Shopify Admin API
+**System:** CSS Custom Properties generated from theme settings
 
-**Endpoint:** `https://fisharmorusa-com.myshopify.com/admin/api/2024-01/graphql.json`
+**Variables Categories:**
+- Colors: `--color-base-*`, `--color-button-*`, `--color-drawer-*`
+- Typography: `--font-heading-family`, `--font-body-family`
+- Spacing: `--sp-1` through `--sp-100` (0.25rem to 32rem)
+- Layout: `--page-width`, `--page-padding`
+- Rounding: `--rounded-button`, `--rounded-card`
 
-```bash
-TOKEN="shpat_..."
-URL="https://fisharmorusa-com.myshopify.com/admin/api/2024-01/graphql.json"
-
-curl -s -X POST "$URL" \
-    -H "X-Shopify-Access-Token: $TOKEN" \
-    -H "Content-Type: application/json" \
-    -d '{"query":"mutation { productUpdate(...) }"}' \
-    | python3 -m json.tool
-```
-
-**Notes:**
-- Use `sleep` delays between requests (rate limiting)
-- Product IDs: `gid://shopify/Product/[ID]` format
-- Common mutations: `productUpdate`, `productPublish`, `collectionDelete`
+**Breakpoints:**
+- Mobile: < 768px
+- Tablet: 768px+
+- Desktop: 1024px+
+- Large: 1280px+
 
 ## Development Notes
 
@@ -164,35 +147,40 @@ curl -s -X POST "$URL" \
 - `_` prefix = internal/helper blocks (`_counter.liquid`, `_accordion-row.liquid`)
 - Regular blocks are user-facing in theme editor
 
-## Metafields
+## Multi-Project Usage
 
-**Product:**
-- `custom.card_description` - Short card text
-- `custom.description_short` - Condensed description
-- `shopify.item-material` - Material (aluminum, roto-molded)
-- `shopify.durability-features` - Rustproof, waterproof, etc.
-- `shopify.color-pattern` - Color/pattern reference
-- `shopify.battery-type`, `battery-size`, `battery-technology` - Battery specs
-- `reviews.rating`, `reviews.rating_count` - Judge.me review data
-- `shopify--discovery--product_recommendation.related_products` - Manual related products
-- `shopify--discovery--product_recommendation.complementary_products` - Accessories/add-ons
-- `mm-google-shopping.custom_product` - UPI availability flag (boolean)
+BODE is designed as a GitHub template for multiple Shopify projects.
 
-**Page:**
-- `custom.header_image` - Banner image for page headers
+**For new projects:**
+```bash
+# Create from template
+gh repo create project-name --template bodenburgc/BODE-shopify
+cd project-name
 
-**Collection:**
-- `ecomposer.collections` - Sub-collection definitions
+# Add upstream for framework updates
+git remote add upstream https://github.com/bodenburgc/BODE-shopify.git
 
-**Variant (Google Shopping):**
-- `mm-google-shopping.custom_label_0` through `custom_label_4`
-- `mm-google-shopping.mpn`, `condition`, `gender`, `age_group`
-- `mm-google-shopping.size_type`, `size_system`
+# Pull framework updates (periodic)
+git fetch upstream
+git merge upstream/main
+```
+
+**Project-specific files (customize per brand):**
+- `config/settings_data.json` - Theme settings values
+- `sections/*-group.json` - Header/footer configuration
+- `templates/index.json` - Homepage layout
+- `.docs/brand/` - Brand guidelines
+
+## Third-Party Integrations
+
+| Integration | Files |
+|-------------|-------|
+| Google Maps | `sections/dealer-locator.liquid`, `assets/dealer-locator.js` |
+| PhotoSwipe | `assets/photoswipe.min.js` - Image galleries |
 
 ## Important Constraints
 
-1. **Never edit `config/settings_data.json`** - Auto-generated by Shopify admin
+1. **Never edit `config/settings_data.json` manually** - Auto-generated by Shopify admin
 2. **Test locally first** - `shopify theme dev` before any `theme push`
-3. **Follow brand guidelines** - Reference `/.docs/brand/` for all content/design
-4. **English only** - Non-English locale files have been removed
-5. **Mobile-first** - Ice fishermen use phones on the ice
+3. **English only** - Non-English locale files have been removed
+4. **Mobile-first** - Design for mobile, enhance for desktop
