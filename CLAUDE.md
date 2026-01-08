@@ -197,6 +197,34 @@ git merge upstream/main
 git push origin main
 ```
 
+### Development Workflow
+
+**ALWAYS make framework improvements in BODE first**, then pull into projects.
+
+```
+BODE-shopify                        Project (e.g., KeyBar)
+────────────                        ──────────────────────
+1. Fix bug in product-card    →
+2. Remove duplicate sections  →     git fetch upstream
+3. Add new feature            →     git merge upstream/main
+4. Improve CSS system         →     (inherits improvements)
+
+                                    5. Customize brand colors
+                                    6. Build homepage layout
+                                    7. Add brand assets
+```
+
+| Change Type | Where to Make It |
+|-------------|------------------|
+| Bug fix in section/snippet | BODE |
+| New reusable section | BODE |
+| Remove cruft/duplicates | BODE |
+| Improve JS/CSS architecture | BODE |
+| Brand colors/fonts | Project |
+| Homepage layout | Project |
+| Brand logos/assets | Project |
+| Store-specific content | Project |
+
 ### What Lives Where
 
 **BODE (this repo) - Framework code:**
