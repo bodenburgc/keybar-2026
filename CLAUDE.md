@@ -157,7 +157,7 @@ BODE is the **master framework** used across multiple Shopify store projects. Ea
 BODE-shopify (this repo)          ← Master framework
     ↓ template
 ├── keybar-2026                   ← KeyBar project
-├── fisharmor                     ← FishArmor project
+├── fisharmor-2025                ← FishArmor project
 ├── project-3                     ← Future project
 └── project-4                     ← Future project
 ```
@@ -167,9 +167,7 @@ BODE-shopify (this repo)          ← Master framework
 | Project | Repo | Store | Status |
 |---------|------|-------|--------|
 | KeyBar | `bodenburgc/keybar-2026` | TBD | In Development |
-| FishArmor | TBD | fisharmorusa-com.myshopify.com | Pending Migration |
-
-> **Note:** FishArmor is currently live at `bodenburgc/FishArmorBackup`. It will be migrated to use BODE as upstream, following the same pattern as KeyBar (separate repo with origin + upstream remotes). Until then, BODE improvements should be manually synced to FishArmor as needed.
+| FishArmor | `bodenburgc/fisharmor-2025` | fisharmorusa-com.myshopify.com | Configured |
 
 ### Creating a New Project
 
