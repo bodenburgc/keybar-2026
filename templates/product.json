@@ -84,14 +84,15 @@
         },
         "text_TM4nxD": {
           "type": "text",
+          "disabled": true,
           "settings": {
-            "icon": "alert",
+            "icon": "shield",
             "iwidth": "custom",
             "icon_width": 20,
-            "text": "<strong>Holiday Shipping Update:</strong> We're taking a brief pause to celebrate the holidays with our families. No shipments 12/24–12/26, 12/31 & 1/1. Orders will resume shipping the following business day. Happy Holidays from the Fish Armor team!",
+            "text": "<strong>Lifetime Guarantee:</strong> Every KeyBar is backed by our lifetime guarantee. If it breaks, we'll fix it or replace it.",
             "text_size": "text-base lg:text-xl",
-            "color_background": "#fee2e2",
-            "color_text": "#991b1b"
+            "color_background": "#EBEEF1",
+            "color_text": "#1C1F22"
           }
         },
         "buy_buttons": {
@@ -726,33 +727,32 @@
         "rounded": false
       }
     },
-    "featured_collection_yeHgLR": {
+    "featured_collection_inserts": {
       "type": "featured-collection",
-      "name": "t:sections.featured-collection.name",
       "settings": {
-        "collection": "batteries",
+        "collection": "inserts",
         "products": [],
         "product_limit": 6,
         "columns": 4,
         "carousel_on_desktop": true,
-        "show_view_all": false,
-        "columns_mobile": "1",
+        "show_view_all": true,
+        "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "heading": "Batteries",
+        "heading": "Tool Inserts",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
+        "subheading": "Customize Your Carry",
+        "description": "<p>Add functionality to your KeyBar with our range of tool inserts.</p>",
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
+        "color_text": "#1C1F22",
+        "color_background": "#EBEEF1",
         "gradient_background": "",
-        "color_highlight": "",
+        "color_highlight": "#FFD700",
         "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
+        "color_button_text": "#1C1F22",
+        "color_button_background": "#FFD700",
         "color_button_gradient": "",
         "padding_top": 72,
         "padding_bottom": 72,
@@ -773,6 +773,6 @@
     "product-recommendations",
     "recently-viewed",
     "1763574105c13058e0",
-    "featured_collection_yeHgLR"
+    "featured_collection_inserts"
   ]
 }
