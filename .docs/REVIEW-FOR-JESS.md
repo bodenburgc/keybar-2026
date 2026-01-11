@@ -111,9 +111,43 @@ Last updated: January 11, 2026
 
 ## Questions for Jess
 
+### General
 1. Should we add a phone number to the contact page?
 2. Does KeyBar have a TikTok account to add?
 3. Is the $75 free shipping threshold still correct?
 4. Where is the Returns Form hosted? (Need URL to link)
 5. Any new FAQ questions to add?
 6. Are there specific hero/banner images to use for homepage?
+
+### From Old Site Review (see SITEMAP-MIGRATION.md for details)
+7. **/skalpel/** - Links to external MTK site. Still active? Add as external link or skip?
+8. **/nascar/** - Is this NASCAR promotion current or outdated?
+9. **/sms-giveaway-official-rules/** - Is there an active giveaway or outdated?
+10. **/request-quote/** - Do you still take custom KeyBar orders via form?
+11. **/dealer-application/** - Recreate dealer application in Shopify or use external form?
+12. **Blog posts** - Should we migrate any blog content? (Recommended: buyer guides, testimonials)
+
+---
+
+## Pages Still Needed (High Priority)
+
+| Page | Why | Content Source |
+|------|-----|----------------|
+| **Why KeyBar** | Key marketing page with product video | keybar.us/why-keybar/ |
+| **KeyBar Story** | Mike's origin story - great brand content | keybar.us/keybar-story/ |
+| **Dealer Information** | If dealer program is active | keybar.us/dealer-information/ |
+
+---
+
+## Collections Still Needed
+
+| Collection | Notes |
+|------------|-------|
+| **Deals** | If running promotions |
+| **Most Popular** | Good for navigation/social proof |
+
+---
+
+## Related Documents
+
+- **SITEMAP-MIGRATION.md** - Full comparison of old site vs new Shopify store
