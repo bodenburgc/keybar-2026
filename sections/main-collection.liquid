@@ -2,7 +2,29 @@
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    /* Dark defaults - editable via Theme Editor > Collection > Colors */
+    --color-background: 28, 31, 34;
+    --color-foreground: 255, 255, 255;
+    --color-base-background: 28, 31, 34;
+    /* Theme editor overrides (if set) */
+    {%- render 'section-variables', section: section -%}
+    /* Apply the colors */
+    background-color: rgb(var(--color-background)) !important;
+    color: rgb(var(--color-foreground)) !important;
   }
+
+  /* Force inner section containers to inherit background */
+  #shopify-section-{{ section.id }} .section,
+  #shopify-section-{{ section.id }} .collection,
+  #shopify-section-{{ section.id }} .section--padding {
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
+  /* ============================================
+     2026 DARK MODE COLLECTION DESIGN - KeyBar
+     Premium EDC aesthetic with gold accents
+     ============================================ */
 
   /* Force product card title and price to stack vertically */
   #shopify-section-{{ section.id }} .product-card__details {
@@ -14,44 +36,77 @@
     width: 100%;
   }
 
-  /* Vendor styling - small, gray, uppercase */
-  #shopify-section-{{ section.id }} .product-card__top a {
-    font-size: 0.75rem;
-    color: rgb(var(--color-foreground-secondary));
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-weight: 500;
+  /* Product card - dark with subtle border */
+  #shopify-section-{{ section.id }} .product-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    overflow: hidden;
   }
 
-  /* Product title - large, bold, uppercase - use heading font (Gazzetta) */
+  #shopify-section-{{ section.id }} .product-card:hover {
+    border-color: rgba(255, 215, 0, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  /* Product image container */
+  #shopify-section-{{ section.id }} .product-card__media {
+    background: #0F1214;
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+  }
+
+  /* Vendor styling - small, muted gold, uppercase */
+  #shopify-section-{{ section.id }} .product-card__top a {
+    font-size: 0.7rem;
+    color: rgba(255, 215, 0, 0.6);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* Product title - clean white, modern */
   #shopify-section-{{ section.id }} .product-card__title {
     font-family: var(--font-heading-family);
-    font-size: clamp(1.25rem, 2.5vw, 1.875rem);
-    font-weight: 700;
+    font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.02em;
-    line-height: 1.2;
-    margin-bottom: 0.75rem;
-    color: #2C4554;
+    letter-spacing: 0.04em;
+    line-height: 1.3;
+    margin-bottom: 0.5rem;
+    color: #FFFFFF;
   }
 
-  /* Price - large, red/accent color */
+  /* Price - gold accent */
   #shopify-section-{{ section.id }} .product-card__details .price {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
     font-weight: 700;
-    color: oklch(50% 0.18 15); /* Safety Red from brand colors */
-    margin-bottom: 1rem;
+    color: #FFD700;
+    margin-bottom: 0.5rem;
   }
 
-  /* Product description - show and style */
+  /* Compare at price (strikethrough) */
+  #shopify-section-{{ section.id }} .product-card__details .price s {
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  /* Product description - subtle gray */
   #shopify-section-{{ section.id }} .product-card__description {
-    font-size: clamp(0.8125rem, 1.5vw, 0.9375rem);
-    line-height: 1.4;
-    color: rgb(var(--color-foreground-secondary));
-    margin-top: 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 0.5rem;
   }
 
-  /* Hide quick add button */
+  /* Card content padding */
+  #shopify-section-{{ section.id }} .product-card__content {
+    gap: 0;
+    padding: 1rem 1rem 1.25rem;
+  }
+
+  /* Hide quick add button on collection */
   #shopify-section-{{ section.id }} .quick-add {
     display: none;
   }
@@ -61,10 +116,54 @@
     display: none;
   }
 
-  /* Adjust card content spacing */
-  #shopify-section-{{ section.id }} .product-card__content {
-    gap: 0;
-    padding-top: 1rem;
+  /* Filter/Sort bar styling for dark mode */
+  #shopify-section-{{ section.id }} .collection__filters {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  #shopify-section-{{ section.id }} .collection__filters button,
+  #shopify-section-{{ section.id }} .collection__filters select {
+    color: #FFFFFF;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  #shopify-section-{{ section.id }} .collection__filters button:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: rgba(255, 215, 0, 0.3);
+  }
+
+  /* Active filter badges */
+  #shopify-section-{{ section.id }} .active-filter {
+    background: rgba(255, 215, 0, 0.15);
+    color: #FFD700;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+  }
+
+  /* Pagination styling */
+  #shopify-section-{{ section.id }} .pagination a,
+  #shopify-section-{{ section.id }} .pagination span {
+    color: #FFFFFF;
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  #shopify-section-{{ section.id }} .pagination a:hover {
+    background: rgba(255, 215, 0, 0.1);
+    border-color: #FFD700;
+    color: #FFD700;
+  }
+
+  /* Sale badge */
+  #shopify-section-{{ section.id }} .badge--sale {
+    background: #FFD700;
+    color: #1C1F22;
+    font-weight: 700;
+  }
+
+  /* Sold out badge */
+  #shopify-section-{{ section.id }} .badge--soldout {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.5);
   }
 </style>
 
