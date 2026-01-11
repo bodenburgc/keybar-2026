@@ -1,85 +1,80 @@
-# FishArmor Brand Guidelines
+# KeyBar Brand Guidelines
 
-**Quick reference guide for FishArmor brand identity and design system.**
+**Quick reference guide for KeyBar brand identity and design system.**
 
-This design system provides comprehensive guidance for maintaining brand consistency across the FishArmor Shopify store built with BODE blocks.
+This design system provides comprehensive guidance for maintaining brand consistency across the KeyBar Shopify store built with the BODE theme framework.
 
 ---
 
 ## Quick Navigation
 
 ### Brand Foundations
-- **[Brand Voice](VOICE.md)** - Personality, tone, messaging guidelines
-- **[Colors](COLORS.md)** - Ice fishing themed OKLCH palette + usage
-- **[Typography](TYPOGRAPHY.md)** - Gazzetta + Barlow, fluid type system
-
-### Layout & Structure
-- **[Layout & Spacing](LAYOUT.md)** - Grid, containers, spacing, responsive (mobile-first for ice fishermen)
+- **[Brand Voice](VOICE.md)** - "Stop the Noise" personality, tone, messaging
+- **[Colors](COLORS.md)** - Industrial EDC palette (KeyBar Gold, Gunmetal, etc.)
+- **[Typography](TYPOGRAPHY.md)** - Gazzetta + Barlow fluid type system
 
 ### UI Elements
 - **[Components](COMPONENTS.md)** - Buttons, cards, forms, navigation patterns
-- **[Icons](ICONS.md)** - Icon system + usage (mobile-friendly touch targets)
-- **[Photography](PHOTOGRAPHY.md)** - Ice fishing image style + specifications
 
 ---
 
 ## Quick Reference by Task
 
 **"What colors can I use?"**
-→ [COLORS.md](COLORS.md) - Ice fishing themed palette (Steel Ice, Frozen Lake, Safety Red)
+→ [COLORS.md](COLORS.md) - Industrial palette (KeyBar Gold, Gunmetal Black, Titanium)
 
 **"What fonts and sizes?"**
-→ [TYPOGRAPHY.md](TYPOGRAPHY.md) - Same as Retay (Gazzetta + Barlow)
+→ [TYPOGRAPHY.md](TYPOGRAPHY.md) - Gazzetta (headlines) + Barlow (body)
 
 **"How do I build a button?"**
-→ [COMPONENTS.md](COMPONENTS.md#buttons) - Safety Red CTAs, outline variants
+→ [COMPONENTS.md](COMPONENTS.md#buttons) - KeyBar Gold CTAs, Gunmetal secondary
 
 **"What's the tone of voice?"**
-→ [VOICE.md](VOICE.md) - Rugged, confident, technical (ice fishing context)
+→ [VOICE.md](VOICE.md) - "Stop the Noise", confident, technical, USA-made
 
-**"How wide should containers be?"**
-→ [LAYOUT.md](LAYOUT.md#container-widths) - Same system as Retay (1228/1366/1920px)
+---
 
-**"What about mobile responsive?"**
-→ [LAYOUT.md](LAYOUT.md#responsive-design-guidelines) - Critical for ice fishermen (bright snow, mobile use)
+## Brand at a Glance
+
+### Core Messages
+- **Primary**: "Stop the Noise" - declutter, simplify, organize
+- **Secondary**: "Keep It Together" - functional, practical
+- **Origin**: USA-made in Savannah, Georgia
+
+### Color Palette
+| Color | Use |
+|-------|-----|
+| KeyBar Gold (#FFD700) | Primary CTAs, highlights, badges |
+| Gunmetal Black (#1C1F22) | Text, headers, secondary buttons |
+| Titanium (#6B7280) | Secondary text |
+| Aluminum Light (#EBEEF1) | Backgrounds |
+
+### Typography
+- **Headlines**: Gazzetta Bold, uppercase
+- **Body**: Barlow family (300-700 weights)
+- **Scale**: Fluid with clamp() - no media queries needed
+
+### Product Categories
+- KeyBars (main organizers)
+- Tool Inserts (fit inside KeyBars)
+- Gear/Accessories (standalone products)
+- Limited Editions (special releases)
 
 ---
 
 ## For Developers
 
 **Implementation Files:**
-- **Tailwind CSS v4**: `/frontend/entrypoints/theme.css` (FishArmor brand colors)
-- **BODE Blocks**: `/snippets/bode-*.liquid` (synced from bode-shopify)
-- **Sections**: `/sections/` (FishArmor custom sections + BODE section)
-- **Templates**: `/templates/*.json` (page compositions)
+- **CSS Variables**: `snippets/css-variables.liquid`
+- **JS Variables**: `snippets/js-variables.liquid`
+- **Sections**: `sections/*.liquid`
+- **Templates**: `templates/*.json`
 
 **Quick Start:**
 1. Read [COLORS.md](COLORS.md) + [TYPOGRAPHY.md](TYPOGRAPHY.md)
 2. Review [COMPONENTS.md](COMPONENTS.md) for common patterns
-3. Understand BODE block system (see `CLAUDE.md` in repo root)
-4. Build using Shopify theme editor + BODE blocks
-
----
-
-## For Designers
-
-**Start Here:**
-1. [VOICE.md](VOICE.md) - Understand the brand personality (ice fishing, USA-made)
-2. [COLORS.md](COLORS.md) - Ice fishing color palette (OKLCH format)
-3. [TYPOGRAPHY.md](TYPOGRAPHY.md) - Gazzetta + Barlow system (same as Retay)
-4. [PHOTOGRAPHY.md](PHOTOGRAPHY.md) - Frozen lakes, ice fishing, USA manufacturing
-
-**Key Concepts:**
-- **Colors**: Ice fishing themed (steel, frozen lake, pine, safety red)
-- **Typography**: Gazzetta (headlines) + Barlow (body) with fluid scales
-- **Photography**: Authentic ice fishing lifestyle, Minnesota winters, real anglers
-- **Tone**: Confident, rugged, technical (not marketing-heavy)
-
-**Mobile-First Priority:**
-- Ice fishermen use phones on the ice
-- Large touch targets (48x48px minimum)
-- High contrast for bright snow conditions
-- Fast loading on slow connections
+3. Understand BODE framework (see `CLAUDE.md` in repo root)
+4. Use `shopify theme dev` for local development
 
 ---
 
@@ -90,145 +85,91 @@ This design system provides comprehensive guidance for maintaining brand consist
 - See [COMPONENTS.md](COMPONENTS.md) for UI copy patterns
 
 **Writing Guidelines:**
-- ✅ Active, confident language ("Protect your investment" not "Can protect...")
-- ✅ Specific and technical (roto-molded, waterproof ratings, dimensions)
-- ✅ USA manufacturing emphasis (Minnesota craftsmanship)
-- ✅ Real ice fishing context ("Built by fishermen for fishermen")
+- ✅ Active, confident language
+- ✅ Specific about materials (6061-T6 aluminum, Grade 5 titanium)
+- ✅ USA manufacturing emphasis (Savannah, Georgia)
+- ✅ "Stop the Noise" benefits (organization, simplification)
 - ❌ Avoid marketing hyperbole ("Ultimate!", "Revolutionary!")
-- ❌ Don't oversimplify technical details (anglers read specs)
+- ❌ Don't use tacti-cool or unnecessary military jargon
 
 **Value Propositions:**
-- Primary: "Protect Your $2,000 Investment" (sonar/electronics)
-- Secondary: Made in USA (Minnesota), Extreme Durability, Angler-Led Design
-- Supporting: Lifetime warranty, Technical specifications, Complete system approach
+- Primary: "Stop the Noise" - eliminate jingle and bulk
+- Secondary: USA-Made, Premium Materials, Modular System
+- Supporting: Lifetime guarantee, Technical specifications, EDC community
 
 ---
 
 ## File Structure
 
 ```
-brand/
-├── README.md                     # ← You are here
-├── VOICE.md                      # Personality, tone, messaging
-├── COLORS.md                     # Ice fishing OKLCH palette (adapted from Retay)
-├── TYPOGRAPHY.md                 # Gazzetta + Barlow (same as Retay)
-├── LAYOUT.md                     # Grid, containers, responsive
-├── COMPONENTS.md                 # Buttons, cards, badges (ice fishing themed)
-├── PHOTOGRAPHY.md                # Frozen lakes, ice fishing imagery
-└── ICONS.md                      # Icon system (mobile-friendly)
+.docs/brand/
+├── README.md           # ← You are here
+├── VOICE.md            # Personality, tone, messaging
+├── COLORS.md           # Industrial OKLCH palette
+├── TYPOGRAPHY.md       # Gazzetta + Barlow system
+└── COMPONENTS.md       # Buttons, cards, badges
 ```
 
 ---
 
-## Why This Structure?
+## KeyBar vs. FishArmor
 
-**FishArmor-Specific Adaptation:**
-- Same proven design system as Retay USA
-- Ice fishing themed colors (vs. hunting theme)
-- Mobile-first for field use (ice fishermen use phones on ice)
-- Shopify/BODE implementation (vs. WordPress/Bricks)
-- USA manufacturing emphasis (Minnesota vs. Turkey)
+**Same BODE Foundation:**
+- Typography system (Gazzetta + Barlow)
+- Layout system (containers, grids, spacing)
+- Component patterns (buttons, cards, navigation)
+- Design principles (consistency, accessibility)
 
-**Benefits:**
-- ✅ Find information in < 2 minutes
-- ✅ Scannable in a single sitting
-- ✅ Clear topic separation
-- ✅ Easy to reference specific guidelines
-- ✅ Better for team collaboration
-- ✅ AI-friendly (Claude can understand each file quickly)
-
----
-
-## Related Documentation
-
-**FishArmor Project:**
-- [../00-START-HERE.md](../00-START-HERE.md) - Project overview
-- [../LAUNCH-CHECKLIST.md](../LAUNCH-CHECKLIST.md) - Launch requirements
-- [../pages/](../pages/) - Page layout guides (homepage, product, collection)
-- [../workflows/](../workflows/) - BODE sync, deployment, development
-
-**BODE System:**
-- `~/Sites/bode-shopify/docs/` - BODE block technical documentation
-- `/CLAUDE.md` (repo root) - Complete project context
-- `/BODE-VERSION.md` (repo root) - Block sync tracking
+**KeyBar Adaptations:**
+- **Colors**: Industrial EDC theme (Gold, Gunmetal) vs. Ice fishing (Steel Ice, Safety Red)
+- **Context**: EDC/everyday carry vs. ice fishing
+- **Products**: Key organizers vs. protective shuttles
+- **Messaging**: "Stop the Noise" vs. "Protect Your Investment"
+- **Location**: Savannah, GA vs. Minnesota
 
 ---
 
 ## Design System Principles
 
 **1. Consistency**
-- Use BODE blocks (don't create custom sections unless approved)
-- Follow established patterns from Retay USA system
+- Use established BODE patterns
+- Follow brand guidelines for all new content
 - Maintain visual hierarchy
 
 **2. Accessibility**
 - WCAG 2.1 AA minimum
-- 4.5:1 contrast for body text (critical in bright snow)
-- Large touch targets for mobile use (48x48px)
-- Screen reader friendly
+- 4.5:1 contrast for body text
+- Large touch targets for mobile (48x48px)
 
 **3. Performance**
-- Mobile-first responsive design (ice fishermen use phones)
-- Optimized images (WebP format)
-- Minimal custom CSS (use Tailwind utilities via BODE blocks)
-- Fast page loads (critical on slow ice-house connections)
+- Mobile-first responsive design
+- Optimized images
+- Fast page loads
 
 **4. Brand Authenticity**
-- Real ice fishing photography (not stock outdoor photos)
-- Natural frozen lake environments
-- Technical accuracy (specifications matter to anglers)
-- Confident, rugged tone (not aggressive or promotional)
-
-**5. Mobile-First (Critical for FishArmor)**
-- Ice fishermen use phones in the field
-- Large buttons and touch targets
-- High contrast for bright snow
-- Fast loading on potentially slow connections
-- Test on actual devices outdoors
+- Real product photography
+- Technical accuracy (specifications matter to EDC users)
+- Confident, industrial tone
 
 ---
 
-## FishArmor vs. Retay USA
+## Related Documentation
 
-**Same Foundation:**
-- Typography system (Gazzetta + Barlow)
-- Layout system (containers, grids, spacing)
-- Component patterns (buttons, cards, navigation)
-- Design principles (consistency, accessibility, performance)
+**KeyBar Project:**
+- `/CLAUDE.md` (repo root) - Complete project context
+- `/README.md` (repo root) - Project overview
 
-**FishArmor Adaptations:**
-- **Colors**: Ice fishing theme (Steel Ice, Frozen Lake, Pine Green, Safety Red)
-- **Context**: Ice fishing vs. hunting
-- **Products**: Shuttles (protective cases) vs. shotguns
-- **Manufacturing**: Minnesota USA vs. Turkish
-- **Platform**: Shopify + BODE blocks vs. WordPress + Bricks Builder
-- **Mobile Priority**: Enhanced for field use on ice
+**BODE Framework:**
+- `/Users/cbodenburg/Sites/BODE-shopify/CLAUDE.md` - Framework documentation
+- `upstream` git remote - Pull framework updates
 
 ---
 
-## Questions?
-
-**Can't find what you need?**
-- Check the appropriate brand file above
-- See [../00-START-HERE.md](../00-START-HERE.md) for complete project navigation
-- Reference `/CLAUDE.md` for technical implementation
-- Review [../pages/](../pages/) for layout composition guides
-
-**Need to update the design system?**
-1. Edit the appropriate brand file
-2. Test changes in Shopify theme editor
-3. Update `frontend/entrypoints/theme.css` if CSS changes
-4. Commit with descriptive message
-5. Preview changes before deploying
+**Design System Version**: 1.0
+**Platform**: Shopify + BODE Theme Framework
+**Brand**: KeyBar - "Stop the Noise"
 
 ---
 
-**Design System Version**: 1.0 (Adapted from Retay USA v1.0)
-**Last Updated**: 2025-10-25
-**Platform**: Shopify + BODE Blocks
-**Target Launch**: November 7, 2025
-
----
-
-*Adapted from Retay USA Design System for FishArmor ice fishing equipment*
-*Same proven structure, ice fishing themed implementation*
+*KeyBar Brand Guidelines*
+*Based on BODE Design System*

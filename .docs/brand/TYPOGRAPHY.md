@@ -1,6 +1,6 @@
-# FishArmor - Brand Typography
+# KeyBar - Brand Typography
 
-FishArmor uses a combination of impactful display typography and highly readable body fonts to create a rugged, professional, technical presence suitable for serious ice fishermen.
+KeyBar uses a combination of impactful display typography and highly readable body fonts to create a rugged, industrial, professional presence suitable for the EDC (everyday carry) community.
 
 ---
 
@@ -12,15 +12,15 @@ FishArmor uses a combination of impactful display typography and highly readable
 ```
 - Bold, condensed display typeface
 - Excellent for large headlines and product names
-- High impact and attention-grabbing (like safety equipment on the ice)
+- High impact and attention-grabbing (like precision-machined metal)
 - Use in all caps for maximum effect
 - Fallback to Impact for system compatibility
 
-**Why Gazzetta for FishArmor:**
-- Projects rugged confidence (ice fishing requires tough gear)
-- Technical without being cold (approachable expertise)
+**Why Gazzetta for KeyBar:**
+- Projects industrial confidence (machined, tactical)
 - Bold enough to read on mobile devices
-- Matches the durability of roto-molded products
+- Matches the precision of aluminum and titanium products
+- "Stop the Noise" - clean, direct, no-nonsense
 
 **Body Font: Barlow Family**
 ```css
@@ -33,11 +33,11 @@ FishArmor uses a combination of impactful display typography and highly readable
 - **Barlow Regular:** Primary body text, descriptions
 - **Barlow Semi Condensed:** Secondary text, captions, specifications
 - **Barlow Condensed:** Space-constrained areas, product spec tables
-- System font fallbacks ensure fast loading (critical on the ice with slow connections)
+- System font fallbacks ensure fast loading
 
-**Why Barlow for FishArmor:**
-- Technical readability (ice fishermen read specs carefully)
-- Works at small sizes for mobile (used in field)
+**Why Barlow for KeyBar:**
+- Technical readability (EDC users research specs)
+- Works at small sizes for mobile (used on the go)
 - Professional without being corporate
 - Excellent for detailed product specifications
 
@@ -181,31 +181,31 @@ Barlow family supports multiple weights:
 
 **Headlines:**
 - Always use Gazzetta for impact and brand consistency
-- Use all caps for major headings (rugged, confident)
+- Use all caps for major headings (industrial, confident)
 - Maintain tight line-height (1.1-1.2) for visual unity
 - Negative letter-spacing for very large sizes
 - Keep headlines short and punchy (3-7 words)
-- Think "billboard on the ice" - readable from distance
+- Think "machined metal" - precise, bold, clean
 
 **Body Text:**
 - Use Barlow Regular for maximum readability
-- Generous line-height (1.6) for comfortable reading (especially on mobile)
+- Generous line-height (1.6) for comfortable reading
 - Keep line length between 60-80 characters
-- Use Semi Condensed variant when space is limited (spec tables)
-- Use Condensed variant sparingly (tables, tight mobile layouts)
+- Use Semi Condensed variant when space is limited
+- Use Condensed variant sparingly (tables, tight layouts)
 - Minimum 16px for body text (readable on phone)
 
 **Hierarchy:**
 - Create clear visual hierarchy using size and weight
 - Don't skip heading levels (H1 → H2 → H3, not H1 → H3)
 - Maintain consistent spacing between heading and body
-- Use color (Pine Green, Steel Ice) to distinguish heading types
+- Use color (KeyBar Gold, Gunmetal) to distinguish heading types
 
-**Mobile Considerations (Critical for Ice Fishermen):**
+**Mobile Considerations:**
 - Larger touch targets for buttons (min 44px height)
 - Readable text without zooming (min 16px base)
-- High contrast for readability in bright snow
-- Bold weights for visibility with sunglasses
+- High contrast for readability
+- Bold weights for quick scanning
 - Test on actual mobile devices
 
 **Accessibility:**
@@ -213,62 +213,22 @@ Barlow family supports multiple weights:
 - Maintain 4.5:1 contrast ratio for body text
 - 3:1 contrast for large text (18px+ or 14px+ bold)
 - Adequate line-height for readability (1.5 minimum)
-- Test in bright outdoor conditions (ice fishermen use phones outside)
 
 ---
 
-## Implementation in Tailwind CSS v4
-
-All typography is defined in `frontend/entrypoints/theme.css` using Tailwind v4's `@theme` directive and custom properties.
-
-**Usage Examples:**
-```html
-<!-- Hero headline (Gazzetta, uppercase, bold) -->
-<h1 class="text-5xl font-headline font-bold uppercase tracking-tight text-white">
-  PREMIUM ICE FISHING PROTECTION
-</h1>
-
-<!-- Section header -->
-<h2 class="text-3xl font-headline uppercase text-steel-ice">
-  Why FishArmor
-</h2>
-
-<!-- Subheading (Barlow Semi Bold) -->
-<h3 class="text-2xl font-body font-semibold text-pine-green">
-  Made in USA
-</h3>
-
-<!-- Body copy (Barlow Regular) -->
-<p class="text-base font-body leading-relaxed text-steel-ice">
-  Every FishArmor shuttle is roto-molded in Minnesota, ensuring the durability you need for extreme ice fishing conditions.
-</p>
-
-<!-- Product specifications -->
-<p class="text-sm font-body-semi text-ice-floe">
-  Dimensions: 18" x 14" x 10" | Weight: 8 lbs | Capacity: Helix 12
-</p>
-
-<!-- Small caption -->
-<p class="text-xs font-body-semi text-ice-floe">
-  *Lifetime warranty on all shuttles
-</p>
-```
-
----
-
-## FishArmor-Specific Typography Patterns
+## KeyBar-Specific Typography Patterns
 
 **Product Hero:**
 ```html
 <div class="product-hero">
-  <h1 class="text-5xl font-headline uppercase text-steel-ice">
-    PRO SHUTTLE
+  <h1 class="text-5xl font-headline uppercase text-gunmetal-black">
+    ALUMINUM KEYBAR
   </h1>
-  <p class="text-xl font-body text-ice-floe">
-    Roto-Molded Protection for Helix 12 Units
+  <p class="text-xl font-body text-titanium">
+    USA-Made Key Organizer with Titanium Pocket Clip
   </p>
-  <p class="text-3xl font-body font-bold text-pine-green">
-    $249.00
+  <p class="text-3xl font-body font-bold text-gunmetal-black">
+    $65.00
   </p>
 </div>
 ```
@@ -276,11 +236,11 @@ All typography is defined in `frontend/entrypoints/theme.css` using Tailwind v4'
 **Feature Grid:**
 ```html
 <div class="feature">
-  <h3 class="text-2xl font-headline uppercase text-pine-green">
-    MADE IN USA
+  <h3 class="text-2xl font-headline uppercase text-keybar-gold">
+    STOP THE NOISE
   </h3>
-  <p class="text-base font-body leading-relaxed text-steel-ice">
-    Minnesota craftsmanship and quality control
+  <p class="text-base font-body leading-relaxed text-gunmetal-black">
+    Organize your keys, tools, and everyday carry in one compact system
   </p>
 </div>
 ```
@@ -290,25 +250,34 @@ All typography is defined in `frontend/entrypoints/theme.css` using Tailwind v4'
 <table class="specs">
   <thead>
     <tr>
-      <th class="text-sm font-body-semi uppercase text-white bg-steel-ice">
+      <th class="text-sm font-body-semi uppercase text-white bg-gunmetal-black">
         Specification
       </th>
-      <th class="text-sm font-body-semi uppercase text-white bg-steel-ice">
+      <th class="text-sm font-body-semi uppercase text-white bg-gunmetal-black">
         Value
       </th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td class="text-sm font-body-semi font-semibold text-steel-ice">
-        Dimensions
+      <td class="text-sm font-body-semi font-semibold text-gunmetal-black">
+        Material
       </td>
-      <td class="text-sm font-body text-ice-floe">
-        18" × 14" × 10"
+      <td class="text-sm font-body text-titanium">
+        6061-T6 Aluminum
       </td>
     </tr>
   </tbody>
 </table>
+```
+
+**Call to Action:**
+```html
+<button class="bg-keybar-gold text-gunmetal-black px-6 py-4 rounded">
+  <span class="text-base font-body font-bold uppercase tracking-wide">
+    Add to Cart
+  </span>
+</button>
 ```
 
 ---
@@ -316,11 +285,9 @@ All typography is defined in `frontend/entrypoints/theme.css` using Tailwind v4'
 **Related Documentation:**
 - See [`COLORS.md`](COLORS.md) for text color usage
 - See [`COMPONENTS.md`](COMPONENTS.md) for component typography
-- See [`../pages/`](../pages/) for typography in layouts
-- See `CLAUDE.md` for Tailwind CSS v4 implementation
+- See [`VOICE.md`](VOICE.md) for messaging guidelines
 
 ---
 
-*Part of FishArmor Brand Guidelines*
-*Same system as Retay USA (Gazzetta + Barlow), adapted for ice fishing context*
-*Last Updated: 2025-10-25*
+*Part of KeyBar Brand Guidelines*
+*Same system as FishArmor (Gazzetta + Barlow), adapted for EDC context*

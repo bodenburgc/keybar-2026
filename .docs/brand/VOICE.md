@@ -1,35 +1,52 @@
-# FishArmor - Brand Voice & Personality
+# KeyBar - Brand Voice & Personality
 
-**Brand Position:** Premium ice fishing protection emphasizing USA manufacturing, angler-led design, and extreme durability.
+**Brand Position:** USA-made key organizers and EDC tools emphasizing organization, quality materials, and the mission to "Stop the Noise."
 
-**Target Audience:** Serious ice fishermen who value technical specifications, authentic experiences, and professional-grade protection for expensive electronics.
+**Target Audience:** EDC enthusiasts, professionals, and everyday users who value organization, quality craftsmanship, and USA-made products.
+
+---
+
+## Core Brand Messages
+
+### **Primary: "Stop the Noise"**
+The signature KeyBar tagline. It means:
+- Eliminate the jingle and bulk of loose keys
+- Declutter your pockets and daily carry
+- Focus on what matters, not fumbling with keys
+- Simplify your everyday routine
+
+### **Secondary: "Keep It Together"**
+The functional promise:
+- Organize keys, tools, and accessories in one compact system
+- Build your perfect everyday carry setup
+- Everything you need, nothing you don't
 
 ---
 
 ## Brand Personality Attributes
 
-**Confident & Rugged**
-- FishArmor projects strength and durability through bold typography and decisive design
-- Clean, uncluttered layouts convey technical competence
-- Direct communication without marketing fluff
-- "Built by fishermen for fishermen" - not corporate speak
+**Industrial & Precise**
+- KeyBar projects machined precision through bold typography and clean design
+- Uncluttered layouts convey organization and purpose
+- Direct communication - no marketing fluff
+- "Engineered in Savannah, GA" - not corporate speak
 
-**Authentic & Field-Tested**
-- Real-world photography showing actual ice fishing conditions
-- Natural frozen lake environments (not studio setups)
-- Focus on the ice fishing lifestyle, not just products
-- Genuine stories from anglers who use the gear
+**Confident & Functional**
+- Products that solve real everyday problems
+- Focus on practical utility, not trends
+- Strong but not aggressive
+- Quality speaks for itself
 
 **Technical & Detailed**
-- Detailed specifications prominently displayed (dimensions, weight capacity, compatibility)
-- Engineering excellence highlighted through materials and construction details
-- Premium quality positioning without pretension
-- Roto-molded construction expertise explained clearly
+- Materials matter: aluminum, titanium, carbon fiber
+- Specifications prominently displayed
+- Engineering excellence without pretension
+- Tool inserts and accessories explained clearly
 
 **Trustworthy & USA-Made**
-- Honest product presentation with complete specifications
+- Honest product presentation
 - Clear pricing and warranty information
-- Made in USA manufacturing prominently featured
+- Made in USA manufacturing in Savannah, Georgia
 - American craftsmanship emphasized
 
 ---
@@ -38,45 +55,45 @@
 
 **Do:**
 - Use active, confident language
-- Be specific and technical when describing features (roto-molded construction, waterproof ratings, etc.)
-- Emphasize real-world performance in extreme cold
-- Speak directly to experienced ice fishermen
-- Celebrate the ice fishing lifestyle and Minnesota heritage
-- Highlight protective value for expensive electronics
+- Be specific about materials (6061-T6 aluminum, Grade 5 titanium)
+- Emphasize organization and simplification
+- Speak to the practical benefits of decluttering
+- Celebrate USA manufacturing heritage
+- Highlight the modular system (KeyBar + inserts + accessories)
 
 **Don't:**
 - Use marketing hyperbole or exaggerated claims
-- Oversimplify technical details
+- Oversimplify the craftsmanship details
 - Employ aggressive or overly promotional tone
-- Use generic outdoor clichés or stereotypes
-- Ignore the technical expertise of the audience
+- Use tacti-cool or military jargon unnecessarily
+- Ignore the quality-focused EDC audience
 
 ---
 
 ## Messaging Examples
 
 **Product Headlines:**
-- ✅ "Roto-Molded Protection. Minnesota Craftsmanship."
-- ✅ "Built for the ice. Trusted by fishermen."
-- ✅ "Protect Your $2,000 Sonar with $200 of Protection"
-- ❌ "The Ultimate Ice Fishing Case!" (too vague, hyperbolic)
+- ✅ "Stop the Noise. Organize Your Carry."
+- ✅ "USA-Made Key Organization Since 2013"
+- ✅ "Machined Aluminum. Titanium Clip. Built to Last."
+- ❌ "The Ultimate Key Holder!" (too vague, hyperbolic)
 
 **Feature Descriptions:**
-- ✅ "Roto-molded construction withstands impacts down to -40°F"
-- ✅ "Waterproof gasket keeps expensive electronics dry even in slush"
-- ❌ "Super tough protection" (not specific enough)
+- ✅ "CNC-machined from 6061-T6 aluminum with a Type III hard anodized finish"
+- ✅ "Holds up to 12 keys plus tool inserts in a pocket-friendly package"
+- ❌ "Super strong key case" (not specific enough)
 
 **Call-to-Actions:**
-- ✅ "Shop Shuttles"
-- ✅ "Complete Your Setup"
-- ✅ "View Specifications"
-- ❌ "Buy Now!" (too pushy, not consultative)
+- ✅ "Shop KeyBars"
+- ✅ "Build Your Setup"
+- ✅ "Add Tool Inserts"
+- ❌ "Buy Now!" (too pushy)
 
 **Value Propositions:**
-- ✅ "Made in USA - Supporting Minnesota jobs and quality"
-- ✅ "Designed by anglers who understand what you need on the ice"
-- ✅ "Lifetime warranty - We stand behind our work"
-- ❌ "Best ice fishing case ever!" (not credible)
+- ✅ "Made in USA - Engineered and manufactured in Savannah, Georgia"
+- ✅ "Lifetime guarantee - We stand behind every KeyBar"
+- ✅ "Modular system - Add inserts as your needs change"
+- ❌ "Best key organizer ever!" (not credible)
 
 ---
 
@@ -84,97 +101,135 @@
 
 **Homepage:**
 - Bold, confident statements
-- Focus on protection value ("Protect your $2,000 investment")
+- Focus on "Stop the Noise" benefits
 - USA manufacturing pride
-- System approach (shuttle + accessories)
+- System approach (KeyBar + inserts + accessories)
 
 **Product Pages:**
 - Technical, detailed specifications
 - Materials and construction details
-- Compatibility information (which sonar units fit)
-- Real-world performance data
+- Capacity information (number of keys)
+- Size and weight specifications
+- Compatible inserts and accessories
 
 **About Page:**
-- Authentic storytelling about Minnesota manufacturing
-- Angler-led design philosophy
+- Origin story of "Stop the Noise"
+- Savannah, Georgia manufacturing
 - Company values and craftsmanship
-- Personal connection to ice fishing community
+- Connection to EDC community
 
 **Warranty/Support:**
 - Clear, straightforward language
 - Confidence in product quality
 - Customer-first approach
-- Technical support availability
+- Repair and replacement process
 
 ---
 
 ## Messaging Hierarchy
 
-**Primary Message:** "Protect Your Investment"
-- Ice fishermen invest thousands in electronics
-- FishArmor protects that investment
-- USA-made quality you can trust
+**Primary Message:** "Stop the Noise"
+- Eliminate the jingle and bulk
+- Organize your everyday carry
+- Simplify your daily routine
 
 **Secondary Messages:**
-- **Extreme Durability:** Roto-molded construction for harsh conditions
-- **Angler-Led Design:** Built by fishermen who understand the ice
-- **Made in USA:** Minnesota craftsmanship and quality control
-- **Complete System:** Shuttles + accessories work together
+- **USA-Made Quality:** Engineered and manufactured in Savannah, Georgia
+- **Premium Materials:** Aluminum, titanium, carbon fiber options
+- **Modular System:** KeyBars + tool inserts + accessories
+- **Lifetime Guarantee:** We stand behind every product
 
 **Supporting Messages:**
-- Lifetime warranty
+- Patented design since 2013
 - Technical specifications for informed buyers
-- Compatibility with major sonar brands
-- Minnesota heritage and outdoor tradition
+- EDC community and lifestyle
+- Dealer network for local support
 
 ---
 
 ## Brand Vocabulary
 
 **Use These Terms:**
-- Shuttle (not "case" or "box")
-- Roto-molded (not "plastic")
-- Sonar protection (not "electronics case")
-- Ice fishing (not "ice angling" unless formal context)
-- USA-made or Made in USA (not "American-made")
-- Angler-led design (not "fisherman-designed")
-- Complete your setup (not "buy more stuff")
-- Lifetime warranty (emphasize commitment)
+- KeyBar (always capitalize, one word)
+- Key organizer (not "key holder" or "key case")
+- Tool inserts (not "accessories" for tools that fit inside)
+- Gear/Accessories (for items that don't fit inside)
+- USA-made or Made in USA
+- EDC / everyday carry (use both, audience knows the acronym)
+- Build your setup (not "buy more stuff")
+- Lifetime guarantee (emphasize commitment)
+
+**Product Materials:**
+- 6061-T6 aluminum (specify the alloy)
+- Grade 5 titanium
+- Carbon fiber
+- Type III hard anodized finish
 
 **Avoid These Terms:**
-- Cheap, affordable (use "investment" instead)
+- Cheap, affordable (use "value" or "investment")
 - Revolutionary, game-changing (too hyperbolic)
-- Military-grade, tactical (wrong context)
-- Luxury, premium (too pretentious - use "professional-grade")
+- Tactical, military-grade (unless specifically relevant)
+- Luxury, premium (too pretentious - use "quality" or "precision")
 
 ---
 
 ## Voice Examples by Scenario
 
 **Hero Section:**
-> **PREMIUM ICE FISHING PROTECTION**
-> Protect your expensive sonar and electronics with USA-made, roto-molded shuttles designed by fishermen for fishermen.
+> **STOP THE NOISE**
+> USA-made key organizers that eliminate the jingle, bulk, and chaos of loose keys. Machined aluminum. Titanium clip. Built to last.
 
 **Benefits Section:**
-> **MADE IN USA**
-> Every shuttle is manufactured in Minnesota, supporting local jobs and ensuring quality control you can trust.
+> **ENGINEERED IN SAVANNAH, GA**
+> Every KeyBar is CNC-machined and assembled in our Savannah facility, ensuring the precision and quality that EDC enthusiasts demand.
 
 **Product Description:**
-> The FishArmor Pro Shuttle protects Humminbird Helix and Solix units in extreme conditions. Roto-molded construction withstands impacts down to -40°F, while the waterproof gasket keeps expensive electronics dry. Includes integrated transducer routing and battery compartment.
+> The Aluminum KeyBar holds up to 12 standard keys in a compact, pocket-friendly package. Machined from 6061-T6 aluminum with a Type III hard anodized finish, it features a titanium pocket clip and accepts all KeyBar tool inserts. Stop the noise. Keep it together.
 
 **Call-to-Action:**
-> **COMPLETE YOUR SETUP**
-> Add accessories to maximize protection and functionality on the ice.
+> **BUILD YOUR SETUP**
+> Add tool inserts and accessories to create your perfect everyday carry system.
+
+**Trust Badge:**
+> **LIFETIME GUARANTEE**
+> We stand behind every KeyBar. If it fails, we'll repair or replace it.
+
+---
+
+## Product Category Voice
+
+**KeyBars (Main Product):**
+- Emphasize materials and capacity
+- Focus on the core "Stop the Noise" benefit
+- Highlight USA manufacturing
+- Technical specifications prominent
+
+**Tool Inserts:**
+- Functional utility focus
+- Compatibility information
+- "Build your setup" messaging
+- Practical everyday use cases
+
+**Gear/Accessories:**
+- Complementary products
+- Complete the system
+- Lifestyle positioning
+- Gift-worthy quality
+
+**Limited Editions:**
+- Scarcity and uniqueness
+- Special materials or finishes
+- Collector appeal
+- Timely release information
 
 ---
 
 **Related Documentation:**
 - See [`COMPONENTS.md`](COMPONENTS.md) for UI pattern copy
 - See [`COLORS.md`](COLORS.md) for visual brand expression
-- See [`../pages/`](../pages/) for voice implementation in layouts
+- See [`TYPOGRAPHY.md`](TYPOGRAPHY.md) for headline and body text styles
 
 ---
 
-*Part of FishArmor Brand Guidelines*
-*Adapted from Retay USA Design System*
-*Last Updated: 2025-10-25*
+*Part of KeyBar Brand Guidelines*
+*Based on BODE Design System*

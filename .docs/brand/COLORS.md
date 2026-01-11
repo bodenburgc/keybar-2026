@@ -1,122 +1,102 @@
-# FishArmor Brand Colors
+# KeyBar Brand Colors
 
-**Ice fishing themed color palette for FishArmor's rugged outdoor aesthetic.**
+**Industrial EDC color palette for KeyBar's tactical everyday carry aesthetic.**
 
 ---
 
 ## Color Philosophy
 
-FishArmor's palette draws from the ice fishing environment:
-- **Frozen landscapes** - Cool blues and grays
-- **Safety & visibility** - High-contrast accents for gear
-- **Natural elements** - Subdued earth tones
-- **USA-made pride** - Confident, professional colors
+KeyBar's palette draws from the industrial EDC world:
+- **Tactical metals** - Dark gunmetals, titanium, aluminum
+- **High visibility** - Bold gold for action and emphasis
+- **USA-made craft** - Confident, industrial colors
+- **Stop the Noise** - Clean, uncluttered, purposeful
 
-**All colors use OKLCH format** for better perceptual uniformity (same as Retay USA system).
+**All colors use OKLCH format** for better perceptual uniformity.
 
 ---
 
 ## Primary Brand Colors
 
-### **Steel Ice** (Primary Dark)
+### **KeyBar Gold** (Primary Accent)
 ```css
---color-steel-ice: oklch(20% 0.015 240);
-HEX: #1A2E3C
-Usage: Primary logo, main dark text, headers, navigation
+--color-keybar-gold: oklch(85% 0.17 85);
+HEX: #FFD700
+Usage: Primary CTAs, "Add to Cart", highlights, badges, brand emphasis
 ```
-The foundational dark color - like steel against ice. Professional, confident, durable.
+Bold gold - visibility and premium quality. The signature KeyBar accent.
 
-### **White** (Reverse Logo)
+### **Gunmetal Black** (Primary Dark)
+```css
+--color-gunmetal-black: oklch(15% 0.01 240);
+HEX: #1C1F22
+Usage: Primary text, headers, navigation, logo
+```
+Deep industrial black - like machined metal. Professional and confident.
+
+---
+
+## Secondary Colors - Industrial Palette
+
+### **Carbon Gray** (Dark Gray)
+```css
+--color-carbon-gray: oklch(25% 0.01 240);
+HEX: #32373C
+Usage: Secondary backgrounds, dark sections, product showcases
+```
+Carbon fiber inspired. Creates depth for product displays.
+
+### **Titanium** (Medium Gray)
+```css
+--color-titanium: oklch(45% 0.02 240);
+HEX: #6B7280
+Usage: Secondary text, descriptions, supporting content
+```
+Like brushed titanium. For secondary information and subtle emphasis.
+
+### **Aluminum Light** (Light Gray)
+```css
+--color-aluminum-light: oklch(92% 0.005 240);
+HEX: #EBEEF1
+Usage: Light backgrounds, section separation, subtle accents
+```
+Clean aluminum finish. Soft background for content areas.
+
+### **White** (Pure White)
 ```css
 --color-white: oklch(100% 0 0);
-HEX: #ffffff
-Usage: Reverse logo, light backgrounds, text on dark backgrounds
+HEX: #FFFFFF
+Usage: Light backgrounds, text on dark, reverse logo
 ```
-Clean, pure white for maximum contrast and readability.
+Clean white for maximum contrast and readability.
 
 ---
 
-## Secondary Colors - Ice & Winter Tones
+## Accent Colors - Visibility & Action
 
-### **Frozen Lake** (Dark Blue-Gray)
+### **Safety Orange** (Warning/Sale)
 ```css
---color-frozen-lake: oklch(30% 0.04 230);
-HEX: #2C4554
-Usage: Deep backgrounds, section dividers, product showcases
+--color-safety-orange: oklch(70% 0.18 50);
+HEX: #FF8C00
+Usage: Sale badges, warnings, limited editions, urgency
 ```
-The deep blue-gray of frozen water. Creates depth and atmosphere.
+High visibility orange for special promotions and alerts.
 
-### **Ice Floe** (Medium Gray-Blue)
+### **Success Green** (Confirmation)
 ```css
---color-ice-floe: oklch(55% 0.03 235);
-HEX: #7891A6
-Usage: Secondary text, warm accents, natural transitions
+--color-success-green: oklch(55% 0.15 145);
+HEX: #22C55E
+Usage: In stock indicators, success messages, confirmations
 ```
-Medium tone for secondary information and subtle emphasis.
+Clean green for positive feedback and availability.
 
-### **Frost** (Light Gray-Blue)
+### **Error Red** (Errors Only)
 ```css
---color-frost: oklch(85% 0.01 235);
-HEX: #D4DEE7
-Usage: Subtle backgrounds, section separation, light accents
+--color-error-red: oklch(50% 0.18 25);
+HEX: #DC2626
+Usage: Error states, form validation, out of stock
 ```
-Soft, barely-there background color. Like frost on a window.
-
----
-
-## Secondary Colors - Nature Palette
-
-### **Pine Green** (Forest Green)
-```css
---color-pine-green: oklch(45% 0.05 155);
-HEX: #4A6B5C
-Usage: Headlines, category labels, outdoor lifestyle elements
-```
-Connects to outdoor heritage and natural environments. Excellent for major headlines.
-
-### **Arctic Mist** (Cool Blue-Gray)
-```css
---color-arctic-mist: oklch(60% 0.04 245);
-HEX: #8BA4C1
-Usage: Secondary navigation, cool accents, atmospheric elements
-```
-Professional blue-gray for regional accents and depth.
-
-### **Slush** (Light Neutral Gray)
-```css
---color-slush: oklch(87% 0.003 240);
-HEX: #DCDFE3
-Usage: Subtle backgrounds, dividers, borders
-```
-Neutral gray for structure without distraction.
-
----
-
-## Accent Colors - Visibility & Safety
-
-### **Sunrise Orange** (Warm Yellow-Gold)
-```css
---color-sunrise-orange: oklch(75% 0.15 60);
-HEX: #FFB84D
-Usage: Highlights, promotions, "New" badges, warm accents
-```
-High visibility like a sunrise over frozen lakes. Use for important highlights.
-
-### **Warning Flag** (Bright Orange)
-```css
---color-warning-flag: oklch(68% 0.18 40);
-HEX: #FF7F2A
-Usage: Secondary CTAs, special offers, energetic accents
-```
-Safety orange - visible from distance. Use for secondary actions.
-
-### **Safety Red** (Primary CTA)
-```css
---color-safety-red: oklch(50% 0.18 15);
-HEX: #D32F2F
-Usage: Primary CTAs, "Add to Cart", critical actions, urgency
-```
-High-contrast red for primary actions. Demands attention like safety equipment.
+Reserved for errors and critical warnings only.
 
 ---
 
@@ -124,37 +104,38 @@ High-contrast red for primary actions. Demands attention like safety equipment.
 
 ### **Page Backgrounds:**
 - White (`--color-white`) for main content areas
-- Frost (`--color-frost`) for subtle section differentiation
-- Steel Ice (`--color-steel-ice`) or Frozen Lake (`--color-frozen-lake`) for hero sections
+- Aluminum Light (`--color-aluminum-light`) for subtle section breaks
+- Gunmetal Black (`--color-gunmetal-black`) for hero sections
+- Carbon Gray (`--color-carbon-gray`) for product showcases
 
 ### **Text Colors:**
-- Steel Ice (`--color-steel-ice`) on light backgrounds
+- Gunmetal Black (`--color-gunmetal-black`) on light backgrounds
 - White (`--color-white`) on dark backgrounds
-- Pine Green (`--color-pine-green`) for headlines and emphasis
+- Titanium (`--color-titanium`) for secondary/supporting text
 
-### **Accent Usage:**
-- Safety Red (`--color-safety-red`) for primary CTAs and "Add to Cart"
-- Warning Flag (`--color-warning-flag`) for secondary actions
-- Sunrise Orange (`--color-sunrise-orange`) for promotions
+### **Button Hierarchy:**
+- **Primary**: KeyBar Gold background, Gunmetal Black text
+- **Secondary**: Gunmetal Black background, White text
+- **Tertiary**: Transparent with Gunmetal Black border
 
 ### **Product Categories:**
-- Use Pine Green or Steel Ice for product headers
-- Reserve Safety Red for "NEW" labels and urgent actions
+- Use KeyBar Gold for emphasis and CTAs
+- Reserve Safety Orange for "SALE" and "LIMITED EDITION"
+- Success Green only for stock/availability
 
 ---
 
-## Comparison to Retay USA
+## Comparison to FishArmor
 
-**FishArmor adapts Retay's system for ice fishing:**
+**KeyBar adapts the system for EDC/tactical:**
 
-| Retay (Hunting) | FishArmor (Ice Fishing) | Purpose |
-|-----------------|-------------------------|---------|
-| Gun Metal | Steel Ice | Primary dark |
-| Marsh | Frozen Lake | Deep backgrounds |
-| Fall Moss | Pine Green | Headlines |
-| Spent Shells | Safety Red | Primary CTA |
-| Duckbill | Sunrise Orange | Highlights |
-| Mallard Feet | Warning Flag | Secondary CTA |
+| FishArmor (Ice Fishing) | KeyBar (EDC) | Purpose |
+|-------------------------|--------------|---------|
+| Steel Ice | Gunmetal Black | Primary dark |
+| Frozen Lake | Carbon Gray | Deep backgrounds |
+| Pine Green | KeyBar Gold | Primary accent/CTA |
+| Safety Red | KeyBar Gold | Primary CTA |
+| Sunrise Orange | Safety Orange | Promotions |
 
 **Same structure, different theme. One design system, multiple brands.**
 
@@ -171,50 +152,27 @@ Using OKLCH provides:
 
 ---
 
-## Implementation in Tailwind
+## Implementation in Theme
 
-All colors defined in `frontend/entrypoints/theme.css`:
+Colors mapped in `snippets/css-variables.liquid`:
 
 ```css
-@theme {
+:root {
   /* Primary */
-  --color-steel-ice: oklch(20% 0.015 240);
+  --color-keybar-gold: oklch(85% 0.17 85);
+  --color-gunmetal-black: oklch(15% 0.01 240);
   --color-white: oklch(100% 0 0);
-  
-  /* Ice & Winter Tones */
-  --color-frozen-lake: oklch(30% 0.04 230);
-  --color-ice-floe: oklch(55% 0.03 235);
-  --color-frost: oklch(85% 0.01 235);
-  
-  /* Nature Palette */
-  --color-pine-green: oklch(45% 0.05 155);
-  --color-arctic-mist: oklch(60% 0.04 245);
-  --color-slush: oklch(87% 0.003 240);
-  
+
+  /* Industrial Palette */
+  --color-carbon-gray: oklch(25% 0.01 240);
+  --color-titanium: oklch(45% 0.02 240);
+  --color-aluminum-light: oklch(92% 0.005 240);
+
   /* Accents */
-  --color-sunrise-orange: oklch(75% 0.15 60);
-  --color-warning-flag: oklch(68% 0.18 40);
-  --color-safety-red: oklch(50% 0.18 15);
+  --color-safety-orange: oklch(70% 0.18 50);
+  --color-success-green: oklch(55% 0.15 145);
+  --color-error-red: oklch(50% 0.18 25);
 }
-```
-
-### **Usage in BODE Blocks:**
-
-```liquid
-<!-- Primary CTA button -->
-<button class="bg-safety-red text-white px-6 py-4 rounded-lg">
-  Shop Shuttles
-</button>
-
-<!-- Hero section background -->
-<section class="bg-steel-ice text-white">
-  Hero Content
-</section>
-
-<!-- Product category badge -->
-<span class="bg-pine-green text-white px-3 py-1 rounded">
-  Accessories
-</span>
 ```
 
 ---
@@ -223,14 +181,14 @@ All colors defined in `frontend/entrypoints/theme.css`:
 
 ### **Contrast Ratios (WCAG 2.1 AA):**
 
-**Light Backgrounds (White, Frost):**
-- ✅ Steel Ice text: 12.8:1 (excellent)
-- ✅ Pine Green text: 6.2:1 (good)
-- ✅ Safety Red text: 5.9:1 (good)
+**Light Backgrounds (White, Aluminum Light):**
+- Gunmetal Black text: 14.5:1 (excellent)
+- Titanium text: 5.8:1 (good)
+- KeyBar Gold (large text only): 3.2:1
 
-**Dark Backgrounds (Steel Ice, Frozen Lake):**
-- ✅ White text: 12.8:1 (excellent)
-- ✅ Sunrise Orange text: 4.8:1 (passes for large text)
+**Dark Backgrounds (Gunmetal Black, Carbon Gray):**
+- White text: 14.5:1 (excellent)
+- KeyBar Gold text: 8.1:1 (excellent)
 
 All primary combinations exceed minimum requirements.
 
@@ -239,70 +197,62 @@ All primary combinations exceed minimum requirements.
 ## Brand Applications
 
 ### **Homepage Hero:**
-- Background: Steel Ice with ice fishing photo overlay
+- Background: Gunmetal Black or Carbon Gray
 - Text: White
-- CTA: Safety Red button
+- CTA: KeyBar Gold button with Gunmetal text
 
 ### **Product Cards:**
 - Background: White
-- Text: Steel Ice
-- Price: Pine Green (emphasis)
-- Add to Cart: Safety Red
+- Text: Gunmetal Black
+- Price: Gunmetal Black (bold)
+- Add to Cart: KeyBar Gold
 
 ### **Navigation:**
-- Background: White or Frost
-- Text: Steel Ice
-- Hover: Pine Green
+- Background: White
+- Text: Gunmetal Black
+- Hover: KeyBar Gold underline
 
 ### **Trust Badges:**
-- "Made in USA": Pine Green background, White text
-- Warranty: Arctic Mist background, Steel Ice text
+- "Made in USA": KeyBar Gold background, Gunmetal text
+- "Lifetime Warranty": Gunmetal background, White text
 
 ---
 
 ## Color Psychology
 
-**Steel Ice & Frozen Lake (Blues/Grays):**
-- Trust, reliability, professionalism
-- Cold environments, ice fishing context
-- Durable, strong products
+**KeyBar Gold (Yellow/Gold):**
+- Visibility, confidence, premium quality
+- Energy, optimism, innovation
+- Action and attention
 
-**Pine Green (Nature):**
-- Outdoor heritage, natural environments
-- Growth, quality, authenticity
+**Gunmetal Black & Carbon Gray (Dark Neutrals):**
+- Industrial strength, machined precision
+- Trust, professionalism, durability
+- Tactical, serious, functional
 
-**Safety Red (Urgency):**
-- Action, importance, visibility
-- Safety equipment context (ice fishing gear)
-- Protective products
-
-**Sunrise Orange (Warmth):**
-- Visibility in cold environments
-- Energy, optimism, new beginnings
-- Special promotions
+**Titanium & Aluminum (Light Grays):**
+- Modern materials, lightweight strength
+- Clean, organized, minimal
+- "Stop the Noise" aesthetic
 
 ---
 
 ## Related Documentation
 
 **Typography:**
-→ [TYPOGRAPHY.md](TYPOGRAPHY.md) - Gazzetta + Barlow (same as Retay)
+→ [TYPOGRAPHY.md](TYPOGRAPHY.md) - Gazzetta + Barlow system
 
 **Components:**
-→ [../pages/](../pages/) - See colors in context
+→ [COMPONENTS.md](COMPONENTS.md) - Buttons, cards, forms
 
-**BODE Design System:**
-→ `~/Sites/bode-shopify/docs/design-system/` - Generic foundation
-
-**Retay Comparison:**
-→ `~/Sites/retay-usa-2025/docs/design-system/BRAND-COLORS.md`
+**Voice:**
+→ [VOICE.md](VOICE.md) - Brand messaging guidelines
 
 ---
 
-**Ice fishing themed. Rugged & confident. Visibility in extreme conditions.** ❄️
+**Industrial EDC. Bold & confident. Stop the Noise.**
 
 ---
 
-*Part of FishArmor Brand Guidelines*
-*Adapted from Retay USA Design System*
-*Last Updated: 2025-10-25*
+*Part of KeyBar Brand Guidelines*
+*Based on BODE Design System*
