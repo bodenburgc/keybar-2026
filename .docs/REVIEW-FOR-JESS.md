@@ -17,6 +17,7 @@ Last updated: January 11, 2026
 | Returns | /pages/returns | Ready for review |
 | Why KeyBar | /pages/why-keybar | Ready for review |
 | The KeyBar Story | /pages/keybar-story | Ready for review |
+| Dealer Information | /pages/dealer-information | Ready for review |
 
 ---
 
@@ -137,7 +138,19 @@ Last updated: January 11, 2026
 |------|-----|----------------|
 | ~~Why KeyBar~~ | ✅ Created | |
 | ~~KeyBar Story~~ | ✅ Created | |
-| **Dealer Information** | If dealer program is active | keybar.us/dealer-information/ |
+| ~~Dealer Information~~ | ✅ Created (combined US + International) | |
+
+### Skipped Pages (confirmed not needed)
+- Request a Quote - dead
+- NASCAR - outdated promotion
+- Sale Exclusions - old
+- Skalpel - not needed (external MTK site)
+
+### Giveaway/Newsletter Signup
+**Question for Jess:** The old /join/ giveaway page - is this still active? Options:
+- Newsletter popup (already in footer) - just announce the prize
+- Privy or Gleam apps - for spin-to-win or viral sharing giveaways
+- What's the current prize and how often do you run giveaways?
 
 ---
 
