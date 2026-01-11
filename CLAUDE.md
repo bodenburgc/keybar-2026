@@ -10,19 +10,31 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |----------|-------|
 | Brand | KeyBar |
 | Theme Framework | BODE 1.0.0 |
-| Store URL | TBD |
 | Shopify API | 2024-01 |
 | Target Market | EDC enthusiasts, "Stop the Noise" |
 
-## Framework Relationship
+## Shopify CLI Commands
 
-This project is built on **BODE**, a shared Shopify theme framework.
+```bash
+shopify theme dev          # Local development with hot reload
+shopify theme push         # Deploy to store
+shopify theme pull         # Pull live theme changes
+shopify theme check        # Lint/validate theme (only validation available)
+shopify theme share        # Generate preview link
+shopify auth login         # Authenticate (required first)
+```
+
+**No build step required** - No npm, webpack, or compilation. CSS/JS are served as-is from `/assets/`.
+
+## Framework Relationship (BODE Upstream)
 
 ```
-BODE-shopify (upstream)           ← Master framework
+/Users/cbodenburg/Sites/BODE-shopify/    ← Master framework (upstream)
     ↓
-keybar-2026 (this repo)           ← KeyBar-specific customizations
+/Users/cbodenburg/Sites/keybar-2026/     ← KeyBar-specific customizations (this repo)
 ```
+
+**BODE is a separate local project.** Framework changes (sections, snippets, core JS/CSS) should be made in BODE-shopify first, then pulled here.
 
 ### Git Remotes
 
@@ -31,79 +43,27 @@ origin   → https://github.com/bodenburgc/keybar-2026.git      (KeyBar changes)
 upstream → https://github.com/bodenburgc/BODE-shopify.git     (Framework updates)
 ```
 
-### Pulling Framework Updates
+### Development Workflow
 
-When BODE is improved, pull updates into KeyBar:
+| Change Type | Where to Make Change |
+|-------------|---------------------|
+| Bug fix in section/snippet | BODE-shopify → push → pull upstream here |
+| New reusable section | BODE-shopify → push → pull upstream here |
+| Improve JS/CSS framework | BODE-shopify → push → pull upstream here |
+| KeyBar colors/fonts/logos | HERE (keybar-2026) |
+| KeyBar homepage layout | HERE (keybar-2026) |
+| Brand guidelines | HERE (`.docs/brand/`) |
+
+### Pulling Framework Updates
 
 ```bash
 git fetch upstream
 git merge upstream/main
-# Resolve any conflicts in brand-specific files
+# Resolve any conflicts in brand-specific files (.gitattributes protects key files)
 git push origin main
 ```
 
-### What to Customize Here (KeyBar-specific)
-
-These files are brand-specific and should be customized for KeyBar:
-- `config/settings_data.json` - Theme settings (colors, fonts, etc.)
-- `sections/header-group.json` - Header configuration
-- `sections/footer-group.json` - Footer configuration
-- `templates/index.json` - Homepage layout
-- `.docs/brand/` - KeyBar brand guidelines
-- `assets/logo*.svg` - KeyBar logos
-
-### What NOT to Customize (Framework code)
-
-These files come from BODE and should generally not be modified directly:
-- `sections/*.liquid` - Section templates
-- `snippets/*.liquid` - Reusable components
-- `assets/theme.js`, `assets/theme.css` - Core JS/CSS
-- `config/settings_schema.json` - Settings definitions
-
-**If you need changes to framework files, make them in BODE-shopify first, then pull upstream.**
-
-### Development Workflow
-
-```
-Need to fix a bug?           → Go to BODE, fix it, pull upstream here
-Need to add a feature?       → Go to BODE, add it, pull upstream here
-Need to change KeyBar brand? → Do it HERE in KeyBar
-```
-
-| Change Type | Where |
-|-------------|-------|
-| Bug fix in section/snippet | BODE → pull upstream |
-| New reusable section | BODE → pull upstream |
-| Improve JS/CSS | BODE → pull upstream |
-| KeyBar colors/fonts | HERE |
-| KeyBar homepage | HERE |
-| KeyBar logos | HERE |
-
-## Shopify CLI Commands
-
-```bash
-shopify theme dev          # Local development server
-shopify theme push         # Deploy to store
-shopify theme pull         # Pull live theme changes
-shopify theme check        # Lint/validate theme
-shopify theme share        # Generate preview link
-shopify auth login         # Authenticate (required first)
-```
-
-## KeyBar-Specific Features
-
-### Product Structure
-- **KeyBars** - Main product line (various sizes/materials)
-- **Inserts** - Accessories that fit inside KeyBars
-- **Accessories** - Standalone accessories
-- **Bundles** - KeyBar + insert combinations
-- **Limited Editions** - Special releases
-
-### Key Sections for KeyBar
-- `product-bundle.liquid` - Bundle KeyBar + inserts for upsells
-- `product-comparison.liquid` - Compare KeyBar sizes/materials
-- `dealer-locator.liquid` - Find KeyBar retailers
-- `pro-staff.liquid` - KeyBar ambassadors/team
+**Protected files (merge=ours via .gitattributes):** `config/settings_data.json`, `templates/index.json`, `sections/*-group.json`, `.docs/brand/*`
 
 ## Theme Architecture
 
@@ -117,33 +77,68 @@ layout/theme.liquid
 └── sections 'footer-group'     → sections/footer-group.json
 ```
 
+### Settings → CSS → Components Flow
+
+```
+config/settings_schema.json (definitions)
+        ↓
+config/settings_data.json (current values, auto-generated)
+        ↓
+snippets/css-variables.liquid ({{ settings.* }} → :root CSS variables)
+        ↓
+snippets/js-variables.liquid ({{ settings.* }} → window.theme object)
+        ↓
+theme.css + theme.js (consume variables)
+```
+
+### Asset Loading (in layout/theme.liquid)
+
+**Always loaded:** `fonts.css` → `css-variables` → `theme.css` → `vendor.js` → `theme.js`
+
+**Conditionally loaded based on page type:**
+- Customer pages: `shopify_common.js`
+- RTL languages: `rtl.css`
+- Tab attention feature: `tab-attention.js`
+- Preload links: `instant-page.js`
+
+**Template-specific assets** (loaded in individual sections):
+- `cart.js/css`, `collection.js/css`, `product-bundle.js/css`, `dealer-locator.js/css`, etc.
+
+### Web Components
+
+Interactive features use custom elements:
+- `<product-bundle>` - Bundle builder interface
+- `<motion-list>` - Animated product grids
+- `<sticky-element>` - Sticky sidebars
+- `<split-words>` - Text animations
+- `<footer-group>` - Footer container
+
 ### Key Files
 
 | File | Purpose |
 |------|---------|
-| `snippets/css-variables.liquid` | Global CSS custom properties from theme settings |
-| `snippets/js-variables.liquid` | JavaScript config (routes, feature flags) |
-| `config/settings_schema.json` | Theme settings definitions |
-| `config/settings_data.json` | Current setting values (auto-generated, DO NOT edit) |
-| `locales/en.default.json` | Translation strings (English only) |
+| `snippets/css-variables.liquid` | Theme settings → CSS custom properties (`:root`) |
+| `snippets/js-variables.liquid` | Routes, feature flags → `window.theme` object |
+| `config/settings_schema.json` | Theme settings definitions (from BODE) |
+| `config/settings_data.json` | Current values (DO NOT edit manually) |
+| `locales/en.default.json` | Translation strings |
 
-## Brand Guidelines
+## KeyBar-Specific Sections
 
-**Update `.docs/brand/` with KeyBar-specific guidelines:**
-- Voice: "Stop the Noise" messaging, EDC lifestyle
-- Colors: KeyBar brand palette
-- Typography: Brand fonts
-- Photography: EDC lifestyle, product photography
-
-**Quick Reference (to be defined):**
-- Primary messaging: "Stop the Noise"
-- Product vocabulary: KeyBar, inserts, EDC
-- Made in USA emphasis
+- `product-bundle.liquid` + `product-bundle.js` - Bundle KeyBar + inserts
+- `product-comparison.liquid` - Compare KeyBar sizes/materials
+- `dealer-locator.liquid` + `dealer-locator.js` - Find retailers (Maps API)
+- `compact-product-bundle.liquid` - Simplified bundle UI
 
 ## Development Notes
 
 **Section Schema Pattern:**
 ```liquid
+<style>/* section-scoped styles */</style>
+{%- liquid
+  # Liquid logic here
+-%}
+<!-- HTML content -->
 {% schema %}
 {
   "name": "Section Name",
@@ -158,6 +153,8 @@ layout/theme.liquid
 - Logic: `{%- liquid ... -%}` (whitespace-trimmed)
 - Output: `{{ variable }}`
 - Include: `{% render 'snippet-name', param: value %}`
+- Translations: `{{ 'key.path' | t }}`
+- Assets: `{{ 'filename' | asset_url }}`
 
 ## Important Constraints
 
