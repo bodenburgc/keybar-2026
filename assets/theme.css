@@ -835,7 +835,7 @@ h6,
 .main-content .h4,
 .main-content .h5,
 .main-content .h6 {
-  color: #2C4554;
+  color: rgb(var(--color-foreground));
 }
 
 .h0 {
