@@ -1,12 +1,3 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "footer",
   "name": "t:sections.footer-group.name",
@@ -19,20 +10,8 @@
           "settings": {
             "icon": "support",
             "custom_icon": "",
-            "heading": "FishArmor Support",
-            "text": "<p>Have questions or need assistance with your FishArmor shuttle? Call <a href=\"tel:651-321-3776\">651&#8209;321&#8209;3776</a> - our team is here to help you!</p>",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "column-3": {
-          "type": "column",
-          "disabled": true,
-          "settings": {
-            "icon": "users",
-            "custom_icon": "",
-            "heading": "Become a Dealer",
-            "text": "<p>Partner with us to bring FishArmor protection to your customers. Contact us to learn how you can become a dealer!</p>",
+            "heading": "KeyBar Support",
+            "text": "<p>Questions about your KeyBar or need help choosing the right setup? Our team in Savannah is ready to help you stop the noise.</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -43,18 +22,18 @@
             "icon": "box",
             "custom_icon": "",
             "heading": "Fast Shipping",
-            "text": "<p>Your sonar protection delivered fast – ready for the ice in days, not weeks. Built in Minnesota, shipped direct to your door.</p>",
+            "text": "<p>Free shipping on orders over $75. Most orders ship within 1-2 business days from our facility in Savannah, Georgia.</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
         },
-        "column_6it3Yt": {
+        "column-3": {
           "type": "column",
           "settings": {
             "icon": "shield",
             "custom_icon": "",
-            "heading": "USA-Made Quality",
-            "text": "<p>Engineered and manufactured in Minnesota. Every shuttle built to survive extreme conditions and protect thousands in electronics.</p>",
+            "heading": "Lifetime Guarantee",
+            "text": "<p>Every KeyBar is backed by our lifetime guarantee. If it breaks, we'll fix it or replace it. No questions asked.</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -62,9 +41,8 @@
       },
       "block_order": [
         "column-1",
-        "column-3",
         "column-2",
-        "column_6it3Yt"
+        "column-3"
       ],
       "settings": {
         "style": "with-border",
@@ -82,17 +60,17 @@
         "button_icon": true,
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
+        "color_text": "#1C1F22",
+        "color_background": "#EBEEF1",
         "gradient_background": "",
-        "color_highlight": "",
+        "color_highlight": "#FFD700",
         "gradient_highlight": "",
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 60,
         "padding_bottom": 60,
-        "divider": true,
+        "divider": false,
         "full_width": false,
         "rounded": false
       }
@@ -103,9 +81,8 @@
         "logo_social": {
           "type": "logo_social",
           "settings": {
-            "logo": "shopify://shop_images/Fish-Amor-Horizontal.png",
-            "logo_height": 95,
-            "show_social": false,
+            "logo_height": 80,
+            "show_social": true,
             "enable_follow_on_shop": false
           }
         },
@@ -113,7 +90,7 @@
           "type": "text",
           "settings": {
             "heading": "",
-            "text": "<p>Designed for Minnesota winters where ice fishing isn't a hobby—it's a lifestyle. Our portable, battle-tested equipment moves with you from frozen lakes to boat decks to dock fishing, performing everywhere you fish and delivering reliability when conditions demand it most.</p>",
+            "text": "<p>Stop the noise. KeyBar is the original key organizer, proudly made in Savannah, Georgia since 2013. We craft premium EDC gear from aircraft-grade aluminum, titanium, and other high-quality materials—all backed by our lifetime guarantee.</p>",
             "container_width": 95,
             "opened": false
           }
@@ -122,7 +99,7 @@
           "type": "link_list",
           "settings": {
             "heading": "SHOP",
-            "menu": "footer-categories",
+            "menu": "footer-shop",
             "container_width": 33,
             "opened": false
           }
@@ -131,7 +108,7 @@
           "type": "link_list",
           "settings": {
             "heading": "SUPPORT",
-            "menu": "footer-company",
+            "menu": "footer-support",
             "container_width": 33,
             "opened": false
           }
@@ -140,7 +117,7 @@
           "type": "link_list",
           "settings": {
             "heading": "COMPANY",
-            "menu": "footer-company-1",
+            "menu": "footer-company",
             "container_width": 33,
             "opened": false
           }
@@ -155,44 +132,44 @@
       ],
       "settings": {
         "invert_newsletter_others": false,
-        "enable_newsletter": false,
-        "newsletter_heading": "",
+        "enable_newsletter": true,
+        "newsletter_heading": "Join the EDC Community",
         "newsletter_heading_size": "md:title-lg",
-        "newsletter_text": "",
+        "newsletter_text": "<p>Get exclusive deals, new product alerts, and EDC tips delivered to your inbox.</p>",
         "newsletter_logo_height": 50,
         "show_social": true,
         "enable_follow_on_shop": false,
-        "color_text": "#e4e8ec",
-        "color_background": "#2c4554",
+        "color_text": "#FFFFFF",
+        "color_background": "#1C1F22",
         "gradient_background": "",
-        "color_button_text": "#000000",
-        "color_button_background": "#ffffff",
+        "color_button_text": "#1C1F22",
+        "color_button_background": "#FFD700",
         "color_button_gradient": "",
         "padding_top": 72,
         "padding_bottom": 72,
         "divider": false,
         "full_width": false,
-        "rounded": true,
-        "enable_parallax": true
+        "rounded": false,
+        "enable_parallax": false
       }
     },
     "footer-copyright": {
       "type": "footer-copyright",
       "settings": {
-        "enable_language_selector": true,
+        "enable_language_selector": false,
         "enable_country_selector": false,
         "show_policy": true,
-        "show_payment_icons": false,
+        "show_payment_icons": true,
         "monochrome_payment_icons": false,
         "show_copyright": true,
-        "copyright_text": "",
-        "color_text": "#e4e8ec",
-        "color_background": "#0a1824",
+        "copyright_text": "KeyBar® is a registered trademark. Made with pride in Savannah, GA.",
+        "color_text": "#9CA3AF",
+        "color_background": "#111418",
         "gradient_background": "",
         "divider": false,
         "full_width": true,
-        "rounded": true,
-        "enable_parallax": true
+        "rounded": false,
+        "enable_parallax": false
       }
     }
   },

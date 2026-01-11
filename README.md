@@ -4,7 +4,7 @@ Shopify theme for **KeyBar** - premium EDC (everyday carry) key organizers, craf
 
 ## Store
 
-- **URL:** TBD
+- **URL:** keybarus.myshopify.com
 - **Framework:** [BODE](https://github.com/bodenburgc/BODE-shopify)
 - **Migration:** From WordPress (71 plugins → Shopify native)
 
@@ -14,11 +14,11 @@ Shopify theme for **KeyBar** - premium EDC (everyday carry) key organizers, craf
 # Install Shopify CLI (if needed)
 npm install -g @shopify/cli
 
-# Authenticate (update store URL when available)
-shopify auth login --store your-store.myshopify.com
+# Authenticate (opens browser)
+shopify auth login
 
 # Start local development
-shopify theme dev
+shopify theme dev --store keybarus.myshopify.com
 ```
 
 ## Commands

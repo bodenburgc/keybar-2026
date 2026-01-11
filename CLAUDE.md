@@ -10,18 +10,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |----------|-------|
 | Brand | KeyBar |
 | Theme Framework | BODE 1.0.0 |
+| Store URL | keybarus.myshopify.com |
 | Shopify API | 2024-01 |
 | Target Market | EDC enthusiasts, "Stop the Noise" |
 
 ## Shopify CLI Commands
 
 ```bash
-shopify theme dev          # Local development with hot reload
-shopify theme push         # Deploy to store
-shopify theme pull         # Pull live theme changes
-shopify theme check        # Lint/validate theme (only validation available)
-shopify theme share        # Generate preview link
-shopify auth login         # Authenticate (required first)
+shopify auth login                              # Authenticate (opens browser)
+shopify theme dev -s keybarus.myshopify.com     # Local development with hot reload
+shopify theme push -s keybarus.myshopify.com    # Deploy to store
+shopify theme pull -s keybarus.myshopify.com    # Pull live theme changes
+shopify theme check                             # Lint/validate theme
+shopify theme share -s keybarus.myshopify.com   # Generate preview link
 ```
 
 **No build step required** - No npm, webpack, or compilation. CSS/JS are served as-is from `/assets/`.
