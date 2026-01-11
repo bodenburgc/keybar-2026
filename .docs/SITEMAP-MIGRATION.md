@@ -14,8 +14,8 @@ Comparing old site (keybar.us) to new Shopify store (keybarus.myshopify.com)
 | /returns/ | ✅ Created | /pages/returns | |
 | /faqs/ | ✅ Created | /pages/faqs | |
 | /terms-conditions/ | ✅ Created | /pages/terms-conditions | |
-| /why-keybar/ | ❌ **NEED TO CREATE** | - | Marketing page with video, explains product benefits |
-| /keybar-story/ | ❌ **NEED TO CREATE** | - | Great brand story - Mike's origin story, "Stop the Noise" |
+| /why-keybar/ | ✅ Created | /pages/why-keybar | Marketing page, explains product benefits |
+| /keybar-story/ | ✅ Created | /pages/keybar-story | Mike's origin story, "Stop the Noise" |
 | /dealer-information/ | ❌ **NEED TO CREATE** | - | Dealer program info, Blue Ridge Knives partnership |
 
 ---
@@ -81,9 +81,9 @@ The old site has ~10 blog posts. **Question for Jess:** Should we migrate blog c
 
 ## Priority Order for Missing Pages
 
-### High Priority (Create Now)
-1. **Why KeyBar** - Key marketing/landing page with product video
-2. **KeyBar Story** - Brand story, Mike's origin story - great for SEO and brand building
+### High Priority - COMPLETED ✅
+1. ~~**Why KeyBar**~~ - Created
+2. ~~**KeyBar Story**~~ - Created
 
 ### Medium Priority (Create Soon)
 3. **Dealer Information** - If dealer program is active

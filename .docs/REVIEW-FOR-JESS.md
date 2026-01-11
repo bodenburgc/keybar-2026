@@ -15,6 +15,8 @@ Last updated: January 11, 2026
 | Set Up & Care | /pages/set-up-care | Ready for review |
 | FAQs | /pages/faqs | Ready for review |
 | Returns | /pages/returns | Ready for review |
+| Why KeyBar | /pages/why-keybar | Ready for review |
+| The KeyBar Story | /pages/keybar-story | Ready for review |
 
 ---
 
@@ -129,12 +131,12 @@ Last updated: January 11, 2026
 
 ---
 
-## Pages Still Needed (High Priority)
+## Pages Still Needed
 
 | Page | Why | Content Source |
 |------|-----|----------------|
-| **Why KeyBar** | Key marketing page with product video | keybar.us/why-keybar/ |
-| **KeyBar Story** | Mike's origin story - great brand content | keybar.us/keybar-story/ |
+| ~~Why KeyBar~~ | ✅ Created | |
+| ~~KeyBar Story~~ | ✅ Created | |
 | **Dealer Information** | If dealer program is active | keybar.us/dealer-information/ |
 
 ---
