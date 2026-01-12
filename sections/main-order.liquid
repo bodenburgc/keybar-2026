@@ -29,7 +29,7 @@
     <div class="customer__content flex flex-col lg:flex-row">
       <div class="grow flex flex-col gap-5 md:gap-8">
         <div class="grid gap-3">
-          <h2 class="text-xl-3xl font-medium">{{ 'customer.order.title' | t: name: order.name }}</h2>
+          <h2 class="fluid-3xl font-medium">{{ 'customer.order.title' | t: name: order.name }}</h2>
           {%- assign order_date = order.created_at | time_tag: format: "date_at_time" -%}
           <p>{{ 'customer.order.date_html' | t: date: order_date }}</p>
 
@@ -237,38 +237,38 @@
           </tbody>
           <tfoot role="rowgroup">
             <tr role="row">
-              <td id="RowSubtotal" role="rowheader" scope="row" colspan="4" class="text-sm-base">{{ 'customer.order.subtotal' | t }}</td>
+              <td id="RowSubtotal" role="rowheader" scope="row" colspan="4" class="fluid-sm">{{ 'customer.order.subtotal' | t }}</td>
               <td headers="RowSubtotal" role="cell" data-label="{{ 'customer.order.subtotal' | t | escape }}" class="text-right">{{ order.line_items_subtotal_price | money }}</td>
             </tr>
             {%- if order.cart_level_discount_applications != blank -%}
               <tr role="row">
                 {%- for discount_application in order.cart_level_discount_applications -%}
-                  <td id="RowDiscount" role="rowheader" scope="row" colspan="4" class="text-sm-base">{{ 'customer.order.discount' | t }} ({{ discount_application.title }})</td>
+                  <td id="RowDiscount" role="rowheader" scope="row" colspan="4" class="fluid-sm">{{ 'customer.order.discount' | t }} ({{ discount_application.title }})</td>
                   <td headers="RowDiscount" role="cell" data-label="{{ 'customer.order.discount' | t | escape }}" class="text-right">-{{ discount_application.total_allocated_amount | money }}</td>
                 {%- endfor -%}
               </tr>
             {%- endif -%}
             {%- for shipping_method in order.shipping_methods -%}
               <tr role="row">
-                <td id="RowShipping" role="rowheader" scope="row" colspan="4" class="text-sm-base">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
+                <td id="RowShipping" role="rowheader" scope="row" colspan="4" class="fluid-sm">{{ 'customer.order.shipping' | t }} ({{ shipping_method.title }})</td>
                 <td headers="RowShipping" role="cell" data-label="{{ 'customer.order.shipping' | t | escape }} ({{ shipping_method.title }})" class="text-right">{{ shipping_method.price | money }}</td>
               </tr>
             {%- endfor -%}
             {%- for tax_line in order.tax_lines -%}
               <tr role="row">
-                <td id="RowTax" role="rowheader" scope="row" colspan="4" class="text-sm-base">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
+                <td id="RowTax" role="rowheader" scope="row" colspan="4" class="fluid-sm">{{ 'customer.order.tax' | t }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)</td>
                 <td headers="RowTax" role="cell" data-label="{{ 'customer.order.tax' | t | escape }} ({{ tax_line.title }} {{ tax_line.rate | times: 100 }}%)" class="text-right">{{ tax_line.price | money }}</td>
               </tr>
             {%- endfor -%}
             {%- if order.total_duties -%}
               <tr role="row">
-                <td id="RowDuties" role="rowheader" scope="row" colspan="4" class="text-sm-base">{{ 'customer.order.total_duties' | t }}</td>
+                <td id="RowDuties" role="rowheader" scope="row" colspan="4" class="fluid-sm">{{ 'customer.order.total_duties' | t }}</td>
                 <td headers="RowDuties" role="cell" data-label="{{ 'customer.order.total_duties' | t | escape }}" class="text-right">{{ order.total_duties | money }}</td>
               </tr>
             {%- endif -%}
             {%- if order.total_refunded_amount > 0 -%}
               <tr role="row">
-                <td id="RowTotalRefund" role="rowheader" scope="row" colspan="4" class="text-sm-base">{{ 'customer.order.total_refunded' | t }}</td>
+                <td id="RowTotalRefund" role="rowheader" scope="row" colspan="4" class="fluid-sm">{{ 'customer.order.total_refunded' | t }}</td>
                 <td headers="RowTotalRefund" role="cell" data-label="{{ 'customer.order.total_refunded' | t | escape }}" class="text-right">-{{ order.total_refunded_amount | money }}</td>
               </tr>
             {%- endif -%}
@@ -282,7 +282,7 @@
 
       <div class="grow-0 flex flex-col gap-5 md:gap-7d5">
         <div class="customer__sidebar flex flex-col gap-5 md:gap-7d5">
-          <h2 class="text-xl-3xl font-medium">{{ 'customer.order.billing_address' | t }}</h2>
+          <h2 class="fluid-3xl font-medium">{{ 'customer.order.billing_address' | t }}</h2>
           <div class="text-base md:text-lg grid gap-2d5">
             <p>
               <span class="font-medium">{{ 'customer.order.payment_status' | t }}:</span>
@@ -293,7 +293,7 @@
         </div>
 
         <div class="customer__sidebar flex flex-col gap-5 md:gap-7d5">
-          <h2 class="text-xl-3xl font-medium">{{ 'customer.order.shipping_address' | t }}</h2>
+          <h2 class="fluid-3xl font-medium">{{ 'customer.order.shipping_address' | t }}</h2>
           <div class="text-base md:text-lg grid gap-2d5">
             <p>
               <span class="font-medium">{{ 'customer.order.fulfillment_status' | t }}:</span>

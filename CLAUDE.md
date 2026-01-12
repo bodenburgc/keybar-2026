@@ -64,7 +64,7 @@ git merge upstream/main
 git push origin main
 ```
 
-**Protected files (merge=ours via .gitattributes):** `config/settings_data.json`, `templates/index.json`, `sections/*-group.json`, `.docs/brand/*`
+**Protected files (merge=ours via .gitattributes):** `config/settings_data.json`, `.shopify/*`, `templates/index.json`, `sections/header-group.json`, `sections/footer-group.json`, `sections/overlay-group.json`, `.docs/brand/*`
 
 ## Theme Architecture
 
@@ -91,6 +91,26 @@ snippets/js-variables.liquid ({{ settings.* }} → window.theme object)
         ↓
 theme.css + theme.js (consume variables)
 ```
+
+### Section Color Schemes
+
+Sections support three color schemes via `snippets/color-scheme.liquid`:
+
+| Scheme | Description |
+|--------|-------------|
+| `light` | Default - uses global theme colors (no CSS overrides) |
+| `dark` | Gunmetal background, white text, gold accents |
+| `accent` | Gold background, dark text |
+
+**Usage in sections:**
+```liquid
+{%- render 'color-scheme', scheme: section.settings.color_scheme -%}
+```
+
+**Related snippets:**
+- `snippets/color-scheme.liquid` - Main color scheme switcher (preferred)
+- `snippets/color-scheme-dark.liquid` - Legacy dark-only snippet
+- `snippets/section-variables.liquid` - Per-section spacing/layout overrides
 
 ### Asset Loading (in layout/theme.liquid)
 
@@ -156,6 +176,17 @@ Interactive features use custom elements:
 - Include: `{% render 'snippet-name', param: value %}`
 - Translations: `{{ 'key.path' | t }}`
 - Assets: `{{ 'filename' | asset_url }}`
+
+**Snippet Documentation Pattern:**
+```liquid
+{%- doc -%}
+  Description of what the snippet does.
+
+  @param {type} name - Parameter description
+  @example
+  {%- render 'snippet-name', param: value -%}
+{%- enddoc -%}
+```
 
 ## Important Constraints
 

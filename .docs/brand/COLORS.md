@@ -100,6 +100,44 @@ Reserved for errors and critical warnings only.
 
 ---
 
+## Dark Scheme Palette (Product Cards)
+
+**For sections using `color_scheme: dark` - optimized for product card visibility.**
+
+| Element | RGB | HEX | Usage |
+|---------|-----|-----|-------|
+| **Section Background** | `28, 31, 34` | `#1C1F22` | Section container |
+| **Card Background** | `18, 20, 22` | `#121416` | Product card depth |
+| **Product Title** | `255, 248, 231` | `#FFF8E7` | Pale gold/cream - readable, warm |
+| **Vendor** | `205, 150, 80` | `#CD9650` | Copper - secondary warm accent |
+| **Price** | `200, 196, 188` | `#C8C4BC` | Warm gray - doesn't compete |
+| **Buttons/CTA** | `255, 215, 0` | `#FFD700` | KeyBar Gold - primary accent |
+
+### Dark Scheme Color Hierarchy
+
+```
+Gold Family (warm palette around primary gold)
+├── KeyBar Gold     #FFD700  →  Primary CTA/buttons
+├── Copper          #CD9650  →  Secondary accent (vendor)
+├── Pale Gold       #FFF8E7  →  High-contrast text (titles)
+└── Warm Gray       #C8C4BC  →  Supporting text (prices)
+```
+
+### Implementation
+
+Dark scheme colors set in `snippets/color-scheme.liquid`:
+
+```liquid
+{%- render 'color-scheme', scheme: section.settings.color_scheme -%}
+```
+
+Section settings dropdown:
+- **Light** - Uses global theme colors
+- **Dark** - Uses dark scheme palette above
+- **Accent** - Gold background with dark text
+
+---
+
 ## Color Usage Guidelines
 
 ### **Page Backgrounds:**

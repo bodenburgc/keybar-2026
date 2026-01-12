@@ -62,7 +62,7 @@
         {%- if filter.type == 'boolean' or filter.param_name == 'filter.v.availability' -%}
           <div class="details" data-filter data-index="{{ filter_id }}">
             <div class="details__summary flex items-center justify-between gap-2">
-              <label for="{{ filter_id }}" class="text-base-xl font-medium cursor-pointer">
+              <label for="{{ filter_id }}" class="fluid-xl font-medium cursor-pointer">
                 {%- liquid
                   if filter.param_name == 'filter.v.availability'
                     echo 'collections.filtering.in_stock_only' | t
@@ -107,7 +107,7 @@
 
               <details class="details{% unless collapsed %} active{% endunless %}" is="accordion-details"{% unless collapsed %} open{% endunless %} data-filter data-index="{{ filter_id }}">
                 <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
-                  <span class="text-base-xl font-medium">
+                  <span class="fluid-xl font-medium">
                     {{- filter.label | escape -}}
                     {%- if filter.operator == 'AND' -%}
                       <small class="details__helptext block text-opacity text-sm font-normal overflow-hidden">
@@ -209,7 +209,7 @@
               -%}
               <details class="details{% unless collapsed %} active{% endunless %}" is="accordion-details"{% unless collapsed %} open{% endunless %} data-filter data-index="{{ filter_id }}">
                 <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
-                  <span class="text-base-xl font-medium">{{ filter.label | escape }}</span>
+                  <span class="fluid-xl font-medium">{{ filter.label | escape }}</span>
                   {%- render 'icon', icon: 'chevron-up' -%}
                 </summary>
                 <div class="details__content">

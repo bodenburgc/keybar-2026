@@ -88,7 +88,7 @@
             <div class="flex flex-col gap-3">
               {%- if block.settings.subheading != blank -%}
                 {%- liquid
-                  assign subtext_size = 'text-sm-lg'
+                  assign subtext_size = 'fluid-lg'
                   assign content_size = 'text-base leading-tight'
                   if block.settings.content_layout == 'marquee'
                     if block.settings.heading_size == 'title-sm' or block.settings.heading_size == 'title-md'

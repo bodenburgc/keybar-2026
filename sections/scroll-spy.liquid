@@ -16,7 +16,7 @@
                 {%- assign target_id = block.settings.target_id | split: ',' -%}
                 <li class="scrollspy-item" role="menuitem" {{ block.shopify_attributes }}>
                   <a href="#{{ target_id | first | strip }}" 
-                    class="scrollspy-link menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer whitespace-nowrap"
+                    class="scrollspy-link menu__item fluid-lg flex items-center font-medium z-2 relative cursor-pointer whitespace-nowrap"
                     data-target="{{ block.settings.target_id | remove: ' ' | strip_newlines }}"
                   >
                     <span class="btn-text">{{ block.settings.title }}</span>
@@ -28,7 +28,7 @@
             {% when 'back_to_top' %}
               <li class="scrollspy-item" role="menuitem" {{ block.shopify_attributes }}>
                 <button type="button"
-                  class="back-to-top menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer whitespace-nowrap"
+                  class="back-to-top menu__item fluid-lg flex items-center font-medium z-2 relative cursor-pointer whitespace-nowrap"
                   aria-label="{{ block.settings.text }}"
                 >
                   <span class="btn-text">

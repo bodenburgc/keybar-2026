@@ -1,7 +1,7 @@
 {%- capture accordion_content -%}
   <details class="details{% if block.settings.reduce_size %} product__accordion {{ block.settings.style }}{% endif %}" is="accordion-details"{% if block.settings.open_by_default %} aria-expanded="true" open{% endif %} {{ block.shopify_attributes }}>
     <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
-      <span class="{% if block.settings.reduce_size %}text-base{% else %}heading text-base-xl{% endif %} font-medium leading-none flex items-center gap-2d5 md:gap-3">
+      <span class="{% if block.settings.reduce_size %}text-base{% else %}heading fluid-xl{% endif %} font-medium leading-none flex items-center gap-2d5 md:gap-3">
         {%- if block.settings.icon_image != blank -%}
           {%- liquid
             if block.settings.iwidth == 'fit'

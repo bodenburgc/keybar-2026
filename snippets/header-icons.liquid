@@ -59,7 +59,7 @@
             <li class="localization{% if show_color_localization %} localization--colored{% endif %}">
               <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top">
                 <summary data-link="">
-                  <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer" data-magnet="0">
+                  <magnet-element class="menu__item fluid-lg flex items-center font-medium z-2 relative cursor-pointer" data-magnet="0">
                     {%- unless section_rendering_api -%}
                       <api-button class="api-only" data-id="header_localization_language_form_{{ context }}" data-section-id="{{ section.id }}"></api-button>
                     {%- endunless -%}
@@ -121,7 +121,7 @@
             <li class="localization{% if show_color_localization %} localization--colored{% endif %}">
               <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top">
                 <summary data-link="">
-                  <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer" data-magnet="0">
+                  <magnet-element class="menu__item fluid-lg flex items-center font-medium z-2 relative cursor-pointer" data-magnet="0">
                     {%- unless section_rendering_api -%}
                       <api-button class="api-only" data-id="header_localization_country_form_{{ context }}" data-section-id="{{ section.id }}"></api-button>
                     {%- endunless -%}

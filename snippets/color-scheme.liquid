@@ -1,0 +1,58 @@
+{%- doc -%}
+  Outputs CSS variables for a preset color scheme.
+
+  @param {string} scheme - The color scheme ID: "light", "dark", or "accent"
+
+  @example
+  {%- render 'color-scheme', scheme: section.settings.color_scheme -%}
+{%- enddoc -%}
+
+{%- liquid
+  case scheme
+    when 'dark'
+      assign bg = settings.color_scheme_dark_background.rgb | default: '28, 31, 34'
+      assign card_bg = '18, 20, 22'
+      assign text = settings.color_scheme_dark_text.rgb | default: '255, 255, 255'
+      assign highlight = settings.color_scheme_dark_highlight.rgb | default: '255, 215, 0'
+      assign btn_bg = settings.color_scheme_dark_button_background.rgb | default: '255, 215, 0'
+      assign btn_text = settings.color_scheme_dark_button_text.rgb | default: '28, 31, 34'
+      assign vendor_color = '205, 150, 80'
+      assign price_color = '200, 196, 188'
+      assign is_dark = true
+    when 'accent'
+      assign bg = settings.color_scheme_accent_background.rgb | default: '255, 215, 0'
+      assign card_bg = '235, 195, 0'
+      assign text = settings.color_scheme_accent_text.rgb | default: '28, 31, 34'
+      assign highlight = settings.color_scheme_accent_highlight.rgb | default: '28, 31, 34'
+      assign btn_bg = settings.color_scheme_accent_button_background.rgb | default: '28, 31, 34'
+      assign btn_text = settings.color_scheme_accent_button_text.rgb | default: '255, 255, 255'
+      assign vendor_color = nil
+      assign price_color = nil
+      assign is_dark = false
+    else
+      # Light scheme (default) - uses global theme colors, no overrides needed
+      assign bg = nil
+      assign card_bg = nil
+  endcase
+-%}
+
+{%- if bg -%}
+--color-background: {{ bg }};
+--color-base-background: {{ bg }};
+--color-foreground: {{ text }};
+--color-base-text: {{ text }};
+--color-highlight: {{ highlight }};
+--color-base-highlight: {{ highlight }};
+--color-button-background: {{ btn_bg }};
+--color-button-border: {{ btn_bg }};
+--color-button-text: {{ btn_text }};
+--color-placeholder: {{ card_bg | default: bg }};
+--color-card-title: {%- if is_dark -%}255, 248, 231{%- else -%}{{ text }}{%- endif -%};
+{%- if vendor_color -%}
+--color-vendor: rgb({{ vendor_color }});
+{%- endif -%}
+{%- if price_color -%}
+--color-price: {{ price_color }};
+{%- endif -%}
+--is-dark-scheme: {%- if is_dark -%}1{%- else -%}0{%- endif -%};
+{%- endif -%}

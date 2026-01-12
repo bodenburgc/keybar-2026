@@ -1,12 +1,23 @@
+{%- liquid
+  # Migration: support old use_dark_scheme checkbox + new color_scheme dropdown
+  assign scheme = section.settings.color_scheme | default: 'light'
+  if section.settings.use_dark_scheme and scheme == 'light'
+    assign scheme = 'dark'
+  endif
+  assign is_dark = false
+  if scheme == 'dark'
+    assign is_dark = true
+  endif
+-%}
+
 <style>
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
-    {%- if section.settings.use_dark_scheme -%}
-      {%- render 'color-scheme-dark' -%}
-    {%- else -%}
-      {%- render 'section-variables', section: section -%}
+    {%- if scheme != 'light' -%}
+      {%- render 'color-scheme', scheme: scheme -%}
     {%- endif -%}
+    {%- render 'section-variables', section: section -%}
     background-color: rgb(var(--color-background)) !important;
     color: rgb(var(--color-foreground)) !important;
   }
@@ -18,9 +29,7 @@
     background: transparent !important;
   }
 
-  {%- if section.settings.use_dark_scheme -%}
-    {%- render 'product-card-dark', section_id: section.id -%}
-
+  {%- if is_dark -%}
     /* Filter/Sort bar styling for dark mode */
     #shopify-section-{{ section.id }} .collection__filters {
       border-color: rgba(255, 255, 255, 0.1);
@@ -354,11 +363,16 @@
   "class": "collection-section",
   "settings": [
     {
-      "type": "checkbox",
-      "id": "use_dark_scheme",
-      "label": "Use dark color scheme",
-      "default": true,
-      "info": "Uses colors from Theme Settings > Dark color scheme"
+      "type": "select",
+      "id": "color_scheme",
+      "label": "Color scheme",
+      "options": [
+        { "value": "light", "label": "Light" },
+        { "value": "dark", "label": "Dark" },
+        { "value": "accent", "label": "Accent (Gold)" }
+      ],
+      "default": "dark",
+      "info": "Colors defined in Theme Settings > Color schemes"
     },
     {
       "type": "range",

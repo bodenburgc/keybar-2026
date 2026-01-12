@@ -1,15 +1,28 @@
 {%- doc -%}
   Outputs CSS variables for the dark color scheme.
   Uses colors defined in Theme Settings > Dark color scheme.
+  Falls back to hardcoded defaults if settings not configured.
 
   @example
   {%- render 'color-scheme-dark' -%}
 {%- enddoc -%}
 
---color-background: {{ settings.color_scheme_dark_background.rgb }};
---color-base-background: {{ settings.color_scheme_dark_background.rgb }};
---color-foreground: {{ settings.color_scheme_dark_text.rgb }};
---color-highlight: {{ settings.color_scheme_dark_highlight.rgb }};
---color-button-background: {{ settings.color_scheme_dark_button_background.rgb }};
---color-button-border: {{ settings.color_scheme_dark_button_background.rgb }};
---color-button-text: {{ settings.color_scheme_dark_button_text.rgb }};
+{%- liquid
+  # Fallback values if settings not configured
+  assign bg = settings.color_scheme_dark_background.rgb | default: '28, 31, 34'
+  assign text = settings.color_scheme_dark_text.rgb | default: '255, 255, 255'
+  assign highlight = settings.color_scheme_dark_highlight.rgb | default: '255, 215, 0'
+  assign btn_bg = settings.color_scheme_dark_button_background.rgb | default: '255, 215, 0'
+  assign btn_text = settings.color_scheme_dark_button_text.rgb | default: '28, 31, 34'
+-%}
+
+--color-background: {{ bg }};
+--color-base-background: {{ bg }};
+--color-foreground: {{ text }};
+--color-highlight: {{ highlight }};
+--color-button-background: {{ btn_bg }};
+--color-button-border: {{ btn_bg }};
+--color-button-text: {{ btn_text }};
+--color-placeholder: {{ bg }};
+--color-card-title: {{ highlight }};
+--is-dark-scheme: 1;

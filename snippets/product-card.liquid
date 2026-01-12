@@ -21,6 +21,7 @@
   @param {boolean} [show_sold_out] - Display sold out badge
   @param {boolean} [show_save_amount] - Show savings badge
   @param {boolean} [show_icon_list] - Display feature icons from metafields
+  @param {boolean} [show_card_description] - Show product card description from metafield
   @param {string} [save_type] - Savings calculation method for badges
   @param {boolean} [mobile_quick_add] - Add mobile-specific quick add button
   @param {string} [display_mode] - Rating display mode ('count' or value)
@@ -328,7 +329,7 @@
 
       <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
         <p class="grow">
-          <a class="product-card__title reversed-link text-base-xl font-medium leading-tight" href="{{ product_url }}">
+          <a class="product-card__title reversed-link fluid-xl font-medium leading-tight" href="{{ product_url }}">
             {{- product.title | escape -}}
           </a>
         </p>

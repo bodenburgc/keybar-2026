@@ -1,0 +1,623 @@
+{%- comment -%}
+  KeyBar Style Guide - Visual brand documentation
+  Shows logos, colors, typography, buttons, product cards, and more
+{%- endcomment -%}
+
+<style>
+  .style-guide {
+    --sg-section-gap: clamp(3rem, 6vw, 5rem);
+    --sg-item-gap: clamp(1.5rem, 3vw, 2.5rem);
+  }
+  .style-guide-nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgb(var(--color-background) / 0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgb(var(--color-foreground) / 0.1);
+    padding: var(--sp-4) 0;
+  }
+  .style-guide-nav__links {
+    display: flex;
+    gap: var(--sp-6);
+    overflow-x: auto;
+    padding: 0 var(--sp-4);
+    scrollbar-width: none;
+  }
+  .style-guide-nav__links::-webkit-scrollbar { display: none; }
+  .style-guide-nav__link {
+    white-space: nowrap;
+    font-size: var(--text-sm);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: rgb(var(--color-foreground) / 0.6);
+    transition: color 0.2s;
+  }
+  .style-guide-nav__link:hover { color: rgb(var(--color-foreground)); }
+
+  .sg-section {
+    padding: var(--sg-section-gap) 0;
+    border-bottom: 1px solid rgb(var(--color-foreground) / 0.1);
+  }
+  .sg-section:last-child { border-bottom: none; }
+  .sg-section__title {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--sp-2);
+  }
+  .sg-section__desc {
+    color: rgb(var(--color-foreground) / 0.6);
+    margin-bottom: var(--sg-item-gap);
+    max-width: 60ch;
+  }
+
+  .sg-color-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: var(--sp-4);
+  }
+  .sg-color-card {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid rgb(var(--color-foreground) / 0.1);
+  }
+  .sg-color-swatch {
+    height: 100px;
+    display: flex;
+    align-items: flex-end;
+    padding: var(--sp-3);
+  }
+  .sg-color-info {
+    padding: var(--sp-3);
+    background: rgb(var(--color-background));
+  }
+  .sg-color-name {
+    font-weight: var(--font-semibold);
+    font-size: var(--text-sm);
+  }
+  .sg-color-hex {
+    font-family: monospace;
+    font-size: var(--text-xs);
+    color: rgb(var(--color-foreground) / 0.6);
+  }
+
+  .sg-type-sample {
+    margin-bottom: var(--sp-6);
+    padding-bottom: var(--sp-6);
+    border-bottom: 1px solid rgb(var(--color-foreground) / 0.05);
+  }
+  .sg-type-label {
+    font-family: monospace;
+    font-size: var(--text-xs);
+    color: rgb(var(--color-foreground) / 0.5);
+    margin-bottom: var(--sp-2);
+  }
+
+  .sg-button-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-4);
+    align-items: center;
+  }
+
+  .sg-scheme-preview {
+    padding: var(--sp-8);
+    border-radius: var(--radius-xl);
+    margin-bottom: var(--sp-6);
+  }
+  .sg-scheme-preview--light {
+    background: #FFFFFF;
+    color: #1C1F22;
+    border: 1px solid rgb(var(--color-foreground) / 0.1);
+  }
+  .sg-scheme-preview--dark {
+    background: #1C1F22;
+    color: #FFFFFF;
+  }
+  .sg-scheme-preview--accent {
+    background: #FFD700;
+    color: #1C1F22;
+  }
+  .sg-scheme-label {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--sp-4);
+    opacity: 0.6;
+  }
+  .sg-scheme-title {
+    font-size: clamp(1.25rem, 2vw, 1.5rem);
+    font-weight: var(--font-bold);
+    margin-bottom: var(--sp-2);
+  }
+  .sg-scheme-vendor {
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--sp-1);
+  }
+  .sg-scheme-price {
+    font-size: var(--text-sm);
+  }
+
+  /* Dark scheme preview colors */
+  .sg-scheme-preview--dark .sg-scheme-title { color: #FFF8E7; }
+  .sg-scheme-preview--dark .sg-scheme-vendor { color: #CD9650; }
+  .sg-scheme-preview--dark .sg-scheme-price { color: #C8C4BC; }
+
+  .sg-logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--sp-6);
+  }
+  .sg-logo-card {
+    padding: var(--sp-8);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 150px;
+  }
+  .sg-logo-card--light {
+    background: #FFFFFF;
+    border: 1px solid rgb(var(--color-foreground) / 0.1);
+  }
+  .sg-logo-card--dark {
+    background: #1C1F22;
+  }
+  .sg-logo-card--gold {
+    background: #FFD700;
+  }
+  .sg-logo-card img, .sg-logo-card svg {
+    max-width: 180px;
+    max-height: 80px;
+    object-fit: contain;
+  }
+
+  .sg-badge-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    align-items: center;
+  }
+  .sg-badge {
+    padding: var(--sp-1) var(--sp-3);
+    border-radius: var(--radius-full);
+    font-size: var(--text-xs);
+    font-weight: var(--font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .sg-badge--gold { background: #FFD700; color: #1C1F22; }
+  .sg-badge--dark { background: #1C1F22; color: #FFFFFF; }
+  .sg-badge--orange { background: #FF8C00; color: #FFFFFF; }
+  .sg-badge--green { background: #22C55E; color: #FFFFFF; }
+  .sg-badge--red { background: #DC2626; color: #FFFFFF; }
+
+  .sg-spacing-demo {
+    display: flex;
+    gap: var(--sp-4);
+    flex-wrap: wrap;
+  }
+  .sg-spacing-box {
+    background: rgb(var(--color-foreground) / 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+    font-size: var(--text-xs);
+  }
+</style>
+
+<nav class="style-guide-nav">
+  <div class="container">
+    <div class="style-guide-nav__links">
+      <a href="#logos" class="style-guide-nav__link">Logos</a>
+      <a href="#colors" class="style-guide-nav__link">Colors</a>
+      <a href="#dark-scheme" class="style-guide-nav__link">Dark Scheme</a>
+      <a href="#typography" class="style-guide-nav__link">Typography</a>
+      <a href="#buttons" class="style-guide-nav__link">Buttons</a>
+      <a href="#badges" class="style-guide-nav__link">Badges</a>
+      <a href="#color-schemes" class="style-guide-nav__link">Color Schemes</a>
+      <a href="#spacing" class="style-guide-nav__link">Spacing</a>
+    </div>
+  </div>
+</nav>
+
+<div class="style-guide container">
+
+  <!-- LOGOS -->
+  <section id="logos" class="sg-section">
+    <h2 class="sg-section__title">Logos</h2>
+    <p class="sg-section__desc">KeyBar logo variations for different backgrounds. Always maintain clear space around the logo.</p>
+
+    <div class="sg-logo-grid">
+      <div>
+        <div class="sg-logo-card sg-logo-card--light">
+          {%- if settings.logo != blank -%}
+            {{ settings.logo | image_url: width: 360 | image_tag: alt: shop.name, class: 'max-w-[180px]' }}
+          {%- else -%}
+            <span class="fluid-xl font-bold">{{ shop.name }}</span>
+          {%- endif -%}
+        </div>
+        <p class="sg-type-label mt-3">On Light Backgrounds</p>
+      </div>
+      <div>
+        <div class="sg-logo-card sg-logo-card--dark">
+          {%- if settings.logo_white != blank -%}
+            {{ settings.logo_white | image_url: width: 360 | image_tag: alt: shop.name, class: 'max-w-[180px]' }}
+          {%- elsif settings.logo != blank -%}
+            {{ settings.logo | image_url: width: 360 | image_tag: alt: shop.name, class: 'max-w-[180px] invert' }}
+          {%- else -%}
+            <span class="fluid-xl font-bold text-white">{{ shop.name }}</span>
+          {%- endif -%}
+        </div>
+        <p class="sg-type-label mt-3">On Dark Backgrounds</p>
+      </div>
+      <div>
+        <div class="sg-logo-card sg-logo-card--gold">
+          {%- if settings.logo != blank -%}
+            {{ settings.logo | image_url: width: 360 | image_tag: alt: shop.name, class: 'max-w-[180px]' }}
+          {%- else -%}
+            <span class="fluid-xl font-bold">{{ shop.name }}</span>
+          {%- endif -%}
+        </div>
+        <p class="sg-type-label mt-3">On Gold/Accent</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COLORS -->
+  <section id="colors" class="sg-section">
+    <h2 class="sg-section__title">Brand Colors</h2>
+    <p class="sg-section__desc">KeyBar's industrial EDC palette. Bold gold for action, dark metals for strength.</p>
+
+    <h3 class="fluid-lg font-semibold mb-4 mt-8">Primary Colors</h3>
+    <div class="sg-color-grid">
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #FFD700;">
+          <span style="color: #1C1F22; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">KeyBar Gold</div>
+          <div class="sg-color-hex">#FFD700</div>
+        </div>
+      </div>
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #1C1F22;">
+          <span style="color: #FFFFFF; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Gunmetal Black</div>
+          <div class="sg-color-hex">#1C1F22</div>
+        </div>
+      </div>
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #FFFFFF; border: 1px solid #eee;">
+          <span style="color: #1C1F22; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">White</div>
+          <div class="sg-color-hex">#FFFFFF</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="fluid-lg font-semibold mb-4 mt-8">Industrial Palette</h3>
+    <div class="sg-color-grid">
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #32373C;">
+          <span style="color: #FFFFFF; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Carbon Gray</div>
+          <div class="sg-color-hex">#32373C</div>
+        </div>
+      </div>
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #6B7280;">
+          <span style="color: #FFFFFF; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Titanium</div>
+          <div class="sg-color-hex">#6B7280</div>
+        </div>
+      </div>
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #EBEEF1;">
+          <span style="color: #1C1F22; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Aluminum Light</div>
+          <div class="sg-color-hex">#EBEEF1</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="fluid-lg font-semibold mb-4 mt-8">Accent Colors</h3>
+    <div class="sg-color-grid">
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #FF8C00;">
+          <span style="color: #FFFFFF; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Safety Orange</div>
+          <div class="sg-color-hex">#FF8C00</div>
+        </div>
+      </div>
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #22C55E;">
+          <span style="color: #FFFFFF; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Success Green</div>
+          <div class="sg-color-hex">#22C55E</div>
+        </div>
+      </div>
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #DC2626;">
+          <span style="color: #FFFFFF; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Error Red</div>
+          <div class="sg-color-hex">#DC2626</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DARK SCHEME PALETTE -->
+  <section id="dark-scheme" class="sg-section">
+    <h2 class="sg-section__title">Dark Scheme Palette</h2>
+    <p class="sg-section__desc">Optimized colors for dark backgrounds. A warm gold family that creates cohesion around the primary KeyBar Gold.</p>
+
+    <div class="sg-color-grid">
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #121416;">
+          <span style="color: #FFFFFF; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Card Background</div>
+          <div class="sg-color-hex">#121416 / rgb(18, 20, 22)</div>
+        </div>
+      </div>
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #FFF8E7;">
+          <span style="color: #1C1F22; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Pale Gold (Titles)</div>
+          <div class="sg-color-hex">#FFF8E7 / rgb(255, 248, 231)</div>
+        </div>
+      </div>
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #CD9650;">
+          <span style="color: #FFFFFF; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Copper (Vendor)</div>
+          <div class="sg-color-hex">#CD9650 / rgb(205, 150, 80)</div>
+        </div>
+      </div>
+      <div class="sg-color-card">
+        <div class="sg-color-swatch" style="background: #C8C4BC;">
+          <span style="color: #1C1F22; font-weight: 600;">Aa</span>
+        </div>
+        <div class="sg-color-info">
+          <div class="sg-color-name">Warm Gray (Price)</div>
+          <div class="sg-color-hex">#C8C4BC / rgb(200, 196, 188)</div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="fluid-lg font-semibold mb-4 mt-8">Dark Scheme Hierarchy</h3>
+    <div class="sg-scheme-preview sg-scheme-preview--dark">
+      <div class="sg-scheme-label">Dark Scheme Product Card</div>
+      <div class="sg-scheme-vendor">KEYBAR</div>
+      <div class="sg-scheme-title">Red Linen Micarta Mandalorian</div>
+      <div class="sg-scheme-price">$50.00 USD</div>
+      <button class="button button--primary mt-4" style="background: #FFD700; color: #1C1F22;">Add to Cart</button>
+    </div>
+  </section>
+
+  <!-- TYPOGRAPHY -->
+  <section id="typography" class="sg-section">
+    <h2 class="sg-section__title">Typography</h2>
+    <p class="sg-section__desc">Fluid typography using clamp() for responsive sizing. Classes follow RETAY naming convention.</p>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-6xl</div>
+      <div class="fluid-6xl font-bold">Stop the Noise</div>
+    </div>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-5xl</div>
+      <div class="fluid-5xl font-bold">KeyBar EDC</div>
+    </div>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-4xl</div>
+      <div class="fluid-4xl font-bold">Organize Your Keys</div>
+    </div>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-3xl</div>
+      <div class="fluid-3xl font-bold">Premium Key Organizers</div>
+    </div>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-2xl</div>
+      <div class="fluid-2xl font-semibold">Made in the USA</div>
+    </div>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-xl</div>
+      <div class="fluid-xl">Featured Collections</div>
+    </div>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-lg</div>
+      <div class="fluid-lg">Product descriptions and body copy that needs emphasis.</div>
+    </div>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-base</div>
+      <div class="fluid-base">Standard body text for paragraphs and content areas.</div>
+    </div>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-sm</div>
+      <div class="fluid-sm">Small text for captions, labels, and metadata.</div>
+    </div>
+
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.fluid-xs</div>
+      <div class="fluid-xs">Extra small for fine print and legal text.</div>
+    </div>
+
+    <h3 class="fluid-lg font-semibold mb-4 mt-8">Tagline Styles</h3>
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.tagline .tagline-lg</div>
+      <div class="tagline tagline-lg uppercase">Stop the Noise</div>
+    </div>
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.tagline .tagline-base</div>
+      <div class="tagline tagline-base uppercase">Everyday Carry</div>
+    </div>
+    <div class="sg-type-sample">
+      <div class="sg-type-label">.tagline .tagline-sm</div>
+      <div class="tagline tagline-sm uppercase">Made in USA</div>
+    </div>
+  </section>
+
+  <!-- BUTTONS -->
+  <section id="buttons" class="sg-section">
+    <h2 class="sg-section__title">Buttons</h2>
+    <p class="sg-section__desc">Button hierarchy for different actions. Primary for main CTAs, secondary for alternatives.</p>
+
+    <h3 class="fluid-lg font-semibold mb-4">Primary Buttons</h3>
+    <div class="sg-button-grid mb-8">
+      <button class="button button--primary">Add to Cart</button>
+      <button class="button button--primary button--small">Small Button</button>
+      <button class="button button--primary" disabled>Disabled</button>
+    </div>
+
+    <h3 class="fluid-lg font-semibold mb-4">Secondary Buttons</h3>
+    <div class="sg-button-grid mb-8">
+      <button class="button button--secondary">View Details</button>
+      <button class="button button--secondary button--small">Small</button>
+      <button class="button button--secondary" disabled>Disabled</button>
+    </div>
+
+    <h3 class="fluid-lg font-semibold mb-4">Tertiary / Outline Buttons</h3>
+    <div class="sg-button-grid">
+      <button class="button button--tertiary">Learn More</button>
+      <button class="button button--tertiary button--small">Small</button>
+    </div>
+  </section>
+
+  <!-- BADGES -->
+  <section id="badges" class="sg-section">
+    <h2 class="sg-section__title">Badges & Tags</h2>
+    <p class="sg-section__desc">Badges for product status, promotions, and categories.</p>
+
+    <h3 class="fluid-lg font-semibold mb-4">Product Badges</h3>
+    <div class="sg-badge-grid mb-8">
+      <span class="sg-badge sg-badge--gold">New</span>
+      <span class="sg-badge sg-badge--orange">Sale</span>
+      <span class="sg-badge sg-badge--dark">Limited Edition</span>
+      <span class="sg-badge sg-badge--green">In Stock</span>
+      <span class="sg-badge sg-badge--red">Sold Out</span>
+    </div>
+
+    <h3 class="fluid-lg font-semibold mb-4">Save Badges</h3>
+    <div class="sg-badge-grid">
+      <span class="sg-badge sg-badge--gold">Save 10%</span>
+      <span class="sg-badge sg-badge--gold">Save 25%</span>
+      <span class="sg-badge sg-badge--gold">Save 35%</span>
+    </div>
+  </section>
+
+  <!-- COLOR SCHEMES -->
+  <section id="color-schemes" class="sg-section">
+    <h2 class="sg-section__title">Section Color Schemes</h2>
+    <p class="sg-section__desc">Three preset schemes for sections. Select via dropdown in theme editor.</p>
+
+    <div class="sg-scheme-preview sg-scheme-preview--light">
+      <div class="sg-scheme-label">Light Scheme (Default)</div>
+      <div class="sg-scheme-vendor" style="color: #6B7280;">KEYBAR</div>
+      <div class="sg-scheme-title" style="color: #2C4554;">Product Title</div>
+      <div class="sg-scheme-price" style="color: #1C1F22;">$50.00 USD</div>
+      <button class="button button--primary mt-4">Add to Cart</button>
+    </div>
+
+    <div class="sg-scheme-preview sg-scheme-preview--dark">
+      <div class="sg-scheme-label">Dark Scheme</div>
+      <div class="sg-scheme-vendor">KEYBAR</div>
+      <div class="sg-scheme-title">Product Title</div>
+      <div class="sg-scheme-price">$50.00 USD</div>
+      <button class="button button--primary mt-4" style="background: #FFD700; color: #1C1F22;">Add to Cart</button>
+    </div>
+
+    <div class="sg-scheme-preview sg-scheme-preview--accent">
+      <div class="sg-scheme-label">Accent Scheme (Gold)</div>
+      <div class="sg-scheme-vendor" style="color: #1C1F22; opacity: 0.6;">KEYBAR</div>
+      <div class="sg-scheme-title" style="color: #1C1F22;">Product Title</div>
+      <div class="sg-scheme-price" style="color: #1C1F22;">$50.00 USD</div>
+      <button class="button mt-4" style="background: #1C1F22; color: #FFFFFF;">Add to Cart</button>
+    </div>
+  </section>
+
+  <!-- SPACING -->
+  <section id="spacing" class="sg-section">
+    <h2 class="sg-section__title">Spacing Scale</h2>
+    <p class="sg-section__desc">Consistent spacing using CSS custom properties. Based on 4px increments.</p>
+
+    <div class="sg-spacing-demo">
+      <div class="sg-spacing-box" style="width: 16px; height: 16px;">4</div>
+      <div class="sg-spacing-box" style="width: 24px; height: 24px;">6</div>
+      <div class="sg-spacing-box" style="width: 32px; height: 32px;">8</div>
+      <div class="sg-spacing-box" style="width: 48px; height: 48px;">12</div>
+      <div class="sg-spacing-box" style="width: 64px; height: 64px;">16</div>
+      <div class="sg-spacing-box" style="width: 96px; height: 96px;">24</div>
+      <div class="sg-spacing-box" style="width: 128px; height: 128px;">32</div>
+    </div>
+
+    <h3 class="fluid-lg font-semibold mb-4 mt-8">Spacing Variables</h3>
+    <div class="overflow-x-auto">
+      <table class="w-full fluid-sm">
+        <thead>
+          <tr class="text-left border-b">
+            <th class="py-2 pr-4">Variable</th>
+            <th class="py-2 pr-4">Value</th>
+            <th class="py-2">Usage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-opacity-10"><td class="py-2 pr-4 font-mono">--sp-1</td><td class="py-2 pr-4">4px</td><td class="py-2">Tight spacing</td></tr>
+          <tr class="border-b border-opacity-10"><td class="py-2 pr-4 font-mono">--sp-2</td><td class="py-2 pr-4">8px</td><td class="py-2">Small gaps</td></tr>
+          <tr class="border-b border-opacity-10"><td class="py-2 pr-4 font-mono">--sp-3</td><td class="py-2 pr-4">12px</td><td class="py-2">Default padding</td></tr>
+          <tr class="border-b border-opacity-10"><td class="py-2 pr-4 font-mono">--sp-4</td><td class="py-2 pr-4">16px</td><td class="py-2">Card padding</td></tr>
+          <tr class="border-b border-opacity-10"><td class="py-2 pr-4 font-mono">--sp-6</td><td class="py-2 pr-4">24px</td><td class="py-2">Section gaps</td></tr>
+          <tr class="border-b border-opacity-10"><td class="py-2 pr-4 font-mono">--sp-8</td><td class="py-2 pr-4">32px</td><td class="py-2">Large spacing</td></tr>
+          <tr><td class="py-2 pr-4 font-mono">--sp-12</td><td class="py-2 pr-4">48px</td><td class="py-2">Section padding</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+
+{% schema %}
+{
+  "name": "Style Guide",
+  "tag": "section",
+  "class": "style-guide-section",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Style Guide"
+    }
+  ]
+}
+{% endschema %}

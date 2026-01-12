@@ -109,7 +109,7 @@
               <div class="quick-order-list-total__info flex flex-col gap-5 grow">
                 <div class="quick-order-list-total__column flex flex-col lg:grid lg:grid-cols-2 gap-5">
                   <div class="quick-order-list-total__left flex flex-col gap-3">
-                    <p class="heading text-xl-3xl tracking-tighter leading-tight hidden lg:block">{{ product.title | escape }}</p>
+                    <p class="heading fluid-3xl tracking-tighter leading-tight hidden lg:block">{{ product.title | escape }}</p>
                     <div class="flex flex-wrap justify-center lg:justify-start gap-4">
                       <span>{{ 'sections.quick_order_list.total_items' | t: count: items_in_cart }}</span>
                       <div class="variant-remove-total inline-flex items-center justify-start relative">
@@ -128,7 +128,7 @@
                   <div class="quick-order-list-total__right flex flex-col gap-4">
                     <div class="flex flex-col lg:flex-row lg:justify-end gap-4 lg:gap-7d5">
                       <div class="totals flex flex-col items-center lg:items-end gap-3">
-                        <p class="totals__subtotal font-medium text-base-xl leading-none">{{ 'sections.quick_order_list.product_total' | t }}</p>
+                        <p class="totals__subtotal font-medium fluid-xl leading-none">{{ 'sections.quick_order_list.product_total' | t }}</p>
                         <span class="totals__subtotal-value font-bold text-2xl leading-none">
                           {{- cart | line_items_for: product | sum: 'original_line_price' | money -}}
                         </span>

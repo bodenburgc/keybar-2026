@@ -52,7 +52,7 @@
       <li>
         <details is="details-mega" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top" {{ mega_menu_block.shopify_attributes }}>
           <summary data-link="{{ link.url }}" class="z-2 relative{% if section.settings.menu_active == 'block' %} rounded-full{% endif %}">
-            <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
+            <magnet-element class="menu__item fluid-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
               {%- unless section_rendering_api -%}
                 <api-button class="api-only" data-id="HeaderNavMega-{{ section.id }}-{{ forloop.index }}-{{ context }}" data-section-id="{{ section.id }}"></api-button>
               {%- endunless -%}
@@ -85,7 +85,7 @@
       <li>
         <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top">
           <summary data-link="{{ link.url }}" class="z-2 relative{% if section.settings.menu_active == 'block' %} rounded-full{% endif %}">
-            <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
+            <magnet-element class="menu__item fluid-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
               <span class="btn-text" data-text>
                 {%- liquid
                   echo link.title
@@ -115,7 +115,7 @@
                     <li class="opacity-0 relative">
                       <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="child">
                         <summary data-link="{{ childlink.url }}">
-                          <a href="{{ childlink.url }}" class="reversed-link text-sm-base" tabindex="-1">{{ childlink.title }}</a>
+                          <a href="{{ childlink.url }}" class="reversed-link fluid-sm" tabindex="-1">{{ childlink.title }}</a>
                         </summary>
                         <div class="dropdown opacity-0 invisible absolute top-0 left-100 max-w-full pointer-events-none">
                           <div class="dropdown__container">
@@ -123,7 +123,7 @@
                               {%- for grandchildlink in childlink.links -%}
                                 <li class="opacity-0">
                                   <p>
-                                    <a href="{{ grandchildlink.url }}" class="reversed-link text-sm-base">{{ grandchildlink.title }}</a>
+                                    <a href="{{ grandchildlink.url }}" class="reversed-link fluid-sm">{{ grandchildlink.title }}</a>
                                   </p>
                                 </li>
                               {%- endfor -%}
@@ -135,7 +135,7 @@
                   {%- else -%}
                     <li class="opacity-0">
                       <p>
-                        <a href="{{ childlink.url }}" class="reversed-link text-sm-base">{{ childlink.title }}</a>
+                        <a href="{{ childlink.url }}" class="reversed-link fluid-sm">{{ childlink.title }}</a>
                       </p>
                     </li>
                   {%- endif -%}
@@ -147,7 +147,7 @@
       </li>
     {%- else -%}
       <li>
-        <a href="{{ link.url }}" class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer" is="magnet-link"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
+        <a href="{{ link.url }}" class="menu__item fluid-lg flex items-center font-medium z-2 relative cursor-pointer" is="magnet-link"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
           <span class="btn-text" data-text>{{ link.title }}</span>
           {%- if section.settings.menu_active == 'block' -%}
             <span class="btn-text btn-duplicate">{{ link.title }}</span>

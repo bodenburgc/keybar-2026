@@ -880,7 +880,7 @@
                 <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
                   <div class="flex items-center gap-2d5">
                     {%- render 'icon-accordion', icon: block.settings.icon -%}
-                    <span class="text-sm-base font-medium leading-none">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
+                    <span class="fluid-sm font-medium leading-none">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
                   </div>
                   {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
                 </summary>
@@ -1002,7 +1002,7 @@
                             endif
                           -%}
                         {%- endif -%}
-                        <span class="text-sm-base font-medium leading-none">{{ block.settings.heading | escape }}</span>
+                        <span class="fluid-sm font-medium leading-none">{{ block.settings.heading | escape }}</span>
                       </div>
                       {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
                     </summary>
@@ -1049,7 +1049,7 @@
                               {%- if variant.available -%}
                                 {%- render 'product-price', product: variant.product, variant: variant, use_variant: true, class: 'flex flex-wrap items-baseline gap-2 lg:flex-col xl:items-end lg:gap-1d5' -%}
                               {%- else -%}
-                                <span class="text-sm-base text-opacity">{{ 'products.product.sold_out' | t }}</span>
+                                <span class="fluid-sm text-opacity">{{ 'products.product.sold_out' | t }}</span>
                               {%- endif -%}
                             </div>
                           </label>

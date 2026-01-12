@@ -3,8 +3,9 @@
 
   Features a streamlined image-details-action layout ideal for search results, recommendations, and cart suggestions.
 
-  @param {object} product - Shopify product object containing variants and media
-  @param {string} product_id - Unique product identifier for element targeting
+  @param {object} [product] - Shopify product object containing variants and media
+  @param {boolean} [placeholder] - Display placeholder card when no product provided
+  @param {string} [product_id] - Unique product identifier for element targeting
   @param {string} section_id - Section identifier for component namespacing
   @param {string} [block_id] - Optional block ID for additional uniqueness
   @param {string} [image_ratio] - Image aspect ratio preset
@@ -27,6 +28,8 @@
      accessibility: true
   %}
 {%- enddoc -%}
+
+{%- comment -%} placeholder parameter used for theme editor preview when no product is selected {%- endcomment -%}
 
 <div class="horizontal-product flex items-center gap-4 md:gap-6 w-full">
   <a class="horizontal-product__media media media--{{ image_ratio }}{% unless image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0" href="{{ product.url }}"{% unless accessibility %} tabindex="-1"{% endunless %}>
@@ -51,7 +54,7 @@
     <div class="flex flex-col gap-1">
       {%- liquid
         if show_price
-          render 'product-price', product: product, class: 'flex flex-wrap items-end gap-2 text-sm'
+          render 'product-price', product: product, placeholder: placeholder, class: 'flex flex-wrap items-end gap-2 text-sm'
         endif
       -%}
     </div>

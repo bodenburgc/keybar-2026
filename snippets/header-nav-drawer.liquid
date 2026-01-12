@@ -96,7 +96,7 @@
                           {%- else -%}
                             {%- for i in (1..4) -%}
                               {%- render 'product-card-horizontal',
-                                product: blank,
+                                placeholder: true,
                                 product_id: i,
                                 section_id: section.id,
                                 block_id: block.id,

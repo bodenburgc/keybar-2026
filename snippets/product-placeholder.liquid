@@ -419,7 +419,7 @@
 
         {%- when 'read_more' -%}
           <button type="button" class="product__more flex items-center justify-between w-full" {{ block.shopify_attributes }}>
-            <span class="text-sm-base font-medium leading-none">
+            <span class="fluid-sm font-medium leading-none">
               {{- 'products.product.read_more' | t -}}
             </span>
             {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'shrink-0' -%}

@@ -47,13 +47,13 @@
           <div class="hidden md:block">
             <ul class="subcollections inline-flex flex-wrap justify-center max-w-full">
               <li class="flex items-center justify-center relative{% if current_tags == blank %} active{% endif %}">
-                <a href="{{ blog.url }}" class="subcollection flex items-center relative leading-tight text-lg-2xl">
+                <a href="{{ blog.url }}" class="subcollection flex items-center relative leading-tight fluid-2xl">
                   <span class="btn-text">{{ 'blogs.article.all_tags' | t }}</span>
                 </a>
               </li>
               {%- for tag in blog.all_tags -%}
                 <li class="flex items-center justify-center relative{% if current_tags contains tag %} active{% endif %}">
-                  <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="subcollection flex items-center relative leading-tight text-lg-2xl">
+                  <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="subcollection flex items-center relative leading-tight fluid-2xl">
                     <span class="btn-text">{{ tag }}</span>
                   </a>
                 </li>

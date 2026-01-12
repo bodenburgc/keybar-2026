@@ -28,7 +28,7 @@
     
     <div class="customer__content flex flex-col lg:flex-row">
       <div class="grow flex flex-col gap-5 md:gap-8">
-        <h2 class="text-xl-3xl font-medium">{{ 'customer.orders.title' | t }}</h2>
+        <h2 class="fluid-3xl font-medium">{{ 'customer.orders.title' | t }}</h2>
 
         {%- paginate customer.orders by 20 -%}
           {%- if customer.orders.size > 0 -%}
@@ -86,7 +86,7 @@
 
       <div class="grow-0">
         <sticky-element class="customer__sidebar flex flex-col gap-5 md:gap-7d5 lg:sticky top-0">
-          <h2 class="text-xl-3xl font-medium">{{ 'customer.account.details' | t }}</h2>
+          <h2 class="fluid-3xl font-medium">{{ 'customer.account.details' | t }}</h2>
           <div class="text-base md:text-lg">{{ customer.default_address | format_address }}</div>
           <div>
             <a class="button button--primary icon-with-text" href="{{ routes.account_addresses_url }}" is="hover-link">

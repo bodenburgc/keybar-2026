@@ -21,7 +21,7 @@
   {%- endif -%}
   <div class="grid gap-4">
     <ul class="article-card__top grid md:flex flex-wrap gap-4">
-      <li class="heading text-base-xl leading-none relative">{{ comment.author }}</li>
+      <li class="heading fluid-xl leading-none relative">{{ comment.author }}</li>
       <li class="inline-flex gap-2 text-xs relative">
         {%- render 'icon', icon: 'calendar', size: 'xs', class: 'stroke-1' -%}
         {{- comment.created_at | date: format: 'date_at_time' -}}

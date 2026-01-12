@@ -150,7 +150,7 @@
             {%- for address in customer.addresses -%}
               <li class="address flex flex-col gap-5 md:gap-7d5" data-address>
                 {%- if address == customer.default_address -%}
-                  <h2 class="text-xl-3xl font-medium">{{ 'customer.addresses.default' | t }}</h2>
+                  <h2 class="fluid-3xl font-medium">{{ 'customer.addresses.default' | t }}</h2>
                 {%- endif -%}
                 <div class="text-base md:text-lg">{{ address | format_address }}</div>
                 <div class="flex flex-wrap gap-3">

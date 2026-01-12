@@ -1323,6 +1323,111 @@ video {
   font-size: var(--fluid-xl-to-3xl);
 }
 
+/* Fluid Typography - RETAY naming convention */
+.fluid-xs {
+  font-size: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+}
+
+.fluid-sm {
+  font-size: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
+}
+
+.fluid-base {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+}
+
+.fluid-lg {
+  font-size: clamp(1.125rem, 1.05rem + 0.375vw, 1.25rem);
+}
+
+.fluid-xl {
+  font-size: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+}
+
+.fluid-2xl {
+  font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+}
+
+.fluid-3xl {
+  font-size: clamp(1.75rem, 1rem + 2.5vw, 3rem);
+}
+
+.fluid-4xl {
+  font-size: clamp(2rem, 1.25rem + 3.75vw, 4rem);
+}
+
+.fluid-5xl {
+  font-size: clamp(2.5rem, 1.25rem + 6.25vw, 5.875rem);
+}
+
+.fluid-6xl {
+  font-size: clamp(3rem, 1.5rem + 7.5vw, 7rem);
+}
+
+/* Text Wrap - Modern typography */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Taglines - RETAY naming convention */
+.tagline {
+  font-family: var(--font-body-family);
+  font-weight: var(--font-medium);
+  letter-spacing: 0.05em;
+}
+
+.tagline-sm {
+  font-size: clamp(0.875rem, 0.85rem + 0.125vw, 1rem);
+}
+
+.tagline-base {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+}
+
+.tagline-lg {
+  font-size: clamp(1.125rem, 1.05rem + 0.375vw, 1.25rem);
+}
+
+/* Grid Auto-Fit - Responsive grid */
+.grid-auto-fit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(var(--grid-min, 300px), 1fr));
+  gap: var(--grid-gap, 1.5rem);
+}
+
+.grid-auto-fill {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(var(--grid-min, 300px), 1fr));
+  gap: var(--grid-gap, 1.5rem);
+}
+
+/* Background Texture - Subtle noise overlay */
+.bg-noise-subtle {
+  position: relative;
+}
+
+.bg-noise-subtle::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+/* iOS Safari Fix - Full height */
+@supports (-webkit-touch-callout: none) {
+  .min-h-screen-ios {
+    min-height: -webkit-fill-available;
+  }
+}
+
 .font-bold {
   font-weight: var(--font-bold)
 }
@@ -9734,7 +9839,8 @@ details.active .drawer__promotions .mega-menu__item,
   --border-opacity: var(--card-border-opacity);
   --product-card-quick-view-inset: var(--sp-4);
   background-color: rgb(var(--color-placeholder));
-  border-radius: var(--radius-xl);
+  border-radius: var(--card-radius);
+  overflow: hidden;
   align-content: flex-start;
   border: var(--card-border-width) solid rgb(var(--color-foreground)/ var(--border-opacity));
   position: relative;
@@ -9820,13 +9926,13 @@ details.active .drawer__promotions .mega-menu__item,
 }
 
 .product-card__top .caption {
-  color: rgb(var(--color-foreground)/ 0.6);
+  color: var(--color-vendor, rgb(var(--color-foreground)/ 0.6));
   font-size: clamp(var(--text-3xs), .579vw, var(--text-2xs));
 }
 
 .product-card__title {
   font-size: clamp(1.25rem, 2.5vw, 1.875rem);
-  color: #2C4554;
+  color: rgb(var(--color-card-title, 44, 69, 84));
 }
 
 .product-card__title,
@@ -11673,7 +11779,7 @@ details.active .drawer__promotions .mega-menu__item,
 
 .slider .card {
   scroll-snap-align: start;
-  border-radius: var(--radius-xl);
+  border-radius: var(--card-radius);
 }
 
 .slider + :is(p, .indicators) {

@@ -406,7 +406,7 @@
                         </td>
 
                         <td class="text-right hidden md:table-cell">
-                          <span class="price text-base-xl">
+                          <span class="price fluid-xl">
                             {%- liquid
                               if settings.currency_code_enabled
                                 echo item.final_line_price | money_with_currency
@@ -456,7 +456,7 @@
                 <div class="cart-details">
                   <details class="details" is="accordion-details">
                     <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
-                      <span class="text-base-2xl font-medium leading-none">{{ 'general.cart.shipping_calculator.caption' | t }}</span>
+                      <span class="fluid-2xl font-medium leading-none">{{ 'general.cart.shipping_calculator.caption' | t }}</span>
                       <svg class="icon icon-chevron-down" viewBox="0 0 18 10" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M1 1L9 9L17 1"></path>
                       </svg>
@@ -536,7 +536,7 @@
                   <details class="details" is="accordion-details" id="CartDiscount-{{ section.id }}">
                     <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
                       <p class="flex items-center gap-2d5">
-                        <span class="text-base-2xl font-medium leading-none">{{ 'general.cart.discount.caption' | t }}</span>
+                        <span class="fluid-2xl font-medium leading-none">{{ 'general.cart.discount.caption' | t }}</span>
                         {%- if discount_codes.size > 0 -%}
                           <span class="cart-discount__count flex items-center justify-center text-xs font-medium rounded-full">{{ discount_codes.size }}</span>
                         {%- endif -%}
@@ -611,7 +611,7 @@
                       {%- endif -%}
 
                       <div class="totals flex flex-wrap items-end justify-between gap-2">
-                        <p class="totals__subtotal h2 font-medium text-base-xl md:text-2xl leading-none">{{ 'cart.general.subtotal' | t }}</p>
+                        <p class="totals__subtotal h2 font-medium fluid-xl md:text-2xl leading-none">{{ 'cart.general.subtotal' | t }}</p>
                         <p class="totals__subtotal-value font-bold text-2xl md:text-3xl leading-none">{{ cart.total_price | money_with_currency }}</p>
                       </div>
 

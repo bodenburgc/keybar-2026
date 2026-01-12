@@ -55,14 +55,14 @@
                       {{- childlink.object.image | image_url: width: childlink.object.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
                     </a>
                   {%- endif -%}
-                  <a href="{{ childlink.url }}" class="{% if block.settings.menu_width != 'small' %}heading {% endif %}reversed-link text-base-xl leading-tight tracking-tight{% if childlink.current %} active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                  <a href="{{ childlink.url }}" class="{% if block.settings.menu_width != 'small' %}heading {% endif %}reversed-link fluid-xl leading-tight tracking-tight{% if childlink.current %} active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
                     {{- childlink.title | escape -}}
                   </a>
                   {%- if childlink.links != blank -%}
                     <ul>
                       {%- for grandchildlink in childlink.links -%}
                         <li>
-                          <a href="{{ grandchildlink.url }}" class="{% if block.settings.menu_width != 'small' %}reversed-link text-base xl:text-lg{% else %}heading reversed-link text-xl-3xl tracking-tighter leading-tight{% endif %}{% if grandchildlink.current %} active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                          <a href="{{ grandchildlink.url }}" class="{% if block.settings.menu_width != 'small' %}reversed-link text-base xl:text-lg{% else %}heading reversed-link fluid-3xl tracking-tighter leading-tight{% endif %}{% if grandchildlink.current %} active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
                             {{- grandchildlink.title | escape -}}
                           </a>
                         </li>
@@ -75,7 +75,7 @@
             {%- if block.settings.button_label != blank -%}
               <div class="mega-menu__footer relative">
                 <a class="mega-menu__link link icon-with-text flex items-center justify-between w-full h-full"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %}>
-                  <span class="{% if block.settings.menu_width != 'small' %}heading {% endif %}link-text text-lg-2xl tracking-tight">{{ block.settings.button_label | escape }}</span>
+                  <span class="{% if block.settings.menu_width != 'small' %}heading {% endif %}link-text fluid-2xl tracking-tight">{{ block.settings.button_label | escape }}</span>
                   {%- render 'icon', icon: 'arrow-right', size: 'lg', class: 'transform' -%}
                 </a>
               </div>
@@ -117,7 +117,7 @@
                         <div class="media-card__text opacity-0 shrink-1 grid gap-0d5">
                           {%- if block.settings[promo_heading] != blank -%}
                             <p>
-                              <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight">{{ block.settings[promo_heading] | escape }}</span>
+                              <span class="heading reversed-link fluid-3xl tracking-tighter leading-tight">{{ block.settings[promo_heading] | escape }}</span>
                             </p>
                           {%- endif -%}
                           {%- if block.settings[promo_subtext] != blank -%}
@@ -174,7 +174,7 @@
                       {{- block.settings[tab_icon] | image_url: width: block.settings[tab_icon].width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'image-fit' -}}
                     </figure>
                   {%- endif -%}
-                  <span class="heading link-text text-xl-3xl tracking-tighter leading-tight">{{ tab_target_heading | escape }}</span>
+                  <span class="heading link-text fluid-3xl tracking-tighter leading-tight">{{ tab_target_heading | escape }}</span>
                 {%- endcapture -%}
                 {%- if block.settings[tab_target_link].type == 'collection_link' or block.settings[tab_target_link].type == 'catalog_link' -%}
                   <button type="button" class="mega-menu__nav-item flex gap-2 items-center opacity-0 link icon-with-text text-left" role="tab" aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}" data-index="{{ forloop_index }}"{% if forloop_first %} disabled{% endif %}>
@@ -195,7 +195,7 @@
           {%- if block.settings.button_label != blank -%}
             <div class="mega-menu__footer relative">
               <a class="mega-menu__link link icon-with-text flex items-center justify-between w-full h-full"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %}>
-                <span class="heading link-text text-base-xl tracking-tight">{{ block.settings.button_label | escape }}</span>
+                <span class="heading link-text fluid-xl tracking-tight">{{ block.settings.button_label | escape }}</span>
                 {%- render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform shrink-0' -%}
               </a>
             </div>
@@ -229,7 +229,7 @@
                       <p class="text-sm text-opacity leading-none uppercase">{{ block.settings.heading_2 | escape }}</p>
                     {%- endif -%}
                     <a class="mega-menu__link link icon-with-text" href="{{ block.settings[tab_target_link].object.url }}">
-                      <span class="heading link-text text-base-xl tracking-tight flex items-center gap-1">
+                      <span class="heading link-text fluid-xl tracking-tight flex items-center gap-1">
                         {{- 'collections.subcollections.all_products' | t: collection: tab_target_heading -}}
                         {%- if products_count > 0 -%}
                           <span class="text-base font-medium tracking-tight">({{ products_count }})</span>
@@ -316,7 +316,7 @@
                           <div class="media-card__text opacity-0 shrink-1 grid gap-0d5">
                             {%- if block.settings[promo_heading] != blank -%}
                               <p>
-                                <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight">{{ block.settings[promo_heading] | escape }}</span>
+                                <span class="heading reversed-link fluid-3xl tracking-tighter leading-tight">{{ block.settings[promo_heading] | escape }}</span>
                               </p>
                             {%- endif -%}
                             {%- if block.settings[promo_subtext] != blank -%}

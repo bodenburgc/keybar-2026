@@ -248,11 +248,15 @@
     ]
   },
   {
-    "name": "Dark color scheme",
+    "name": "Color schemes",
     "settings": [
       {
         "type": "paragraph",
-        "content": "Define colors for the dark color scheme. Sections can toggle this scheme on/off."
+        "content": "Define preset color schemes that sections can apply. Light scheme uses global Colors settings."
+      },
+      {
+        "type": "header",
+        "content": "Dark scheme"
       },
       {
         "type": "color",
@@ -283,6 +287,40 @@
         "id": "color_scheme_dark_button_text",
         "label": "Button text",
         "default": "#1C1F22"
+      },
+      {
+        "type": "header",
+        "content": "Accent scheme (KeyBar Gold)"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_accent_background",
+        "label": "Background",
+        "default": "#FFD700"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_accent_text",
+        "label": "Text",
+        "default": "#1C1F22"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_accent_highlight",
+        "label": "Highlight",
+        "default": "#1C1F22"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_accent_button_background",
+        "label": "Button background",
+        "default": "#1C1F22"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_accent_button_text",
+        "label": "Button text",
+        "default": "#FFFFFF"
       }
     ]
   },

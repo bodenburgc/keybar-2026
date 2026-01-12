@@ -90,7 +90,7 @@
                 <div class="grid gap-4">
                   <div class="grid gap-2">
                     <div class="giftcard__code" onclick="theme.selectText('gift-card-code');">
-                      <strong id="gift-card-code" class="text-base-2xl font-bold leading-none">{{ gift_card.code | format_code }}</strong>
+                      <strong id="gift-card-code" class="fluid-2xl font-bold leading-none">{{ gift_card.code | format_code }}</strong>
                     </div>
             
                     <p class="text-sm">{{ 'gift_cards.issued.redeem' | t }}</p>
@@ -127,7 +127,7 @@
         
                 <div class="grid justify-center">
                   <div class="gift-card__qr-code grid justify-center gap-6">
-                    <p class="heading text-base-xl leading-none">{{ 'gift_cards.issued.scan' | t }}</p>
+                    <p class="heading fluid-xl leading-none">{{ 'gift_cards.issued.scan' | t }}</p>
                     <qr-code identifier="{{ gift_card.qr_identifier }}" class="flex justify-center"></qr-code>
         
                     {%- if gift_card.pass_url -%}

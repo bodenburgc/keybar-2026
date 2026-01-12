@@ -12,7 +12,7 @@
 
 {%- if gift_items.size > 0 -%}
   <div class="cart__gift grid gap-4 md:gap-6">
-    <p class="text-base-2xl font-medium leading-none">{{ 'cart.gift_wrapping.gift_wrapping_list' | t }}</p>
+    <p class="fluid-2xl font-medium leading-none">{{ 'cart.gift_wrapping.gift_wrapping_list' | t }}</p>
     <div class="cart__items">
       <table role="table" class="no-headings w-full overflow-visible">
         <caption class="sr-only">{{ 'cart.gift_wrapping.gift_wrapping_list' | t }}</caption>
@@ -245,7 +245,7 @@
               </td>
 
               <td class="text-right hidden md:table-cell">
-                <span class="price text-base-xl">
+                <span class="price fluid-xl">
                   {%- liquid
                     if settings.currency_code_enabled
                       echo item.final_line_price | money_with_currency

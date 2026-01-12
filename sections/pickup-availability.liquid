@@ -65,7 +65,7 @@
       <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
         <div class="drawer__scrollable relative flex flex-col grow shrink">
           <div class="pickup-availability-product"> 
-            <h3 class="text-base-xl font-medium leading-tight">{{ product_variant.product.title | escape }}</h3>
+            <h3 class="fluid-xl font-medium leading-tight">{{ product_variant.product.title | escape }}</h3>
             {%- unless product_variant.product.has_only_default_variant -%}
               <p class="pickup-availability-variant flex flex-wrap text-sm text-opacity">
                 {%- for product_option in product_variant.product.options_with_values -%}

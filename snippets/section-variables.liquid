@@ -27,6 +27,7 @@
 
 {%- if section.settings.color_text != blank and section.settings.color_text != 'rgba(0,0,0,0)' -%}
   --color-foreground: {{ section.settings.color_text.rgb }};
+  --color-card-title: {{ section.settings.color_text.rgb }};
   --color-border: var(--color-foreground)/ 0.1;
   --color-border-dark: var(--color-foreground)/ 0.4;
   --color-border-light: var(--color-foreground)/ 0.06;
