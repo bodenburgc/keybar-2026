@@ -1094,8 +1094,91 @@
     </script>
   {%- endif -%}
   
+  {%- liquid
+    # Product Schema JSON-LD
+    # Comprehensive structured data for better Google rich snippets
+    assign selected_variant = product.selected_or_first_available_variant
+    assign product_price = selected_variant.price | divided_by: 100.0
+    assign product_compare_price = selected_variant.compare_at_price | divided_by: 100.0
+  -%}
   <script type="application/ld+json">
-    {{- product | structured_data -}}
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": {{ product.title | json }},
+      "description": {{ product.description | strip_html | truncate: 5000 | json }},
+      "url": "{{ shop.url }}{{ product.url }}",
+      "sku": {{ selected_variant.sku | default: product.id | json }},
+      {%- if product.metafields.product.mpn != blank -%}
+      "mpn": {{ product.metafields.product.mpn | json }},
+      {%- endif -%}
+      {%- if product.metafields.product.gtin != blank -%}
+      "gtin": {{ product.metafields.product.gtin | json }},
+      {%- endif -%}
+      "brand": {
+        "@type": "Brand",
+        "name": {{ product.vendor | default: shop.name | json }}
+      },
+      "image": [
+        {%- for media in product.media -%}
+          {%- if media.media_type == 'image' -%}
+            "{{ media | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
+          {%- endif -%}
+        {%- endfor -%}
+      ],
+      "offers": {
+        "@type": "Offer",
+        "url": "{{ shop.url }}{{ product.url }}",
+        "priceCurrency": "{{ cart.currency.iso_code }}",
+        "price": "{{ product_price }}",
+        {%- if product_compare_price > product_price -%}
+        "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
+        {%- endif -%}
+        "availability": "https://schema.org/{% if selected_variant.available %}InStock{% else %}OutOfStock{% endif %}",
+        "seller": {
+          "@type": "Organization",
+          "name": {{ shop.name | json }}
+        },
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingDestination": {
+            "@type": "DefinedRegion",
+            "addressCountry": "US"
+          },
+          "deliveryTime": {
+            "@type": "ShippingDeliveryTime",
+            "handlingTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 1,
+              "maxValue": 2,
+              "unitCode": "d"
+            },
+            "transitTime": {
+              "@type": "QuantitativeValue",
+              "minValue": 2,
+              "maxValue": 5,
+              "unitCode": "d"
+            }
+          }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "US",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 30,
+          "returnMethod": "https://schema.org/ReturnByMail",
+          "returnFees": "https://schema.org/FreeReturn"
+        }
+      }
+      {%- comment -%}
+        Uncomment when review app is integrated:
+        ,"aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.8",
+          "reviewCount": "127"
+        }
+      {%- endcomment -%}
+    }
   </script>
 </div>
 
