@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
@@ -24,7 +33,6 @@
             "text_letter_spacing": 0,
             "text_capitalize": false,
             "secondary_color": false,
-            "text_color": "",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -35,13 +43,20 @@
             "button_label": "Shop KeyBars",
             "button_link": "shopify://collections/keybars",
             "button_style": "primary",
-            "button_size": "large"
+            "button_size": "large",
+            "button_external": false,
+            "button_icon": true
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "transparent_header": true,
+        "image": "shopify://shop_images/keyabr-social.jpg",
         "image_height": "750px",
         "content_width": "medium",
         "content_position": "md:items-center md:justify-center",
@@ -49,15 +64,15 @@
         "image_height_mobile": "500px",
         "content_position_mobile": "items-center justify-center",
         "text_alignment_mobile": "center",
-        "color_text": "#FFFFFF",
-        "color_background": "#1C1F22",
+        "color_text": "#ffffff",
+        "color_background": "#1c1f22",
         "gradient_background": "",
-        "color_highlight": "#FFD700",
+        "color_highlight": "#ffd700",
         "gradient_highlight": "",
-        "color_button_text": "#1C1F22",
-        "color_button_background": "#FFD700",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
         "color_button_gradient": "",
-        "color_overlay": "#1C1F22",
+        "color_overlay": "#1c1f22",
         "overlay_opacity": 50,
         "padding_top": 0,
         "padding_bottom": 0,
@@ -75,46 +90,77 @@
           "type": "column",
           "settings": {
             "icon": "earth-americas",
+            "custom_icon": "",
             "heading": "USA Made",
-            "text": "<p>Proudly crafted in Savannah, Georgia. Every KeyBar is manufactured right here in America.</p>"
+            "text": "<p>Proudly crafted in Savannah, Georgia. Every KeyBar is manufactured right here in America.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
           }
         },
         "lifetime": {
           "type": "column",
           "settings": {
             "icon": "shield-check",
+            "custom_icon": "",
             "heading": "Lifetime Guarantee",
-            "text": "<p>We stand behind every product. If it breaks, we fix it or replace it. Period.</p>"
+            "text": "<p>We stand behind every product. If it breaks, we fix it or replace it. Period.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
           }
         },
         "modular": {
           "type": "column",
           "settings": {
             "icon": "puzzle-piece",
+            "custom_icon": "",
             "heading": "Modular System",
-            "text": "<p>Customize your carry with 20+ tool inserts. Build the perfect everyday carry for your needs.</p>"
+            "text": "<p>Customize your carry with 20+ tool inserts. Build the perfect everyday carry for your needs.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
           }
         },
         "materials": {
           "type": "column",
           "settings": {
             "icon": "gem",
+            "custom_icon": "",
             "heading": "Premium Materials",
-            "text": "<p>Aircraft-grade aluminum, Grade 5 titanium, and premium G10. Built to last a lifetime.</p>"
+            "text": "<p>Aircraft-grade aluminum, Grade 5 titanium, and premium G10. Built to last a lifetime.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
           }
         }
       },
-      "block_order": ["usa_made", "lifetime", "modular", "materials"],
+      "block_order": [
+        "usa_made",
+        "lifetime",
+        "modular",
+        "materials"
+      ],
       "settings": {
+        "style": "with-border",
         "columns": 4,
+        "text_alignment": "left",
         "heading": "",
         "heading_size": "title-md",
         "heading_alignment": "text-center md:items-center",
         "heading_tag": "h2",
-        "color_text": "#1C1F22",
-        "color_background": "#EBEEF1",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#ebeef1",
+        "color_background": "#1c1f22",
         "gradient_background": "",
-        "color_highlight": "#FFD700",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
         "padding_top": 60,
         "padding_bottom": 60,
         "divider": false,
@@ -122,9 +168,107 @@
         "rounded": false
       }
     },
+    "why_keybar": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Why KeyBar?",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "tagline": {
+          "type": "text",
+          "settings": {
+            "text": "<p><em><strong>Stop the Noise. Organize Your Carry.</strong></em></p>",
+            "text_font": "subtitle",
+            "text_size": "subtext-lg",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "text_color": "#ffd700",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Tired of keyring frustration? The KeyBar is a patented, USA-made key organizer with a titanium pocket clip that works like a multi-tool for your keys and everyday carry items.</p><p>Customize your setup exactly how you want it. Add tool inserts like flash drives, bottle openers, and screwdrivers. Built with heavy-duty materials—aircraft-grade aluminum, titanium, and carbon fiber—to last a lifetime.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 18,
+            "text_line_height": 1.7,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "text_color": "",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop KeyBars",
+            "button_link": "shopify://collections/keybars",
+            "button_style": "primary",
+            "button_size": "medium",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "tagline",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "video_url": "https://www.youtube.com/watch?v=y3FoTqHl3Fs",
+        "cover_image": "shopify://shop_images/the-American-made-key-organizer.jpg",
+        "description": "See how KeyBar works",
+        "below_video_image": "watch-this.png",
+        "enable_video_autoplay": false,
+        "enable_video_looping": false,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "video_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "300px",
+        "text_alignment_mobile": "left",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "#1c1f22",
+        "gradient_highlight": "",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
     "featured_keybars": {
       "type": "featured-collection",
       "settings": {
+        "color_scheme": "dark",
         "collection": "keybars",
         "products": [],
         "product_limit": 8,
@@ -141,13 +285,13 @@
         "description": "<p>The original key organizer. Choose from aluminum, titanium, brass, copper, and more.</p>",
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
-        "color_text": "#1C1F22",
-        "color_background": "#FFFFFF",
+        "color_text": "#ebeef1",
+        "color_background": "#1c1f22",
         "gradient_background": "",
-        "color_highlight": "#FFD700",
+        "color_highlight": "#ffd700",
         "gradient_highlight": "",
-        "color_button_text": "#1C1F22",
-        "color_button_background": "#FFD700",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
         "color_button_gradient": "",
         "padding_top": 80,
         "padding_bottom": 80,
@@ -156,83 +300,183 @@
         "rounded": false
       }
     },
-    "collection_list": {
-      "type": "collection-list",
+    "how_to_assemble": {
+      "type": "video-with-text",
       "blocks": {
-        "keybars": {
-          "type": "collection",
+        "heading": {
+          "type": "heading",
           "settings": {
-            "collection": "keybars",
-            "title": "",
-            "description": "",
-            "overlay_content": true,
-            "color_text": "#FFFFFF",
-            "color_overlay": "#1C1F22",
-            "overlay_opacity": 40
+            "heading": "Easy Assembly",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
           }
         },
-        "inserts": {
-          "type": "collection",
+        "tagline": {
+          "type": "text",
           "settings": {
-            "collection": "inserts",
-            "title": "",
-            "description": "",
-            "overlay_content": true,
-            "color_text": "#FFFFFF",
-            "color_overlay": "#1C1F22",
-            "overlay_opacity": 40
+            "text": "<p><em><strong>Set Up Your KeyBar in Minutes</strong></em></p>",
+            "text_font": "subtitle",
+            "text_size": "subtext-lg",
+            "text_max_size": 32,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "text_color": "#ffd700",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
           }
         },
-        "gear": {
-          "type": "collection",
+        "text": {
+          "type": "text",
           "settings": {
-            "collection": "gear",
-            "title": "",
-            "description": "",
-            "overlay_content": true,
-            "color_text": "#FFFFFF",
-            "color_overlay": "#1C1F22",
-            "overlay_opacity": 40
+            "text": "<p>No special tools required. Simply load your keys, add your favorite tool inserts, and tighten the screws. Rearrange anytime to fit your needs—your KeyBar adapts to your life.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 18,
+            "text_line_height": 1.7,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "text_color": "",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "View Assembly Guide",
+            "button_link": "shopify://pages/assembly",
+            "button_style": "primary",
+            "button_size": "medium",
+            "button_external": false,
+            "button_icon": true
           }
         }
       },
-      "block_order": ["keybars", "inserts", "gear"],
+      "block_order": [
+        "heading",
+        "tagline",
+        "text",
+        "button"
+      ],
       "settings": {
-        "card_style": "card",
-        "image_type": "collection",
-        "image_ratio": "square",
-        "show_products_count": true,
-        "show_view_all": false,
-        "columns": 3,
-        "carousel_on_desktop": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "heading": "Shop By Category",
-        "heading_size": "title-lg",
-        "heading_alignment": "text-center md:items-center",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "#FFFFFF",
-        "color_background": "#1C1F22",
+        "video_url": "https://www.youtube.com/watch?v=k8_ITxkvyL4",
+        "cover_image": "shopify://shop_images/Easy-Assembly.jpg",
+        "description": "How to assemble your KeyBar",
+        "below_video_image": "watch-this.png",
+        "enable_video_autoplay": false,
+        "enable_video_looping": false,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "300px",
+        "text_alignment_mobile": "left",
+        "color_text": "#1c1f22",
+        "color_background": "#ebeef1",
         "gradient_background": "",
-        "color_highlight": "#FFD700",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "#1c1f22",
         "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
         "color_button_gradient": "",
         "padding_top": 80,
         "padding_bottom": 80,
         "divider": false,
         "full_width": false,
-        "rounded": false
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "trusted_by": {
+      "type": "pro-staff",
+      "blocks": {
+        "staff_1": {
+          "type": "staff_member",
+          "settings": {
+            "photo": "shopify://shop_images/S35VN-Laser-Polished-T-Logo-Lifestyle-1.jpg",
+            "first_name": "Mike",
+            "last_name": "Reynolds",
+            "title": "EDC Enthusiast • 5-Year Carrier",
+            "bio": "<p>I've carried a KeyBar every day for 5 years. Dropped it, scratched it, beat the hell out of it—still works perfectly. This thing is indestructible.</p>",
+            "instagram_url": "",
+            "facebook_url": ""
+          }
+        },
+        "staff_2": {
+          "type": "staff_member",
+          "settings": {
+            "photo": "shopify://shop_images/Zircuti-Deep-Carry-3.0-Pocket-Clips-On-Copper-KeyBar.jpg",
+            "first_name": "Jake",
+            "last_name": "Thompson",
+            "title": "Gear Reviewer • Everyday Carry HQ",
+            "bio": "<p>Finally, no more pocket jingle. My keys are organized, I've got a bottle opener and a screwdriver always with me. The titanium clip is rock solid.</p>",
+            "instagram_url": "",
+            "facebook_url": ""
+          }
+        },
+        "staff_3": {
+          "type": "staff_member",
+          "settings": {
+            "photo": "shopify://shop_images/Glow-Rhino-Spark-Glow-Fob-Lifestyle-KeyBar.jpg",
+            "first_name": "Chris",
+            "last_name": "Davis",
+            "title": "Repeat Customer • 4x Buyer",
+            "bio": "<p>Bought one for myself, then bought three more as gifts. Everyone asks where I got it. American made, lifetime warranty—you can't beat that.</p>",
+            "instagram_url": "",
+            "facebook_url": ""
+          }
+        },
+        "staff_4": {
+          "type": "staff_member",
+          "settings": {
+            "photo": "shopify://shop_images/Photo-Mar-25-9-29-29-AM-scaled.jpg",
+            "first_name": "Sarah",
+            "last_name": "Mitchell",
+            "title": "First Responder • EMT",
+            "bio": "<p>As a first responder, I need gear that works every time. My KeyBar holds my keys plus essential tools. It's become part of my everyday kit.</p>",
+            "instagram_url": "",
+            "facebook_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "staff_1",
+        "staff_2",
+        "staff_3",
+        "staff_4"
+      ],
+      "settings": {
+        "heading": "TRUSTED BY THE BEST",
+        "heading_size": "title-lg",
+        "heading_tag": "h2",
+        "heading_alignment": "text-center md:items-center",
+        "description": "<p>From first responders to everyday carry enthusiasts, KeyBar users trust our products to organize their lives and stand up to whatever they throw at them.</p>",
+        "columns_desktop": 2,
+        "columns_tablet": 1,
+        "padding_top": 64,
+        "padding_bottom": 64,
+        "divider": false,
+        "rounded": false,
+        "show_texture": true,
+        "full_width": false,
+        "heading_color": "",
+        "last_name_color": "#FFD700"
       }
     },
     "featured_inserts": {
       "type": "featured-collection",
       "settings": {
+        "color_scheme": "light",
         "collection": "inserts",
         "products": [],
         "product_limit": 8,
@@ -249,13 +493,13 @@
         "description": "<p>From utility tools to bottle openers, customize your KeyBar with our range of inserts.</p>",
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
-        "color_text": "#1C1F22",
-        "color_background": "#FFFFFF",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
         "gradient_background": "",
-        "color_highlight": "#FFD700",
+        "color_highlight": "#ffd700",
         "gradient_highlight": "",
-        "color_button_text": "#1C1F22",
-        "color_button_background": "#FFD700",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
         "color_button_gradient": "",
         "padding_top": 80,
         "padding_bottom": 80,
@@ -288,7 +532,6 @@
             "text_letter_spacing": 0,
             "text_capitalize": false,
             "secondary_color": false,
-            "text_color": "",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -299,13 +542,20 @@
             "button_label": "Shop All Products",
             "button_link": "shopify://collections/all",
             "button_style": "primary",
-            "button_size": "large"
+            "button_size": "large",
+            "button_external": false,
+            "button_icon": true
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "transparent_header": false,
+        "image": "shopify://shop_images/keyabr-social.jpg",
         "image_height": "500px",
         "content_width": "medium",
         "content_position": "md:items-center md:justify-center",
@@ -313,15 +563,15 @@
         "image_height_mobile": "400px",
         "content_position_mobile": "items-center justify-center",
         "text_alignment_mobile": "center",
-        "color_text": "#FFFFFF",
-        "color_background": "#32373C",
+        "color_text": "#ffffff",
+        "color_background": "#32373c",
         "gradient_background": "",
-        "color_highlight": "#FFD700",
+        "color_highlight": "#ffd700",
         "gradient_highlight": "",
-        "color_button_text": "#1C1F22",
-        "color_button_background": "#FFD700",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
         "color_button_gradient": "",
-        "color_overlay": "#1C1F22",
+        "color_overlay": "#1c1f22",
         "overlay_opacity": 60,
         "padding_top": 0,
         "padding_bottom": 0,
@@ -335,6 +585,7 @@
     "new_arrivals": {
       "type": "featured-collection",
       "settings": {
+        "color_scheme": "light",
         "collection": "new-arrivals",
         "products": [],
         "product_limit": 4,
@@ -351,13 +602,13 @@
         "description": "<p>Check out our latest KeyBars, inserts, and gear.</p>",
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
-        "color_text": "#1C1F22",
-        "color_background": "#EBEEF1",
+        "color_text": "#1c1f22",
+        "color_background": "#ebeef1",
         "gradient_background": "",
-        "color_highlight": "#FFD700",
+        "color_highlight": "#ffd700",
         "gradient_highlight": "",
-        "color_button_text": "#1C1F22",
-        "color_button_background": "#FFD700",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
         "color_button_gradient": "",
         "padding_top": 80,
         "padding_bottom": 80,
@@ -370,10 +621,12 @@
   "order": [
     "hero",
     "value_props",
+    "why_keybar",
     "featured_keybars",
-    "collection_list",
-    "featured_inserts",
+    "how_to_assemble",
+    "trusted_by",
     "cta_banner",
-    "new_arrivals"
+    "new_arrivals",
+    "featured_inserts"
   ]
 }
