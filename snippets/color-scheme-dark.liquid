@@ -1,0 +1,15 @@
+{%- doc -%}
+  Outputs CSS variables for the dark color scheme.
+  Uses colors defined in Theme Settings > Dark color scheme.
+
+  @example
+  {%- render 'color-scheme-dark' -%}
+{%- enddoc -%}
+
+--color-background: {{ settings.color_scheme_dark_background.rgb }};
+--color-base-background: {{ settings.color_scheme_dark_background.rgb }};
+--color-foreground: {{ settings.color_scheme_dark_text.rgb }};
+--color-highlight: {{ settings.color_scheme_dark_highlight.rgb }};
+--color-button-background: {{ settings.color_scheme_dark_button_background.rgb }};
+--color-button-border: {{ settings.color_scheme_dark_button_background.rgb }};
+--color-button-text: {{ settings.color_scheme_dark_button_text.rgb }};

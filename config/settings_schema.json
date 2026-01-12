@@ -248,6 +248,45 @@
     ]
   },
   {
+    "name": "Dark color scheme",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "Define colors for the dark color scheme. Sections can toggle this scheme on/off."
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_dark_background",
+        "label": "Background",
+        "default": "#1C1F22"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_dark_text",
+        "label": "Text",
+        "default": "#FFFFFF"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_dark_highlight",
+        "label": "Highlight / Accent",
+        "default": "#FFD700"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_dark_button_background",
+        "label": "Button background",
+        "default": "#FFD700"
+      },
+      {
+        "type": "color",
+        "id": "color_scheme_dark_button_text",
+        "label": "Button text",
+        "default": "#1C1F22"
+      }
+    ]
+  },
+  {
     "name": "Typography",
     "settings": [
       {
