@@ -1,0 +1,281 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Become a KeyBar Dealer",
+            "heading_size": "title-xl",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Interested in carrying KeyBar products in your store? We partner with retailers who share our commitment to quality American-made EDC gear.</p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 24,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image_height": "400px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_height_mobile": "300px",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#1c1f22",
+        "overlay_opacity": 60,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "distribution": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Distribution Partner",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We proudly partner with Blue Ridge Knives as our authorized distributor. Contact them directly to place orders or inquire about dealer pricing.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 18,
+            "text_line_height": 1.7,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Visit Blue Ridge Knives",
+            "button_link": "https://www.blueridgeknives.com/",
+            "button_style": "primary",
+            "button_size": "large",
+            "button_external": true,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "image_height": "adapt",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "300px",
+        "text_alignment_mobile": "left",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "requirements": {
+      "type": "multicolumn",
+      "blocks": {
+        "us": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "heading": "For US Dealers",
+            "heading_size": "fluid-2xl",
+            "text": "<ul><li>Minimum $1,000 annual expenditure to retain dealer status</li><li>Adherence to MAP (Minimum Advertised Price) policy</li><li>No sales on Amazon or other marketplace platforms</li><li>Payment via check, credit card, or approved Net 30 terms</li></ul>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "intl": {
+          "type": "column",
+          "settings": {
+            "show_border": true,
+            "text_alignment": "left",
+            "text_alignment_mobile": "left",
+            "heading": "For International Dealers",
+            "heading_size": "fluid-2xl",
+            "text": "<ul><li>Minimum initial order of 10 KeyBars</li><li>Adherence to MAP (Minimum Advertised Price) policy</li><li>No sales on Amazon or other marketplace platforms</li><li>Payment via check, credit card, or approved Net 30 terms</li></ul>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "us",
+        "intl"
+      ],
+      "settings": {
+        "gap": "large",
+        "columns": 2,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "heading": "Dealer Requirements",
+        "heading_size": "title-lg tracking-heading",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#ebeef1",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "apply": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Apply to Become a Dealer",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Ready to join the KeyBar dealer network? We'd love to hear from you.</p><p>Please email <a href=\"mailto:jess@keybar.us\">jess@keybar.us</a> with the following information:</p><ul><li>Company name and website</li><li>Business type (retail storefront, online, or both)</li><li>Contact name, email, and phone</li><li>Billing and shipping addresses</li><li>Preferred payment method</li></ul><p>We'll review your application and respond with dealer pricing and next steps.</p><p><strong>Current Dealers:</strong> Download the Dealer Order Form and submit orders to <a href=\"mailto:info@keybar.us\">info@keybar.us</a>.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 18,
+            "text_line_height": 1.7,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Email jess@keybar.us",
+            "button_link": "mailto:jess@keybar.us",
+            "button_style": "primary",
+            "button_size": "large",
+            "button_external": true,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "image_height": "adapt",
+        "image_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "300px",
+        "text_alignment_mobile": "left",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "distribution",
+    "requirements",
+    "apply"
+  ]
+}
