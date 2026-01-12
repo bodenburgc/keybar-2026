@@ -1,0 +1,355 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Frequently Asked Questions",
+            "heading_size": "title-xl",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Everything you need to know about KeyBar products, ordering, and shipping.</p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 24,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image_height": "400px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_height_mobile": "300px",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#1c1f22",
+        "overlay_opacity": 60,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "product_faqs": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "title": "What inserts don't fit in the KeyBar JR?",
+            "text": "<p>The hook, nail file, and skeleton key do not fit within the KeyBar JR. All other inserts will fit.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "title": "Will I have issues going through airport security with my KeyBar?",
+            "text": "<p>You should encounter no difficulties at airport security provided your KeyBar components comply with TSA regulations. Security personnel may request to inspect it. Check the <a href=\"https://www.tsa.gov/travel/security-screening/prohibited-items\" target=\"_blank\">TSA website</a> for a list of prohibited items.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "title": "My titanium KeyBar looks a little dull. Why is that, and what can I do?",
+            "text": "<p>The anodizing process colors titanium, but hand oils can diminish the appearance over time. Grab a cloth and some Windex and give it a light cleaning. The color, treatment, or customization will brighten immediately.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "title": "How many keys can a KeyBar accommodate?",
+            "text": "<p>Up to 12 keys with the provided screws, and up to 28 keys with the extension screw set (available for purchase separately).</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4"
+      ],
+      "settings": {
+        "style": "with-border",
+        "heading": "Product Questions",
+        "heading_size": "title-lg",
+        "heading_alignment": "text-left md:items-start",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 40,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "ordering_faqs": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "title": "I saw a KeyBar on social media, but it's not on the website — how can I purchase it?",
+            "text": "<p>Email <a href=\"mailto:info@keybar.us\">info@keybar.us</a> with a screenshot or link to the product image and we'll check availability for you.</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "title": "I'd like to purchase a custom KeyBar – how can I do that?",
+            "text": "<p>Contact <a href=\"mailto:info@keybar.us\">info@keybar.us</a> with image screenshots or descriptions of your custom specifications. We'll assess feasibility and get back to you with options.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "title": "Why was my order not able to be processed? What should I do?",
+            "text": "<p>Common reasons include:</p><ul><li>Mismatched billing/shipping address details</li><li>Insufficient funds</li><li>Frozen account status</li><li>Invalid card number, expiration date, or security code</li></ul><p>If your information was entered correctly, contact your credit card issuer for assistance.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ],
+      "settings": {
+        "style": "with-border",
+        "heading": "Ordering Questions",
+        "heading_size": "title-lg",
+        "heading_alignment": "text-left md:items-start",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#ebeef1",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "shipping_faqs": {
+      "type": "faq",
+      "blocks": {
+        "q1": {
+          "type": "question",
+          "settings": {
+            "title": "How long does it take to ship and receive my order?",
+            "text": "<p>Standard orders ship within 24-48 business hours. Custom orders ship within 24-72 business hours depending on complexity. Delivery times depend on the shipping method selected at checkout based on USPS estimates (not guaranteed).</p>"
+          }
+        },
+        "q2": {
+          "type": "question",
+          "settings": {
+            "title": "Tracking shows \"NOT FOUND\" – is there something wrong?",
+            "text": "<p>That just means USPS hasn't scanned the package into their system yet. Once they do, the tracking will update.</p>"
+          }
+        },
+        "q3": {
+          "type": "question",
+          "settings": {
+            "title": "Tracking hasn't updated in several days. Is something wrong?",
+            "text": "<p>For domestic orders, your package is in transit awaiting arrival at the local processing center. International delivery times vary by destination postal service. Note that USPS loses tracking ability once packages depart the U.S.</p>"
+          }
+        },
+        "q4": {
+          "type": "question",
+          "settings": {
+            "title": "Tracking hasn't updated in more than 10 days. Is something wrong?",
+            "text": "<p>For U.S. orders, contact USPS at 800-275-8777 to file an investigation claim. International delivery times vary significantly by destination postal service.</p>"
+          }
+        },
+        "q5": {
+          "type": "question",
+          "settings": {
+            "title": "The tracking shows delivery, but I haven't received my package. What should I do?",
+            "text": "<p>We recommend these steps:</p><ul><li>Check with household members</li><li>Search alternative delivery locations at your address</li><li>Ask neighbors about mistaken deliveries</li><li>Contact USPS for assistance</li><li>Wait a day or two for tracking updates to catch up</li></ul>"
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5"
+      ],
+      "settings": {
+        "style": "with-border",
+        "heading": "Shipping & Tracking",
+        "heading_size": "title-lg",
+        "heading_alignment": "text-left md:items-start",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 60,
+        "padding_bottom": 80,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "cta": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Still Have Questions?",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Can't find what you're looking for? Our team is here to help.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 20,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Contact Us",
+            "button_link": "shopify://pages/contact",
+            "button_style": "primary",
+            "button_size": "large",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image_height": "350px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_height_mobile": "300px",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
+        "color_button_gradient": "",
+        "color_overlay": "#1c1f22",
+        "overlay_opacity": 50,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "product_faqs",
+    "ordering_faqs",
+    "shipping_faqs",
+    "cta"
+  ]
+}
