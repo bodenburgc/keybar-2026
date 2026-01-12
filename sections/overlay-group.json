@@ -30,8 +30,8 @@
         "cart_recommendations_products": [],
         "empty_cart_message": "<p>Not sure where to start?<br/>Try these collections:</p>",
         "empty_cart_collections": [
-          "shuttles",
-          "accessories"
+          "keybars",
+          "inserts"
         ],
         "recent_products_enabled": true,
         "recent_products_heading": "Recently viewed",
@@ -50,7 +50,7 @@
         "text-1": {
           "type": "text",
           "settings": {
-            "text": "<p>Join the Fish Armor crew</p>",
+            "text": "<p>Join the KeyBar community</p>",
             "text_font": "body",
             "text_size": "subtext-custom",
             "text_max_size": 16,
@@ -86,7 +86,7 @@
         "text-2": {
           "type": "text",
           "settings": {
-            "text": "<p>Be first to know about new shuttles, poles, and accessories designed to protect your live imaging investment. Plus get compatibility guides, mounting tips, and product updates delivered to your inbox.</p>",
+            "text": "<p>Be first to know about new KeyBars, inserts, and EDC accessories. Plus get setup tips, exclusive deals, and product updates delivered to your inbox.</p>",
             "text_font": "body",
             "text_size": "text-sm",
             "text_max_size": 32,
