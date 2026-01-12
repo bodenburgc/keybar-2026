@@ -91,13 +91,7 @@
         "padding_bottom": 100,
         "divider": false,
         "full_width": false,
-        "rounded": false,
-        "color_text": "#FFFFFF",
-        "color_background": "#1C1F22",
-        "gradient_background": "",
-        "color_button_text": "#1C1F22",
-        "color_button_background": "#FFD700",
-        "color_button_gradient": ""
+        "rounded": false
       }
     },
     "recently-viewed": {

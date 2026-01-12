@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "type": "footer",
   "name": "t:sections.footer-group.name",
@@ -60,10 +69,10 @@
         "button_icon": true,
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
-        "color_text": "#1C1F22",
-        "color_background": "#EBEEF1",
+        "color_text": "#1c1f22",
+        "color_background": "#ebeef1",
         "gradient_background": "",
-        "color_highlight": "#FFD700",
+        "color_highlight": "#ffd700",
         "gradient_highlight": "",
         "color_button_text": "",
         "color_button_background": "",
@@ -81,8 +90,9 @@
         "logo_social": {
           "type": "logo_social",
           "settings": {
-            "logo_height": 80,
-            "show_social": true,
+            "logo": "shopify://shop_images/logo.svg",
+            "logo_height": 120,
+            "show_social": false,
             "enable_follow_on_shop": false
           }
         },
@@ -132,24 +142,24 @@
       ],
       "settings": {
         "invert_newsletter_others": false,
-        "enable_newsletter": true,
+        "enable_newsletter": false,
         "newsletter_heading": "Join the EDC Community",
         "newsletter_heading_size": "md:title-lg",
         "newsletter_text": "<p>Get exclusive deals, new product alerts, and EDC tips delivered to your inbox.</p>",
         "newsletter_logo_height": 50,
         "show_social": true,
         "enable_follow_on_shop": false,
-        "color_text": "#FFFFFF",
-        "color_background": "#1C1F22",
+        "color_text": "#ffffff",
+        "color_background": "#1c1f22",
         "gradient_background": "",
-        "color_button_text": "#1C1F22",
-        "color_button_background": "#FFD700",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
         "color_button_gradient": "",
         "padding_top": 72,
         "padding_bottom": 72,
         "divider": false,
         "full_width": false,
-        "rounded": false,
+        "rounded": true,
         "enable_parallax": false
       }
     },
@@ -163,7 +173,7 @@
         "monochrome_payment_icons": false,
         "show_copyright": true,
         "copyright_text": "KeyBar® is a registered trademark. Made with pride in Savannah, GA.",
-        "color_text": "#9CA3AF",
+        "color_text": "#9ca3af",
         "color_background": "#111418",
         "gradient_background": "",
         "divider": false,
