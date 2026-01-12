@@ -11331,6 +11331,14 @@ details.active .drawer__promotions .mega-menu__item,
   }
 }
 
+.shopify-policy__body .rte {
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+}
+
+.shopify-policy__body .rte :is(h1, h2, h3, h4, h5, h6) {
+  margin-block-end: var(--sp-2);
+}
+
 .shopify-policy__body .rte a,
 .shopify-policy__body .rte span[href] {
   word-break: break-word;
