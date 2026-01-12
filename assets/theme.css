@@ -9762,8 +9762,12 @@ details.active .drawer__promotions .mega-menu__item,
   --card-grid-per-row: 2;
   --card-grid-template: auto-flow dense/repeat(var(--card-grid-per-row), minmax(0, 1fr));
   --card-grid-gap: var(--sp-3);
+  --card-hover-offset: 20px;
   grid: var(--card-grid-template);
   gap: var(--card-grid-gap);
+  padding: var(--card-hover-offset);
+  margin: calc(var(--card-hover-offset) * -1);
+  overflow: visible;
 }
 
 @media screen and (max-width: 639px) {
@@ -9840,10 +9844,22 @@ details.active .drawer__promotions .mega-menu__item,
   --product-card-quick-view-inset: var(--sp-4);
   background-color: rgb(var(--color-placeholder));
   border-radius: var(--card-radius);
-  overflow: hidden;
   align-content: flex-start;
   border: var(--card-border-width) solid rgb(var(--color-foreground)/ var(--border-opacity));
   position: relative;
+  transition: transform var(--animation-primary), box-shadow var(--animation-primary), border-color var(--animation-primary);
+}
+
+.product-card__media {
+  overflow: hidden;
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+}
+
+@media (hover: hover) {
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgb(0 0 0 / 0.12), inset 0 0 0 1px rgb(var(--color-foreground) / 0.1);
+  }
 }
 
 .product-card__media video-media :is(iframe, video) {
@@ -11735,7 +11751,8 @@ details.active .drawer__promotions .mega-menu__item,
     padding-inline: var(--slider-padding);
     margin-inline: calc(var(--slider-padding) * -1);
     scroll-padding-inline: var(--slider-padding);
-    padding-block-end: var(--card-shadow-vertical-offset);
+    padding-block: var(--card-hover-offset, 20px);
+    margin-block: calc(var(--card-hover-offset, 20px) * -1);
   }
 
   .slider--tablet .card-grid {
@@ -11761,7 +11778,8 @@ details.active .drawer__promotions .mega-menu__item,
     padding-inline: var(--slider-padding);
     margin-inline: calc(var(--slider-padding) * -1);
     scroll-padding-inline: var(--slider-padding);
-    padding-block-end: var(--card-shadow-vertical-offset);
+    padding-block: var(--card-hover-offset, 20px);
+    margin-block: calc(var(--card-hover-offset, 20px) * -1);
   }
 
   .slider--desktop .card-grid {
