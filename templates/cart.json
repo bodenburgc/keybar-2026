@@ -14,9 +14,8 @@
       "blocks": {
         "free_shipping": {
           "type": "free_shipping",
-          "disabled": true,
           "settings": {
-            "minimum_amount": "1500"
+            "minimum_amount": "75"
           }
         },
         "subtotal": {
@@ -46,7 +45,7 @@
         "heading_size": "title-xl tracking-heading",
         "heading_alignment": "md:items-end",
         "heading_tag": "h1",
-        "show_vendor": true,
+        "show_vendor": false,
         "show_payment_icons": true,
         "show_shipping_calculator": true,
         "add_discount_code": true,
@@ -73,7 +72,7 @@
         "description": "",
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
-        "color_text": "",
+        "color_text": "#16323e",
         "color_background": "",
         "gradient_background": "",
         "color_highlight": "",
