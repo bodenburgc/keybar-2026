@@ -59,19 +59,17 @@
 
 ## STILL NEEDS ATTENTION
 
-### 1. Upload KeyBar Favicon
-**Action Required:** Upload favicon to Shopify Files, then set in Theme Settings > Logo
-- Current setting is cleared (was FishArmor)
-- Recommended: 32x32px PNG or SVG
-
-### 2. Newsletter Popup Image
-**Current:** `Pro-Lite-Series.jpg` (may be FishArmor product image)
-**Action:** Verify or replace with KeyBar product image in Theme Editor > Newsletter Popup
-
-### 3. Theme Info Comments (Low Priority)
+### 1. Theme Info Comments (Low Priority)
 **Files:** `config/settings_schema.json`, `assets/fonts.css`
 - Contains comments referencing "FishArmor"
 - Not customer-facing, cosmetic only
+
+---
+
+## RECENTLY COMPLETED
+
+- ✅ **Favicon** - KeyBar favicon uploaded
+- ✅ **Newsletter Popup Image** - Pro-Lite-Series.jpg confirmed as KeyBar product
 
 ---
 
@@ -160,9 +158,8 @@
 | Questions for Jess | 9 items |
 
 **Site is ready for Jess review.** Only remaining tasks are:
-1. Upload KeyBar favicon
-2. Verify newsletter popup image
-3. Answer 9 questions above
+1. Answer 9 questions above
+2. (Optional) Clean up FishArmor comments in code - not customer-facing
 
 ---
 

@@ -255,8 +255,8 @@ See `.docs/AUDIT-FOR-JESS.md` for full status. Key items:
 - [x] Cart/checkout optimization
 - [x] Color consistency (#16323e)
 - [x] SEO schema implementation
-- [ ] Upload KeyBar favicon
-- [ ] Verify newsletter popup image
+- [x] Upload KeyBar favicon
+- [x] Verify newsletter popup image (Pro-Lite-Series.jpg)
 - [ ] Connect Google Search Console
 - [ ] Set up review app (Judge.me recommended)
 
