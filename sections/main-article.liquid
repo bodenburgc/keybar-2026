@@ -35,7 +35,7 @@
 {{ 'article.css' | asset_url | stylesheet_tag }}
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
-  <article class="article relative grid gap-8" itemscope itemtype="http://schema.org/BlogPosting">
+  <article class="article relative grid gap-8" itemscope itemtype="https://schema.org/BlogPosting">
     <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} grid gap-5 text-center">
       {%- if section.settings.show_tags or section.settings.show_date or section.settings.show_comments or section.settings.show_author -%}
         <div class="flex flex-wrap items-center justify-center gap-6">
@@ -68,7 +68,7 @@
                 </li>
               {%- endif -%}
               {%- if section.settings.show_author -%}
-                <li class="italic text-sm relative" itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <li class="italic text-sm relative" itemprop="author" itemscope itemtype="https://schema.org/Person">
                   {%- capture author -%}<span class="font-medium not-italic" itemprop="name">{{ article.author }}</span>{%- endcapture -%}
                   {{- 'blogs.article.written_by_html' | t: author: author -}}
                 </li>
