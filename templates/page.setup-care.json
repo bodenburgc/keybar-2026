@@ -1,0 +1,470 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "hero": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Set Up & Care",
+            "heading_size": "title-xl",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Everything you need to assemble your KeyBar and keep it looking great.</p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 24,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image_height": "450px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_height_mobile": "350px",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#1c1f22",
+        "overlay_opacity": 60,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "video": {
+      "type": "video-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Watch the Walkthrough",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>New to KeyBar? This quick video shows you exactly how to assemble your key organizer step by step. Have lots of keys and inserts? Check out our advanced assembly video for tips on optimizing your setup.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 18,
+            "text_line_height": 1.7,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "text_color": "",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "video_url": "https://www.youtube.com/watch?v=k8_ITxkvyL4",
+        "cover_image": "shopify://shop_images/Easy-Assembly.jpg",
+        "description": "KeyBar assembly instructions",
+        "below_video_image": "watch-this.png",
+        "enable_video_autoplay": false,
+        "enable_video_looping": false,
+        "image_height": "adapt",
+        "video_width": "medium",
+        "layout": "video_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "video_url_mobile": "",
+        "image_height_mobile": "300px",
+        "text_alignment_mobile": "left",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "whats_included": {
+      "type": "multicolumn-with-icons",
+      "blocks": {
+        "keybar": {
+          "type": "column",
+          "settings": {
+            "icon": "box",
+            "custom_icon": "",
+            "heading": "KeyBar Body",
+            "text": "<p>Your KeyBar with titanium pocket clip pre-installed</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "screws": {
+          "type": "column",
+          "settings": {
+            "icon": "screwdriver",
+            "custom_icon": "",
+            "heading": "Screws",
+            "text": "<p>Three sizes included: 1/2\", 3/4\", and 7/8\" to fit your key stack</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "washers": {
+          "type": "column",
+          "settings": {
+            "icon": "circle-dashed",
+            "custom_icon": "",
+            "heading": "Washers & O-Rings",
+            "text": "<p>20 washers for spacing plus 2 O-rings for tension adjustment</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "fob": {
+          "type": "column",
+          "settings": {
+            "icon": "key",
+            "custom_icon": "",
+            "heading": "Key Fob Link",
+            "text": "<p>Attach car fobs or items that don't fit inside</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "keybar",
+        "screws",
+        "washers",
+        "fob"
+      ],
+      "settings": {
+        "style": "with-border",
+        "columns": 4,
+        "text_alignment": "left",
+        "heading": "What's in the Box",
+        "heading_size": "title-lg",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#ebeef1",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "steps": {
+      "type": "timeline",
+      "blocks": {
+        "step_1": {
+          "type": "content",
+          "settings": {
+            "subheading": "Step 1",
+            "heading": "Insert Screw & O-Ring",
+            "heading_tag": "h3",
+            "text": "<p>Take the screw that best fits your key stack and insert it through the front side of your KeyBar. Add an O-ring onto the screw—this creates tension to keep your keys secure.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "step_2": {
+          "type": "content",
+          "settings": {
+            "subheading": "Step 2",
+            "heading": "Layer Keys & Washers",
+            "heading_tag": "h3",
+            "text": "<p>Stack your keys onto the screw, using washers between them for smooth operation. Arrange keys according to how often you use them—most-used keys on the outside for easy access.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "step_3": {
+          "type": "content",
+          "settings": {
+            "subheading": "Step 3",
+            "heading": "Attach the Back",
+            "heading_tag": "h3",
+            "text": "<p>Place the back side (with pocket clip) onto your key stack. Screw the two halves together until snug. Don't overtighten—you want keys to swing freely.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "step_4": {
+          "type": "content",
+          "settings": {
+            "subheading": "Step 4",
+            "heading": "Test & Adjust",
+            "heading_tag": "h3",
+            "text": "<p>Fan out your keys to make sure they swing smoothly. Too loose? Tighten slightly. Too stiff? Loosen a bit or add another O-ring. Your KeyBar should feel just right.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "link",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "step_1",
+        "step_2",
+        "step_3",
+        "step_4"
+      ],
+      "settings": {
+        "show_navigation": true,
+        "layout": "image_first",
+        "image_ratio": "adapt",
+        "image_ratio_mobile": "square",
+        "heading": "Assembly in 4 Easy Steps",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "care": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Care & Cleaning",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p><strong>Anodized Titanium KeyBars</strong></p><p>To restore the vibrant colors on your anodized titanium KeyBar, gently clean with Windex and a soft cloth. Avoid abrasive materials that could scratch the finish.</p><p><strong>All KeyBars</strong></p><p>Periodically check that your screw is snug. If keys feel loose or stiff, adjust tension by tightening/loosening the screw or adding/removing an O-ring.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 18,
+            "text_line_height": 1.7,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "image_height": "adapt",
+        "image_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "300px",
+        "text_alignment_mobile": "left",
+        "color_text": "#ebeef1",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "cta": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Need Help?",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Still have questions? Our team is here to help you get the most out of your KeyBar.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 20,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Contact Us",
+            "button_link": "shopify://pages/contact",
+            "button_style": "primary",
+            "button_size": "large",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image_height": "400px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_height_mobile": "300px",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
+        "color_button_gradient": "",
+        "color_overlay": "#1c1f22",
+        "overlay_opacity": 50,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "video",
+    "whats_included",
+    "steps",
+    "care",
+    "cta"
+  ]
+}

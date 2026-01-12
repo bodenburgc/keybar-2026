@@ -200,7 +200,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Tired of keyring frustration? The KeyBar is a patented, USA-made key organizer with a titanium pocket clip that works like a multi-tool for your keys and everyday carry items.</p><p>Customize your setup exactly how you want it. Add tool inserts like flash drives, bottle openers, and screwdrivers. Built with heavy-duty materials—aircraft-grade aluminum, titanium, and carbon fiber—to last a lifetime.</p>",
+            "text": "<p>KeyBar was born when our founder Mike—a hotel engineer in Savannah, Georgia—got tired of everyone hearing him coming. His jingling keys announced his arrival before he ever walked through the door.</p><p>So he built something better: a compact, silent key organizer that holds your keys and everyday tools in one sleek package. What started in his workshop is now a family business, still made right here in the USA.</p>",
             "text_font": "body",
             "text_size": "subtext-md",
             "text_max_size": 18,
@@ -223,13 +223,25 @@
             "button_external": false,
             "button_icon": true
           }
+        },
+        "button_story": {
+          "type": "button",
+          "settings": {
+            "button_label": "Our Full Story",
+            "button_link": "shopify://pages/about",
+            "button_style": "secondary",
+            "button_size": "medium",
+            "button_external": false,
+            "button_icon": true
+          }
         }
       },
       "block_order": [
         "heading",
         "tagline",
         "text",
-        "button"
+        "button",
+        "button_story"
       ],
       "settings": {
         "video_url": "https://www.youtube.com/watch?v=y3FoTqHl3Fs",

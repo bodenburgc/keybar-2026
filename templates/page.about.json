@@ -1,0 +1,577 @@
+{
+  "sections": {
+    "hero": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Our Story",
+            "heading_size": "title-xl",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>A family business. Built by hand. Made in America.</p>",
+            "text_font": "body",
+            "text_size": "subtext-lg",
+            "text_max_size": 24,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/about-mike-grinder.jpg",
+        "image_height": "650px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_height_mobile": "450px",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#1c1f22",
+        "overlay_opacity": 50,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "intro": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Stop the Noise",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>KeyBar started with a simple frustration. Mike spent over a decade as a chief engineer at historic hotels in Savannah, Georgia, carrying dozens of keys that jingled with every step.</p><p>One day a coworker said, <em>\"Everyone knows when you're coming—we can hear your keys from a mile away.\"</em></p><p>That was the moment. Mike went to his shop and started building something better.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 18,
+            "text_line_height": 1.7,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/about-workshop.jpg",
+        "image_height": "adapt",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "350px",
+        "text_alignment_mobile": "left",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "gallery": {
+      "type": "collage-grid",
+      "blocks": {
+        "img_1": {
+          "type": "image",
+          "settings": {
+            "column_size": 6,
+            "row_size": 2,
+            "subheading": "",
+            "heading": "",
+            "link": "",
+            "invert_subheading_heading": false,
+            "image": "shopify://shop_images/about-mike-crafting.jpg",
+            "content_position": "items-end justify-start",
+            "text_alignment": "left",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#1c1f22",
+            "overlay_opacity": 0,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "#1c1f22",
+            "overlay_opacity_hover": 40
+          }
+        },
+        "img_2": {
+          "type": "image",
+          "settings": {
+            "column_size": 4,
+            "row_size": 2,
+            "subheading": "",
+            "heading": "",
+            "link": "",
+            "invert_subheading_heading": false,
+            "image": "shopify://shop_images/about-hands-cnc.jpg",
+            "content_position": "items-end justify-start",
+            "text_alignment": "left",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#1c1f22",
+            "overlay_opacity": 0,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "#1c1f22",
+            "overlay_opacity_hover": 40
+          }
+        },
+        "img_3": {
+          "type": "image",
+          "settings": {
+            "column_size": 4,
+            "row_size": 2,
+            "subheading": "",
+            "heading": "",
+            "link": "",
+            "invert_subheading_heading": false,
+            "image": "shopify://shop_images/about-jessica.jpg",
+            "content_position": "items-end justify-start",
+            "text_alignment": "left",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#1c1f22",
+            "overlay_opacity": 0,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "#1c1f22",
+            "overlay_opacity_hover": 40
+          }
+        },
+        "img_4": {
+          "type": "image",
+          "settings": {
+            "column_size": 6,
+            "row_size": 2,
+            "subheading": "",
+            "heading": "",
+            "link": "",
+            "invert_subheading_heading": false,
+            "image": "shopify://shop_images/about-team.jpg",
+            "content_position": "items-end justify-start",
+            "text_alignment": "left",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#1c1f22",
+            "overlay_opacity": 0,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "#1c1f22",
+            "overlay_opacity_hover": 40
+          }
+        }
+      },
+      "block_order": [
+        "img_1",
+        "img_2",
+        "img_3",
+        "img_4"
+      ],
+      "settings": {
+        "row_height": 280,
+        "row_height_mobile": 200,
+        "heading": "Handcrafted in Savannah",
+        "heading_size": "title-lg",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p>Every KeyBar is made by hand in our Savannah, Georgia workshop. From machining raw materials to final assembly, we control every step.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#ebeef1",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "family": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "A Family Business",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>What started as one man's solution became a family mission. Mike's wife Jessica joined the business, and together they've built KeyBar from their Savannah workshop into something bigger.</p><p>Today they're raising their kids while running a company that's trusted by first responders, tradespeople, and EDC enthusiasts worldwide. It's the American Dream—built one KeyBar at a time.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 18,
+            "text_line_height": 1.7,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop KeyBars",
+            "button_link": "shopify://collections/keybars",
+            "button_style": "primary",
+            "button_size": "medium",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/about-mike-son-workshop.jpg",
+        "image_height": "adapt",
+        "image_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "350px",
+        "text_alignment_mobile": "left",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "stats": {
+      "type": "number-counter",
+      "blocks": {
+        "years": {
+          "type": "counter",
+          "settings": {
+            "title": "Years in Business",
+            "number": "10",
+            "unit": "+",
+            "duration": 2
+          }
+        },
+        "usa": {
+          "type": "counter",
+          "settings": {
+            "title": "Made in USA",
+            "number": "100",
+            "unit": "%",
+            "duration": 2
+          }
+        },
+        "guarantee": {
+          "type": "counter",
+          "settings": {
+            "title": "Lifetime Guarantee",
+            "number": "∞",
+            "unit": "",
+            "duration": 2
+          }
+        },
+        "inserts": {
+          "type": "counter",
+          "settings": {
+            "title": "Tool Inserts",
+            "number": "20",
+            "unit": "+",
+            "duration": 2
+          }
+        }
+      },
+      "block_order": [
+        "years",
+        "usa",
+        "guarantee",
+        "inserts"
+      ],
+      "settings": {
+        "gap": "large",
+        "columns": 4,
+        "text_alignment": "center",
+        "columns_mobile": "2",
+        "swipe_on_mobile": false,
+        "text_alignment_mobile": "center",
+        "color_text": "#ebeef1",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "values": {
+      "type": "multicolumn-with-icons",
+      "blocks": {
+        "usa": {
+          "type": "column",
+          "settings": {
+            "icon": "earth-americas",
+            "custom_icon": "",
+            "heading": "Made in the USA",
+            "text": "<p>Every KeyBar is designed and manufactured in Savannah, Georgia. American craftsmanship, American jobs.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "quality": {
+          "type": "column",
+          "settings": {
+            "icon": "gem",
+            "custom_icon": "",
+            "heading": "Premium Materials",
+            "text": "<p>Aircraft-grade aluminum. Grade 5 titanium. Carbon fiber. The same materials trusted by aerospace and military.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "guarantee": {
+          "type": "column",
+          "settings": {
+            "icon": "shield-check",
+            "custom_icon": "",
+            "heading": "Lifetime Guarantee",
+            "text": "<p>We stand behind everything we make. If your KeyBar ever fails, we'll fix it or replace it. Period.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "community": {
+          "type": "column",
+          "settings": {
+            "icon": "users",
+            "custom_icon": "",
+            "heading": "Built for You",
+            "text": "<p>From first responders to weekend warriors, our community shapes everything we do.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "usa",
+        "quality",
+        "guarantee",
+        "community"
+      ],
+      "settings": {
+        "style": "with-border",
+        "columns": 4,
+        "text_alignment": "left",
+        "heading": "What We Stand For",
+        "heading_size": "title-lg",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "#1c1f22",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 80,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "cta": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ready to Stop the Noise?",
+            "heading_size": "title-lg",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Find your perfect KeyBar and build a setup that works for you.</p>",
+            "text_font": "body",
+            "text_size": "subtext-md",
+            "text_max_size": 20,
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop KeyBars",
+            "button_link": "shopify://collections/keybars",
+            "button_style": "primary",
+            "button_size": "large",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/about-tradeshow.jpg",
+        "image_height": "450px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "image_height_mobile": "350px",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_background": "#1c1f22",
+        "gradient_background": "",
+        "color_highlight": "#ffd700",
+        "gradient_highlight": "",
+        "color_button_text": "#1c1f22",
+        "color_button_background": "#ffd700",
+        "color_button_gradient": "",
+        "color_overlay": "#1c1f22",
+        "overlay_opacity": 50,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "intro",
+    "gallery",
+    "family",
+    "stats",
+    "values",
+    "cta"
+  ]
+}

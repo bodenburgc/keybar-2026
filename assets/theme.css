@@ -16063,6 +16063,27 @@ video-media:not([playing]) .deferred-poster .play-button .icon:last-child:not(:o
   }
 }
 
+/* Number counter title styling */
+.counter-card > .grid {
+  gap: var(--sp-2);
+}
+
+.counter-card > .grid > p:not(.counter-heading) {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+}
+
+/* Multicolumn with icons description (excludes footer) */
+main .text-with-icons .column__text {
+  font-size: clamp(1.125rem, 1.05rem + 0.375vw, 1.25rem);
+}
+
+/* Timeline card headings */
+.timeline__item-content > .heading {
+  font-size: clamp(1.75rem, 1.5rem + 1.25vw, 2.5rem);
+}
+
 .divider__line {
   border-bottom: var(--divider-border-thickness) solid rgb(var(--color-border));
   border-right: var(--divider-border-thickness) solid rgb(var(--color-border));
