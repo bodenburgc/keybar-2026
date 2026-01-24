@@ -15,7 +15,7 @@
     "logo_mobile": "shopify://shop_images/logo.svg",
     "white_logo_mobile": "shopify://shop_images/logo.svg",
     "logo_width_mobile": 150,
-    "favicon": "",
+    "favicon": "shopify://shop_images/keybar_favicon.png",
     "color_text": "#16323e",
     "color_background": "#FFFFFF",
     "color_highlight": "#FFD700",

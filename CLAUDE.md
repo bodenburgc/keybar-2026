@@ -150,6 +150,7 @@ Interactive features use custom elements:
 - `product-comparison.liquid` - Compare KeyBar sizes/materials
 - `dealer-locator.liquid` + `dealer-locator.js` - Find retailers (Maps API)
 - `compact-product-bundle.liquid` - Simplified bundle UI
+- `product-addon-picker.liquid` - Pocket clip add-on selector (see Pocket Clip section below)
 
 ## Development Notes
 

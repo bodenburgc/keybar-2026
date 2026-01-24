@@ -510,6 +510,13 @@
       "sale": "Sale",
       "show_more": "Show more"
     },
+    "addon": {
+      "available_options": "Available options",
+      "choose": "Choose a",
+      "included": "Included",
+      "included_short": "Incl.",
+      "selected": "Add-on"
+    },
     "product": {
       "product_variants": "Product variants",
       "sold_out": "Sold Out",
