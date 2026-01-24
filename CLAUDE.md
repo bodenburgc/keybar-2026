@@ -94,6 +94,9 @@ Feature-specific assets load conditionally in sections (e.g., `cart.css`, `cart.
 - `product-comparison.liquid` - Feature comparison tables
 - `pro-staff.liquid` - Team/ambassador showcase
 
+### In Development
+- `product-addon-picker.liquid` - Add-on product selector (see `.docs/FEATURE-CLIP-ADDON.md`)
+
 ## JavaScript Architecture
 
 **Pattern:** Vanilla JavaScript with Web Components (Custom Elements API)
