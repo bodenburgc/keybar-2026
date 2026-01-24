@@ -247,6 +247,50 @@ Interactive features use custom elements:
 | `page.dealer-info.json` | Become a Dealer information |
 | `page.style-guide.json` | Internal style reference |
 
+## Pocket Clip Add-On Feature (In Development)
+
+A product add-on system allowing customers to select pocket clips when purchasing KeyBars.
+
+**Feature Doc:** See `BODE-shopify/.docs/FEATURE-CLIP-ADDON.md` for full technical spec.
+
+### Quick Reference
+
+**Metafields to configure per KeyBar product:**
+| Metafield | Value |
+|-----------|-------|
+| `custom.enable_clip_addon` | `true` |
+| `custom.clip_addon_products` | Link: Regular Pocket Clip, Deep Carry Clip 3.0 |
+| `custom.clip_addon_title` | "Pocket Clip" (optional) |
+| `custom.clip_addon_description` | Helper text (optional) |
+
+**Clip Products to Create:**
+
+| Product | Variants | Pricing |
+|---------|----------|---------|
+| Regular Pocket Clip | Plain, Blackwashed, Blue, Bronze, Fuchsia | $0, $3, $3, $3, $3 |
+| Deep Carry Clip 3.0 | Plain 3.0, Blackwashed 3.0, Blue 3.0, Bronze 3.0, Fuchsia 3.0 | $20.76, $23.76, $23.76, $23.76, $23.76 |
+
+**Files (in BODE-shopify, pull upstream after complete):**
+- `snippets/product-addon-picker.liquid`
+- `assets/product-addon.js`
+- `assets/product-addon.css`
+- `sections/main-product.liquid` (block added)
+
+**Theme Editor:** Add "Add-on picker" block to product page template.
+
+### Implementation Status
+
+| Task | Status |
+|------|--------|
+| Build code in BODE-shopify | Done |
+| Create clip products | Pending |
+| Create metafield definitions | Pending |
+| Configure KeyBar products | Pending |
+| Pull upstream to keybar-2026 | Pending |
+| Test end-to-end | Pending |
+
+---
+
 ## Pre-Launch Checklist
 
 See `.docs/AUDIT-FOR-JESS.md` for full status. Key items:
@@ -259,6 +303,7 @@ See `.docs/AUDIT-FOR-JESS.md` for full status. Key items:
 - [x] Verify newsletter popup image (Pro-Lite-Series.jpg)
 - [ ] Connect Google Search Console
 - [ ] Set up review app (Judge.me recommended)
+- [ ] Implement pocket clip add-on feature
 
 ## Important Constraints
 
