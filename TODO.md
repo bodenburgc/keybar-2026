@@ -114,8 +114,9 @@ Screenshots captured via Playwright in `.playwright-mcp/`:
 
 ### Broken Links (P1)
 
-- [ ] **#29 - Fix warranty page contact link** - "contact us" link points to 404. Options: `mailto:info@keybar.us` or `/policies/contact-information`
-- [ ] **#30 - Fix FAQs page "Contact Us" link** - "Contact Us" button points to 404. Same fix options as above.
+- [ ] **#29 - Fix warranty page contact link** - Content is in Shopify admin (Pages → Warranty). Update "contact us" link to `mailto:info@keybar.us`
+- [x] **#30 - Fix FAQs page "Contact Us" link** - Changed to `mailto:info@keybar.us`
+- [x] **Fix Setup & Care page "Contact Us" link** - Changed to `mailto:info@keybar.us`
 
 ### Proposal Gaps - Admin Tasks (P2)
 
