@@ -547,6 +547,236 @@
                 image_fill: settings.product_image_fill
               -%}
 
+              {%- comment -%} Shelf Mount Alert {%- endcomment -%}
+              <div id="shelf-mount-alert-{{ section.id }}" style="display: none; margin-top: 1rem; padding: 1rem; background-color: #FFF3CD; border: 1px solid #FFC107; border-radius: 4px;">
+                <p style="margin: 0; color: #856404; font-weight: 600;">
+                  ⚠️ Shelf Required: This configuration requires the Fish Armor Shelf (mounts via gimbal bracket). The shelf will be automatically added to your cart.
+                </p>
+              </div>
+
+              <script>
+                (function() {
+                  const sectionId = '{{ section.id }}';
+                  const shelfVariantId = 51870786126005;
+
+                  // Use global scope to prevent duplicate adds across multiple section instances
+                  window.FishArmorShelf = window.FishArmorShelf || {
+                    addedForVariant: null,
+                    isAdding: false,
+                    debounceTimer: null,
+                    listenerAttached: false
+                  };
+
+                  async function getCartCounts() {
+                    try {
+                      const response = await fetch('/cart.js');
+                      const cart = await response.json();
+
+                      // Count items with "Shelf Mount" in option3 (variant_options or options)
+                      const shelfMountCount = cart.items.filter(item => {
+                        // Check both variant_options (newer) and options (legacy) arrays
+                        const options = item.variant_options || item.options || [];
+                        return options.some(opt =>
+                          opt && typeof opt === 'string' && opt.toLowerCase().includes('shelf mount')
+                        );
+                      }).length;
+
+                      // Count shelf items
+                      const shelfCount = cart.items.filter(item =>
+                        item.variant_id === shelfVariantId
+                      ).reduce((total, item) => total + item.quantity, 0);
+
+                      return { shelfMountCount, shelfCount };
+                    } catch (error) {
+                      console.error('[Fish Armor Shelf] Error checking cart:', error);
+                      return { shelfMountCount: 0, shelfCount: 0 };
+                    }
+                  }
+
+                  async function checkShelfRequirement(variant) {
+                    if (!variant) return;
+
+                    const alertBox = document.getElementById(`shelf-mount-alert-${sectionId}`);
+                    if (!alertBox) return;
+
+                    // Check if size contains "Shelf Mount"
+                    const isShelfMount = variant.option3 && variant.option3.toLowerCase().includes('shelf mount');
+
+                    if (isShelfMount) {
+                      alertBox.style.display = 'block';
+
+                      // Clear any pending debounce timers
+                      clearTimeout(window.FishArmorShelf.debounceTimer);
+
+                      // Debounce the add to cart call to prevent rapid-fire duplicates
+                      window.FishArmorShelf.debounceTimer = setTimeout(async () => {
+                        // Check if already adding
+                        if (window.FishArmorShelf.isAdding) {
+                          console.log('[Fish Armor Shelf] Already adding shelf, skipping...');
+                          return;
+                        }
+
+                        // Get current cart counts
+                        const { shelfMountCount, shelfCount } = await getCartCounts();
+                        console.log(`[Fish Armor Shelf] Cart analysis: ${shelfMountCount} shelf-mount product(s), ${shelfCount} shelf(s)`);
+
+                        // If we have more shelf-mount products than shelves, add a shelf
+                        if (shelfMountCount > shelfCount) {
+                          console.log('[Fish Armor Shelf] Need to add shelf to match shelf-mount products');
+                          addShelfToCart(variant.id);
+                        } else {
+                          console.log('[Fish Armor Shelf] Shelf count matches shelf-mount products, no action needed');
+                        }
+                      }, 500); // Increased to 500ms for better debouncing
+                    } else {
+                      alertBox.style.display = 'none';
+                    }
+                  }
+
+                  function addShelfToCart(variantId) {
+                    // Set flag immediately to prevent concurrent calls
+                    window.FishArmorShelf.isAdding = true;
+                    console.log('[Fish Armor Shelf] Adding shelf to cart...');
+
+                    fetch('/cart/add.js', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ items: [{ id: shelfVariantId, quantity: 1 }] })
+                    })
+                    .then(response => response.json())
+                    .then(() => {
+                      window.FishArmorShelf.addedForVariant = variantId;
+                      console.log('[Fish Armor Shelf] Shelf successfully added to cart');
+                      document.dispatchEvent(new CustomEvent('cart:refresh'));
+                    })
+                    .catch(error => {
+                      console.error('[Fish Armor Shelf] Error adding shelf:', error);
+                    })
+                    .finally(() => {
+                      window.FishArmorShelf.isAdding = false;
+                    });
+                  }
+
+                  // Check if shelves need to be added after cart changes
+                  async function checkShelvesAfterCartChange() {
+                    // Don't check if already adding
+                    if (window.FishArmorShelf.isAdding) {
+                      return;
+                    }
+
+                    const { shelfMountCount, shelfCount } = await getCartCounts();
+                    console.log(`[Fish Armor Shelf] Post-cart-update check: ${shelfMountCount} shelf-mount product(s), ${shelfCount} shelf(s)`);
+
+                    // If we have more shelf-mount products than shelves, add missing shelves
+                    const shelvesNeeded = shelfMountCount - shelfCount;
+                    if (shelvesNeeded > 0) {
+                      console.log(`[Fish Armor Shelf] Adding ${shelvesNeeded} shelf(s) to match shelf-mount products`);
+                      addMultipleShelves(shelvesNeeded);
+                    }
+                  }
+
+                  function addMultipleShelves(count) {
+                    window.FishArmorShelf.isAdding = true;
+                    console.log(`[Fish Armor Shelf] Adding ${count} shelf(s) to cart...`);
+
+                    fetch('/cart/add.js', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ items: [{ id: shelfVariantId, quantity: count }] })
+                    })
+                    .then(response => response.json())
+                    .then(() => {
+                      console.log(`[Fish Armor Shelf] Successfully added ${count} shelf(s) to cart`);
+                      document.dispatchEvent(new CustomEvent('cart:refresh'));
+                    })
+                    .catch(error => {
+                      console.error('[Fish Armor Shelf] Error adding shelves:', error);
+                    })
+                    .finally(() => {
+                      window.FishArmorShelf.isAdding = false;
+                    });
+                  }
+
+                  // Wait for product-form to be ready, then attach ONE listener (not multiple)
+                  function setupListeners() {
+                    // Only attach listener once globally to prevent duplicate handlers
+                    if (window.FishArmorShelf.listenerAttached) {
+                      return;
+                    }
+
+                    // Listen for variant changes (when user selects variant)
+                    if (window.theme && window.theme.pubsub) {
+                      window.theme.pubsub.subscribe(window.theme.pubsub.PUB_SUB_EVENTS.variantChange, (event) => {
+                        if (event.data && event.data.variant) {
+                          checkShelfRequirement(event.data.variant);
+                        }
+                      });
+                      console.log('[Fish Armor Shelf] Variant change listener attached via theme pubsub');
+                    } else {
+                      // Fallback to document listener if pubsub not available
+                      document.addEventListener('variant:change', (event) => {
+                        if (event.detail && event.detail.variant) {
+                          checkShelfRequirement(event.detail.variant);
+                        }
+                      }, { once: false });
+                      console.log('[Fish Armor Shelf] Variant change listener attached via document event');
+                    }
+
+                    // Listen for cart update events (after items added to cart)
+                    // Multiple event types to catch different theme implementations
+                    const cartEvents = ['cart:refresh', 'cart:updated', 'cart:build', 'cart:change'];
+                    cartEvents.forEach(eventName => {
+                      document.addEventListener(eventName, () => {
+                        console.log(`[Fish Armor Shelf] Cart event detected: ${eventName}, checking if shelves needed...`);
+                        setTimeout(() => {
+                          checkShelvesAfterCartChange();
+                        }, 500); // Small delay to ensure cart API reflects latest changes
+                      });
+                    });
+
+                    // Also listen for product form submissions (most reliable for catching adds)
+                    document.addEventListener('submit', (event) => {
+                      const form = event.target;
+                      if (form && form.getAttribute('action') === '/cart/add') {
+                        console.log('[Fish Armor Shelf] Product add-to-cart form submitted, will check cart after...');
+                        setTimeout(() => {
+                          checkShelvesAfterCartChange();
+                        }, 1000); // Longer delay for form submission processing
+                      }
+                    }, true); // Use capture phase to catch before submission
+
+                    console.log('[Fish Armor Shelf] Cart event listeners attached');
+
+                    window.FishArmorShelf.listenerAttached = true;
+
+                    // Check initial variant
+                    const el = document.querySelector('[data-selected-variant]');
+                    if (el && el.textContent) {
+                      try {
+                        checkShelfRequirement(JSON.parse(el.textContent));
+                      } catch (e) {
+                        console.error('[Fish Armor Shelf] Error parsing initial variant:', e);
+                      }
+                    }
+                  }
+
+                  // Setup after DOM is ready
+                  if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', setupListeners);
+                  } else {
+                    setupListeners();
+                  }
+                })();
+              </script>
+
+            {%- when 'addon_picker' -%}
+              {%- render 'product-addon-picker',
+                product: product,
+                section_id: section.id,
+                block: block,
+                product_form_id: product_form_id
+              -%}
+
             {%- when 'product_variations' -%}
               {%- render 'product-variants',
                 block: block,
@@ -658,7 +888,7 @@
                 <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
                   <div class="flex items-center gap-2d5">
                     {%- render 'icon-accordion', icon: block.settings.icon -%}
-                    <span class="fluid-sm font-medium leading-none">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
+                    <span class="text-sm-base font-medium leading-none">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
                   </div>
                   {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
                 </summary>
@@ -780,7 +1010,7 @@
                             endif
                           -%}
                         {%- endif -%}
-                        <span class="fluid-sm font-medium leading-none">{{ block.settings.heading | escape }}</span>
+                        <span class="text-sm-base font-medium leading-none">{{ block.settings.heading | escape }}</span>
                       </div>
                       {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
                     </summary>
@@ -827,7 +1057,7 @@
                               {%- if variant.available -%}
                                 {%- render 'product-price', product: variant.product, variant: variant, use_variant: true, class: 'flex flex-wrap items-baseline gap-2 lg:flex-col xl:items-end lg:gap-1d5' -%}
                               {%- else -%}
-                                <span class="fluid-sm text-opacity">{{ 'products.product.sold_out' | t }}</span>
+                                <span class="text-sm-base text-opacity">{{ 'products.product.sold_out' | t }}</span>
                               {%- endif -%}
                             </div>
                           </label>
@@ -1094,91 +1324,8 @@
     </script>
   {%- endif -%}
   
-  {%- liquid
-    # Product Schema JSON-LD
-    # Comprehensive structured data for better Google rich snippets
-    assign selected_variant = product.selected_or_first_available_variant
-    assign product_price = selected_variant.price | divided_by: 100.0
-    assign product_compare_price = selected_variant.compare_at_price | divided_by: 100.0
-  -%}
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Product",
-      "name": {{ product.title | json }},
-      "description": {{ product.description | strip_html | truncate: 5000 | json }},
-      "url": "{{ shop.url }}{{ product.url }}",
-      "sku": {{ selected_variant.sku | default: product.id | json }},
-      {%- if product.metafields.product.mpn != blank -%}
-      "mpn": {{ product.metafields.product.mpn | json }},
-      {%- endif -%}
-      {%- if product.metafields.product.gtin != blank -%}
-      "gtin": {{ product.metafields.product.gtin | json }},
-      {%- endif -%}
-      "brand": {
-        "@type": "Brand",
-        "name": {{ product.vendor | default: shop.name | json }}
-      },
-      "image": [
-        {%- for media in product.media -%}
-          {%- if media.media_type == 'image' -%}
-            "{{ media | image_url: width: 1200 }}"{% unless forloop.last %},{% endunless %}
-          {%- endif -%}
-        {%- endfor -%}
-      ],
-      "offers": {
-        "@type": "Offer",
-        "url": "{{ shop.url }}{{ product.url }}",
-        "priceCurrency": "{{ cart.currency.iso_code }}",
-        "price": "{{ product_price }}",
-        {%- if product_compare_price > product_price -%}
-        "priceValidUntil": "{{ 'now' | date: '%Y' | plus: 1 }}-12-31",
-        {%- endif -%}
-        "availability": "https://schema.org/{% if selected_variant.available %}InStock{% else %}OutOfStock{% endif %}",
-        "seller": {
-          "@type": "Organization",
-          "name": {{ shop.name | json }}
-        },
-        "shippingDetails": {
-          "@type": "OfferShippingDetails",
-          "shippingDestination": {
-            "@type": "DefinedRegion",
-            "addressCountry": "US"
-          },
-          "deliveryTime": {
-            "@type": "ShippingDeliveryTime",
-            "handlingTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 1,
-              "maxValue": 2,
-              "unitCode": "d"
-            },
-            "transitTime": {
-              "@type": "QuantitativeValue",
-              "minValue": 2,
-              "maxValue": 5,
-              "unitCode": "d"
-            }
-          }
-        },
-        "hasMerchantReturnPolicy": {
-          "@type": "MerchantReturnPolicy",
-          "applicableCountry": "US",
-          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
-          "merchantReturnDays": 30,
-          "returnMethod": "https://schema.org/ReturnByMail",
-          "returnFees": "https://schema.org/FreeReturn"
-        }
-      }
-      {%- comment -%}
-        Uncomment when review app is integrated:
-        ,"aggregateRating": {
-          "@type": "AggregateRating",
-          "ratingValue": "4.8",
-          "reviewCount": "127"
-        }
-      {%- endcomment -%}
-    }
+    {{- product | structured_data -}}
   </script>
 </div>
 
@@ -2034,6 +2181,17 @@
           "type": "page",
           "id": "size_chart",
           "label": "t:sections.main-product.blocks.variant_picker.settings.size_chart.label"
+        }
+      ]
+    },
+    {
+      "type": "addon_picker",
+      "name": "Add-on picker",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "Configure add-on products using metafields on each product. Set 'custom.enable_clip_addon' to true and add products to 'custom.clip_addon_products'. See .docs/FEATURE-CLIP-ADDON.md for details."
         }
       ]
     },
