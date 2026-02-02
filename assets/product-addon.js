@@ -10,7 +10,8 @@ if (!customElements.get('product-addon')) {
     constructor() {
       super();
 
-      this.productSelect = this.querySelector('[data-addon-product-select]');
+      this.productRadios = this.querySelectorAll('[data-addon-product-radio]');
+      this.productCards = this.querySelectorAll('.product-addon__card');
       this.variantInput = this.querySelector('[data-addon-variant-input]');
       this.priceDisplay = this.querySelector('[data-addon-price]');
       this.variantContainers = this.querySelectorAll('[data-addon-variants]');
@@ -21,11 +22,13 @@ if (!customElements.get('product-addon')) {
     }
 
     bindEvents() {
-      // Product dropdown change
-      this.productSelect?.addEventListener('change', this.onProductChange.bind(this));
+      // Product card selection
+      this.productRadios.forEach(radio => {
+        radio.addEventListener('change', this.onProductChange.bind(this));
+      });
 
-      // Variant swatch selection
-      this.querySelectorAll('input[type="radio"]').forEach(input => {
+      // Variant swatch selection (for variant options, not product selection)
+      this.querySelectorAll('[data-addon-variants] input[type="radio"]').forEach(input => {
         input.addEventListener('change', this.onVariantChange.bind(this));
       });
     }
@@ -99,13 +102,19 @@ if (!customElements.get('product-addon')) {
     }
 
     /**
-     * Handle product dropdown change
+     * Handle product card selection change
      * Shows/hides appropriate variant swatches
      */
     onProductChange(event) {
       const selectedProductId = event.target.value;
-      const selectedOption = event.target.selectedOptions[0];
-      const firstVariantId = selectedOption.dataset.firstVariantId;
+      const selectedRadio = event.target;
+      const firstVariantId = selectedRadio.dataset.firstVariantId;
+
+      // Update card visual states
+      this.productCards.forEach(card => {
+        const radio = card.querySelector('[data-addon-product-radio]');
+        card.classList.toggle('is-selected', radio?.value === selectedProductId);
+      });
 
       // Hide all variant containers, show selected one
       this.variantContainers.forEach(container => {
@@ -128,7 +137,7 @@ if (!customElements.get('product-addon')) {
       }
 
       // Update price display
-      this.updatePriceDisplay(selectedOption.dataset.firstVariantPrice);
+      this.updatePriceDisplay(selectedRadio.dataset.firstVariantPrice);
 
       // Dispatch event for other components
       this.dispatchEvent(new CustomEvent('addon:product-changed', {

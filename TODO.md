@@ -55,9 +55,54 @@
 
 ---
 
+## UI/UX SEO Audit (2026-02-02)
+
+### Audit Screenshots
+
+Screenshots captured via Playwright in `.playwright-mcp/`:
+- `audit-homepage-desktop.png` - Homepage (1280px)
+- `audit-homepage-mobile.png` - Homepage (375px)
+- `audit-product-desktop.png` - Product page (1280px)
+- `audit-product-mobile.png` - Product page (375px)
+- `audit-collection-desktop.png` - Collection page (1280px)
+- `audit-faqs-desktop.png` - FAQs page (1280px)
+
+### SEO Audit Results
+
+| Page | Title | H1 | Meta Desc | Canonical | OG Tags | Schema |
+|------|-------|-----|-----------|-----------|---------|--------|
+| Homepage | ✅ | ✅ (1) | ✅ | ✅ | ✅ | ✅ |
+| Product | ✅ | ✅ (1) | ✅ | ✅ | ✅ | ✅ Product |
+| Collection | ✅ | ✅ (1) | - | ✅ | - | ✅ |
+| FAQs | ✅ | ✅ (1) | - | ✅ | - | ✅ FAQPage (3x) |
+
+### Issues Found
+
+| Issue | Priority | Status |
+|-------|----------|--------|
+| Page content duplication bug | P0 | Task #19 |
+| Warranty page broken contact link | P1 | Task #29 |
+| FAQs page broken "Contact Us" link | P1 | Task #30 |
+| Images missing alt text (8 total) | P2 | Task #31 |
+| Add-on picker shows dropdown on desktop | P2 | Task #24 |
+| Multiple FAQPage schemas (should be 1) | P3 | Task #32 |
+
+### Positive Findings
+
+- ✅ Mobile responsive design working well
+- ✅ Mobile dock navigation functional
+- ✅ Add-on picker shows image cards on mobile
+- ✅ Product structured data complete
+- ✅ FAQ structured data present (though split)
+- ✅ Proper heading hierarchy (single H1 per page)
+- ✅ Skip to content link present
+- ✅ Breadcrumbs on collection pages
+
+---
+
 ## In Progress
 
-_None currently_
+- [ ] **#19 - Page Content Duplication** (P0) - Investigate and fix
 
 ---
 
@@ -65,28 +110,28 @@ _None currently_
 
 ### Critical Bugs (P0)
 
-- [ ] **Page Content Duplication** - Full-page screenshots show content rendering twice (header and sections appear again below footer). Affects all pages. Investigate CSS positioning, section groups, or JS rendering.
+- [ ] **#19 - Page Content Duplication** - Full-page screenshots show content rendering twice (header and sections appear again below footer). Affects all pages. Check `layout/theme.liquid`, CSS positioning, section groups, or JS rendering.
 
-### Proposal Gaps (P1)
+### Broken Links (P1)
 
-- [ ] **Fix warranty page contact link** - In Shopify admin, edit Warranty page content to update "contact us" link to `/pages/contact`
+- [ ] **#29 - Fix warranty page contact link** - "contact us" link points to 404. Options: `mailto:info@keybar.us` or `/policies/contact-information`
+- [ ] **#30 - Fix FAQs page "Contact Us" link** - "Contact Us" button points to 404. Same fix options as above.
 
 ### Proposal Gaps - Admin Tasks (P2)
 
-- [ ] **Enable product reviews** - Theme has full review support built-in. Install Judge.me/Loox/Yotpo app, enable "rating" block in product template via theme editor
-- [ ] **Create Bundles collection** - Set up in Shopify admin, add bundle products
-- [ ] **Verify accelerated checkout** - Shopify admin → Settings → Payments → Enable Shop Pay, Apple Pay, Google Pay
+- [ ] **#27 - Enable product reviews** - Theme has full review support built-in. Install Judge.me/Loox/Yotpo app, enable "rating" block in product template via theme editor
+- [ ] **#26 - Create Bundles collection** - Set up in Shopify admin, add bundle products
+- [ ] **#28 - Verify accelerated checkout** - Shopify admin → Settings → Payments → Enable Shop Pay, Apple Pay, Google Pay
 - [ ] **Verify 301 redirects** - Check URL Redirects in Shopify admin for old WooCommerce URLs
-- [ ] **Create Contact page** - Pages → Add page, handle: "contact", template: "page.contact"
 
 ### UI Enhancements (P2)
 
-- [ ] **Add-on Picker Image Cards** - Replace dropdown with clickable image cards showing each clip style (see `snippets/product-addon-picker.liquid`)
-- [ ] **Verify mobile responsive design** - Test all pages on mobile, check touch targets, menu drawer
+- [ ] **#24 - Add-on Picker Image Cards on Desktop** - Mobile already shows image cards; update to show on desktop too (see `snippets/product-addon-picker.liquid`)
 
 ### Accessibility (P2)
 
-- [ ] **Collection Product Accessibility** - Products render visually but may not be in accessibility tree (test with screen reader)
+- [ ] **#22 - Collection Product Accessibility** - Products render visually but may not be in accessibility tree (test with screen reader)
+- [ ] **#31 - Add missing alt text** - 4 images on product page + 4 on collection page missing alt attributes
 
 ### Performance (P2)
 
@@ -103,9 +148,9 @@ _None currently_
 
 ### SEO (P3)
 
+- [ ] **#32 - Consolidate FAQ schema** - Currently 3 separate FAQPage schemas; combine into single schema
 - [ ] Add hreflang tags if supporting multiple locales
 - [ ] Implement AggregateRating schema when product reviews are added
-- [ ] Validate FAQ schema with Google Rich Results Test
 - [ ] Add explicit robots meta tag if needed
 
 ### Documentation (P3)
@@ -117,8 +162,13 @@ _None currently_
 
 ## Completed (Recent)
 
+### 2026-02-02 - UI/UX SEO Audit
+
+- [x] **#23 - Verify mobile responsive design** - Tested all pages on mobile (375px). Mobile dock navigation works, add-on picker shows image cards, touch targets adequate, layout adapts correctly.
+
 ### 2026-02-02 - Build Session Fixes
 
+- [x] **Add-on Picker Image Cards (Mobile)** - Mobile view shows image cards for clip selection. Desktop still shows dropdown (Task #24 to update desktop).
 - [x] **Create Contact page template** - Created `templates/page.contact.json` with contact form, subject selector, and sidebar info. **Admin action:** Create page with handle "contact" and assign template.
 - [x] **Fix font_url error** - Removed invalid font preload lines using `font_url` filter (requires font_picker settings). Fonts load via fonts.css
 - [x] **Fix empty product carousels** - Fixed Liquid `default` filter issue with empty arrays in featured-collection.liquid

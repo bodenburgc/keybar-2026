@@ -1,7 +1,7 @@
 {%- doc -%}
-  Renders an add-on product picker with dropdown and variant swatches.
+  Renders an add-on product picker with image cards and variant swatches.
 
-  Reads linked products from metafield and displays selection UI.
+  Displays linked products as clickable image cards with product photos.
   Selected add-on variant is added to cart alongside main product.
 
   @param {object} product - The main product being viewed
@@ -67,42 +67,67 @@
     {%- endif -%}
   </div>
 
-  {%- # Product Selector Dropdown -%}
-  <div class="product-addon__selector mb-4">
-    <label class="form__label text-sm mb-2 block" for="AddonProduct-{{ section_id }}">
+  {%- # Product Selector Image Cards -%}
+  <fieldset class="product-addon__selector mb-4">
+    <legend class="form__label text-sm mb-3 block">
       {{ 'products.addon.available_options' | t | default: 'Available options' }}
-    </label>
-    <div class="field relative">
-      <select
-        id="AddonProduct-{{ section_id }}"
-        class="select w-full"
-        data-addon-product-select
-      >
-        {%- for addon_product in addon_products -%}
-          {%- liquid
-            assign first_variant = addon_product.selected_or_first_available_variant
-            assign base_price = addon_products.first.selected_or_first_available_variant.price
-            assign price_diff = first_variant.price | minus: base_price
-          -%}
-          <option
+    </legend>
+    <div class="product-addon__cards grid gap-3" data-addon-product-cards>
+      {%- for addon_product in addon_products -%}
+        {%- liquid
+          assign first_variant = addon_product.selected_or_first_available_variant
+          assign base_price = addon_products.first.selected_or_first_available_variant.price
+          assign price_diff = first_variant.price | minus: base_price
+          assign featured_image = first_variant.featured_image | default: addon_product.featured_image
+        -%}
+        <div class="product-addon__card{% if forloop.first %} is-selected{% endif %}">
+          <input
+            type="radio"
+            class="sr-only"
+            id="AddonProduct-{{ section_id }}-{{ addon_product.id }}"
+            name="addon-product-{{ section_id }}"
             value="{{ addon_product.id }}"
+            data-addon-product-radio
             data-product-handle="{{ addon_product.handle }}"
             data-first-variant-id="{{ first_variant.id }}"
             data-first-variant-price="{{ first_variant.price }}"
-            {% if forloop.first %}selected{% endif %}
+            {% if forloop.first %}checked{% endif %}
+          />
+          <label
+            for="AddonProduct-{{ section_id }}-{{ addon_product.id }}"
+            class="product-addon__card-label flex gap-3 cursor-pointer"
           >
-            {{ addon_product.title }}
-            {%- if price_diff > 0 -%}
-              : +{{ price_diff | money }}
-            {%- elsif first_variant.price == 0 -%}
-              ({{ 'products.addon.included' | t | default: 'Included' }})
-            {%- endif -%}
-          </option>
-        {%- endfor -%}
-      </select>
-      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none right-4 top-1/2 -translate-y-1/2 rotate-180' -%}
+            <div class="product-addon__card-media shrink-0 relative overflow-hidden">
+              {%- if featured_image != blank -%}
+                {{- featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,80,120,160', class: 'object-cover w-full h-full', alt: addon_product.title | escape -}}
+              {%- else -%}
+                <span aria-hidden="true" class="block w-full h-full">
+                  {{- 'product-1' | placeholder_svg_tag: 'placeholder' -}}
+                </span>
+              {%- endif -%}
+            </div>
+            <div class="product-addon__card-content flex flex-col justify-center gap-1">
+              <span class="product-addon__card-title font-medium text-sm leading-tight">
+                {{- addon_product.title | escape -}}
+              </span>
+              <span class="product-addon__card-price text-xs">
+                {%- if price_diff > 0 -%}
+                  +{{ price_diff | money }}
+                {%- elsif first_variant.price == 0 -%}
+                  {{ 'products.addon.included' | t | default: 'Included' }}
+                {%- else -%}
+                  +{{ first_variant.price | money }}
+                {%- endif -%}
+              </span>
+            </div>
+            <div class="product-addon__card-check shrink-0 flex items-center">
+              {%- render 'icon', icon: 'checkmark', size: 'sm' -%}
+            </div>
+          </label>
+        </div>
+      {%- endfor -%}
     </div>
-  </div>
+  </fieldset>
 
   {%- # Variant Swatches for Each Add-on Product -%}
   {%- for addon_product in addon_products -%}
