@@ -25,6 +25,11 @@ shopify theme check                             # Lint/validate theme
 shopify theme share -s keybarus.myshopify.com   # Generate preview link
 ```
 
+**Store config:** The `-s` flag is required unless you have `.shopify/project.json`:
+```json
+{"store": "keybarus.myshopify.com"}
+```
+
 **No build step required** - No npm, webpack, or compilation. CSS/JS are served as-is from `/assets/`.
 
 ## Framework Relationship (BODE Upstream)
