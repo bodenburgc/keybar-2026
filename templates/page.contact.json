@@ -1,0 +1,77 @@
+{
+  "sections": {
+    "main": {
+      "type": "contact-form",
+      "blocks": {
+        "phone_field": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "Phone Number",
+            "required": false,
+            "full_width": false
+          }
+        },
+        "subject_field": {
+          "type": "custom_field",
+          "settings": {
+            "type": "select",
+            "title": "Subject",
+            "required": true,
+            "full_width": true,
+            "select_options": "General Inquiry, Product Question, Order Status, Warranty Claim, Wholesale/Dealer Inquiry, Other"
+          }
+        },
+        "contact_info": {
+          "type": "contact",
+          "settings": {
+            "heading": "Customer Service",
+            "text": "<p><strong>Email:</strong> support@keybar.us</p><p><strong>Hours:</strong> Mon-Fri 9am-5pm EST</p>"
+          }
+        },
+        "social": {
+          "type": "media",
+          "settings": {
+            "heading": "Follow Us"
+          }
+        }
+      },
+      "block_order": [
+        "phone_field",
+        "subject_field",
+        "contact_info",
+        "social"
+      ],
+      "settings": {
+        "heading": "Contact Us",
+        "heading_size": "title-lg",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h1",
+        "subheading": "",
+        "description": "<p>Have a question about your KeyBar or need help with an order? We're here to help. Fill out the form below and we'll get back to you within 1-2 business days.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
