@@ -248,63 +248,26 @@ Interactive features use custom elements:
 | `page.dealer-info.json` | Become a Dealer information |
 | `page.style-guide.json` | Internal style reference |
 
-## Pocket Clip Add-On Feature (In Development)
+## Product Add-On System
 
-A product add-on system allowing customers to select pocket clips when purchasing KeyBars.
+A reusable add-on picker allowing customers to select optional products (like pocket clips) when purchasing KeyBars.
 
-**Feature Doc:** See `BODE-shopify/.docs/FEATURE-CLIP-ADDON.md` for full technical spec.
+**Full spec:** `.docs/FEATURE-CLIP-ADDON.md`
 
-### Quick Reference
+**Files:**
+- `snippets/product-addon-picker.liquid` - UI component
+- `assets/product-addon.js` - `<product-addon>` web component
+- `assets/product-addon.css` - Styles
 
-**Metafields to configure per KeyBar product:**
-| Metafield | Value |
-|-----------|-------|
-| `custom.enable_clip_addon` | `true` |
-| `custom.clip_addon_products` | Link: Regular Pocket Clip, Deep Carry Clip 3.0 |
-| `custom.clip_addon_title` | "Pocket Clip" (optional) |
-| `custom.clip_addon_description` | Helper text (optional) |
-
-**Clip Products to Create:**
-
-| Product | Variants | Pricing |
-|---------|----------|---------|
-| Regular Pocket Clip | Plain, Blackwashed, Blue, Bronze, Fuchsia | $0, $3, $3, $3, $3 |
-| Deep Carry Clip 3.0 | Plain 3.0, Blackwashed 3.0, Blue 3.0, Bronze 3.0, Fuchsia 3.0 | $20.76, $23.76, $23.76, $23.76, $23.76 |
-
-**Files (in BODE-shopify, pull upstream after complete):**
-- `snippets/product-addon-picker.liquid`
-- `assets/product-addon.js`
-- `assets/product-addon.css`
-- `sections/main-product.liquid` (block added)
+**Metafields per product:**
+| Metafield | Type |
+|-----------|------|
+| `custom.enable_clip_addon` | Boolean |
+| `custom.clip_addon_products` | List of products |
+| `custom.clip_addon_title` | Single line text (optional) |
+| `custom.clip_addon_description` | Multi-line text (optional) |
 
 **Theme Editor:** Add "Add-on picker" block to product page template.
-
-### Implementation Status
-
-| Task | Status |
-|------|--------|
-| Build code in BODE-shopify | Done |
-| Create clip products | Pending |
-| Create metafield definitions | Pending |
-| Configure KeyBar products | Pending |
-| Pull upstream to keybar-2026 | Pending |
-| Test end-to-end | Pending |
-
----
-
-## Pre-Launch Checklist
-
-See `.docs/AUDIT-FOR-JESS.md` for full status. Key items:
-
-- [x] Remove FishArmor remnants (all 9 fixed)
-- [x] Cart/checkout optimization
-- [x] Color consistency (#16323e)
-- [x] SEO schema implementation
-- [x] Upload KeyBar favicon
-- [x] Verify newsletter popup image (Pro-Lite-Series.jpg)
-- [ ] Connect Google Search Console
-- [ ] Set up review app (Judge.me recommended)
-- [ ] Implement pocket clip add-on feature
 
 ## Important Constraints
 
