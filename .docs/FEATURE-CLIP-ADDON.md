@@ -126,8 +126,23 @@ The block only renders if the product has `custom.enable_clip_addon = true` AND 
 | Create `product-addon.css` | Done |
 | Modify `main-product.liquid` (add block) | Done |
 | Add translations | Done |
-| Create clip products in Shopify | Pending |
+| Push BODE to GitHub | Done |
+| Pull upstream to keybar-2026 | Done |
+| Create clip products in Shopify | **NEXT** |
 | Create metafield definitions | Pending |
 | Configure KeyBar products | Pending |
-| Pull upstream to keybar-2026 | Pending |
+| Add block in Theme Editor | Pending |
 | Test end-to-end | Pending |
+
+## Resume Point (2026-01-24)
+
+**Code is complete and deployed to both repos.**
+
+Next steps are all in Shopify Admin (keybarus.myshopify.com):
+
+1. Create metafield definitions (4 total - see "Metafield Setup" section above)
+2. Create "Regular Pocket Clip" product with 5 variants
+3. Create "Deep Carry Clip 3.0" product with 5 variants
+4. On KeyBar products, set `custom.enable_clip_addon = true` and link clip products
+5. In Theme Editor, add "Add-on picker" block to product page template
+6. Test checkout flow
