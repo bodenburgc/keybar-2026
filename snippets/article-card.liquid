@@ -38,7 +38,7 @@
       {%- endif -%}
 
       <a href="{{ article.url }}" class="article-card__link block relative media media--{{ image_ratio }}" aria-label="{{ article.title | escape }}" tabindex="-1">
-        {{- article.image | image_url: width: article.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '180,360,540,720,900,1080,1600', is: 'lazy-image', class: 'article-card__image' -}}
+        {{- article.image | image_url: width: article.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '180,360,540,720,900,1080,1600', is: 'lazy-image', class: 'article-card__image', alt: article.title -}}
       </a>
     </div>
   {%- endif -%}

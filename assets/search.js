@@ -177,14 +177,7 @@ if (!customElements.get('predictive-search')) {
             this.removeAttribute('loading');
             this.setAttribute('results', '');
           })
-          .catch((error) => {
-            if (error.name === 'AbortError') {
-              console.log('Fetch aborted by user');
-            }
-            else {
-              console.error(error);
-            }
-          });
+          .catch(() => {});
       }
 
       renderSearchResults(responseText) {

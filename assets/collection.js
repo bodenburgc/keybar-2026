@@ -14,6 +14,11 @@ if (!customElements.get('facet-form')) {
         this.addEventListener('submit', this.onFormSubmit);
       }
 
+      disconnectedCallback() {
+        this.removeEventListener('change', this.onFormChange);
+        this.removeEventListener('submit', this.onFormSubmit);
+      }
+
       getAnimationParams() {
         return {
           distance: this.isMobile ? 30 : 50,
@@ -162,14 +167,7 @@ if (!customElements.get('facet-form')) {
               this.afterRenderSection();
             }, execution > 500 ? 0 : 500);
           })
-          .catch((error) => {
-            if (error.name === 'AbortError') {
-              console.log('Fetch aborted by user');
-            }
-            else {
-              console.error(error);
-            }
-          });
+          .catch(() => {});
       }
 
       renderSectionFromCache(url, event) {
@@ -551,14 +549,7 @@ if (!customElements.get('infinite-button')) {
             this.renderPagination(responseText);
             this.renderProductGridContainer(responseText);
           })
-          .catch((error) => {
-            if (error.name === 'AbortError') {
-              console.log('Fetch aborted by user');
-            }
-            else {
-              console.error(error);
-            }
-          });
+          .catch(() => {});
       }
 
       renderPagination(responseText) {

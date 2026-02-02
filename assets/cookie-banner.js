@@ -58,9 +58,7 @@ if (!customElements.get('cookie-banner')) {
         this.hide();
         window.Shopify.customerPrivacy?.setTrackingConsent(true, this.noop);
     
-        document.addEventListener('trackingConsentAccepted', () => {
-          console.log('trackingConsentAccepted event fired');
-        });
+        document.addEventListener('trackingConsentAccepted', () => {});
       }
     
       declinePolicy() {

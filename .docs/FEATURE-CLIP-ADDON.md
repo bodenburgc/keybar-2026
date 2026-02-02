@@ -51,7 +51,7 @@ BODE-shopify/
 
 | Name | Namespace.Key | Type | Purpose |
 |------|---------------|------|---------|
-| Enable Clip Add-on | `custom.enable_clip_addon` | Boolean | Toggle feature per product |
+| Enable Clip Add-on | `custom.enable_clip_add_on` | Boolean | Toggle feature per product |
 | Clip Add-on Products | `custom.clip_addon_products` | List of products | Linked add-on products (order = display order) |
 | Clip Add-on Title | `custom.clip_addon_title` | Single line text | Section heading (default: "Pocket Clip") |
 | Clip Add-on Description | `custom.clip_addon_description` | Multi-line text | Helper text below title |

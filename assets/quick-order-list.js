@@ -217,11 +217,7 @@ if (!customElements.get('quick-order-list')) {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'quick-order-list', cart: parsedState, target, line, name });
           })
           .catch((error) => {
-            if (error.name === 'AbortError') {
-              console.log('Fetch aborted by user');
-            }
-            else {
-              console.log(error);
+            if (error.name !== 'AbortError') {
               this.setErrorMessage(theme.cartStrings.error);
             }
           });

@@ -267,7 +267,7 @@ A reusable add-on picker allowing customers to select optional products (like po
 **Metafields per product:**
 | Metafield | Type |
 |-----------|------|
-| `custom.enable_clip_addon` | Boolean |
+| `custom.enable_clip_add_on` | Boolean |
 | `custom.clip_addon_products` | List of products |
 | `custom.clip_addon_title` | Single line text (optional) |
 | `custom.clip_addon_description` | Multi-line text (optional) |

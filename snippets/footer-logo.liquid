@@ -18,7 +18,7 @@
           {%- capture sizes -%}{{ block.settings.logo_height | times: block.settings.logo.aspect_ratio }}px{%- endcapture -%}
           {%- capture widths -%}{{ block.settings.logo_height | times: block.settings.logo.aspect_ratio }}, {{ block.settings.logo_height | times: block.settings.logo.aspect_ratio | times: 2 | at_most: block.settings.logo.width }}{%- endcapture -%}
           {%- capture style -%}--image-width: {{ block.settings.logo_height | times: block.settings.logo.aspect_ratio }}px; --image-height: {{ block.settings.logo_height }}px;{%- endcapture -%}
-          {{- block.settings.logo | image_url: width: block.settings.logo.width | image_tag: loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, is: 'lazy-image' -}}
+          {{- block.settings.logo | image_url: width: block.settings.logo.width | image_tag: alt: shop.name, loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, is: 'lazy-image' -}}
         </a>
       </p>
     {%- endif -%}

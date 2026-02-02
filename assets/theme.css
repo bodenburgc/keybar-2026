@@ -32,7 +32,7 @@
   --border-radius: clamp(var(--sp-4), 1.578vw, var(--sp-7d5));
   --border-radius-medium: calc(clamp(1em, 1.7vw, 1.7em) * 1.2);
   --border-radius-small: calc(clamp(1em, 1.7vw, 1.7em) * 0.5);
-  --rounded-full: calc(infinity * 1px);
+  --rounded-full: 9999px;
   --input-height: var(--sp-13);
   --input-padding-inline: var(--sp-6d5);
   --transform-logical: 1;

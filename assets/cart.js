@@ -278,14 +278,7 @@ if (!customElements.get('cart-items')) {
           .then((parsedState) => {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cart: parsedState, target, line, name });
           })
-          .catch((error) => {
-            if (error.name === 'AbortError') {
-              console.log('Fetch aborted by user');
-            }
-            else {
-              console.error(error);
-            }
-          });
+          .catch(() => {});
       }
 
       enableLoading(line) {
@@ -468,14 +461,7 @@ if (!customElements.get('shipping-calculator')) {
               this.formatError(parsedState);
             }
           })
-          .catch((error) => {
-            if (error.name === 'AbortError') {
-              console.log('Fetch aborted by user');
-            }
-            else {
-              console.error(error);
-            }
-          })
+          .catch(() => {})
           .finally(() => {
             this.resultsElement.hidden = false;
             this.submitButton.removeAttribute('aria-busy');
@@ -601,14 +587,7 @@ if (!customElements.get('cart-discount')) {
 
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'cart-discount', cart: parsedState });
           })
-          .catch((error) => {
-            if (error.name === 'AbortError') {
-              console.log('Fetch aborted by user');
-            }
-            else {
-              console.error(error);
-            }
-          })
+          .catch(() => {})
           .finally(() => {
             this.submitButton.removeAttribute('aria-busy');
           });
@@ -644,14 +623,7 @@ if (!customElements.get('cart-discount')) {
           .then((parsedState) => {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'cart-discount', cart: parsedState });
           })
-          .catch((error) => {
-            if (error.name === 'AbortError') {
-              console.log('Fetch aborted by user');
-            }
-            else {
-              console.error(error);
-            }
-          })
+          .catch(() => {})
           .finally(() => {
             event.target.removeAttribute('loading');
           });

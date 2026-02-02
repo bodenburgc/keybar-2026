@@ -309,6 +309,9 @@
 }
 
 /* Air reviews */
+/* Note: !important is required throughout this section to override Air Reviews app's
+   inline styles and their own !important declarations. This is standard practice
+   for third-party app style overrides. */
 
 :is(.AirReviews-Widget, #AirReviews-Modal__DetailsMobile) .AirReviews-StarRate .AirReviews-StarRate--Positive {
   inset: unset;
@@ -365,7 +368,9 @@
   height: 100%;
 }
 
-#AirReviews-BlockWrapper {
+/* Consolidated font-family reset for Air Reviews components */
+:is(#AirReviews-BlockWrapper, #AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details, #AirReviews-PopWrapper, #AirReviews-Modal__DetailsMobile, div[id*=AirReviews-CarouselWrapper]),
+#AirReviews-Modal :is(.AirReviews-TextField, .AirReviews-Textarea) {
   font-family: inherit !important;
 }
 
@@ -419,17 +424,25 @@
   padding: 0 !important;
 }
 
+/* Consolidated background reset for Air Reviews components */
+#AirReviews-BlockWrapper :is(.AirReviews-Blocks--Information, .AirReviews-Blocks--Rate, .AirReviews-Blocks--List, .AirReviews-Blocks--Actions) {
+  background: none !important;
+}
+
 #AirReviews-BlockWrapper .AirReviews-Blocks--Information {
   padding: 0;
   margin: 0;
-  background: none !important;
 }
 
 #AirReviews-BlockWrapper .AirReviews-Blocks--Rate {
   margin: 0;
   padding: 0;
   gap: var(--sp-2d5);
-  background: none !important;
+}
+
+/* Consolidated rating color for Air Reviews */
+#AirReviews-BlockWrapper :is(.AirReviews-Blocks--RateCount, .AirReviews-Blocks--MaximumRate) {
+  color: rgb(var(--color-rating)) !important;
 }
 
 #AirReviews-BlockWrapper .AirReviews-Blocks--RateCount {
@@ -438,7 +451,6 @@
   letter-spacing: -.04em;
   font-weight: var(--font-bold);
   font-size: 3.75rem !important;
-  color: rgb(var(--color-rating)) !important;
   margin: 0;
   padding: 0;
   border: none;
@@ -455,7 +467,6 @@
   letter-spacing: .05em;
   font-size: var(--text-base);
   margin: 0;
-  color: rgb(var(--color-rating)) !important;
 }
 
 #AirReviews-BlockWrapper .AirReviews-Blocks--ReviewCount {
@@ -504,7 +515,6 @@
   display: grid;
   gap: var(--sp-1d5);
   width: 100%;
-  background: none !important;
 }
 
 #AirReviews-BlockWrapper .AirReviews-Blocks__SummaryLeft {
@@ -540,7 +550,6 @@
   flex-direction: column;
   gap: var(--sp-2d5);
   color: inherit;
-  background: none !important;
   width: 100%;
 }
 
@@ -957,10 +966,6 @@
   inset-inline-end: 1.2rem;
 }
 
-:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details, #AirReviews-PopWrapper, #AirReviews-Modal__DetailsMobile) {
-  font-family: inherit !important;
-}
-
 :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Overlay {
   background-color: rgb(var(--color-drawer-overlay)/ 0.7);
   border-color: rgb(var(--color-drawer-overlay)/ 0.7);
@@ -1345,6 +1350,11 @@
   font-weight: 600;
 }
 
+/* Consolidated color inherit for Air Reviews author/date elements */
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) :is(.AirReviews-Blocks__AuthorName, .AirReviews-Blocks__Date, .AirReviews-Blocks__Author~*) {
+  color: inherit !important;
+}
+
 :is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__Author {
   color: inherit;
   margin-block-start: var(--sp-2);
@@ -1357,7 +1367,6 @@
   display: flex;
   align-items: center;
   gap: var(--sp-3);
-  color: inherit !important;
 }
 
 :is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__AuthorName img {
@@ -1372,14 +1381,12 @@
   font-size: var(--text-sm);
   opacity: 0.6;
   font-weight: 400;
-  color: inherit !important;
 }
 
 :is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__Author~* {
   margin-block-start: var(--sp-7d5);
   font-size: var(--text-base);
   line-height: 1.6;
-  color: inherit !important;
 }
 
 :is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-PopWrapper) .AirReviews-StarRate {
@@ -1593,7 +1600,6 @@
   border-radius: var(--inputs-radius);
   transition: var(--animation-primary);
   transition-property: border-color, background-color;
-  font-family: inherit !important;
 }
 
 #AirReviews-Modal .AirReviews-TextField::-moz-placeholder,
@@ -1894,10 +1900,6 @@
 
 #AirReviews-PopWrapper .AirReviews-Pop__Wrapper--horizontal .Avada-ReviewsPop__ContentContainer>*:last-child {
   margin-block-end: var(--sp-4);
-}
-
-div[id*=AirReviews-CarouselWrapper] {
-  font-family: inherit !important;
 }
 
 div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card {

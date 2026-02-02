@@ -73,7 +73,7 @@
     <a href="{{ collection.url }}" class="media-card__link flex flex-col w-full h-full relative" aria-label="{{ collection_title | escape }}">
       <div class="media media--{{ image_ratio }} relative overflow-hidden">
         {%- if collection_image != blank -%}
-          {{- collection_image | image_url: width: collection_image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+          {{- collection_image | image_url: width: collection_image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image', alt: collection_title -}}
         {%- else -%}
           <span class="block aspect-{{ image_ratio }}"></span>
         {%- endif -%}
@@ -98,11 +98,13 @@
   {%- else -%}
     <a href="#" class="media-card__link flex flex-col w-full h-full relative" aria-label="{{ collection_title | escape }}">
       <div class="media media--{{ image_ratio }} relative overflow-hidden">
-        {%- liquid
-          assign modulo = position | modulo: 5 | plus: 1
-          assign placeholder = 'collection-' | append: modulo
-          echo placeholder | placeholder_svg_tag: 'placeholder placeholder--transparent'
-        -%}
+        <span aria-hidden="true">
+          {%- liquid
+            assign modulo = position | modulo: 5 | plus: 1
+            assign placeholder = 'collection-' | append: modulo
+            echo placeholder | placeholder_svg_tag: 'placeholder placeholder--transparent'
+          -%}
+        </span>
       </div>
       <div class="media-card__content flex justify-between items-center gap-4 w-full text-{{ settings.card_text_alignment }}">
         <div class="media-card__text shrink-1 grid gap-0d5">

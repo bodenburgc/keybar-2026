@@ -37,7 +37,6 @@ try {
 } catch (e) {}
 
 document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touch');
-console.log(theme.settings.themeName + ' theme (' + theme.settings.themeVersion + ') by BODE | Learn more at https://BODE.design');
 
 (function () {
   /*============================================================================
@@ -7925,14 +7924,62 @@ class ScrollSpy extends HTMLElement {
     this.scrollspyLinks.forEach(link => {
       link.addEventListener('click', this.handleScrollspyLinkClick.bind(this));
     });
-    
+
     if (this.backToTopButton) {
       this.backToTopButton.addEventListener('click', this.handleBackToTopClick.bind(this));
     }
 
     if (this.showHighlight) {
-      window.addEventListener('scroll', this.updateActiveLink.bind(this));
-      this.updateActiveLink.bind(this);
+      this.setupIntersectionObserver();
+    }
+  }
+
+  setupIntersectionObserver() {
+    this.sectionMap = new Map();
+
+    const observerOptions = {
+      root: null,
+      rootMargin: `-${this.headerHeight}px 0px -50% 0px`,
+      threshold: 0
+    };
+
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        this.sectionMap.set(entry.target.id, entry.isIntersecting);
+      });
+      this.updateActiveLinkFromObserver();
+    }, observerOptions);
+
+    this.scrollspyLinks.forEach(link => {
+      const targetIds = link.hasAttribute('data-target') ? link.getAttribute('data-target').split(',') : [];
+      targetIds.forEach(targetId => {
+        const section = document.getElementById(targetId);
+        if (section) {
+          this.observer.observe(section);
+        }
+      });
+    });
+  }
+
+  updateActiveLinkFromObserver() {
+    let currentSection = '';
+
+    this.sectionMap.forEach((isIntersecting, sectionId) => {
+      if (isIntersecting) {
+        currentSection = sectionId;
+      }
+    });
+
+    this.scrollspyLinks.forEach(link => {
+      const targetIds = link.hasAttribute('data-target') ? link.getAttribute('data-target').split(',') : [];
+      const isActive = targetIds.some(targetId => targetId === currentSection);
+      link.classList.toggle('active', isActive);
+    });
+  }
+
+  disconnectedCallback() {
+    if (this.observer) {
+      this.observer.disconnect();
     }
   }
 
@@ -7959,39 +8006,5 @@ class ScrollSpy extends HTMLElement {
     });
   }
 
-  updateActiveLink() {
-    let current = '';
-      
-    this.scrollspyLinks.forEach(link => {
-      const targetIds = link.hasAttribute('data-target') ? link.getAttribute('data-target').split(',') : [];
-
-      targetIds.forEach((targetId) => {
-        const section = document.getElementById(targetId);
-        
-        if (section) {
-          const offset = 0;
-          const sectionTop = section.offsetTop - offset;
-          const sectionBottom = sectionTop + section.offsetHeight;
-          
-          if (window.pageYOffset >= sectionTop && window.pageYOffset < sectionBottom) {
-            current = targetId;
-          }
-        }
-      });
-    });
-    
-    this.scrollspyLinks.forEach(link => {
-      const targetIds = link.hasAttribute('data-target') ? link.getAttribute('data-target').split(',') : [];
-      let active = false;
-
-      targetIds.forEach((targetId) => {
-        if (targetId !== '' && targetId === current) {
-          active = true;
-        }
-      });
-
-      link.classList.toggle('active', active);
-    });
-  }
 };
 customElements.define('scroll-spy', ScrollSpy, { extends: 'nav' });

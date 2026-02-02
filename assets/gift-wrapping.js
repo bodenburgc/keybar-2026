@@ -112,9 +112,7 @@ if (!customElements.get('gift-wrapping')) {
           .then((parsedState) => {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'gift-wrapping', cart: parsedState });
           })
-          .catch((error) => {
-            console.log(error);
-          });
+          .catch(() => {});
       }
 
       enableLoading() {
@@ -242,9 +240,7 @@ if (!customElements.get('gift-wrap-selector')) {
                 theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'gift-wrap', cart: cartJson });
               });
           })
-          .catch((error) => {
-            console.error(error);
-          });
+          .catch(() => {});
       }
 
       unsetGiftWrap() {
@@ -290,9 +286,7 @@ if (!customElements.get('gift-wrap-selector')) {
                 theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'gift-wrap', cart: cartJson });
               });
           })
-          .catch((error) => {
-            console.error(error);
-          });
+          .catch(() => {});
       }
     }
   );
@@ -348,9 +342,7 @@ if (!customElements.get('gift-wrap-item')) {
           .then((parsedState) => {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'gift-wrap', cart: parsedState });
           })
-          .catch((error) => {
-            console.error(error);
-          });
+          .catch(() => {});
       }
 
       enableLoading(line) {

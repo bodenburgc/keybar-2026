@@ -60,7 +60,7 @@
           });
           this.filteredDealers = [...this.dealers];
         } catch (e) {
-          console.error('Failed to parse dealer data:', e);
+          // Failed to parse dealer data
         }
       }
     }
@@ -135,7 +135,7 @@
           const allStyles = JSON.parse(stylesScript.textContent);
           styles = allStyles[this.config.mapStyle] || [];
         } catch (e) {
-          console.error('Failed to parse map styles:', e);
+          // Failed to parse map styles
         }
       }
 
@@ -342,7 +342,6 @@
         this.searchCenter = coords;
         this.filterByRadius(coords);
       } catch (error) {
-        console.error('Search error:', error);
         this.showMessage(strings.searchError || 'Unable to find that location. Try a ZIP code.');
       } finally {
         this.setSearchLoading(false);
