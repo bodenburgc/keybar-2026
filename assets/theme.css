@@ -8475,8 +8475,9 @@ details.active .drawer__promotions .mega-menu__item,
 
 /*! footer */
 
+/* Parallax footer effect - only apply when explicitly enabled via data attribute */
 @media screen and (min-width: 768px) {
-  .footer-group {
+  .footer-group[data-parallax] {
     position: absolute;
     z-index: -1;
   }

@@ -102,7 +102,7 @@ Screenshots captured via Playwright in `.playwright-mcp/`:
 
 ## In Progress
 
-- [ ] **#19 - Page Content Duplication** (P0) - Investigate and fix
+_None currently_
 
 ---
 
@@ -110,7 +110,7 @@ Screenshots captured via Playwright in `.playwright-mcp/`:
 
 ### Critical Bugs (P0)
 
-- [ ] **#19 - Page Content Duplication** - Full-page screenshots show content rendering twice (header and sections appear again below footer). Affects all pages. Check `layout/theme.liquid`, CSS positioning, section groups, or JS rendering.
+- [x] **#19 - Page Content Duplication** - Fixed by changing footer CSS from unconditional `position: absolute` to conditional `[data-parallax]` selector. Footer now renders in normal document flow unless parallax is explicitly enabled.
 
 ### Broken Links (P1)
 
