@@ -14,6 +14,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Shopify API | 2024-01 |
 | Target Market | EDC enthusiasts, "Stop the Noise" |
 
+**Task List:** See `TODO.md` for pending tasks and recent completions.
+
 ## Shopify CLI Commands
 
 ```bash
