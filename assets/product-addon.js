@@ -32,17 +32,70 @@ if (!customElements.get('product-addon')) {
 
     /**
      * Setup integration with the main product form
+     * Patches the form's bundles property to work correctly with our addon input
      */
     setupFormIntegration() {
-      // Find the product form
-      const productInfo = this.closest('product-info');
-      const form = productInfo?.querySelector(`form[action*="/cart/add"]`) ||
-                   document.getElementById(this.formId)?.closest('form');
+      const formId = this.dataset.formId;
+      if (!formId) return;
 
-      if (form && !form.hasAttribute('data-addon-integrated')) {
-        form.setAttribute('data-addon-integrated', 'true');
-        form.addEventListener('submit', this.handleFormSubmit.bind(this));
+      const form = document.getElementById(formId);
+      if (!form) {
+        // Form may not exist yet, wait for DOM
+        requestAnimationFrame(() => this.setupFormIntegration());
+        return;
       }
+
+      // Store reference to form
+      this.form = form;
+
+      // Rename our input to avoid the native form property shadowing issue
+      // The form auto-creates form.bundles when there's an input named "bundles"
+      if (this.variantInput) {
+        this.variantInput.setAttribute('name', 'addon_bundle');
+        this.variantInput.setAttribute('data-is-addon-bundle', 'true');
+      }
+
+      // Override the form's bundles getter to include our addon input
+      this.patchFormBundles(form);
+    }
+
+    /**
+     * Patch the form's bundles property to return an array including our addon
+     */
+    patchFormBundles(form) {
+      const self = this;
+      const originalDescriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(form), 'bundles');
+
+      // Define a new bundles property on this specific form instance
+      Object.defineProperty(form, 'bundles', {
+        get: function() {
+          // Get the original bundles from the prototype getter if it exists
+          let bundles = [];
+          if (originalDescriptor && originalDescriptor.get) {
+            try {
+              const original = originalDescriptor.get.call(this);
+              if (Array.isArray(original)) {
+                bundles = [...original];
+              }
+            } catch (e) {
+              // Ignore errors from original getter
+            }
+          }
+
+          // Add our addon input if it's checked and has a value
+          if (self.variantInput && self.variantInput.checked && self.variantInput.value) {
+            // Create a proxy object that looks like the input for the bundles mechanism
+            bundles.push({
+              value: self.variantInput.value,
+              checked: true,
+              disabled: false
+            });
+          }
+
+          return bundles;
+        },
+        configurable: true
+      });
     }
 
     /**
@@ -70,7 +123,9 @@ if (!customElements.get('product-addon')) {
       });
 
       // Update hidden input with first variant of selected product
-      this.variantInput.value = firstVariantId;
+      if (this.variantInput) {
+        this.variantInput.value = firstVariantId;
+      }
 
       // Update price display
       this.updatePriceDisplay(selectedOption.dataset.firstVariantPrice);
@@ -101,7 +156,9 @@ if (!customElements.get('product-addon')) {
       const optionValue = input.value;
 
       // Update hidden input
-      this.variantInput.value = variantId;
+      if (this.variantInput) {
+        this.variantInput.value = variantId;
+      }
 
       // Update price display
       this.updatePriceDisplay(variantPrice);
@@ -153,144 +210,6 @@ if (!customElements.get('product-addon')) {
      */
     get selectedVariantId() {
       return this.variantInput?.value;
-    }
-
-    /**
-     * Get addon data for cart submission
-     */
-    getCartData() {
-      const variantId = this.selectedVariantId;
-      if (!variantId) return null;
-
-      return {
-        id: parseInt(variantId, 10),
-        quantity: 1
-      };
-    }
-
-    /**
-     * Intercept form submission to add addon product
-     */
-    async handleFormSubmit(event) {
-      const form = event.target;
-      const addonData = this.getCartData();
-
-      // If no addon selected, let form submit normally
-      if (!addonData) return;
-
-      // Prevent default form submission
-      event.preventDefault();
-      event.stopPropagation();
-
-      // Get main product variant ID
-      const mainVariantInput = form.querySelector('input[name="id"], select[name="id"]');
-      const mainVariantId = mainVariantInput?.value;
-
-      if (!mainVariantId) {
-        console.error('Product Addon: No main variant ID found');
-        return;
-      }
-
-      // Build items array for cart
-      const quantity = parseInt(form.querySelector('input[name="quantity"]')?.value || 1, 10);
-      const items = [
-        {
-          id: parseInt(mainVariantId, 10),
-          quantity: quantity
-        },
-        addonData
-      ];
-
-      // Get submit button for loading state
-      const submitButton = form.querySelector('[type="submit"], button[name="add"]');
-      submitButton?.setAttribute('aria-busy', 'true');
-      submitButton?.setAttribute('aria-disabled', 'true');
-
-      // Clear any previous errors
-      const errorEl = form.querySelector('.product-form__error-message');
-      if (errorEl) {
-        errorEl.textContent = '';
-        errorEl.hidden = true;
-      }
-
-      try {
-        // Collect sections to update
-        let sectionsToBundle = [];
-        document.documentElement.dispatchEvent(
-          new CustomEvent('cart:bundled-sections', {
-            bubbles: true,
-            detail: { sections: sectionsToBundle }
-          })
-        );
-
-        // Add to cart via AJAX
-        const response = await fetch(theme.routes.cart_add_url, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            items: items,
-            sections: sectionsToBundle,
-            sections_url: window.location.pathname
-          })
-        });
-
-        const result = await response.json();
-
-        if (result.status) {
-          // Error occurred
-          console.error('Product Addon: Cart error:', result.description);
-          if (errorEl) {
-            errorEl.textContent = result.description;
-            errorEl.hidden = false;
-          }
-
-          document.dispatchEvent(new CustomEvent('ajaxProduct:error', {
-            detail: { errorMessage: result.description }
-          }));
-          return;
-        }
-
-        // Success - update cart state
-        const cartResponse = await fetch(theme.routes.cart_url, {
-          headers: { 'Accept': 'application/json' }
-        });
-        const cartJson = await cartResponse.json();
-        cartJson.sections = result.sections;
-
-        // Publish cart update event
-        if (theme.pubsub) {
-          theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, {
-            source: 'product-addon',
-            cart: cartJson
-          });
-        }
-
-        // Dispatch added event
-        document.dispatchEvent(new CustomEvent('ajaxProduct:added', {
-          detail: { product: result }
-        }));
-
-        // Open cart drawer or redirect based on settings
-        if (document.body.classList.contains('template-cart') || theme.settings?.cartType === 'page') {
-          window.location.href = theme.routes.cart_url;
-        } else {
-          const cartDrawer = document.querySelector('cart-drawer');
-          cartDrawer?.show(submitButton);
-        }
-
-      } catch (error) {
-        console.error('Product Addon: Failed to add to cart:', error);
-        if (errorEl) {
-          errorEl.textContent = 'Failed to add to cart. Please try again.';
-          errorEl.hidden = false;
-        }
-      } finally {
-        submitButton?.removeAttribute('aria-busy');
-        submitButton?.removeAttribute('aria-disabled');
-      }
     }
   });
 }
