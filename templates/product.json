@@ -65,6 +65,10 @@
             "size_chart": ""
           }
         },
+        "addon_picker_D8xdAc": {
+          "type": "addon_picker",
+          "settings": {}
+        },
         "sku_Lac8zH": {
           "type": "sku",
           "settings": {}
@@ -87,8 +91,8 @@
             "icon_width": 20,
             "text": "<strong>Lifetime Guarantee:</strong> Every KeyBar is backed by our lifetime guarantee. If it breaks, we'll fix it or replace it.",
             "text_size": "text-base lg:text-xl",
-            "color_background": "#EBEEF1",
-            "color_text": "#1C1F22"
+            "color_background": "#ebeef1",
+            "color_text": "#1c1f22"
           }
         },
         "buy_buttons": {
@@ -139,6 +143,7 @@
         "description_short_ht66tx",
         "countdown",
         "variant_picker",
+        "addon_picker_D8xdAc",
         "sku_Lac8zH",
         "inventory",
         "text_TM4nxD",
@@ -292,15 +297,19 @@
         "rounded": false
       }
     },
-    "product-recommendations": {
-      "type": "product-recommendations",
+    "featured_collection_inserts": {
+      "type": "featured-collection",
       "settings": {
+        "color_scheme": "light",
+        "collection": "inserts",
+        "products": [],
         "product_limit": 12,
         "columns": 5,
         "carousel_on_desktop": true,
+        "show_view_all": true,
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "heading": "You may also like",
+        "heading": "Tool Inserts",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -323,18 +332,16 @@
         "rounded": true
       }
     },
-    "featured_collection_inserts": {
-      "type": "featured-collection",
+    "product-recommendations": {
+      "type": "product-recommendations",
       "settings": {
-        "collection": "inserts",
-        "products": [],
+        "color_scheme": "light",
         "product_limit": 12,
         "columns": 5,
         "carousel_on_desktop": true,
-        "show_view_all": true,
         "columns_mobile": "2",
         "swipe_on_mobile": true,
-        "heading": "Tool Inserts",
+        "heading": "You may also like",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",

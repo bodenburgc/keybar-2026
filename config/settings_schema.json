@@ -1,11 +1,11 @@
 [
   {
     "name": "theme_info",
-    "theme_name": "FishArmor 2024",
-    "theme_author": "FishArmor",
+    "theme_name": "KeyBar 2026",
+    "theme_author": "BODE",
     "theme_version": "1.0.0",
-    "theme_documentation_url": "https://fisharmor.com",
-    "theme_support_url": "https://fisharmor.com/support"
+    "theme_documentation_url": "https://keybar.us",
+    "theme_support_url": "https://keybar.us/pages/contact"
   },
   {
     "name": "Logo",
@@ -333,7 +333,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Heading Font: Gazzetta (Bold) - Custom FishArmor font"
+        "content": "Heading Font: Gazzetta (Bold)"
       },
       {
         "type": "range",
@@ -364,7 +364,7 @@
       },
       {
         "type": "paragraph",
-        "content": "Body Font: Barlow (Regular, with weights 300-700) - Custom FishArmor font"
+        "content": "Body Font: Barlow (Regular, with weights 300-700)"
       },
       {
         "type": "range",

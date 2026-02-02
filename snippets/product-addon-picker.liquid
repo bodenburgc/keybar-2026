@@ -20,13 +20,17 @@
 
 {%- liquid
   # Check if add-on is enabled for this product
-  assign addon_enabled = product.metafields.custom.enable_clip_addon.value
+  assign addon_enabled = product.metafields.custom.enable_clip_add_on.value
+
   unless addon_enabled
     break
   endunless
 
   # Get linked add-on products
   assign addon_products = product.metafields.custom.clip_addon_products.value
+-%}
+
+{%- liquid
   if addon_products == blank or addon_products.size == 0
     break
   endif
@@ -235,11 +239,14 @@
     </div>
   {%- endfor -%}
 
-  {%- # Hidden input to store selected addon variant ID -%}
+  {%- # Hidden checkbox for ProductForm bundles mechanism -%}
   <input
-    type="hidden"
-    name="addon_variant_id"
+    type="checkbox"
+    name="bundles"
     value="{{ default_variant.id }}"
+    form="{{ product_form_id }}"
+    checked
+    hidden
     data-addon-variant-input
   />
 

@@ -1,6 +1,6 @@
 /**
  * Dealer Locator
- * Provides search and map functionality for finding FishArmor dealers
+ * Provides search and map functionality for finding KeyBar dealers
  */
 
 (function() {
