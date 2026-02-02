@@ -216,7 +216,7 @@
 </div>
 
 {%- assign question_blocks = section.blocks | where: 'type', 'question' -%}
-{%- if question_blocks.size > 0 -%}
+{%- if question_blocks.size > 0 and section.settings.enable_faq_schema -%}
   <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -256,6 +256,13 @@
         }
       ],
       "default": "with-border"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_faq_schema",
+      "label": "Enable FAQ structured data",
+      "info": "Enable on only one FAQ section per page to avoid duplicate schemas",
+      "default": true
     },
     {
       "type": "header",

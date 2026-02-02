@@ -110,6 +110,7 @@
       ],
       "settings": {
         "style": "with-border",
+        "enable_faq_schema": true,
         "heading": "Product Questions",
         "heading_size": "title-lg",
         "heading_alignment": "text-left md:items-start",
@@ -169,6 +170,7 @@
       ],
       "settings": {
         "style": "with-border",
+        "enable_faq_schema": false,
         "heading": "Ordering Questions",
         "heading_size": "title-lg",
         "heading_alignment": "text-left md:items-start",
@@ -244,6 +246,7 @@
       ],
       "settings": {
         "style": "with-border",
+        "enable_faq_schema": false,
         "heading": "Shipping & Tracking",
         "heading_size": "title-lg",
         "heading_alignment": "text-left md:items-start",

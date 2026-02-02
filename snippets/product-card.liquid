@@ -122,7 +122,7 @@
                   {%- capture media_class -%}media--height{% unless image_fill %} media--contain{% endunless %} w-full h-full overflow-hidden{%- endcapture -%}
                   {%- unless media.media_type == 'video' or media.media_type == 'external_video' -%}
                     <div class="media {{ media_class }}">
-                      {{- media | image_url: width: media.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+                      {{- media | image_url: width: media.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image', alt: media.alt | default: product.title | escape -}}
                     </div>
                   {%- else -%}
                     {%- render 'product-video',
@@ -140,12 +140,12 @@
               <secondary-media class="product-card__carousel block absolute top-0 left-0 w-full h-full hidden md:block" selected-index="0"></secondary-media>
             {%- endif -%}
 
-            {{- featured_media | image_url: width: featured_media.width | image_tag: loading: loading, widths: '180,360,540,720,900,1080', is: lazyimage -}}
+            {{- featured_media | image_url: width: featured_media.width | image_tag: loading: loading, widths: '180,360,540,720,900,1080', is: lazyimage, alt: product.title | escape -}}
 
             {%- if show_on_model and product.metafields.theme.model_media.value != blank -%}
               {%- assign model_media = product.metafields.theme.model_media.value -%}
               <div class="product-card__model media media--height absolute top-0 left-0 w-full h-full hidden md:block opacity-0 invisible pointer-events-none overflow-hidden">
-                {{- model_media | image_url: width: model_media.width | image_tag: loading: loading, widths: '180,360,540,720,900,1080', is: lazyimage -}}
+                {{- model_media | image_url: width: model_media.width | image_tag: loading: loading, widths: '180,360,540,720,900,1080', is: lazyimage, alt: product.title | append: ' - lifestyle view' | escape -}}
               </div>
             {%- endif -%}
           {%- else -%}
@@ -436,7 +436,7 @@
                   <div class="flex flex-col items-center md:flex-row md:items-start gap-2">
                     {%- if item.icon != blank -%}
                       <figure class="shrink-0 media media--transparent relative inline-block">
-                        {{- item.icon | image_url: width: item.icon.width | image_tag: loading: 'lazy', sizes: '24px', widths: '80,96,160,192', class: 'w-full h-full', is: 'lazy-image' -}}
+                        {{- item.icon | image_url: width: item.icon.width | image_tag: loading: 'lazy', sizes: '24px', widths: '80,96,160,192', class: 'w-full h-full', is: 'lazy-image', alt: item.title | escape | default: '' -}}
                       </figure>
                     {%- endif -%}
                     <div class="flex flex-col items-center md:items-start gap-1 text-center md:text-left text-xs font-medium leading-none">

@@ -127,12 +127,12 @@ _None currently_
 
 ### UI Enhancements (P2)
 
-- [ ] **#24 - Add-on Picker Image Cards on Desktop** - Mobile already shows image cards; update to show on desktop too (see `snippets/product-addon-picker.liquid`)
+- [x] **#24 - Add-on Picker Image Cards on Desktop** - Already implemented with image cards for all screen sizes (commit 08083cf)
 
 ### Accessibility (P2)
 
 - [ ] **#22 - Collection Product Accessibility** - Products render visually but may not be in accessibility tree (test with screen reader)
-- [ ] **#31 - Add missing alt text** - 4 images on product page + 4 on collection page missing alt attributes
+- [x] **#31 - Add missing alt text** - Fixed 7 images: product-card.liquid (4) and main-product.liquid (3)
 
 ### Performance (P2)
 
@@ -149,7 +149,7 @@ _None currently_
 
 ### SEO (P3)
 
-- [ ] **#32 - Consolidate FAQ schema** - Currently 3 separate FAQPage schemas; combine into single schema
+- [x] **#32 - Consolidate FAQ schema** - Added `enable_faq_schema` setting to FAQ section. Only first section outputs schema now. For full consolidation, combine all FAQs into single section.
 - [ ] Add hreflang tags if supporting multiple locales
 - [ ] Implement AggregateRating schema when product reviews are added
 - [ ] Add explicit robots meta tag if needed
