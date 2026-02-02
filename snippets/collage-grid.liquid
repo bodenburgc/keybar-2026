@@ -67,16 +67,16 @@
               >
             {%- endif -%}
 
-            {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
+            {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image', alt: block.settings.image.alt | default: block.settings.heading | default: '' -}}
           </picture>
 
           {%- if block.settings.image_hover != blank -%}
-            <picture class="media media--height block w-full h-full absolute top-0 left-0 opacity-0 pointer-events-none overflow-hidden">
-              {{- block.settings.image_hover | image_url: width: block.settings.image_hover.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
+            <picture class="media media--height block w-full h-full absolute top-0 left-0 opacity-0 pointer-events-none overflow-hidden" aria-hidden="true">
+              {{- block.settings.image_hover | image_url: width: block.settings.image_hover.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image', alt: '' -}}
             </picture>
           {%- endif -%}
         {%- else -%}
-          <div class="media media--height w-full h-full relative overflow-hidden">
+          <div class="media media--height w-full h-full relative overflow-hidden" aria-hidden="true">
             {%- capture placeholder -%}{% cycle 'collection-1', 'collection-2', 'collection-3', 'collection-4', 'collection-5', 'collection-6' %}{%- endcapture -%}
             {{- placeholder | placeholder_svg_tag: 'placeholder placeholder--transparent' -}}
           </div>

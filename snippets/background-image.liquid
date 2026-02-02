@@ -34,7 +34,7 @@
   <picture class="media{% if background_image_position == 'contain' %} media--contain media--transparent{% endif %} media--height block w-full h-full relative overflow-hidden">
     {%- liquid
       if background_image != blank
-        echo background_image | image_url: width: background_image.width | image_tag: sizes: sizes, widths: widths, loading: loading, fetchpriority: fetchpriority, is: lazyimage, class: 'banner__image'
+        echo background_image | image_url: width: background_image.width | image_tag: sizes: sizes, widths: widths, loading: loading, fetchpriority: fetchpriority, is: lazyimage, class: 'banner__image', alt: background_image.alt | default: ''
       else
         assign placeholder = 'banner__image placeholder'
         if context == 'section'

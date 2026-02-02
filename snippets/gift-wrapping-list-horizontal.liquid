@@ -18,7 +18,7 @@
         <li id="CartDrawer-Item-{{ item.key }}" class="horizontal-product flex items-center gap-4 md:gap-6" data-variant-id="{{ item.variant_id }}" data-handle="{{ item.product.handle }}" data-quantity="{{ item.quantity }}" data-price="{{ item.original_price }}">
           {%- if item.image -%}
             <a class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0" href="{{ item.url }}" tabindex="-1">
-              {{- item.image | image_url: width: item.image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
+              {{- item.image | image_url: width: item.image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image', alt: item.product.title | escape -}}
             </a>
           {%- endif -%}
           <div class="horizontal-product__details grow flex flex-col justify-start gap-1d5">

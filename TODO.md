@@ -16,14 +16,21 @@ _None currently_
 
 ## Pending Tasks
 
+### Visual/Layout Bugs (P0)
+
+- [ ] **Page Content Duplication** - Full-page screenshots show content rendering twice (header and sections appear again below footer). Affects all pages. Needs investigation.
+
+### Font/Asset Issues (P1)
+
+_All resolved - see Completed section_
+
+### UI Enhancements (P2)
+
+- [ ] **Add-on Picker Image Cards** - Replace dropdown with clickable image cards showing each clip style (see `snippets/product-addon-picker.liquid`)
+
 ### Accessibility (P1)
 
-- [ ] Add alt text to `snippets/background-image.liquid`
-- [ ] Add alt text to `snippets/collage.liquid` and `collage-grid.liquid`
-- [ ] Add alt text to `snippets/header-nav-mega.liquid` (nav promo images)
-- [ ] Add alt text to `snippets/gift-wrapping-list.liquid` and `gift-wrapping-list-horizontal.liquid`
-- [ ] Add alt text to `snippets/header-icons.liquid` (country flags)
-- [ ] Add alt text to `snippets/portfolio.liquid`
+- [ ] **Collection Product Accessibility** - Products render visually but may not be in accessibility tree (test with screen reader)
 
 ### Performance (P2)
 
@@ -53,6 +60,17 @@ _None currently_
 ---
 
 ## Completed (Recent)
+
+### 2026-02-02 - Build Session Fixes
+
+- [x] **Fix font_url error** - Removed invalid font preload lines using `font_url` filter (requires font_picker settings). Fonts load via fonts.css
+- [x] **Fix empty product carousels** - Fixed Liquid `default` filter issue with empty arrays in featured-collection.liquid
+- [x] Add alt text to `snippets/background-image.liquid`
+- [x] Add alt text to `snippets/collage.liquid` and `collage-grid.liquid`
+- [x] Add alt text to `snippets/header-nav-mega.liquid` (nav promo images, collection images, tab icons)
+- [x] Add alt text to `snippets/gift-wrapping-list.liquid` and `gift-wrapping-list-horizontal.liquid`
+- [x] Add alt text to `snippets/header-icons.liquid` (country flags)
+- [x] Add alt text to `snippets/portfolio.liquid`
 
 ### 2026-02-02 - Site Audit Fixes (commit 7a7b6ae)
 

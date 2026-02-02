@@ -128,7 +128,7 @@
                     {%- capture localization_country -%}
                       {%- if show_country_flag -%}
                         <span class="country-flag shrink-0 media media--rounded relative overflow-hidden">
-                          {{- localization.country | image_url: width: 60, format: 'jpg' | image_tag: loading: 'lazy', class: 'rounded-full', is: 'lazy-image' -}}
+                          {{- localization.country | image_url: width: 60, format: 'jpg' | image_tag: loading: 'lazy', class: 'rounded-full', is: 'lazy-image', alt: localization.country.name | escape -}}
                         </span>
                       {%- endif -%}
                       {%- if show_country_name -%}

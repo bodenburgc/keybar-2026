@@ -52,7 +52,7 @@
                 <li class="mega-menu__nav-item opacity-0">
                   {%- if block.settings.show_menu_image and childlink.type == 'collection_link' and childlink.object.image != blank -%}
                     <a href="{{ childlink.url }}" class="media media--wide block relative overflow-hidden">
-                      {{- childlink.object.image | image_url: width: childlink.object.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+                      {{- childlink.object.image | image_url: width: childlink.object.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image', alt: childlink.object.image.alt | default: childlink.object.title -}}
                     </a>
                   {%- endif -%}
                   <a href="{{ childlink.url }}" class="{% if block.settings.menu_width != 'small' %}heading {% endif %}reversed-link fluid-xl leading-tight tracking-tight{% if childlink.current %} active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
@@ -110,7 +110,7 @@
                       </div>
                     {%- endif -%}
                     <div class="media media--{{ block.settings[promo_image_ratio] }} relative overflow-hidden">
-                      {{- block.settings[promo_image] | image_url: width: block.settings[promo_image].width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+                      {{- block.settings[promo_image] | image_url: width: block.settings[promo_image].width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image', alt: block.settings[promo_heading] | default: '' -}}
                     </div>
                     {%- if block.settings[promo_heading] != blank or block.settings[promo_subtext] != blank -%}
                       <div class="media-card__content flex justify-between items-center gap-4 w-full">
@@ -171,7 +171,7 @@
                     <figure class="media media--transparent relative inline-block shrink-0">
                       {%- capture sizes -%}{{ block.settings[tab_icon_width] }}px{%- endcapture -%}
                       {%- capture widths -%}{{ block.settings[tab_icon_width] }}, {{ block.settings[tab_icon_width] | times: 2 | at_most: block.settings[tab_icon].width }}{%- endcapture -%}
-                      {{- block.settings[tab_icon] | image_url: width: block.settings[tab_icon].width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'image-fit' -}}
+                      {{- block.settings[tab_icon] | image_url: width: block.settings[tab_icon].width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'image-fit', alt: tab_target_heading | escape -}}
                     </figure>
                   {%- endif -%}
                   <span class="heading link-text fluid-3xl tracking-tighter leading-tight">{{ tab_target_heading | escape }}</span>
@@ -309,7 +309,7 @@
                         </div>
                       {%- endif -%}
                       <div class="media media--{{ block.settings[promo_image_ratio] }} relative overflow-hidden">
-                        {{- block.settings[promo_image] | image_url: width: block.settings[promo_image].width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+                        {{- block.settings[promo_image] | image_url: width: block.settings[promo_image].width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image', alt: block.settings[promo_heading] | default: '' -}}
                       </div>
                       {%- if block.settings[promo_heading] != blank or block.settings[promo_subtext] != blank -%}
                         <div class="media-card__content flex justify-between items-center gap-4 w-full">
