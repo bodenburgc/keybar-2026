@@ -134,14 +134,16 @@ _None currently_
 ### UI Enhancements (P2)
 
 - [x] **#24 - Add-on Picker Image Cards on Desktop** - Already implemented with image cards for all screen sizes (commit 08083cf)
-- [ ] **#33 - Empty product carousels on product page** - "Tool Inserts" and "You may also like" sections show headers but 0 products. Check `templates/product.json` for section config, `sections/featured-collection.liquid` for collection handle, and `sections/product-recommendations.liquid` for API issues. Test at `/products/freedom-aluminum-keybar`.
-- [ ] **#34 - Add breadcrumbs to product pages** - Collection pages have breadcrumbs but product pages don't. `snippets/product-breadcrumb.liquid` already exists with BreadcrumbList schema. Add render call to `sections/main-product.liquid` or as block type. Expected: Home > Collection > Product.
+- [x] **#33 - Empty product carousels on product page** - Fixed `product-recommendations.liquid` to only render section when products are found. Pre-counts available products before rendering. Both carousels now display 12 products.
+- [x] **#34 - Add breadcrumbs to product pages** - Added breadcrumb block to `templates/product.json`. Uses existing `snippets/product-breadcrumb.liquid` with BreadcrumbList schema. Shows: Home > Collection > Product.
 
 ### Visual Design Issues (P2)
 
 - [ ] **#37 - H3 font size inconsistency** - "Pocket Clip" H3 is 16px while description H3s ("Will my keys fit?", etc.) are 30px. Check `assets/product-addon.css` and `assets/theme.css`. Either unify sizes or use different heading level for add-on picker.
 - [ ] **#38 - Customize button uses wrong gold color** - Uses #b78726 instead of brand gold #ffd700. Update in `assets/product-addon.css`. Button border and text should match brand guidelines.
 - [ ] **#39 - Add-Ons links lack visual distinction** - Product links (Extension Screws, MagNut Set, etc.) use same color as body text (#16323e) with no underline. Add underline or use different color for accessibility (WCAG 2.1 requires links be distinguishable by more than color alone).
+- [ ] **#40 - Increase vendor label letter-spacing** - "KeyBar" vendor text above product title needs more letter-spacing. Add `letter-spacing: 0.1em` or higher to vendor styles. Check `sections/main-product.liquid` for markup and `assets/theme.css` for styles.
+- [ ] **#41 - Fix Add to Cart button border color** - Border is yellow/gold but button bg is dark teal (#16323e). Border should be same color family (lighter/darker teal). Modify `--color-button-border` in `snippets/css-variables.liquid` or add override in `assets/apps.css`.
 
 ### Accessibility (P2)
 
@@ -172,11 +174,17 @@ _None currently_
 ### Documentation (P3)
 
 - [x] Document color scheme usage patterns - Created `.docs/COLOR-SCHEMES.md`
-- [ ] Add JSDoc comments to complex theme.js functions
+- [x] Add JSDoc comments to complex theme.js functions - Added documentation to `theme.a11y`, `theme.utils`, `theme.pubsub` namespaces and `ProductInfo`, `VariantPicker`, `ModalElement` classes
 
 ---
 
 ## Completed (Recent)
+
+### 2026-02-03 - UI & Documentation Fixes
+
+- [x] **#33 - Fix product carousels** - Fixed `product-recommendations.liquid` to pre-count products before rendering section. Section now only displays when products exist.
+- [x] **#34 - Add breadcrumbs to product pages** - Added breadcrumb block to `templates/product.json` (first in block order). Uses existing snippet with BreadcrumbList schema.
+- [x] **Add JSDoc to theme.js** - Added documentation to core namespaces (`theme.a11y`, `theme.utils`, `theme.pubsub`) and key classes (`ProductInfo`, `VariantPicker`, `ModalElement`)
 
 ### 2026-02-03 - Accessibility & Code Quality Audit (commit 8575fc4)
 

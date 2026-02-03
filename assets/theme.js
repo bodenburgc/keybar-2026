@@ -93,9 +93,19 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
     }
   };
 
+  /**
+   * Accessibility utilities for managing focus and keyboard navigation.
+   * @namespace theme.a11y
+   */
   theme.a11y = {
+    /** @type {Object} Stores event handlers for focus trapping */
     trapFocusHandlers: {},
 
+    /**
+     * Gets all focusable elements within a container.
+     * @param {HTMLElement} container - The container to search within
+     * @returns {HTMLElement[]} Array of focusable elements
+     */
     getFocusableElements: (container) => {
       return Array.from(
         container.querySelectorAll(
@@ -104,6 +114,12 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
       );
     },
 
+    /**
+     * Traps keyboard focus within a container element.
+     * Used for modals, drawers, and other overlay UI.
+     * @param {HTMLElement} container - Element to trap focus within
+     * @param {HTMLElement} [elementToFocus=container] - Element to focus initially
+     */
     trapFocus: (container, elementToFocus = container) => {
       const elements = theme.a11y.getFocusableElements(container);
       const first = elements[0];
@@ -146,6 +162,10 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
       }
     },
     
+    /**
+     * Removes focus trap and optionally returns focus to an element.
+     * @param {HTMLElement|null} [elementToFocus=null] - Element to focus after removing trap
+     */
     removeTrapFocus: (elementToFocus = null) => {
       document.removeEventListener('focusin', theme.a11y.trapFocusHandlers.focusin);
       document.removeEventListener('focusout', theme.a11y.trapFocusHandlers.focusout);
@@ -155,7 +175,16 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
     }
   };
 
+  /**
+   * General utility functions for the theme.
+   * @namespace theme.utils
+   */
   theme.utils = {
+    /**
+     * Throttles a function using requestAnimationFrame.
+     * @param {Function} callback - Function to throttle
+     * @returns {Function} Throttled function with cancel() method
+     */
     throttle: (callback) => {
       let requestId = null, lastArgs;
       const later = (context) => () => {
@@ -175,6 +204,12 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
       return throttled;
     },
 
+    /**
+     * Debounces a function to delay execution until after wait time.
+     * @param {Function} fn - Function to debounce
+     * @param {number} wait - Milliseconds to wait before execution
+     * @returns {Function} Debounced function
+     */
     debounce: (fn, wait) => {
       let timer;
       return (...args) => {
@@ -183,6 +218,12 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
       };
     },
 
+    /**
+     * Returns a promise that resolves when an event fires on an element.
+     * @param {HTMLElement} element - Element to listen on
+     * @param {string} eventName - Name of the event to wait for
+     * @returns {Promise<Event>} Resolves with the event object
+     */
     waitForEvent: (element, eventName) => {
       return new Promise((resolve) => {
         const done = (event) => {
@@ -195,6 +236,12 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
       });
     },
 
+    /**
+     * Creates a fetch configuration object for API requests.
+     * @param {string} [type='json'] - Response type ('json' or 'javascript')
+     * @param {string} [method='POST'] - HTTP method
+     * @returns {Object} Fetch config with method and headers
+     */
     fetchConfig: (type = 'json', method = 'POST') => {
       return {
         method: method,
@@ -202,6 +249,11 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
       };
     },
 
+    /**
+     * Creates and submits a form programmatically for POST navigation.
+     * @param {string} path - Form action URL
+     * @param {Object} [options] - Options with method and parameters
+     */
     postLink: (path, options) => {
       options = options || {};
       const method = options['method'] || 'post';
@@ -405,7 +457,16 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
     }
   };
 
+  /**
+   * Publish-subscribe event system for decoupled component communication.
+   * Used for cart updates, variant changes, and other cross-component events.
+   * @namespace theme.pubsub
+   */
   theme.pubsub = {
+    /**
+     * Available event names for subscription.
+     * @enum {string}
+     */
     PUB_SUB_EVENTS: {
       cartUpdate: 'cartUpdate',
       quantityUpdate: 'quantityUpdate',
@@ -418,8 +479,15 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
       optionValueSelectionChange: 'optionValueSelectionChange',
     },
 
+    /** @type {Object.<string, Function[]>} Event subscribers by event name */
     subscribers: {},
 
+    /**
+     * Subscribe to an event.
+     * @param {string} eventName - Event name from PUB_SUB_EVENTS
+     * @param {Function} callback - Function to call when event is published
+     * @returns {Function} Unsubscribe function
+     */
     subscribe: (eventName, callback) => {
       if (theme.pubsub.subscribers[eventName] === undefined) {
         theme.pubsub.subscribers[eventName] = [];
@@ -434,6 +502,11 @@ document.documentElement.classList.add(theme.config.isTouch ? 'touch' : 'no-touc
       }
     },
 
+    /**
+     * Publish an event to all subscribers.
+     * @param {string} eventName - Event name from PUB_SUB_EVENTS
+     * @param {*} data - Data to pass to subscriber callbacks
+     */
     publish: (eventName, data) => {
       if (theme.pubsub.subscribers[eventName]) {
         theme.pubsub.subscribers[eventName].forEach((callback) => {
@@ -1760,17 +1833,31 @@ class OverlayElement extends HTMLElement {
 }
 customElements.define('overlay-element', OverlayElement);
 
+/** @type {WeakMap} Tracks scroll lock layers per element */
 const lockLayerCount = new WeakMap();
+
+/**
+ * Base class for modal/drawer overlay components.
+ * Handles show/hide animations, focus management, scroll locking, and gesture controls.
+ * Extended by DrawerElement, MenuDrawer, ShareDrawer, etc.
+ *
+ * @extends HTMLElement
+ * @fires modal:afterHide - After modal is hidden
+ * @fires modal:afterShow - After modal is shown
+ * @fires modal:closeAll - Request to close all open modals
+ */
 class ModalElement extends HTMLElement {
   constructor() {
     super();
 
+    /** @type {Object} Event names fired by this component */
     this.events = {
       afterHide: 'modal:afterHide',
       afterShow: 'modal:afterShow',
       closeAll: 'modal:closeAll'
     };
 
+    /** @type {Object} CSS classes applied during modal states */
     this.classes = {
       open: 'has-modal-open',
       opening: 'has-modal-opening'
@@ -4853,16 +4940,25 @@ class ModelMedia extends DeferredMedia {
 }
 customElements.define('model-media', ModelMedia);
 
+/**
+ * Web component for product variant selection (color, size, etc.).
+ * Publishes optionValueSelectionChange events when options change.
+ *
+ * @extends HTMLElement
+ */
 class VariantPicker extends HTMLElement {
   constructor() {
     super();
   }
 
+  /**
+   * Sets up change event listener to publish variant selection changes.
+   */
   connectedCallback() {
     this.addEventListener('change', (event) => {
       const target = this.getInputForEventTarget(event.target);
       this.updateSelectionMetadata(event.target);
-      
+
       theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.optionValueSelectionChange, {
         data: {
           event,
@@ -4890,14 +4986,32 @@ class VariantPicker extends HTMLElement {
 }
 customElements.define('variant-picker', VariantPicker);
 
+/**
+ * Core web component for product information display and variant selection.
+ * Handles variant changes, price updates, stock status, and dynamic content updates.
+ *
+ * @extends HTMLElement
+ * @fires product-info:loaded - When component is fully initialized
+ *
+ * @example
+ * <product-info data-section-id="main-product" data-product-id="123" form="ProductForm-123">
+ *   <!-- Product blocks rendered here -->
+ * </product-info>
+ */
 class ProductInfo extends HTMLElement {
+  /** @type {Function|undefined} Unsubscribe function for variant changes */
   onVariantChangeUnsubscriber = undefined;
+  /** @type {Function|undefined} Unsubscribe function for cart updates */
   cartUpdateUnsubscriber = undefined;
+  /** @type {AbortController|undefined} Controller for canceling pending fetch requests */
   abortController = undefined;
+  /** @type {string|null} URL of pending product info request */
   pendingRequestUrl = null;
+  /** @type {Function[]} Callbacks to run before processing fetched HTML */
   preProcessHtmlCallbacks = [];
+  /** @type {Function[]} Callbacks to run after processing fetched HTML */
   postProcessHtmlCallbacks = [];
-  
+
   constructor() {
     super();
   }

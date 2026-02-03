@@ -16,7 +16,7 @@
 {%- liquid
   # Track which product IDs we've already shown to avoid duplicates
   assign shown_ids = ','
-  assign has_products = false
+  assign product_count = 0
 
   # Check if current product is a shuttle and determine compatibility tag
   assign is_shuttle = false
@@ -41,16 +41,49 @@
   if is_shuttle and compatibility_tag != ''
     assign dynamic_heading = 'Compatible Accessories'
   endif
+
+  # Pre-count available products to determine if section should render
+  if product.collections.size > 0
+    for collection in product.collections
+      for coll_product in collection.products
+        if coll_product.id == product.id
+          continue
+        endif
+        assign id_string = ',' | append: coll_product.id | append: ','
+        if shown_ids contains id_string
+          continue
+        endif
+        if is_shuttle and compatibility_tag != ''
+          assign has_compatibility_tag = false
+          for coll_product_tag in coll_product.tags
+            if coll_product_tag == compatibility_tag
+              assign has_compatibility_tag = true
+              break
+            endif
+          endfor
+          if has_compatibility_tag == false
+            continue
+          endif
+        endif
+        assign shown_ids = shown_ids | append: coll_product.id | append: ','
+        assign product_count = product_count | plus: 1
+        if product_count >= section.settings.product_limit
+          break
+        endif
+      endfor
+      if product_count >= section.settings.product_limit
+        break
+      endif
+    endfor
+  endif
+
+  # Reset shown_ids for actual rendering
+  assign shown_ids = ','
 -%}
 
 <div class="related-products block">
   <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
-    {%- comment -%} Check if product has collections {%- endcomment -%}
-    {%- if product.collections.size > 0 -%}
-      {%- assign has_products = true -%}
-    {%- endif -%}
-
-    {%- if has_products -%}
+    {%- if product_count > 0 -%}
       <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative overflow-hidden md:overflow-visible">
         {%- capture indicators -%}
           <div class="indicators hidden lg:flex gap-2d5">

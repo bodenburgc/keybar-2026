@@ -12,6 +12,12 @@
     "main-product": {
       "type": "main-product",
       "blocks": {
+        "breadcrumb": {
+          "type": "breadcrumb",
+          "settings": {
+            "show_collections_link": false
+          }
+        },
         "vendor": {
           "type": "text",
           "settings": {
@@ -133,6 +139,7 @@
         }
       },
       "block_order": [
+        "breadcrumb",
         "vendor",
         "title",
         "price",
