@@ -126,9 +126,22 @@ _None currently_
 - [ ] **#28 - Verify accelerated checkout** - Shopify admin → Settings → Payments → Enable Shop Pay, Apple Pay, Google Pay
 - [ ] **Verify 301 redirects** - Check URL Redirects in Shopify admin for old WooCommerce URLs
 
+### Content Issues - Admin Tasks (P1)
+
+- [ ] **#35 - Fix product description nested lists** - Freedom Aluminum KeyBar has invalid HTML: `<ul><ul>` nesting (4 instances). In Shopify admin → Products → Freedom Aluminum KeyBar → Edit description. The "What's included?" list has `<ul>` directly inside `<ul>` without `<li>` wrapper. Same for "How much does the KeyBar weigh?" section. Fix by ensuring proper list structure.
+- [ ] **#36 - Replace watermarked product image** - Freedom Aluminum KeyBar image 1 shows "Filter Status" watermark (stock photo). In Shopify admin → Products → Freedom Aluminum KeyBar → Media, replace `Aluminum-Freedom-Update-1.jpg` with final watermark-free photo.
+
 ### UI Enhancements (P2)
 
 - [x] **#24 - Add-on Picker Image Cards on Desktop** - Already implemented with image cards for all screen sizes (commit 08083cf)
+- [ ] **#33 - Empty product carousels on product page** - "Tool Inserts" and "You may also like" sections show headers but 0 products. Check `templates/product.json` for section config, `sections/featured-collection.liquid` for collection handle, and `sections/product-recommendations.liquid` for API issues. Test at `/products/freedom-aluminum-keybar`.
+- [ ] **#34 - Add breadcrumbs to product pages** - Collection pages have breadcrumbs but product pages don't. `snippets/product-breadcrumb.liquid` already exists with BreadcrumbList schema. Add render call to `sections/main-product.liquid` or as block type. Expected: Home > Collection > Product.
+
+### Visual Design Issues (P2)
+
+- [ ] **#37 - H3 font size inconsistency** - "Pocket Clip" H3 is 16px while description H3s ("Will my keys fit?", etc.) are 30px. Check `assets/product-addon.css` and `assets/theme.css`. Either unify sizes or use different heading level for add-on picker.
+- [ ] **#38 - Customize button uses wrong gold color** - Uses #b78726 instead of brand gold #ffd700. Update in `assets/product-addon.css`. Button border and text should match brand guidelines.
+- [ ] **#39 - Add-Ons links lack visual distinction** - Product links (Extension Screws, MagNut Set, etc.) use same color as body text (#16323e) with no underline. Add underline or use different color for accessibility (WCAG 2.1 requires links be distinguishable by more than color alone).
 
 ### Accessibility (P2)
 
