@@ -24,10 +24,11 @@
     }
   }
 
-  /* Remove spacing between vendor and title, and title and price */
-  #shopify-section-{{ section.id }} .product__vendor + .product__title,
-  #shopify-section-{{ section.id }} .product__title + .product__price {
-    margin-block-start: 0;
+  /* Tighten spacing between vendor, title, and price */
+  #shopify-section-{{ section.id }} .product__vendor,
+  #shopify-section-{{ section.id }} .product__title,
+  #shopify-section-{{ section.id }} .product__price {
+    margin-block: 0 !important;
   }
 
   /* Hide tax notice */
