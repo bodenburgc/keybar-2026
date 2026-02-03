@@ -196,12 +196,12 @@
 
                       if value.swatch != blank
                         if value.swatch.image
-                          assign swatch_image = value.swatch.image | image_url: width: 72
+                          assign swatch_image = value.swatch.image | image_url: width: 150
                         elsif value.swatch.color
                           assign swatch_fallback = value.swatch.color
                         endif
                       elsif variant_for_value.featured_image
-                        assign swatch_image = variant_for_value.featured_image | image_url: width: 72
+                        assign swatch_image = variant_for_value.featured_image | image_url: width: 150
                       endif
 
                       # Check settings for custom swatch colors
@@ -289,6 +289,7 @@
   {%- # Hidden checkbox for ProductForm bundles mechanism -%}
   <input
     type="checkbox"
+    class="sr-only"
     name="bundles"
     value="{{ default_variant.id }}"
     form="{{ product_form_id }}"

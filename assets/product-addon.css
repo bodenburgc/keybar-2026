@@ -10,6 +10,10 @@
   --addon-accent-color: rgb(var(--color-accent, 183 135 38));
   --addon-swatch-size: 36px;
   --addon-swatch-size-mobile: 32px;
+  --addon-swatch-width: 28px;
+  --addon-swatch-height: 72px;
+  --addon-swatch-width-mobile: 24px;
+  --addon-swatch-height-mobile: 60px;
 }
 
 /* ============================================
@@ -155,7 +159,7 @@
 /* Swatch list with price indicators */
 .product-addon__variants li {
   text-align: center;
-  min-width: var(--addon-swatch-size);
+  min-width: var(--addon-swatch-width);
 }
 
 /* ============================================
@@ -163,18 +167,24 @@
    ============================================ */
 
 .product-addon__variants .color-swatch {
-  width: var(--addon-swatch-size);
-  height: var(--addon-swatch-size);
-  border-radius: var(--rounded-swatch, 50%);
+  width: var(--addon-swatch-width);
+  height: var(--addon-swatch-height);
+  border-radius: 4px;
   border: 2px solid transparent;
   background: var(--swatch-background);
   background-image: var(--swatch-background-image);
-  background-size: cover;
+  background-size: contain;
   background-position: center;
+  background-repeat: no-repeat;
   transition:
     border-color var(--animation-short, 0.2s),
     transform var(--animation-short, 0.2s),
     box-shadow var(--animation-short, 0.2s);
+}
+
+/* Remove solid color background when swatch has an image */
+.product-addon__variants .color-swatch.with-image {
+  background-color: transparent;
 }
 
 .product-addon__variants .color-swatch:hover {
@@ -302,12 +312,12 @@
   }
 
   .product-addon__variants .color-swatch {
-    width: var(--addon-swatch-size-mobile);
-    height: var(--addon-swatch-size-mobile);
+    width: var(--addon-swatch-width-mobile);
+    height: var(--addon-swatch-height-mobile);
   }
 
   .product-addon__variants li {
-    min-width: var(--addon-swatch-size-mobile);
+    min-width: var(--addon-swatch-width-mobile);
   }
 
   /* Hide tooltips on touch devices */
