@@ -136,14 +136,16 @@ _None currently_
 - [x] **#24 - Add-on Picker Image Cards on Desktop** - Already implemented with image cards for all screen sizes (commit 08083cf)
 - [x] **#33 - Empty product carousels on product page** - Fixed `product-recommendations.liquid` to only render section when products are found. Pre-counts available products before rendering. Both carousels now display 12 products.
 - [x] **#34 - Add breadcrumbs to product pages** - Added breadcrumb block to `templates/product.json`. Uses existing `snippets/product-breadcrumb.liquid` with BreadcrumbList schema. Shows: Home > Collection > Product.
+- [ ] **#42 - Move breadcrumb above product columns** - Breadcrumb currently in right column above product info. Move to span full width above both gallery and product info columns. Modify `sections/main-product.liquid` to render breadcrumb before grid container, or create separate section.
 
 ### Visual Design Issues (P2)
 
-- [ ] **#37 - H3 font size inconsistency** - "Pocket Clip" H3 is 16px while description H3s ("Will my keys fit?", etc.) are 30px. Check `assets/product-addon.css` and `assets/theme.css`. Either unify sizes or use different heading level for add-on picker.
-- [ ] **#38 - Customize button uses wrong gold color** - Uses #b78726 instead of brand gold #ffd700. Update in `assets/product-addon.css`. Button border and text should match brand guidelines.
-- [ ] **#39 - Add-Ons links lack visual distinction** - Product links (Extension Screws, MagNut Set, etc.) use same color as body text (#16323e) with no underline. Add underline or use different color for accessibility (WCAG 2.1 requires links be distinguishable by more than color alone).
-- [ ] **#40 - Increase vendor label letter-spacing** - "KeyBar" vendor text above product title needs more letter-spacing. Add `letter-spacing: 0.1em` or higher to vendor styles. Check `sections/main-product.liquid` for markup and `assets/theme.css` for styles.
-- [ ] **#41 - Fix Add to Cart button border color** - Border is yellow/gold but button bg is dark teal (#16323e). Border should be same color family (lighter/darker teal). Modify `--color-button-border` in `snippets/css-variables.liquid` or add override in `assets/apps.css`.
+- [x] **#37 - H3 font size inconsistency** - Changed addon picker title to use `h4` class instead of `text-base` for proper visual hierarchy (18-24px responsive).
+- [x] **#38 - Customize button uses wrong gold color** - Updated `--addon-accent-color` fallback from #b78726 to brand gold #ffd700.
+- [x] **#39 - Add-Ons links lack visual distinction** - Added subtle underline (40% opacity, 2px offset) to addon card titles. Underline removes when selected.
+- [x] **#40 - Increase vendor label letter-spacing** - Increased from 0.1em to 0.15em in main-product.liquid.
+- [x] **#41 - Fix Add to Cart button border color** - Added `--color-button-border: 22 50 62` to match dark teal background.
+- [ ] **#43 - Remove space below vendor label** - Extra gap between "KEYBAR" vendor and product title. Reduce/remove `margin-bottom` on vendor element or `margin-top` on H1 title. Check `sections/main-product.liquid` and `assets/theme.css`.
 
 ### Accessibility (P2)
 
@@ -179,6 +181,14 @@ _None currently_
 ---
 
 ## Completed (Recent)
+
+### 2026-02-03 - Visual Design Fixes
+
+- [x] **#37 - H3 font size** - Changed addon picker title to `h4` class for proper hierarchy
+- [x] **#38 - Gold color** - Updated addon accent color to brand gold #ffd700
+- [x] **#39 - Links accessibility** - Added subtle underline to addon card titles (WCAG 2.1)
+- [x] **#40 - Vendor letter-spacing** - Increased to 0.15em
+- [x] **#41 - Button border** - Fixed Add to Cart border to match dark teal background
 
 ### 2026-02-03 - UI & Documentation Fixes
 

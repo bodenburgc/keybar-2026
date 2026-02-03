@@ -7,7 +7,7 @@
 
 .product-addon {
   --addon-border-color: rgba(var(--color-foreground), 0.1);
-  --addon-accent-color: rgb(var(--color-accent, 183 135 38));
+  --addon-accent-color: rgb(var(--color-accent, 255 215 0));
   --addon-swatch-size: 36px;
   --addon-swatch-size-mobile: 32px;
   --addon-swatch-width: 28px;
@@ -240,6 +240,16 @@
 /* Card content */
 .product-addon__card-title {
   color: rgb(var(--color-foreground));
+  /* WCAG 2.1: Links must be distinguishable by more than color alone */
+  text-decoration: underline;
+  text-decoration-color: rgba(var(--color-foreground), 0.4);
+  text-underline-offset: 2px;
+}
+
+/* Remove underline when card is selected (checkmark provides visual feedback) */
+.product-addon__card.is-selected .product-addon__card-title,
+.product-addon__card input:checked + .product-addon__card-label .product-addon__card-title {
+  text-decoration: none;
 }
 
 .product-addon__card-price {
@@ -387,7 +397,7 @@
 
 .product-addon__variants input:checked + .label-swatch {
   border-color: var(--addon-accent-color);
-  background: rgba(var(--color-accent-rgb, 183 135 38), 0.1);
+  background: rgba(var(--color-accent-rgb, 255 215 0), 0.1);
   color: var(--addon-accent-color);
 }
 
