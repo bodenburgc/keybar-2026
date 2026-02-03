@@ -17,6 +17,13 @@ if (!customElements.get('product-addon')) {
       this.variantContainers = this.querySelectorAll('[data-addon-variants]');
       this.formId = this.dataset.formId;
 
+      // Progressive disclosure elements
+      this.collapsedHeader = this.querySelector('[data-addon-collapsed]');
+      this.detailsPanel = this.querySelector('[data-addon-details]');
+      this.toggleBtn = this.querySelector('[data-addon-toggle]');
+      this.doneBtn = this.querySelector('[data-addon-done]');
+      this.collapsedValue = this.querySelector('[data-addon-collapsed-value]');
+
       this.bindEvents();
       this.setupFormIntegration();
     }
@@ -31,6 +38,70 @@ if (!customElements.get('product-addon')) {
       this.querySelectorAll('[data-addon-variants] input[type="radio"]').forEach(input => {
         input.addEventListener('change', this.onVariantChange.bind(this));
       });
+
+      // Progressive disclosure toggle
+      if (this.toggleBtn) {
+        this.toggleBtn.addEventListener('click', this.toggleDetails.bind(this));
+      }
+      if (this.doneBtn) {
+        this.doneBtn.addEventListener('click', this.collapseDetails.bind(this));
+      }
+    }
+
+    /**
+     * Toggle the expanded/collapsed state
+     */
+    toggleDetails() {
+      const isExpanded = this.toggleBtn.getAttribute('aria-expanded') === 'true';
+      if (isExpanded) {
+        this.collapseDetails();
+      } else {
+        this.expandDetails();
+      }
+    }
+
+    /**
+     * Expand the details panel
+     */
+    expandDetails() {
+      this.classList.add('is-expanded');
+      this.detailsPanel?.removeAttribute('hidden');
+      this.toggleBtn?.setAttribute('aria-expanded', 'true');
+    }
+
+    /**
+     * Collapse the details panel
+     */
+    collapseDetails() {
+      this.classList.remove('is-expanded');
+      this.detailsPanel?.setAttribute('hidden', '');
+      this.toggleBtn?.setAttribute('aria-expanded', 'false');
+      this.updateCollapsedDisplay();
+    }
+
+    /**
+     * Update the collapsed header to show current selection
+     */
+    updateCollapsedDisplay() {
+      if (!this.collapsedValue) return;
+
+      // Get selected product name
+      const selectedProductRadio = this.querySelector('[data-addon-product-radio]:checked');
+      const selectedCard = selectedProductRadio?.closest('.product-addon__card');
+      const productTitle = selectedCard?.querySelector('.product-addon__card-title')?.textContent?.trim() || '';
+
+      // Get selected variant/color
+      const selectedProductId = selectedProductRadio?.value;
+      const variantContainer = this.querySelector(`[data-addon-variants="${selectedProductId}"]`);
+      const selectedVariantRadio = variantContainer?.querySelector('input[type="radio"]:checked');
+      const variantValue = selectedVariantRadio?.value || '';
+
+      // Update display
+      if (productTitle && variantValue) {
+        this.collapsedValue.textContent = `${productTitle} — ${variantValue}`;
+      } else if (productTitle) {
+        this.collapsedValue.textContent = productTitle;
+      }
     }
 
     /**

@@ -55,20 +55,50 @@
   data-form-id="{{ product_form_id }}"
   {{ block.shopify_attributes }}
 >
-  {%- # Section Header -%}
-  <div class="product-addon__header flex flex-col gap-2 mb-4">
-    <h3 class="product-addon__title heading text-base font-semibold">
-      {{ addon_title }}
-    </h3>
-    {%- if addon_description != blank -%}
-      <p class="product-addon__description text-sm text-opacity">
-        {{ addon_description }}
-      </p>
-    {%- endif -%}
+  {%- # Collapsed Header (Default State) -%}
+  <div class="product-addon__collapsed" data-addon-collapsed>
+    <div class="product-addon__collapsed-content">
+      <div class="product-addon__collapsed-icon">
+        {%- render 'icon', icon: 'checkmark', size: 'sm' -%}
+      </div>
+      <div class="product-addon__collapsed-info">
+        <span class="product-addon__collapsed-title">
+          {{ 'products.addon.includes_clip' | t | default: 'Includes Titanium Pocket Clip' }}
+        </span>
+{%- liquid
+          # Get a meaningful variant display name
+          assign variant_display = default_variant.title
+          if variant_display == 'Default Title' or variant_display == blank
+            assign variant_display = default_variant.option1 | default: 'Plain'
+          endif
+        -%}
+        <span class="product-addon__collapsed-value" data-addon-collapsed-value>
+          {{ default_addon.title }}{% if variant_display != blank %} — {{ variant_display }}{% endif %}
+        </span>
+      </div>
+    </div>
+    <button type="button" class="product-addon__customize-btn" data-addon-toggle aria-expanded="false" aria-controls="AddonDetails-{{ section_id }}">
+      <span>{{ 'products.addon.customize' | t | default: 'Customize' }}</span>
+      {%- render 'icon', icon: 'chevron-down', size: 'sm' -%}
+    </button>
   </div>
 
-  {%- # Product Selector Image Cards -%}
-  <fieldset class="product-addon__selector mb-4">
+  {%- # Expanded Details (Hidden by Default) -%}
+  <div class="product-addon__details" id="AddonDetails-{{ section_id }}" data-addon-details hidden>
+    {%- # Section Header -%}
+    <div class="product-addon__header flex flex-col gap-2 mb-4">
+      <h3 class="product-addon__title heading text-base font-semibold">
+        {{ addon_title }}
+      </h3>
+      {%- if addon_description != blank -%}
+        <p class="product-addon__description text-sm text-opacity">
+          {{ addon_description }}
+        </p>
+      {%- endif -%}
+    </div>
+
+    {%- # Product Selector Image Cards -%}
+    <fieldset class="product-addon__selector mb-4">
     <legend class="form__label text-sm mb-3 block">
       {{ 'products.addon.available_options' | t | default: 'Available options' }}
     </legend>
@@ -285,6 +315,13 @@
       </script>
     </div>
   {%- endfor -%}
+
+    {%- # Done button to collapse -%}
+    <button type="button" class="product-addon__done-btn" data-addon-done>
+      {{ 'products.addon.done' | t | default: 'Done' }}
+    </button>
+  </div>
+  {%- # End of Expanded Details -%}
 
   {%- # Hidden checkbox for ProductForm bundles mechanism -%}
   <input

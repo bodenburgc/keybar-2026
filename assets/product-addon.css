@@ -17,6 +17,141 @@
 }
 
 /* ============================================
+   Collapsed State (Default)
+   ============================================ */
+
+.product-addon__collapsed {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-4);
+  background: rgba(var(--color-foreground), 0.02);
+  border: 1px solid var(--addon-border-color);
+  border-radius: var(--rounded-input, 8px);
+}
+
+.product-addon__collapsed-content {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.product-addon__collapsed-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background: var(--addon-accent-color);
+  color: rgb(var(--color-background));
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.product-addon__collapsed-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.product-addon__collapsed-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.product-addon__collapsed-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.product-addon__collapsed-value {
+  font-size: 0.75rem;
+  color: rgba(var(--color-foreground), 0.7);
+}
+
+.product-addon__customize-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: var(--sp-2) var(--sp-3);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--addon-accent-color);
+  background: transparent;
+  border: 1px solid var(--addon-accent-color);
+  border-radius: var(--rounded-input, 8px);
+  cursor: pointer;
+  transition: all var(--animation-short, 0.2s);
+  white-space: nowrap;
+}
+
+.product-addon__customize-btn:hover {
+  background: var(--addon-accent-color);
+  color: rgb(var(--color-background));
+}
+
+.product-addon__customize-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform var(--animation-short, 0.2s);
+}
+
+.product-addon__customize-btn[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+
+/* Hide collapsed state when expanded */
+.product-addon.is-expanded .product-addon__collapsed {
+  display: none;
+}
+
+/* ============================================
+   Expanded Details
+   ============================================ */
+
+.product-addon__details {
+  padding-top: var(--sp-4);
+  animation: fadeSlideIn var(--animation-short, 0.2s) ease;
+}
+
+.product-addon__details[hidden] {
+  display: none;
+}
+
+@keyframes fadeSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Done button */
+.product-addon__done-btn {
+  display: block;
+  width: 100%;
+  padding: var(--sp-3);
+  margin-top: var(--sp-4);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: rgb(var(--color-background));
+  background: var(--addon-accent-color);
+  border: none;
+  border-radius: var(--rounded-input, 8px);
+  cursor: pointer;
+  transition: opacity var(--animation-short, 0.2s);
+}
+
+.product-addon__done-btn:hover {
+  opacity: 0.9;
+}
+
+/* ============================================
    Header
    ============================================ */
 
@@ -75,16 +210,23 @@
 
 /* Card media */
 .product-addon__card-media {
-  width: 60px;
-  height: 60px;
+  width: 100px;
+  height: 48px;
   border-radius: calc(var(--rounded-input, 8px) - 4px);
-  background-color: rgba(var(--color-foreground), 0.05);
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .product-addon__card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  /* Rotate vertical clip images to display horizontally */
+  transform: rotate(90deg);
+  transform-origin: center center;
+  max-width: none;
+  width: auto;
+  height: 90px;
+  object-fit: contain;
 }
 
 .product-addon__card-media .placeholder {
@@ -258,15 +400,32 @@
 }
 
 /* ============================================
-   Price Summary
+   Price Summary (hidden in progressive disclosure mode)
    ============================================ */
 
 .product-addon__summary {
+  display: none; /* Hidden - collapsed header shows selection instead */
   border-color: var(--addon-border-color);
 }
 
 .product-addon__summary [data-addon-price] {
   color: var(--addon-accent-color);
+}
+
+/* ============================================
+   Collapsed State - Mobile
+   ============================================ */
+
+@media screen and (max-width: 480px) {
+  .product-addon__collapsed {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--sp-3);
+  }
+
+  .product-addon__customize-btn {
+    justify-content: center;
+  }
 }
 
 /* ============================================

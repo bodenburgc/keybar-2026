@@ -520,7 +520,10 @@
       "choose": "Choose a",
       "included": "Included",
       "included_short": "Incl.",
-      "selected": "Add-on"
+      "selected": "Add-on",
+      "includes_clip": "Includes Titanium Pocket Clip",
+      "customize": "Customize",
+      "done": "Done"
     },
     "product": {
       "product_variants": "Product variants",
