@@ -146,8 +146,8 @@ _None currently_
 
 - [x] Sanitize innerHTML assignments throughout JS - Security audit complete: **No XSS vulnerabilities found**. All 24 JS files reviewed. Codebase uses DOMParser for server responses and textContent for user input. No changes needed.
 - [x] Remove console.log statements from theme.js - Removed 6 debug statements (commit 8575fc4)
-- [ ] Replace hardcoded `#ccc` color in `apps.css` print media query with theme variable
-- [ ] Clean up precise calc() values in theme.css (round to cleaner values)
+- [x] Replace hardcoded `#ccc` color - Fixed in `product-addon.css` print media query (was not in apps.css as originally noted)
+- [x] Clean up precise calc() values in theme.css - Reviewed: values are intentionally precise for fluid typography scale calculations. Rounding would affect visual output. No changes needed.
 
 ### SEO (P3)
 
@@ -158,7 +158,7 @@ _None currently_
 
 ### Documentation (P3)
 
-- [ ] Document color scheme usage patterns
+- [x] Document color scheme usage patterns - Created `.docs/COLOR-SCHEMES.md`
 - [ ] Add JSDoc comments to complex theme.js functions
 
 ---
