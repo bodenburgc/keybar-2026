@@ -129,7 +129,29 @@ if (!customElements.get('facet-form')) {
         const drawer = document.getElementById('FacetDrawer');
         if (drawer) drawer.classList.remove('loading');
 
+        // Announce to screen readers that products have been updated
+        this.announceUpdate(items.length);
+
         document.dispatchEvent(new CustomEvent('collection:reloaded'));
+      }
+
+      announceUpdate(count) {
+        let announcer = document.getElementById('FacetAnnouncer');
+        if (!announcer) {
+          announcer = document.createElement('div');
+          announcer.id = 'FacetAnnouncer';
+          announcer.className = 'sr-only';
+          announcer.setAttribute('aria-live', 'polite');
+          announcer.setAttribute('aria-atomic', 'true');
+          document.body.appendChild(announcer);
+        }
+        // Clear and set after short delay to ensure announcement
+        announcer.textContent = '';
+        setTimeout(() => {
+          announcer.textContent = theme.strings.productsLoaded ?
+            theme.strings.productsLoaded.replace('{{ count }}', count) :
+            `${count} products loaded`;
+        }, 100);
       }
 
       renderSection(url, event) {

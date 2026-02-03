@@ -340,7 +340,12 @@
         "other": "{{ count }} products"
       },
       "show_on_model": "Show on model",
-      "product_view": "Product view"
+      "product_view": "Product view",
+      "products_list": "Products in {{ collection }}",
+      "products_loaded": {
+        "one": "{{ count }} product loaded",
+        "other": "{{ count }} products loaded"
+      }
     },
     "sorting": {
       "sort_button": "Sort by",

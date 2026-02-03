@@ -159,7 +159,7 @@
                 context: 'page'
               -%}
             {%- else -%}
-              <p id="ProductCount" class="grow text-base lg:text-lg" role="status">
+              <p id="ProductCount" class="grow text-base lg:text-lg" role="status" aria-live="polite" aria-atomic="true">
                 {%- liquid
                   if collection.results_count
                     echo 'general.search.results_with_count' | t: terms: collection.terms, count: collection.results_count
@@ -284,7 +284,7 @@
           {%- endif -%}
 
           {%- if collection.all_products_count > 0 -%}
-            <motion-list class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid relative">
+            <motion-list class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid relative" role="list" aria-label="{{ 'collections.general.products_list' | t: collection: collection.title }}">
               {%- for product in collection.products -%}
                 {%- liquid
                   for block in section.blocks

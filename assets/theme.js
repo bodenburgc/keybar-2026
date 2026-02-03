@@ -2179,12 +2179,7 @@ class ShareDrawer extends DrawerElement {
       await navigator.share({ url: this.urlToShare, title: document.title });
     }
     catch(error) {
-      if (error.name === 'AbortError') {
-        console.log('Share canceled by user');
-      }
-      else {
-        console.error(error);
-      }
+      // Share canceled or failed - no action needed
     }
   }
 
@@ -5021,12 +5016,8 @@ class ProductInfo extends HTMLElement {
           activeElement.focus({ preventScroll: true });
         }, 100);
       })
-      .catch((error) => {
-        if (error.name === 'AbortError') {
-          console.log('Fetch aborted by user');
-        } else {
-          console.error(error);
-        }
+      .catch(() => {
+        // Fetch aborted or failed - no action needed
       });
   }
 
@@ -5352,8 +5343,8 @@ class ProductForm extends HTMLFormElement {
 
         this.cartDrawer?.show(this.activeElement);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // Cart add failed - no action needed
       })
       .finally(() => {
         this.submitButton.removeAttribute('aria-busy');
@@ -7235,8 +7226,8 @@ class ProductBundle extends HTMLElement {
         this.cartDrawer?.show(this.activeElement);
         this.resetVariants();
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // Cart add failed - no action needed
       })
       .finally(() => {
         this.submitButton.removeAttribute('aria-busy');
@@ -7775,7 +7766,6 @@ class ComparisonTable extends HTMLElement {
           
           let highlighted = false;
           columns.forEach((column) => {
-            console.log(column.innerHTML);
             if (first_column.innerHTML != column.innerHTML) {
               highlighted = true;
             }
