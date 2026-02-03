@@ -283,7 +283,7 @@
                   </div>
                 {%- else -%}
                   <p class="product__vendor {{ block.settings.text_size }}" {{ block.shopify_attributes }}>
-                    {{- product.vendor | link_to_vendor : class: 'reversed-link' -}}
+                    {{- product.vendor -}}
                   </p>
                 {%- endif -%}
               {%- endif -%}
