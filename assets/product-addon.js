@@ -24,8 +24,19 @@ if (!customElements.get('product-addon')) {
       this.doneBtn = this.querySelector('[data-addon-done]');
       this.collapsedValue = this.querySelector('[data-addon-collapsed-value]');
 
+      // Price elements
+      this.basePrice = parseInt(this.dataset.basePrice, 10) || 0;
+      this.currentAddonPrice = parseInt(this.dataset.defaultAddonPrice, 10) || 0;
+      this.currencySymbol = this.dataset.currencySymbol || '$';
+      this.sectionId = this.dataset.sectionId;
+
+      // Find the main price display element
+      this.mainPriceContainer = document.querySelector(`[id^="Price-${this.sectionId}"]`);
+      this.originalPriceHTML = this.mainPriceContainer?.innerHTML;
+
       this.bindEvents();
       this.setupFormIntegration();
+      this.updateMainPriceDisplay();
     }
 
     bindEvents() {
@@ -261,16 +272,48 @@ if (!customElements.get('product-addon')) {
     }
 
     /**
-     * Update the price display
+     * Update the add-on price display (in the add-on section)
      */
     updatePriceDisplay(price) {
       if (!this.priceDisplay) return;
 
       const priceNum = parseInt(price, 10);
+      this.currentAddonPrice = priceNum;
+
       if (priceNum === 0) {
         this.priceDisplay.textContent = theme?.strings?.addonIncluded || 'Included';
       } else {
         this.priceDisplay.textContent = '+' + this.formatMoney(priceNum);
+      }
+
+      // Update the main product price display
+      this.updateMainPriceDisplay();
+    }
+
+    /**
+     * Update the main product price to show total with add-on
+     */
+    updateMainPriceDisplay() {
+      if (!this.mainPriceContainer) return;
+
+      const totalPrice = this.basePrice + this.currentAddonPrice;
+      const priceElement = this.mainPriceContainer.querySelector('.price__regular');
+
+      if (!priceElement) return;
+
+      if (this.currentAddonPrice > 0) {
+        // Show total with breakdown hint
+        const baseFormatted = this.formatMoney(this.basePrice);
+        const totalFormatted = this.formatMoney(totalPrice);
+        const addonFormatted = this.formatMoney(this.currentAddonPrice);
+
+        priceElement.innerHTML = `
+          <span class="product-addon__total-price">${totalFormatted}</span>
+          <span class="product-addon__price-breakdown">(${baseFormatted} + ${addonFormatted} clip)</span>
+        `;
+      } else {
+        // Show just base price
+        priceElement.innerHTML = this.formatMoney(this.basePrice);
       }
     }
 

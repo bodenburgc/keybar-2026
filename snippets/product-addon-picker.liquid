@@ -52,7 +52,10 @@
   id="ProductAddon-{{ section_id }}"
   data-section-id="{{ section_id }}"
   data-default-variant-id="{{ default_variant.id }}"
+  data-default-addon-price="{{ default_variant.price }}"
+  data-base-price="{{ product.selected_or_first_available_variant.price }}"
   data-form-id="{{ product_form_id }}"
+  data-currency-symbol="{{ cart.currency.symbol }}"
   {{ block.shopify_attributes }}
 >
   {%- # Collapsed Header (Default State) -%}
