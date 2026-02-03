@@ -100,11 +100,12 @@
           <scroll-shadow class="product-card__spec block overflow-hidden">
             <div class="product-card__icons flex flex-nowrap{% unless icon_list_block.settings.enable_carousel %} lg:flex-wrap{% endunless %}" is="icons-carousel" tabindex="0">
               {%- for item in metafield.value -%}
+                {%- assign icon_alt = item.title | escape | default: '' -%}
                 <div class="product-card__icon shrink-0">
                   <div class="flex flex-col items-center md:flex-row md:items-start gap-2">
                     {%- if item.icon != blank -%}
                       <figure class="shrink-0 media media--transparent relative inline-block">
-                        {{- item.icon | image_url: width: item.icon.width | image_tag: loading: 'lazy', sizes: '32px', widths: '80,96,160,192', class: 'w-full h-full', is: 'lazy-image', alt: item.title | escape | default: '' -}}
+                        {{- item.icon | image_url: width: item.icon.width | image_tag: loading: 'lazy', sizes: '32px', widths: '80,96,160,192', class: 'w-full h-full', is: 'lazy-image', alt: icon_alt -}}
                       </figure>
                     {%- endif -%}
                     <div class="flex flex-col items-center md:items-start gap-1 text-center md:text-left text-sm font-medium leading-none">
@@ -807,12 +808,15 @@
                           endif
                         -%}
                         {%- if variant.product -%}
-                          {%- assign variant_image = variant.image | default: variant.product.featured_image -%}
+                          {%- liquid
+                            assign variant_image = variant.image | default: variant.product.featured_image
+                            assign variant_alt = variant.product.title | append: ' - ' | append: variant.title | escape
+                          -%}
                           <label class="product-bundle__info flex items-center gap-4 md:gap-6" for="Recommendations-{{ section.id }}-{{ variant.id }}">
                             <input name="bundles" value="{{ variant.id }}" data-price="{{ variant.price }}" class="checkbox" id="Recommendations-{{ section.id }}-{{ variant.id }}" type="checkbox"{% unless variant.available %} disabled{% endunless %} />
                             {%- if variant_image -%}
                               <picture class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0 pointer-events-none">
-                                {{- variant_image | image_url: width: variant_image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image', alt: variant.product.title | append: ' - ' | append: variant.title | escape -}}
+                                {{- variant_image | image_url: width: variant_image.width | image_tag: loading: 'lazy', widths: '180,360,540', sizes: '180px', is: 'lazy-image', alt: variant_alt, width: variant_image.width, height: variant_image.height -}}
                               </picture>
                             {%- endif -%}
                             <div class="horizontal-product__details grow flex flex-col justify-start gap-1d5">
@@ -958,11 +962,14 @@
         form="{{ product_form_id }}"
       >
         <div class="product-sticky-form__card grid gap-4 opacity-0 invisible pointer-events-auto">
-          {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
+          {%- liquid
+            assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+            assign featured_media_alt = product.title | escape
+          -%}
           <div class="product-sticky-form__variant{% if featured_media == blank %} no-image{% endif %} grid items-center gap-4">
             {%- if featured_media != blank -%}
               <div class="hidden md:block media media--adapt relative overflow-hidden" data-widths="80,160" data-sticky-product-media>
-                {{- featured_media | image_url: width: featured_media.width | image_tag: loading: 'lazy', sizes: '80px', widths: '80,160', is: 'lazy-image', alt: product.title | escape -}}
+                {{- featured_media | image_url: width: featured_media.width | image_tag: loading: 'lazy', sizes: '80px', widths: '80,160', is: 'lazy-image', alt: featured_media_alt, width: featured_media.width, height: featured_media.height -}}
               </div>
             {%- endif -%}
 

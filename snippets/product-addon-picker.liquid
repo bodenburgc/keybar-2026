@@ -220,6 +220,28 @@
                           endif
                         endfor
                       endif
+
+                      # Hardcoded color mappings for common clip colors
+                      # These override CSS color name fallback for better accuracy
+                      assign value_lower = value | downcase
+                      case value_lower
+                        when 'plain'
+                          assign swatch_fallback = '#a8a9ad'
+                        when 'blackwashed'
+                          assign swatch_fallback = '#2d2d2d'
+                        when 'bronze'
+                          assign swatch_fallback = '#cd7f32'
+                        when 'gold'
+                          assign swatch_fallback = '#d4af37'
+                        when 'titanium'
+                          assign swatch_fallback = '#878681'
+                        when 'copper'
+                          assign swatch_fallback = '#b87333'
+                        when 'burnt bronze'
+                          assign swatch_fallback = '#704214'
+                        when 'midnight blue'
+                          assign swatch_fallback = '#191970'
+                      endcase
                     -%}
                     <label
                       for="Addon-{{ section_id }}-{{ addon_product.id }}-{{ option.name | handle }}-{{ forloop.index0 }}"

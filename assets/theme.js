@@ -2570,6 +2570,9 @@ class RecentlyViewed extends HTMLElement {
       })
       .catch(e => {
         console.error(e);
+      })
+      .finally(() => {
+        this.removeAttribute('aria-busy');
       });
   }
 
@@ -2618,6 +2621,9 @@ class ProductRecommendations extends HTMLElement {
       })
       .catch(e => {
         console.error(e);
+      })
+      .finally(() => {
+        this.removeAttribute('aria-busy');
       });
   }
 }
@@ -3405,6 +3411,9 @@ class APIButton extends HTMLElement {
       })
       .catch(e => {
         console.error(e);
+      })
+      .finally(() => {
+        this.removeAttribute('aria-busy');
       });
   }
 
@@ -6823,6 +6832,9 @@ class QuickView extends XModal {
       })
       .catch(e => {
         console.error(e);
+      })
+      .finally(() => {
+        this.removeAttribute('aria-busy');
       });
   }
 

@@ -136,9 +136,9 @@ _None currently_
 
 ### Performance (P2)
 
-- [ ] Add `.finally()` blocks to fetch chains in theme.js for proper cleanup
-- [ ] Add explicit width/height attributes to images to prevent layout shift
-- [ ] Add preload hints for critical product images in gallery
+- [x] Add `.finally()` blocks to fetch chains in theme.js for proper cleanup - Added to RecentlyViewed, ProductRecommendations, APIButton.renderSectionFromFetch, QuickView.quickview (4 of 7 fetch chains that needed it)
+- [x] Add explicit width/height attributes to images to prevent layout shift - Added to media.liquid (3 image_tag calls) and main-product.liquid (2 bundle variant images)
+- [x] Add preload hints for critical product images in gallery - Added `<link rel="preload">` for featured product image in layout/theme.liquid with responsive srcset
 - [ ] Review and optimize large CSS/JS bundle sizes
 
 ### Code Quality (P3)

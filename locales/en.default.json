@@ -503,7 +503,7 @@
   },
   "products": {
     "general": {
-      "color_swatch_trigger": "BOGO",
+      "color_swatch_trigger": "Color,Colour,BOGO",
       "size_trigger": "Size",
       "size_chart": "Size chart",
       "save_html": "Save {{ saved_amount }}",
