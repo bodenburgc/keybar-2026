@@ -48,6 +48,27 @@
     line-height: 1;
   }
 
+  /* Add to Cart button - dark teal with white text */
+  #shopify-section-{{ section.id }} .product-form__submit {
+    --color-button-background: var(--color-heading);
+    --color-button-text: 255 255 255;
+    --color-button-gradient: rgb(var(--color-heading));
+    background: rgb(var(--color-heading)) !important;
+    color: rgb(255 255 255) !important;
+  }
+
+  #shopify-section-{{ section.id }} .product-form__submit .btn-fill {
+    background: rgb(255 255 255) !important;
+  }
+
+  #shopify-section-{{ section.id }} .product-form__submit .btn-text {
+    color: rgb(255 255 255);
+  }
+
+  #shopify-section-{{ section.id }} .product-form__submit:hover {
+    opacity: 0.9;
+  }
+
   /* Hide tax notice */
   #shopify-section-{{ section.id }} .product__tax {
     display: none;
