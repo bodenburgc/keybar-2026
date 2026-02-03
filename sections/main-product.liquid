@@ -34,11 +34,11 @@
   /* Style vendor as brand label */
   #shopify-section-{{ section.id }} .product__vendor {
     text-transform: uppercase;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.25em;
     font-size: 0.75rem;
     font-weight: 600;
     color: rgb(var(--color-accent));
-    margin-block-end: var(--sp-2) !important;
+    margin-block-end: 0 !important;
   }
 
   /* Match price color to title */
@@ -127,6 +127,7 @@
   assign media_count = product.media.size
   assign first_3d_model = product.media | where: 'media_type', 'model' | first
   assign icon_list_block = section.blocks | where: 'type', 'icon_list' | first
+  assign breadcrumb_block = section.blocks | where: 'type', 'breadcrumb' | first
 -%}
 
 {%- if first_3d_model -%}
@@ -211,6 +212,9 @@
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <div class="page-width{% if media_count > 0 %}{% if section.settings.full_width %} page-width--full{% endif %}{% else %} page-width--narrow{% endif %} relative">
+    {%- if breadcrumb_block -%}
+      {%- render 'product-breadcrumb', product: product, block: breadcrumb_block -%}
+    {%- endif -%}
     <div class="featured-product product product--{{ section.settings.gallery_layout }}{% if media_count == 0 %} no-media{% endif %} flex flex-col items-start lg:grid gap-5 w-full relative">
       {%- if media_count > 0 -%}
         <div class="product__gallery-container{% if section.settings.enable_sticky_info %} lg:sticky{% endif %} flex flex-col gap-0 md:gap-8 relative w-full">
@@ -258,7 +262,7 @@
               {%- render block -%}
 
             {%- when 'breadcrumb' -%}
-              {%- render 'product-breadcrumb', product: product, block: block -%}
+              {%- comment -%} Breadcrumb is now rendered above the product grid for full-width display {%- endcomment -%}
 
             {%- when 'text' -%}
               {%- if block.settings.text != blank -%}

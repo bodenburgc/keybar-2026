@@ -136,7 +136,7 @@ _None currently_
 - [x] **#24 - Add-on Picker Image Cards on Desktop** - Already implemented with image cards for all screen sizes (commit 08083cf)
 - [x] **#33 - Empty product carousels on product page** - Fixed `product-recommendations.liquid` to only render section when products are found. Pre-counts available products before rendering. Both carousels now display 12 products.
 - [x] **#34 - Add breadcrumbs to product pages** - Added breadcrumb block to `templates/product.json`. Uses existing `snippets/product-breadcrumb.liquid` with BreadcrumbList schema. Shows: Home > Collection > Product.
-- [ ] **#42 - Move breadcrumb above product columns** - Breadcrumb currently in right column above product info. Move to span full width above both gallery and product info columns. Modify `sections/main-product.liquid` to render breadcrumb before grid container, or create separate section.
+- [x] **#42 - Move breadcrumb above product columns** - Moved breadcrumb render from block loop to before the grid container in `sections/main-product.liquid`. Now spans full width above both columns.
 
 ### Visual Design Issues (P2)
 
@@ -145,8 +145,8 @@ _None currently_
 - [x] **#39 - Add-Ons links lack visual distinction** - Added subtle underline (40% opacity, 2px offset) to addon card titles. Underline removes when selected.
 - [x] **#40 - Increase vendor label letter-spacing** - Increased from 0.1em to 0.15em in main-product.liquid.
 - [x] **#41 - Fix Add to Cart button border color** - Added `--color-button-border: 22 50 62` to match dark teal background.
-- [ ] **#43 - Remove space below vendor label** - Extra gap between "KEYBAR" vendor and product title. Reduce/remove `margin-bottom` on vendor element or `margin-top` on H1 title. Check `sections/main-product.liquid` and `assets/theme.css`.
-- [ ] **#44 - Increase vendor letter-spacing further** - Current 0.15em not wide enough. Try 0.2em, 0.25em, or 0.3em. Modify in `sections/main-product.liquid`.
+- [x] **#43 - Remove space below vendor label** - Set `margin-block-end: 0` on `.product__vendor` in `sections/main-product.liquid`.
+- [x] **#44 - Increase vendor letter-spacing further** - Increased from 0.15em to 0.25em in `sections/main-product.liquid`.
 
 ### Accessibility (P2)
 
