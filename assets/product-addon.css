@@ -184,7 +184,10 @@
    ============================================ */
 
 .product-addon__details {
-  padding: var(--sp-4) 0 0;
+  padding: var(--sp-4);
+  margin-top: var(--sp-3);
+  background: #f3f4f6;
+  border-radius: 12px;
   animation: addonSlideIn var(--animation-short, 0.2s) ease;
 }
 
@@ -242,11 +245,11 @@
   flex-direction: column;
   align-items: center;
   padding: var(--sp-3);
-  background: rgb(var(--color-background));
+  background: transparent;
   border: 1px solid var(--addon-border-color);
   border-radius: 10px;
   cursor: pointer;
-  transition: border-color var(--animation-short, 0.2s);
+  transition: border-color var(--animation-short, 0.2s), background var(--animation-short, 0.2s);
   text-align: center;
   height: 100%;
 }
@@ -258,6 +261,7 @@
 /* Selected state */
 .product-addon__card.is-selected .product-addon__card-label,
 .product-addon__card input:checked + .product-addon__card-label {
+  background: rgba(255, 255, 255, 0.7);
   border: 1px solid #9ca3af;
   outline: 2px solid #e5e7eb;
   outline-offset: 0;
@@ -416,7 +420,7 @@
 /* Selected state - outline wraps swatch + price */
 .product-addon__swatch-item:has(input:checked) {
   outline: 2px solid #e5e7eb;
-  background: rgba(var(--color-foreground), 0.03);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 /* Color Swatches */
@@ -438,7 +442,7 @@
 }
 
 .product-addon__color-swatch.with-image {
-  background-color: rgb(var(--color-background));
+  background-color: transparent;
 }
 
 .product-addon__color-swatch:hover {
@@ -576,26 +580,42 @@
 
 .product-addon__done {
   padding-top: var(--sp-3);
-  border-top: 1px solid var(--addon-border-color);
-  text-align: right;
+  margin-top: var(--sp-3);
 }
 
 .product-addon__done-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  padding: var(--sp-2) var(--sp-4);
-  font-size: 0.8125rem;
+  justify-content: center;
+  width: 100%;
+  padding: 12px 20px;
+  min-height: 44px;
+  font-size: 0.875rem;
   font-weight: 600;
+  letter-spacing: 0.02em;
   color: rgb(var(--color-background));
   background: rgb(var(--color-foreground));
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: opacity var(--animation-short, 0.2s);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 180ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .product-addon__done-btn:hover {
-  opacity: 0.85;
+  background: rgba(var(--color-foreground), 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+}
+
+.product-addon__done-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.product-addon__done-btn:focus-visible {
+  outline: 2px solid var(--addon-accent-color);
+  outline-offset: 2px;
 }
 
 /* ============================================
@@ -680,6 +700,23 @@
   /* Hide tooltips on touch */
   .product-addon__swatch-tooltip {
     display: none;
+  }
+
+  /* Tighter padding on mobile */
+  .product-addon__details {
+    padding: var(--sp-3);
+  }
+
+  .product-addon__done {
+    padding-top: var(--sp-3);
+    margin-top: var(--sp-3);
+  }
+
+  .product-addon__done-btn {
+    padding: 14px 16px;
+    min-height: 48px;
+    font-size: 0.9375rem;
+    border-radius: 10px;
   }
 }
 
