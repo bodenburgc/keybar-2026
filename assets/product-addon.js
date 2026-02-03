@@ -17,14 +17,15 @@ if (!customElements.get('product-addon')) {
       this.variantContainers = this.querySelectorAll('[data-addon-variants]');
       this.formId = this.dataset.formId;
 
+      // Main card elements (new checkbox card UI)
+      this.mainCard = this.querySelector('[data-addon-main-card]');
+      this.collapsedTitle = this.querySelector('[data-addon-collapsed-title]');
+      this.collapsedValue = this.querySelector('[data-addon-collapsed-value]');
+
       // Progressive disclosure elements
-      this.collapsedHeader = this.querySelector('[data-addon-collapsed]');
       this.detailsPanel = this.querySelector('[data-addon-details]');
       this.toggleBtn = this.querySelector('[data-addon-toggle]');
       this.doneBtn = this.querySelector('[data-addon-done]');
-      this.collapsedValue = this.querySelector('[data-addon-collapsed-value]');
-      this.collapsedTitle = this.querySelector('[data-addon-collapsed-title]');
-      this.collapsedThumbnail = this.querySelector('[data-addon-thumbnail]');
 
       // Price elements
       this.basePrice = parseInt(this.dataset.basePrice, 10) || 0;
@@ -93,16 +94,17 @@ if (!customElements.get('product-addon')) {
     }
 
     /**
-     * Update the collapsed header to show current selection
+     * Update the main card to show current selection
      */
     updateCollapsedDisplay() {
-      // Get selected product name
+      // Get selected product info
       const selectedProductRadio = this.querySelector('[data-addon-product-radio]:checked');
-      const selectedCard = selectedProductRadio?.closest('.product-addon__card');
-      const productTitle = selectedCard?.querySelector('.product-addon__card-title')?.textContent?.trim() || '';
+      if (!selectedProductRadio) return;
+
+      const productTitle = selectedProductRadio.dataset.productTitle || '';
 
       // Get selected variant/color
-      const selectedProductId = selectedProductRadio?.value;
+      const selectedProductId = selectedProductRadio.value;
       const variantContainer = this.querySelector(`[data-addon-variants="${selectedProductId}"]`);
       const selectedVariantRadio = variantContainer?.querySelector('input[type="radio"]:checked');
       const variantValue = selectedVariantRadio?.value || '';
@@ -115,33 +117,6 @@ if (!customElements.get('product-addon')) {
       // Update variant value display
       if (this.collapsedValue) {
         this.collapsedValue.textContent = variantValue || 'Plain';
-      }
-
-      // Update thumbnail image
-      if (this.collapsedThumbnail) {
-        const selectedVariantId = this.variantInput?.value;
-        // Try to find the variant image from the JSON data
-        const variantsJson = variantContainer?.querySelector('[data-addon-variants-json]');
-        if (variantsJson) {
-          try {
-            const variants = JSON.parse(variantsJson.textContent);
-            const selectedVariant = variants.find(v => String(v.id) === String(selectedVariantId));
-            if (selectedVariant?.featured_image?.src) {
-              this.collapsedThumbnail.innerHTML = `
-                <img
-                  src="${selectedVariant.featured_image.src}&width=200"
-                  srcset="${selectedVariant.featured_image.src}&width=80 80w, ${selectedVariant.featured_image.src}&width=120 120w, ${selectedVariant.featured_image.src}&width=160 160w, ${selectedVariant.featured_image.src}&width=200 200w"
-                  sizes="72px"
-                  class="product-addon__collapsed-img"
-                  alt="${productTitle}"
-                  loading="lazy"
-                />
-              `;
-            }
-          } catch (e) {
-            // JSON parse error, leave thumbnail as is
-          }
-        }
       }
     }
 
@@ -251,6 +226,9 @@ if (!customElements.get('product-addon')) {
       // Update price display
       this.updatePriceDisplay(selectedRadio.dataset.firstVariantPrice);
 
+      // Update main card display
+      this.updateCollapsedDisplay();
+
       // Dispatch event for other components
       this.dispatchEvent(new CustomEvent('addon:product-changed', {
         bubbles: true,
@@ -290,6 +268,9 @@ if (!customElements.get('product-addon')) {
       if (selectedLabel) {
         selectedLabel.textContent = optionValue;
       }
+
+      // Update main card display (thumbnail, title, variant)
+      this.updateCollapsedDisplay();
 
       // Dispatch event
       this.dispatchEvent(new CustomEvent('addon:variant-changed', {

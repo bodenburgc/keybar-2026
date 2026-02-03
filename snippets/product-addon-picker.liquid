@@ -1,7 +1,8 @@
 {%- doc -%}
-  Renders an add-on product picker with image cards and variant swatches.
+  Renders an add-on product picker with checkbox card UI.
 
-  Displays linked products as clickable image cards with product photos.
+  Displays a prominent card with product thumbnail that's always visible.
+  Features "Complete Your Setup" framing to encourage engagement.
   Selected add-on variant is added to cart alongside main product.
 
   @param {object} product - The main product being viewed
@@ -37,11 +38,18 @@
 
   # Get customizable text
   assign addon_title = product.metafields.custom.clip_addon_title.value | default: 'Pocket Clip'
-  assign addon_description = product.metafields.custom.clip_addon_description.value | default: 'Select your titanium pocket clip color or upgrade to the deep carry pocket clip.'
+  assign addon_description = product.metafields.custom.clip_addon_description.value | default: 'Choose your clip style. The standard clip is included free in Plain finish. Upgrade to colored finishes or the Deep Carry 3.0 for a lower profile in your pocket.'
 
   # First product is the default
   assign default_addon = addon_products.first
   assign default_variant = default_addon.selected_or_first_available_variant
+  assign default_image = default_variant.featured_image | default: default_addon.featured_image
+
+  # Calculate if default is "free" (included)
+  assign is_included = false
+  if default_variant.price == 0
+    assign is_included = true
+  endif
 -%}
 
 {{ 'product-addon.css' | asset_url | stylesheet_tag }}
@@ -58,289 +66,284 @@
   data-currency-symbol="{{ cart.currency.symbol }}"
   {{ block.shopify_attributes }}
 >
-  {%- # Collapsed Header (Default State) - Thumbnail Card Design -%}
+  {%- # Section Header -%}
+  <div class="product-addon__section-header">
+    <div class="product-addon__section-header-content">
+      <h3 class="product-addon__section-title">
+        {%- render 'icon', icon: 'check-circle', size: 'sm' -%}
+        {{ addon_title }}
+      </h3>
+      {%- if addon_description != blank -%}
+        <p class="product-addon__section-desc">
+          {{ addon_description }}
+        </p>
+      {%- endif -%}
+    </div>
+    <span class="product-addon__badge">
+      {%- if is_included -%}
+        {{ 'products.addon.included' | t | default: 'Included' }}
+      {%- else -%}
+        {{ 'products.addon.from_price' | t: price: default_variant.price | money_without_trailing_zeros | default: 'From +' | append: default_variant.price | money_without_trailing_zeros }}
+      {%- endif -%}
+    </span>
+  </div>
+
+  {%- # Main Checkbox Card - Always Visible -%}
   {%- liquid
-    # Get default clip image for thumbnail
-    assign default_clip_image = default_variant.featured_image | default: default_addon.featured_image
-    # Get clip product title
-    assign clip_title = default_addon.title | default: 'Titanium Pocket Clip'
-    # Get a meaningful variant display name
+    assign clip_title = default_addon.title | default: 'Standard Pocket Clip'
     assign variant_display = default_variant.title
     if variant_display == 'Default Title' or variant_display == blank
       assign variant_display = default_variant.option1 | default: 'Plain'
     endif
   -%}
-  <div class="product-addon__collapsed" data-addon-collapsed>
-    <div class="product-addon__collapsed-thumbnail" data-addon-thumbnail>
-      {%- if default_clip_image != blank -%}
-        {{- default_clip_image | image_url: width: 200 | image_tag:
-          loading: 'lazy',
-          widths: '80,120,160,200',
-          class: 'product-addon__collapsed-img',
-          alt: clip_title | escape
-        -}}
-      {%- else -%}
-        <span class="product-addon__collapsed-img-placeholder">
-          {%- render 'icon', icon: 'package', size: 'md' -%}
-        </span>
-      {%- endif -%}
+  <div class="product-addon__main-card" data-addon-main-card>
+    <div class="product-addon__main-card-inner">
+      {%- # Content -%}
+      <div class="product-addon__main-content">
+        <div class="product-addon__main-info">
+          <span class="product-addon__main-title" data-addon-collapsed-title>{{ clip_title }}</span>
+          <span class="product-addon__main-variant" data-addon-collapsed-value>{{ variant_display }}</span>
+        </div>
+      </div>
+
+      {%- # Customize Button -%}
+      <button
+        type="button"
+        class="product-addon__customize-btn"
+        data-addon-toggle
+        aria-expanded="false"
+        aria-controls="AddonDetails-{{ section_id }}"
+      >
+        <span class="product-addon__customize-text">{{ 'products.addon.customize' | t | default: 'Customize' }}</span>
+        {%- render 'icon', icon: 'chevron-down', size: 'sm' -%}
+      </button>
     </div>
-    <div class="product-addon__collapsed-content">
-      <span class="product-addon__collapsed-label">Included with your KeyBar</span>
-      <span class="product-addon__collapsed-title" data-addon-collapsed-title>
-        {{- clip_title -}}
-      </span>
-      <span class="product-addon__collapsed-value" data-addon-collapsed-value>
-        {{- variant_display -}}
-      </span>
+
+    {%- # Checkmark indicator -%}
+    <div class="product-addon__main-check">
+      {%- render 'icon', icon: 'accept', size: 'sm' -%}
     </div>
-    <button type="button" class="product-addon__customize-btn" data-addon-toggle aria-expanded="false" aria-controls="AddonDetails-{{ section_id }}">
-      <span>{{ 'products.addon.change' | t | default: 'Change' }}</span>
-      {%- render 'icon', icon: 'chevron-right', size: 'sm' -%}
-    </button>
   </div>
 
-  {%- # Expanded Details (Hidden by Default) -%}
+  {%- # Expanded Details Panel -%}
   <div class="product-addon__details" id="AddonDetails-{{ section_id }}" data-addon-details hidden>
-    {%- # Section Header -%}
-    <div class="product-addon__header flex flex-col gap-2 mb-4">
-      <h3 class="product-addon__title heading h4">
-        {{ addon_title }}
-      </h3>
-      {%- if addon_description != blank -%}
-        <p class="product-addon__description text-sm text-opacity">
-          {{ addon_description }}
-        </p>
-      {%- endif -%}
-    </div>
-
-    {%- # Product Selector Image Cards -%}
-    <fieldset class="product-addon__selector mb-4">
-    <legend class="form__label text-sm mb-3 block">
-      {{ 'products.addon.available_options' | t | default: 'Available options' }}
-    </legend>
-    <div class="product-addon__cards grid gap-3" data-addon-product-cards>
-      {%- for addon_product in addon_products -%}
-        {%- liquid
-          assign first_variant = addon_product.selected_or_first_available_variant
-          assign base_price = addon_products.first.selected_or_first_available_variant.price
-          assign price_diff = first_variant.price | minus: base_price
-          assign featured_image = first_variant.featured_image | default: addon_product.featured_image
-        -%}
-        <div class="product-addon__card{% if forloop.first %} is-selected{% endif %}">
-          <input
-            type="radio"
-            class="sr-only"
-            id="AddonProduct-{{ section_id }}-{{ addon_product.id }}"
-            name="addon-product-{{ section_id }}"
-            value="{{ addon_product.id }}"
-            data-addon-product-radio
-            data-product-handle="{{ addon_product.handle }}"
-            data-first-variant-id="{{ first_variant.id }}"
-            data-first-variant-price="{{ first_variant.price }}"
-            {% if forloop.first %}checked{% endif %}
-          />
-          <label
-            for="AddonProduct-{{ section_id }}-{{ addon_product.id }}"
-            class="product-addon__card-label flex gap-3 cursor-pointer"
-          >
-            <div class="product-addon__card-media shrink-0 relative overflow-hidden">
-              {%- if featured_image != blank -%}
-                {{- featured_image | image_url: width: 120 | image_tag: loading: 'lazy', widths: '60,80,120,160', class: 'object-cover w-full h-full', alt: addon_product.title | escape -}}
-              {%- else -%}
-                <span aria-hidden="true" class="block w-full h-full">
-                  {{- 'product-1' | placeholder_svg_tag: 'placeholder' -}}
-                </span>
-              {%- endif -%}
-            </div>
-            <div class="product-addon__card-content flex flex-col justify-center gap-1">
-              <span class="product-addon__card-title font-medium text-sm leading-tight">
-                {{- addon_product.title | escape -}}
-              </span>
-              <span class="product-addon__card-price text-xs">
-                {%- if price_diff > 0 -%}
-                  +{{ price_diff | money }}
-                {%- elsif first_variant.price == 0 -%}
-                  {{ 'products.addon.included' | t | default: 'Included' }}
+    {%- # Clip Type Selector - Image Cards -%}
+    <fieldset class="product-addon__selector">
+      <legend class="product-addon__selector-label">Clip Type</legend>
+      <div class="product-addon__cards" data-addon-product-cards>
+        {%- for addon_product in addon_products -%}
+          {%- liquid
+            assign first_variant = addon_product.selected_or_first_available_variant
+            assign base_price = addon_products.first.selected_or_first_available_variant.price
+            assign price_diff = first_variant.price | minus: base_price
+            assign featured_image = first_variant.featured_image | default: addon_product.featured_image
+          -%}
+          <div class="product-addon__card{% if forloop.first %} is-selected{% endif %}">
+            <input
+              type="radio"
+              class="sr-only"
+              id="AddonProduct-{{ section_id }}-{{ addon_product.id }}"
+              name="addon-product-{{ section_id }}"
+              value="{{ addon_product.id }}"
+              data-addon-product-radio
+              data-product-handle="{{ addon_product.handle }}"
+              data-first-variant-id="{{ first_variant.id }}"
+              data-first-variant-price="{{ first_variant.price }}"
+              data-product-title="{{ addon_product.title | escape }}"
+              data-product-image="{% if featured_image %}{{ featured_image | image_url: width: 200 }}{% endif %}"
+              {% if forloop.first %}checked{% endif %}
+            />
+            <label for="AddonProduct-{{ section_id }}-{{ addon_product.id }}" class="product-addon__card-label">
+              <div class="product-addon__card-media">
+                {%- if featured_image != blank -%}
+                  {{- featured_image | image_url: width: 200 | image_tag: loading: 'lazy', widths: '100,150,200', class: 'product-addon__card-img', alt: addon_product.title | escape -}}
                 {%- else -%}
-                  +{{ first_variant.price | money }}
+                  <span class="product-addon__card-placeholder">
+                    {%- render 'icon', icon: 'product', size: 'md' -%}
+                  </span>
+                {%- endif -%}
+              </div>
+              <span class="product-addon__card-title">{{ addon_product.title | escape }}</span>
+              <span class="product-addon__card-price">
+                {%- if price_diff > 0 -%}
+                  +{{ price_diff | money_without_trailing_zeros }}
+                {%- elsif first_variant.price == 0 -%}
+                  Included
+                {%- else -%}
+                  +{{ first_variant.price | money_without_trailing_zeros }}
                 {%- endif -%}
               </span>
-            </div>
-            <div class="product-addon__card-check shrink-0 flex items-center">
-              {%- render 'icon', icon: 'checkmark', size: 'sm' -%}
-            </div>
-          </label>
-        </div>
-      {%- endfor -%}
-    </div>
-  </fieldset>
-
-  {%- # Variant Swatches for Each Add-on Product -%}
-  {%- for addon_product in addon_products -%}
-    <div
-      class="product-addon__variants{% unless forloop.first %} hidden{% endunless %}"
-      data-addon-variants="{{ addon_product.id }}"
-      data-product-id="{{ addon_product.id }}"
-    >
-      {%- unless addon_product.has_only_default_variant -%}
-        {%- for option in addon_product.options_with_values -%}
-          {%- liquid
-            # Check if this is a color option
-            assign is_color = false
-            assign swatch_trigger_list = 'products.general.color_swatch_trigger' | t | downcase | split: ','
-            assign downcased_option = option.name | downcase
-            for trigger in swatch_trigger_list
-              assign swatch_trigger = trigger | strip
-              if downcased_option contains swatch_trigger
-                assign is_color = true
-                break
-              endif
-            endfor
-          -%}
-
-          <fieldset class="product-addon__option mb-4">
-            <legend class="form__label text-sm mb-2 flex items-center gap-2">
-              <span class="text-accent font-medium">
-                {{ 'products.addon.choose' | t | default: 'Choose a' }} {{ option.name }}:
+              <span class="product-addon__card-check">
+                {%- render 'icon', icon: 'accept', size: 'sm' -%}
               </span>
-              <span class="font-medium" data-selected-option="{{ option.name }}">
-                {{ option.selected_value }}
-              </span>
-            </legend>
-
-            <ul class="swatches swatches--{{ settings.rounded_swatch }} flex items-start flex-wrap gap-3">
-              {%- for value in option.values -%}
-                {%- liquid
-                  # Find variant for this option value to get price
-                  assign variant_for_value = nil
-                  for variant in addon_product.variants
-                    if variant.option1 == value or variant.option2 == value or variant.option3 == value
-                      assign variant_for_value = variant
-                      break
-                    endif
-                  endfor
-                -%}
-                <li class="flex flex-col items-center gap-1">
-                  <input
-                    type="radio"
-                    class="sr-only peer"
-                    id="Addon-{{ section_id }}-{{ addon_product.id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
-                    name="addon-{{ addon_product.id }}-{{ option.name | handle }}"
-                    value="{{ value | escape }}"
-                    data-variant-id="{{ variant_for_value.id }}"
-                    data-variant-price="{{ variant_for_value.price }}"
-                    data-variant-available="{{ variant_for_value.available }}"
-                    {% if option.selected_value == value %}checked{% endif %}
-                    {% unless variant_for_value.available %}disabled{% endunless %}
-                  />
-
-                  {%- if is_color -%}
-                    {%- liquid
-                      # Swatch background logic
-                      assign swatch_image = blank
-                      assign swatch_fallback = value | split: ' ' | last | handle
-
-                      if value.swatch != blank
-                        if value.swatch.image
-                          assign swatch_image = value.swatch.image | image_url: width: 150
-                        elsif value.swatch.color
-                          assign swatch_fallback = value.swatch.color
-                        endif
-                      elsif variant_for_value.featured_image
-                        assign swatch_image = variant_for_value.featured_image | image_url: width: 150
-                      endif
-
-                      # Check settings for custom swatch colors
-                      if settings.swatch_config != blank and swatch_image == blank
-                        assign value_downcase = value | downcase
-                        assign swatch_config = settings.swatch_config | newline_to_br | split: '<br />'
-                        for swatch in swatch_config
-                          assign swatch_parts = swatch | strip | split: ':'
-                          assign swatch_name = swatch_parts.first | downcase | strip
-                          if swatch_name == value_downcase
-                            assign swatch_value = swatch_parts.last | strip
-                            if swatch_value contains '#'
-                              assign swatch_fallback = swatch_value
-                            endif
-                            break
-                          endif
-                        endfor
-                      endif
-
-                      # Hardcoded color mappings for common clip colors
-                      # These override CSS color name fallback for better accuracy
-                      assign value_lower = value | downcase
-                      case value_lower
-                        when 'plain'
-                          assign swatch_fallback = '#a8a9ad'
-                        when 'blackwashed'
-                          assign swatch_fallback = '#2d2d2d'
-                        when 'bronze'
-                          assign swatch_fallback = '#cd7f32'
-                        when 'gold'
-                          assign swatch_fallback = '#d4af37'
-                        when 'titanium'
-                          assign swatch_fallback = '#878681'
-                        when 'copper'
-                          assign swatch_fallback = '#b87333'
-                        when 'burnt bronze'
-                          assign swatch_fallback = '#704214'
-                        when 'midnight blue'
-                          assign swatch_fallback = '#191970'
-                      endcase
-                    -%}
-                    <label
-                      for="Addon-{{ section_id }}-{{ addon_product.id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
-                      class="color-swatch{% if swatch_image != blank %} with-image{% endif %}{% unless variant_for_value.available %} unavailable{% endunless %} cursor-pointer block relative"
-                      title="{{ value | escape }}"
-                      style="--swatch-background: {{ swatch_fallback }};{% if swatch_image != blank %}--swatch-background-image: url({{ swatch_image }});{% endif %}"
-                    >
-                      <span class="sr-only">{{ value | escape }}</span>
-                      <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ value | escape }}</span>
-                    </label>
-                  {%- else -%}
-                    <label
-                      for="Addon-{{ section_id }}-{{ addon_product.id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
-                      class="label-swatch{% unless variant_for_value.available %} unavailable{% endunless %} text-sm font-medium leading-none cursor-pointer block relative px-3 py-2 border rounded"
-                      title="{{ value | escape }}"
-                    >
-                      {{ value }}
-                    </label>
-                  {%- endif -%}
-
-                  {%- # Price indicator below swatch -%}
-                  {%- if variant_for_value.price > 0 -%}
-                    <span class="text-xs text-opacity">
-                      +{{ variant_for_value.price | money_without_trailing_zeros }}
-                    </span>
-                  {%- else -%}
-                    <span class="text-xs text-opacity">
-                      {{ 'products.addon.included_short' | t | default: 'Incl.' }}
-                    </span>
-                  {%- endif -%}
-                </li>
-              {%- endfor -%}
-            </ul>
-          </fieldset>
+            </label>
+          </div>
         {%- endfor -%}
-      {%- endunless -%}
+      </div>
+    </fieldset>
 
-      {%- # Store variant data as JSON for JS -%}
-      <script type="application/json" data-addon-variants-json>
-        {{ addon_product.variants | json }}
-      </script>
+    {%- # Variant Swatches for Each Add-on Product -%}
+    {%- for addon_product in addon_products -%}
+      <div
+        class="product-addon__variants{% unless forloop.first %} hidden{% endunless %}"
+        data-addon-variants="{{ addon_product.id }}"
+        data-product-id="{{ addon_product.id }}"
+      >
+        {%- unless addon_product.has_only_default_variant -%}
+          {%- for option in addon_product.options_with_values -%}
+            {%- liquid
+              # Check if this is a color option
+              assign is_color = false
+              assign swatch_trigger_list = 'products.general.color_swatch_trigger' | t | downcase | split: ','
+              assign downcased_option = option.name | downcase
+              for trigger in swatch_trigger_list
+                assign swatch_trigger = trigger | strip
+                if downcased_option contains swatch_trigger
+                  assign is_color = true
+                  break
+                endif
+              endfor
+            -%}
+
+            <fieldset class="product-addon__option">
+              <legend class="product-addon__option-label">
+                <span class="product-addon__option-name">{{ option.name }}:</span>
+                <span class="product-addon__option-value" data-selected-option="{{ option.name }}">
+                  {{ option.selected_value }}
+                </span>
+              </legend>
+
+              <ul class="product-addon__swatches swatches swatches--{{ settings.rounded_swatch }}">
+                {%- for value in option.values -%}
+                  {%- liquid
+                    # Find variant for this option value to get price
+                    assign variant_for_value = nil
+                    for variant in addon_product.variants
+                      if variant.option1 == value or variant.option2 == value or variant.option3 == value
+                        assign variant_for_value = variant
+                        break
+                      endif
+                    endfor
+                  -%}
+                  <li class="product-addon__swatch-item">
+                    <input
+                      type="radio"
+                      class="sr-only peer"
+                      id="Addon-{{ section_id }}-{{ addon_product.id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
+                      name="addon-{{ addon_product.id }}-{{ option.name | handle }}"
+                      value="{{ value | escape }}"
+                      data-variant-id="{{ variant_for_value.id }}"
+                      data-variant-price="{{ variant_for_value.price }}"
+                      data-variant-available="{{ variant_for_value.available }}"
+                      data-variant-image="{% if variant_for_value.featured_image %}{{ variant_for_value.featured_image | image_url: width: 200 }}{% endif %}"
+                      {% if option.selected_value == value %}checked{% endif %}
+                      {% unless variant_for_value.available %}disabled{% endunless %}
+                    />
+
+                    {%- if is_color -%}
+                      {%- liquid
+                        # Swatch background logic
+                        assign swatch_image = blank
+                        assign swatch_fallback = value | split: ' ' | last | handle
+
+                        if value.swatch != blank
+                          if value.swatch.image
+                            assign swatch_image = value.swatch.image | image_url: width: 150
+                          elsif value.swatch.color
+                            assign swatch_fallback = value.swatch.color
+                          endif
+                        elsif variant_for_value.featured_image
+                          assign swatch_image = variant_for_value.featured_image | image_url: width: 150
+                        endif
+
+                        # Check settings for custom swatch colors
+                        if settings.swatch_config != blank and swatch_image == blank
+                          assign value_downcase = value | downcase
+                          assign swatch_config = settings.swatch_config | newline_to_br | split: '<br />'
+                          for swatch in swatch_config
+                            assign swatch_parts = swatch | strip | split: ':'
+                            assign swatch_name = swatch_parts.first | downcase | strip
+                            if swatch_name == value_downcase
+                              assign swatch_value = swatch_parts.last | strip
+                              if swatch_value contains '#'
+                                assign swatch_fallback = swatch_value
+                              endif
+                              break
+                            endif
+                          endfor
+                        endif
+
+                        # Hardcoded color mappings for common clip colors
+                        assign value_lower = value | downcase
+                        case value_lower
+                          when 'plain'
+                            assign swatch_fallback = '#a8a9ad'
+                          when 'blackwashed'
+                            assign swatch_fallback = '#2d2d2d'
+                          when 'bronze'
+                            assign swatch_fallback = '#cd7f32'
+                          when 'gold'
+                            assign swatch_fallback = '#d4af37'
+                          when 'titanium'
+                            assign swatch_fallback = '#878681'
+                          when 'copper'
+                            assign swatch_fallback = '#b87333'
+                          when 'burnt bronze'
+                            assign swatch_fallback = '#704214'
+                          when 'midnight blue'
+                            assign swatch_fallback = '#191970'
+                        endcase
+                      -%}
+                      <label
+                        for="Addon-{{ section_id }}-{{ addon_product.id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
+                        class="product-addon__color-swatch{% if swatch_image != blank %} with-image{% endif %}{% unless variant_for_value.available %} unavailable{% endunless %}"
+                        title="{{ value | escape }}"
+                        style="--swatch-background: {{ swatch_fallback }};{% if swatch_image != blank %}--swatch-background-image: url({{ swatch_image }});{% endif %}"
+                      >
+                        <span class="sr-only">{{ value | escape }}</span>
+                        <span class="product-addon__swatch-tooltip">{{ value | escape }}</span>
+                      </label>
+                    {%- else -%}
+                      <label
+                        for="Addon-{{ section_id }}-{{ addon_product.id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
+                        class="product-addon__label-swatch{% unless variant_for_value.available %} unavailable{% endunless %}"
+                        title="{{ value | escape }}"
+                      >
+                        {{ value }}
+                      </label>
+                    {%- endif -%}
+
+                    {%- # Price indicator below swatch -%}
+                    <span class="product-addon__swatch-price">
+                      {%- if variant_for_value.price > 0 -%}
+                        +{{ variant_for_value.price | money_without_trailing_zeros }}
+                      {%- else -%}
+                        {{ 'products.addon.included_short' | t | default: 'Incl.' }}
+                      {%- endif -%}
+                    </span>
+                  </li>
+                {%- endfor -%}
+              </ul>
+            </fieldset>
+          {%- endfor -%}
+        {%- endunless -%}
+
+        {%- # Store variant data as JSON for JS -%}
+        <script type="application/json" data-addon-variants-json>
+          {{ addon_product.variants | json }}
+        </script>
+      </div>
+    {%- endfor -%}
+
+    {%- # Done link -%}
+    <div class="product-addon__done">
+      <button type="button" class="product-addon__done-btn" data-addon-done>
+        Done
+      </button>
     </div>
-  {%- endfor -%}
-
-    {%- # Done button to collapse -%}
-    <button type="button" class="product-addon__done-btn" data-addon-done>
-      {{ 'products.addon.done' | t | default: 'Done' }}
-    </button>
   </div>
-  {%- # End of Expanded Details -%}
 
-  {%- # Hidden checkbox for ProductForm bundles mechanism -%}
+  {%- # Hidden input for form submission -%}
   <input
     type="checkbox"
     class="sr-only"
@@ -352,10 +355,9 @@
     data-addon-variant-input
   />
 
-  {%- # Price summary -%}
-  <div class="product-addon__summary flex items-center justify-between py-3 border-t mt-4" data-addon-summary>
-    <span class="text-sm">{{ 'products.addon.selected' | t | default: 'Add-on' }}:</span>
-    <span class="font-medium" data-addon-price>
+  {%- # Hidden price summary (for JS reference) -%}
+  <div class="sr-only" data-addon-summary>
+    <span data-addon-price>
       {%- if default_variant.price == 0 -%}
         {{ 'products.addon.included' | t | default: 'Included' }}
       {%- else -%}
