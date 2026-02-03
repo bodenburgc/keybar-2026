@@ -79,7 +79,8 @@
             show_sold_out: settings.product_sold_out,
             show_save_amount: settings.product_save_amount,
             save_type: settings.product_save_type,
-            show_icon_list: settings.product_icon_list
+            show_icon_list: settings.product_icon_list,
+            show_card_description: true
           -%}
         {%- else -%}
           {%- for i in (1..section.settings.product_limit) -%}

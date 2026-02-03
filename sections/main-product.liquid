@@ -77,6 +77,11 @@
     display: none;
   }
 
+  /* Product short description */
+  #shopify-section-{{ section.id }} .product__description-short {
+    font-size: var(--text-base);
+  }
+
   /* Notice box styling for text blocks */
   #shopify-section-{{ section.id }} .product__text--notice {
     background-color: var(--notice-bg, #fee2e2);
@@ -390,7 +395,7 @@
               <div class="product__price grid gap-3" {{ block.shopify_attributes }}>
                 <div class="no-js-hidden" id="Price-{{ section.id }}-{{ product.id }}">
                   {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap items-baseline gap-2 lg:gap-1d5 text-3xl lg:text-4xl' -%}
-                  
+
                   {%- if product.quantity_price_breaks_configured? -%}
                     <div class="text-opacity text-sm font-medium leading-tight" id="VolumeNote-{{ section.id }}-{{ product.id }}">
                       {{- 'products.volume_pricing.note' | t -}}

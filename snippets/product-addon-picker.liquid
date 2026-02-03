@@ -58,31 +58,45 @@
   data-currency-symbol="{{ cart.currency.symbol }}"
   {{ block.shopify_attributes }}
 >
-  {%- # Collapsed Header (Default State) -%}
+  {%- # Collapsed Header (Default State) - Thumbnail Card Design -%}
+  {%- liquid
+    # Get default clip image for thumbnail
+    assign default_clip_image = default_variant.featured_image | default: default_addon.featured_image
+    # Get clip product title
+    assign clip_title = default_addon.title | default: 'Titanium Pocket Clip'
+    # Get a meaningful variant display name
+    assign variant_display = default_variant.title
+    if variant_display == 'Default Title' or variant_display == blank
+      assign variant_display = default_variant.option1 | default: 'Plain'
+    endif
+  -%}
   <div class="product-addon__collapsed" data-addon-collapsed>
+    <div class="product-addon__collapsed-thumbnail" data-addon-thumbnail>
+      {%- if default_clip_image != blank -%}
+        {{- default_clip_image | image_url: width: 200 | image_tag:
+          loading: 'lazy',
+          widths: '80,120,160,200',
+          class: 'product-addon__collapsed-img',
+          alt: clip_title | escape
+        -}}
+      {%- else -%}
+        <span class="product-addon__collapsed-img-placeholder">
+          {%- render 'icon', icon: 'package', size: 'md' -%}
+        </span>
+      {%- endif -%}
+    </div>
     <div class="product-addon__collapsed-content">
-      <div class="product-addon__collapsed-icon">
-        {%- render 'icon', icon: 'checkmark', size: 'sm' -%}
-      </div>
-      <div class="product-addon__collapsed-info">
-        <span class="product-addon__collapsed-title">
-          {{ 'products.addon.includes_clip' | t | default: 'Includes Titanium Pocket Clip' }}
-        </span>
-{%- liquid
-          # Get a meaningful variant display name
-          assign variant_display = default_variant.title
-          if variant_display == 'Default Title' or variant_display == blank
-            assign variant_display = default_variant.option1 | default: 'Plain'
-          endif
-        -%}
-        <span class="product-addon__collapsed-value" data-addon-collapsed-value>
-          {{ default_addon.title }}{% if variant_display != blank %} — {{ variant_display }}{% endif %}
-        </span>
-      </div>
+      <span class="product-addon__collapsed-label">Included with your KeyBar</span>
+      <span class="product-addon__collapsed-title" data-addon-collapsed-title>
+        {{- clip_title -}}
+      </span>
+      <span class="product-addon__collapsed-value" data-addon-collapsed-value>
+        {{- variant_display -}}
+      </span>
     </div>
     <button type="button" class="product-addon__customize-btn" data-addon-toggle aria-expanded="false" aria-controls="AddonDetails-{{ section_id }}">
-      <span>{{ 'products.addon.customize' | t | default: 'Customize' }}</span>
-      {%- render 'icon', icon: 'chevron-down', size: 'sm' -%}
+      <span>{{ 'products.addon.change' | t | default: 'Change' }}</span>
+      {%- render 'icon', icon: 'chevron-right', size: 'sm' -%}
     </button>
   </div>
 

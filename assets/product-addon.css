@@ -20,89 +20,126 @@
 }
 
 /* ============================================
-   Collapsed State (Default)
+   Collapsed State (Default) - Thumbnail Card
    ============================================ */
 
 .product-addon__collapsed {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: var(--sp-3);
-  padding: var(--sp-4);
-  background: rgba(var(--color-foreground), 0.02);
-  border: 1px solid var(--addon-border-color);
-  border-radius: var(--rounded-input, 8px);
+  gap: var(--sp-4);
+  padding: var(--sp-3);
+  background: rgb(var(--color-background));
+  border: 1px solid rgba(var(--color-foreground), 0.12);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.product-addon__collapsed-content {
-  display: flex;
-  align-items: center;
-  gap: var(--sp-3);
+.product-addon__collapsed:hover {
+  border-color: rgba(var(--color-foreground), 0.2);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06), 0 6px 16px rgba(0, 0, 0, 0.04);
 }
 
-.product-addon__collapsed-icon {
+/* Thumbnail container */
+.product-addon__collapsed-thumbnail {
+  flex-shrink: 0;
+  width: 72px;
+  height: 56px;
+  background: linear-gradient(135deg, #f8f8f8 0%, #f0f0f0 100%);
+  border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
-  background: var(--addon-accent-color);
-  color: rgb(var(--color-background));
-  border-radius: 50%;
-  flex-shrink: 0;
+  overflow: hidden;
 }
 
-.product-addon__collapsed-icon svg {
-  width: 14px;
-  height: 14px;
+.product-addon__collapsed-img {
+  transform: rotate(90deg);
+  transform-origin: center center;
+  max-width: none;
+  width: auto;
+  height: 65px;
+  object-fit: contain;
 }
 
-.product-addon__collapsed-info {
+.product-addon__collapsed-img-placeholder {
+  color: rgba(var(--color-foreground), 0.3);
+}
+
+.product-addon__collapsed-img-placeholder svg {
+  width: 28px;
+  height: 28px;
+}
+
+/* Content area */
+.product-addon__collapsed-content {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.product-addon__collapsed-label {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--addon-accent-color);
 }
 
 .product-addon__collapsed-title {
   font-size: 0.875rem;
   font-weight: 600;
   color: rgb(var(--color-foreground));
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .product-addon__collapsed-value {
-  font-size: 0.75rem;
-  color: rgba(var(--color-foreground), 0.7);
+  font-size: 0.8125rem;
+  color: rgba(var(--color-foreground), 0.6);
+  font-weight: 400;
 }
 
 .product-addon__customize-btn {
   display: flex;
   align-items: center;
-  gap: var(--sp-2);
+  gap: var(--sp-1);
   padding: var(--sp-2) var(--sp-3);
-  font-size: 0.875rem;
-  font-weight: 500;
-  color: var(--addon-accent-color);
-  background: transparent;
-  border: 1px solid var(--addon-accent-color);
-  border-radius: var(--rounded-input, 8px);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+  background: rgba(var(--color-foreground), 0.06);
+  border: none;
+  border-radius: 20px;
   cursor: pointer;
   transition: all var(--animation-short, 0.2s);
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .product-addon__customize-btn:hover {
-  background: var(--addon-accent-color);
-  color: rgb(var(--color-background));
+  background: rgba(var(--color-foreground), 0.1);
+  color: rgb(var(--color-foreground));
 }
 
 .product-addon__customize-btn svg {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
+  opacity: 0.6;
   transition: transform var(--animation-short, 0.2s);
 }
 
+.product-addon__customize-btn:hover svg {
+  transform: translateX(2px);
+  opacity: 1;
+}
+
 .product-addon__customize-btn[aria-expanded="true"] svg {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 
 /* Hide collapsed state when expanded */
@@ -453,13 +490,28 @@
 
 @media screen and (max-width: 480px) {
   .product-addon__collapsed {
-    flex-direction: column;
-    align-items: stretch;
     gap: var(--sp-3);
   }
 
+  .product-addon__collapsed-thumbnail {
+    width: 60px;
+    height: 48px;
+  }
+
+  .product-addon__collapsed-img {
+    height: 52px;
+  }
+
+  .product-addon__collapsed-title {
+    font-size: 0.8125rem;
+  }
+
   .product-addon__customize-btn {
-    justify-content: center;
+    padding: var(--sp-2);
+  }
+
+  .product-addon__customize-btn span {
+    display: none;
   }
 }
 

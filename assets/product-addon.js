@@ -23,6 +23,8 @@ if (!customElements.get('product-addon')) {
       this.toggleBtn = this.querySelector('[data-addon-toggle]');
       this.doneBtn = this.querySelector('[data-addon-done]');
       this.collapsedValue = this.querySelector('[data-addon-collapsed-value]');
+      this.collapsedTitle = this.querySelector('[data-addon-collapsed-title]');
+      this.collapsedThumbnail = this.querySelector('[data-addon-thumbnail]');
 
       // Price elements
       this.basePrice = parseInt(this.dataset.basePrice, 10) || 0;
@@ -94,8 +96,6 @@ if (!customElements.get('product-addon')) {
      * Update the collapsed header to show current selection
      */
     updateCollapsedDisplay() {
-      if (!this.collapsedValue) return;
-
       // Get selected product name
       const selectedProductRadio = this.querySelector('[data-addon-product-radio]:checked');
       const selectedCard = selectedProductRadio?.closest('.product-addon__card');
@@ -107,11 +107,41 @@ if (!customElements.get('product-addon')) {
       const selectedVariantRadio = variantContainer?.querySelector('input[type="radio"]:checked');
       const variantValue = selectedVariantRadio?.value || '';
 
-      // Update display
-      if (productTitle && variantValue) {
-        this.collapsedValue.textContent = `${productTitle} — ${variantValue}`;
-      } else if (productTitle) {
-        this.collapsedValue.textContent = productTitle;
+      // Update title
+      if (this.collapsedTitle && productTitle) {
+        this.collapsedTitle.textContent = productTitle;
+      }
+
+      // Update variant value display
+      if (this.collapsedValue) {
+        this.collapsedValue.textContent = variantValue || 'Plain';
+      }
+
+      // Update thumbnail image
+      if (this.collapsedThumbnail) {
+        const selectedVariantId = this.variantInput?.value;
+        // Try to find the variant image from the JSON data
+        const variantsJson = variantContainer?.querySelector('[data-addon-variants-json]');
+        if (variantsJson) {
+          try {
+            const variants = JSON.parse(variantsJson.textContent);
+            const selectedVariant = variants.find(v => String(v.id) === String(selectedVariantId));
+            if (selectedVariant?.featured_image?.src) {
+              this.collapsedThumbnail.innerHTML = `
+                <img
+                  src="${selectedVariant.featured_image.src}&width=200"
+                  srcset="${selectedVariant.featured_image.src}&width=80 80w, ${selectedVariant.featured_image.src}&width=120 120w, ${selectedVariant.featured_image.src}&width=160 160w, ${selectedVariant.featured_image.src}&width=200 200w"
+                  sizes="72px"
+                  class="product-addon__collapsed-img"
+                  alt="${productTitle}"
+                  loading="lazy"
+                />
+              `;
+            }
+          } catch (e) {
+            // JSON parse error, leave thumbnail as is
+          }
+        }
       }
     }
 
