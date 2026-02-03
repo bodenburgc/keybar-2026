@@ -146,6 +146,7 @@ _None currently_
 - [x] **#40 - Increase vendor label letter-spacing** - Increased from 0.1em to 0.15em in main-product.liquid.
 - [x] **#41 - Fix Add to Cart button border color** - Added `--color-button-border: 22 50 62` to match dark teal background.
 - [ ] **#43 - Remove space below vendor label** - Extra gap between "KEYBAR" vendor and product title. Reduce/remove `margin-bottom` on vendor element or `margin-top` on H1 title. Check `sections/main-product.liquid` and `assets/theme.css`.
+- [ ] **#44 - Increase vendor letter-spacing further** - Current 0.15em not wide enough. Try 0.2em, 0.25em, or 0.3em. Modify in `sections/main-product.liquid`.
 
 ### Accessibility (P2)
 
