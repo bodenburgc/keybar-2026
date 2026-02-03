@@ -43,7 +43,6 @@
   # First product is the default
   assign default_addon = addon_products.first
   assign default_variant = default_addon.selected_or_first_available_variant
-  assign default_image = default_variant.featured_image | default: default_addon.featured_image
 
   # Calculate if default is "free" (included)
   assign is_included = false
