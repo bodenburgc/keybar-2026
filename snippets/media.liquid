@@ -37,7 +37,7 @@
 
 {%- case media.media_type -%}
   {%- when 'image' -%}
-    {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: lazyimage, width: media.preview_image.width, height: media.preview_image.height -}}
+    {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, preload: preload, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: lazyimage, width: media.preview_image.width, height: media.preview_image.height -}}
 
   {%- when 'video', 'external_video' -%}
     <video-media class="deferred-media block relative w-full" style="--aspect-ratio: {{ media.aspect_ratio }};" data-aspect-ratio="{{ media.aspect_ratio }}" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}"

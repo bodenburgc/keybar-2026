@@ -48,11 +48,6 @@
       endif
     -%}
 
-    {%- comment -%}Preload featured product image for LCP optimization{%- endcomment -%}
-    {%- if request.page_type == 'product' and product.featured_media -%}
-      <link rel="preload" as="image" href="{{ product.featured_media | image_url: width: 1200 }}" fetchpriority="high" imagesrcset="{{ product.featured_media | image_url: width: 400 }} 400w, {{ product.featured_media | image_url: width: 800 }} 800w, {{ product.featured_media | image_url: width: 1200 }} 1200w" imagesizes="(max-width: 740px) 100vw, 50vw">
-    {%- endif -%}
-
     <link rel="stylesheet" href="{{ 'apps.css' | asset_url }}" media="print" fetchpriority="low" onload="this.media='all'">
 
     {{ content_for_header }}
