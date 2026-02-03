@@ -49,24 +49,26 @@
   }
 
   /* Add to Cart button - dark teal with white text */
-  #shopify-section-{{ section.id }} .product-form__submit {
-    --color-button-background: var(--color-heading);
+  #shopify-section-{{ section.id }} .product-form__submit.button {
+    --color-button-background: 22 50 62;
     --color-button-text: 255 255 255;
-    --color-button-gradient: rgb(var(--color-heading));
-    background: rgb(var(--color-heading)) !important;
-    color: rgb(255 255 255) !important;
+    background-color: #16323e !important;
+    background-image: none !important;
+    color: #ffffff !important;
+    border-color: #16323e !important;
   }
 
-  #shopify-section-{{ section.id }} .product-form__submit .btn-fill {
-    background: rgb(255 255 255) !important;
+  #shopify-section-{{ section.id }} .product-form__submit.button .btn-fill {
+    background-color: #ffffff !important;
   }
 
-  #shopify-section-{{ section.id }} .product-form__submit .btn-text {
-    color: rgb(255 255 255);
+  #shopify-section-{{ section.id }} .product-form__submit.button .btn-text,
+  #shopify-section-{{ section.id }} .product-form__submit.button span {
+    color: #ffffff !important;
   }
 
-  #shopify-section-{{ section.id }} .product-form__submit:hover {
-    opacity: 0.9;
+  #shopify-section-{{ section.id }} .product-form__submit.button:hover {
+    background-color: #1c3d4a !important;
   }
 
   /* Hide tax notice */
