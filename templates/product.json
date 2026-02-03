@@ -69,10 +69,6 @@
           "type": "addon_picker",
           "settings": {}
         },
-        "sku_Lac8zH": {
-          "type": "sku",
-          "settings": {}
-        },
         "inventory": {
           "type": "inventory",
           "settings": {
@@ -144,7 +140,6 @@
         "countdown",
         "variant_picker",
         "addon_picker_D8xdAc",
-        "sku_Lac8zH",
         "inventory",
         "text_TM4nxD",
         "buy_buttons",
@@ -292,7 +287,7 @@
         "color_button_gradient": "",
         "padding_top": 48,
         "padding_bottom": 52,
-        "divider": false,
+        "divider": true,
         "full_width": false,
         "rounded": false
       }

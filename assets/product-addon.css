@@ -14,6 +14,9 @@
   --addon-swatch-height: 72px;
   --addon-swatch-width-mobile: 24px;
   --addon-swatch-height-mobile: 60px;
+
+  /* Override default product block spacing for better visual separation */
+  margin-block-start: var(--sp-8) !important;
 }
 
 /* ============================================

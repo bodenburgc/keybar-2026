@@ -51,6 +51,33 @@
   #shopify-section-{{ section.id }} .product__text--notice p {
     color: inherit;
   }
+
+  /* Improved quantity input disabled state */
+  #shopify-section-{{ section.id }} .quantity:has(:disabled) {
+    opacity: 0.5;
+    background-color: rgba(var(--color-foreground), 0.03);
+    cursor: not-allowed;
+  }
+
+  #shopify-section-{{ section.id }} .quantity__input:disabled,
+  #shopify-section-{{ section.id }} .quantity__button:disabled {
+    cursor: not-allowed;
+    color: rgba(var(--color-foreground), 0.4);
+  }
+
+  /* Enhanced gallery thumbnail hover state */
+  #shopify-section-{{ section.id }} .product__thumbnail:hover::after {
+    --tw-ring-color: rgba(var(--color-foreground), 0.3);
+  }
+
+  #shopify-section-{{ section.id }} .product__thumbnail:hover img {
+    transform: scale(1.02);
+    transition: transform var(--animation-fast);
+  }
+
+  #shopify-section-{{ section.id }} .product__thumbnail img {
+    transition: transform var(--animation-fast);
+  }
 </style>
 
 {%- liquid

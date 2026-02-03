@@ -5,6 +5,17 @@
     {%- render 'section-variables', section: section -%}
     --section-grid-gap: {{ section.settings.grid_horizontal }}px;
   }
+
+  /* Increase list item spacing for better readability */
+  #shopify-section-{{ section.id }} .rte li {
+    margin-block-start: var(--sp-3);
+  }
+
+  @media screen and (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .rte li {
+      margin-block-start: var(--sp-4);
+    }
+  }
 </style>
 
 {%- assign description = section.blocks | where: "type", "description" | first -%}
