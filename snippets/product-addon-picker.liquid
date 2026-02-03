@@ -79,11 +79,11 @@
         </p>
       {%- endif -%}
     </div>
-    <span class="product-addon__badge">
+    <span class="product-addon__badge" data-addon-badge>
       {%- if is_included -%}
-        {{ 'products.addon.included' | t | default: 'Included' }}
+        $0
       {%- else -%}
-        {{ 'products.addon.from_price' | t: price: default_variant.price | money_without_trailing_zeros | default: 'From +' | append: default_variant.price | money_without_trailing_zeros }}
+        +{{ default_variant.price | money_without_trailing_zeros }}
       {%- endif -%}
     </span>
   </div>

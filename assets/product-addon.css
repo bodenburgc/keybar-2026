@@ -227,15 +227,17 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: var(--sp-3);
-  padding: 6px;
-  margin: -6px;
+  padding: 10px;
+  margin: -10px;
 }
 
 .product-addon__card {
   position: relative;
+  width: 100%;
 }
 
 .product-addon__card-label {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -256,9 +258,9 @@
 /* Selected state */
 .product-addon__card.is-selected .product-addon__card-label,
 .product-addon__card input:checked + .product-addon__card-label {
-  border: 2px solid rgba(var(--color-foreground), 0.6);
-  outline: 3px solid rgba(var(--color-foreground), 0.2);
-  outline-offset: 1px;
+  border: 1px solid #9ca3af;
+  outline: 2px solid #e5e7eb;
+  outline-offset: 0;
 }
 
 /* Focus state */
@@ -316,8 +318,8 @@
 /* Card checkmark indicator */
 .product-addon__card-check {
   position: absolute;
-  top: -6px;
-  right: -6px;
+  top: -8px;
+  right: -8px;
   width: 22px;
   height: 22px;
   display: flex;
@@ -330,6 +332,7 @@
   transform: scale(0.8);
   transition: opacity var(--animation-short, 0.2s), transform var(--animation-short, 0.2s);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  z-index: 1;
 }
 
 .product-addon__card-check svg {
@@ -405,6 +408,15 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  padding: 6px;
+  border-radius: 8px;
+  transition: outline var(--animation-short, 0.2s), background var(--animation-short, 0.2s);
+}
+
+/* Selected state - outline wraps swatch + price */
+.product-addon__swatch-item:has(input:checked) {
+  outline: 2px solid #e5e7eb;
+  background: rgba(var(--color-foreground), 0.03);
 }
 
 /* Color Swatches */
@@ -412,7 +424,7 @@
   position: relative;
   width: 44px;
   height: 68px;
-  border-radius: 22px;
+  border-radius: 6px;
   border: 2px solid var(--addon-border-color);
   background: var(--swatch-background);
   background-image: var(--swatch-background-image);
@@ -449,11 +461,9 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
 }
 
-/* Selected state */
+/* Selected state - swatch border only (outline on parent) */
 .product-addon__swatch-item input:checked + .product-addon__color-swatch {
-  border: 2px solid rgba(var(--color-foreground), 0.6);
-  outline: 3px solid rgba(var(--color-foreground), 0.2);
-  outline-offset: 1px;
+  border-color: #9ca3af;
 }
 
 .product-addon__swatch-item input:checked + .product-addon__color-swatch::after {

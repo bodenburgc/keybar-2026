@@ -21,6 +21,7 @@ if (!customElements.get('product-addon')) {
       this.mainCard = this.querySelector('[data-addon-main-card]');
       this.collapsedTitle = this.querySelector('[data-addon-collapsed-title]');
       this.collapsedValue = this.querySelector('[data-addon-collapsed-value]');
+      this.priceBadge = this.querySelector('[data-addon-badge]');
 
       // Progressive disclosure elements
       this.detailsPanel = this.querySelector('[data-addon-details]');
@@ -286,15 +287,25 @@ if (!customElements.get('product-addon')) {
      * Update the add-on price display (in the add-on section)
      */
     updatePriceDisplay(price) {
-      if (!this.priceDisplay) return;
-
       const priceNum = parseInt(price, 10);
       this.currentAddonPrice = priceNum;
 
-      if (priceNum === 0) {
-        this.priceDisplay.textContent = theme?.strings?.addonIncluded || 'Included';
-      } else {
-        this.priceDisplay.textContent = '+' + this.formatMoney(priceNum);
+      // Update hidden price summary
+      if (this.priceDisplay) {
+        if (priceNum === 0) {
+          this.priceDisplay.textContent = theme?.strings?.addonIncluded || 'Included';
+        } else {
+          this.priceDisplay.textContent = '+' + this.formatMoney(priceNum);
+        }
+      }
+
+      // Update the price badge in the header
+      if (this.priceBadge) {
+        if (priceNum === 0) {
+          this.priceBadge.textContent = '$0';
+        } else {
+          this.priceBadge.textContent = '+' + this.formatMoney(priceNum);
+        }
       }
 
       // Update the main product price display
