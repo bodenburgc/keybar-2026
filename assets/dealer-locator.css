@@ -3,6 +3,10 @@
  * Uses theme color variables
  */
 
+.dealer-locator {
+  contain: content;
+}
+
 /* Fix title wrapper visibility */
 .dealer-locator-section .title-wrapper {
   position: relative;

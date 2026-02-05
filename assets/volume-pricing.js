@@ -1,3 +1,4 @@
+// TODO(BODE): backport to BODE-shopify
 if (!customElements.get('price-per-item')) {
   customElements.define(
     'price-per-item',
@@ -84,9 +85,9 @@ if (!customElements.get('price-per-item')) {
         if (this.classList.contains('variant-item__price-per-item')) {
           this.currentQtyForVolumePricing = this.getCartQuantity(updatedCartQuantity);
         }
+        const pricePerItemsCurrent = document.querySelectorAll(`price-per-item[id^="PricePerItem-${this.sectionId || this.variantId}-${this.productId}"] .price-per-item--current`);
         for (let pair of this.qtyPricePairs) {
           if (this.currentQtyForVolumePricing >= pair[0]) {
-            const pricePerItemsCurrent = document.querySelectorAll(`price-per-item[id^="PricePerItem-${this.sectionId || this.variantId}-${this.productId}"] .price-per-item--current`);
             pricePerItemsCurrent.forEach((pricePerItemCurrent) => {
               this.classList.contains('variant-item__price-per-item') ? pricePerItemCurrent.innerHTML = theme.quickOrderListStrings.each.replace('[money]', pair[1]) : pricePerItemCurrent.innerHTML = pair[1];
             });

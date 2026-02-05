@@ -1,4 +1,5 @@
 .mobile-dock {
+  contain: layout style;
   visibility: visible;
   transform: translateY(100%);
   color: rgb(var(--color-foreground));
@@ -130,5 +131,14 @@
 
   .mobile-dock[loaded] {
     transition: transform var(--animation-primary);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-dock[loaded],
+  .header-sticky .header,
+  .mobile-dock-section~.page-container :is(.facet-sticky, .product-sticky-form),
+  .header-sticky~.page-container .scrollspy-section {
+    transition-duration: 0s !important;
   }
 }

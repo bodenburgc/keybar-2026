@@ -6,6 +6,7 @@
  */
 
 .product-addon {
+  contain: content;
   --addon-border-color: rgba(var(--color-foreground), 0.12);
   --addon-accent-color: rgb(var(--color-accent, 255 215 0));
   --addon-accent-rgb: var(--color-accent-rgb, 255, 215, 0);
@@ -735,5 +736,30 @@
 
   .product-addon__details {
     display: block !important;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-addon__main-card,
+  .product-addon__customize-indicator,
+  .product-addon__customize-indicator svg,
+  .product-addon__card-label,
+  .product-addon__card-check,
+  .product-addon__color-swatch,
+  .product-addon__color-swatch::after,
+  .product-addon__label-swatch,
+  .product-addon__swatch-item,
+  .product-addon__swatch-tooltip,
+  .product-addon__done-btn {
+    transition-duration: 0s !important;
+  }
+
+  .product-addon__details,
+  .product-addon__variants {
+    animation-duration: 0s !important;
   }
 }

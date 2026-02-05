@@ -1,3 +1,4 @@
+// TODO(BODE): backport to BODE-shopify
 if (!customElements.get('facet-form')) {
   customElements.define(
     'facet-form',
@@ -189,7 +190,7 @@ if (!customElements.get('facet-form')) {
               this.afterRenderSection();
             }, execution > 500 ? 0 : 500);
           })
-          .catch(() => {});
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
 
       renderSectionFromCache(url, event) {
@@ -571,7 +572,7 @@ if (!customElements.get('infinite-button')) {
             this.renderPagination(responseText);
             this.renderProductGridContainer(responseText);
           })
-          .catch(() => {});
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
 
       renderPagination(responseText) {

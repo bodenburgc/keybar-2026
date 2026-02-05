@@ -1,3 +1,4 @@
+// TODO(BODE): backport to BODE-shopify
 if (!customElements.get('search-drawer')) {
   customElements.define(
     'search-drawer',
@@ -177,7 +178,7 @@ if (!customElements.get('predictive-search')) {
             this.removeAttribute('loading');
             this.setAttribute('results', '');
           })
-          .catch(() => {});
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
 
       renderSearchResults(responseText) {

@@ -1,3 +1,4 @@
+// TODO(BODE): backport to BODE-shopify
 if (!customElements.get('remove-gift-wrap')) {
   customElements.define(
     'remove-gift-wrap',
@@ -112,7 +113,7 @@ if (!customElements.get('gift-wrapping')) {
           .then((parsedState) => {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'gift-wrapping', cart: parsedState });
           })
-          .catch(() => {});
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
 
       enableLoading() {
@@ -240,7 +241,7 @@ if (!customElements.get('gift-wrap-selector')) {
                 theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'gift-wrap', cart: cartJson });
               });
           })
-          .catch(() => {});
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
 
       unsetGiftWrap() {
@@ -286,7 +287,7 @@ if (!customElements.get('gift-wrap-selector')) {
                 theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'gift-wrap', cart: cartJson });
               });
           })
-          .catch(() => {});
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
     }
   );
@@ -342,7 +343,7 @@ if (!customElements.get('gift-wrap-item')) {
           .then((parsedState) => {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'gift-wrap', cart: parsedState });
           })
-          .catch(() => {});
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
 
       enableLoading(line) {

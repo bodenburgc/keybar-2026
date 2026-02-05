@@ -86,7 +86,7 @@ if (!customElements.get('compact-product-bundle')) {
     
             this.cartDrawer?.show(this.activeElement);
           })
-          .catch(() => {})
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); })
           .finally(() => {
             this.submitButton.removeAttribute('aria-busy');
     

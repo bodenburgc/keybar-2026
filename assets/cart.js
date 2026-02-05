@@ -1,3 +1,4 @@
+// TODO(BODE): backport to BODE-shopify
 if (!customElements.get('tab-list')) {
   customElements.define(
     'tab-list',
@@ -301,7 +302,7 @@ if (!customElements.get('cart-items')) {
           .then((parsedState) => {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cart: parsedState, target, line, name });
           })
-          .catch(() => {});
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
 
       /**
@@ -517,7 +518,7 @@ if (!customElements.get('shipping-calculator')) {
               this.formatError(parsedState);
             }
           })
-          .catch(() => {})
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); })
           .finally(() => {
             this.resultsElement.hidden = false;
             this.submitButton.removeAttribute('aria-busy');
@@ -643,7 +644,7 @@ if (!customElements.get('cart-discount')) {
 
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'cart-discount', cart: parsedState });
           })
-          .catch(() => {})
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); })
           .finally(() => {
             this.submitButton.removeAttribute('aria-busy');
           });
@@ -679,7 +680,7 @@ if (!customElements.get('cart-discount')) {
           .then((parsedState) => {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'cart-discount', cart: parsedState });
           })
-          .catch(() => {})
+          .catch((e) => { if (e.name !== 'AbortError') console.error(e); })
           .finally(() => {
             event.target.removeAttribute('loading');
           });

@@ -1,5 +1,9 @@
 /*! compact-product-bundle */
 
+.compact-product-bundle {
+  contain: content;
+}
+
 .compact-product-bundle-wrapper .product-card--promo {
   --card-column-size: 1;
   --card-row-size: 1;
