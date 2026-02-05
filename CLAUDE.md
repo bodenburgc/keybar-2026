@@ -20,15 +20,24 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 shopify auth login                              # Authenticate (opens browser)
 shopify theme dev -s keybarus.myshopify.com     # Local development with hot reload
 shopify theme push -s keybarus.myshopify.com    # Deploy to store
+shopify theme push -s keybarus.myshopify.com -t 186764001563 --allow-live  # Deploy to live theme
 shopify theme pull -s keybarus.myshopify.com    # Pull live theme changes
 shopify theme check                             # Lint/validate theme
+shopify theme share -s keybarus.myshopify.com   # Generate preview link
 ```
 
 **No build step required** - CSS/JS are served as-is from `/assets/`.
 
 ## BODE Upstream Framework
 
-This repo is a downstream fork of BODE. **Framework changes (sections, snippets, core JS/CSS) should be made in BODE-shopify first**, then pulled here.
+This repo is a downstream fork of BODE (migrated from WordPress). **Framework changes (sections, snippets, core JS/CSS) should be made in BODE-shopify first**, then pulled here.
+
+**Git Remotes:**
+
+| Remote | Repo | Purpose |
+|--------|------|---------|
+| origin | `bodenburgc/keybar-2026` | Push project changes |
+| upstream | `bodenburgc/BODE-shopify` | Pull framework updates |
 
 ```bash
 # Pull framework updates
