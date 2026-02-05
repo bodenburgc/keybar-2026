@@ -80,7 +80,7 @@
           "settings": {
             "inventory_threshold": 15,
             "show_inventory_transfer": true,
-            "show_inventory_quantity": "low",
+            "show_inventory_quantity": "none",
             "color_scheme": "accent-1"
           }
         },
