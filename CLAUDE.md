@@ -8,13 +8,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | Key Info | Value |
 |----------|-------|
-| Brand | KeyBar |
-| Theme Framework | BODE 1.0.0 |
 | Store URL | keybarus.myshopify.com |
+| Theme Framework | BODE 1.0.0 |
 | Shopify API | 2024-01 |
-| Target Market | EDC enthusiasts, "Stop the Noise" |
 
-**Task List:** See `TODO.md` for pending tasks and recent completions.
+**Task List:** `TODO.md` | **Feature Specs:** `.docs/` | **Brand Guidelines:** `.docs/brand/`
 
 ## Shopify CLI Commands
 
@@ -24,48 +22,25 @@ shopify theme dev -s keybarus.myshopify.com     # Local development with hot rel
 shopify theme push -s keybarus.myshopify.com    # Deploy to store
 shopify theme pull -s keybarus.myshopify.com    # Pull live theme changes
 shopify theme check                             # Lint/validate theme
-shopify theme share -s keybarus.myshopify.com   # Generate preview link
 ```
 
-**Store config:** The `-s` flag is required unless you have `.shopify/project.json`:
-```json
-{"store": "keybarus.myshopify.com"}
-```
+**No build step required** - CSS/JS are served as-is from `/assets/`.
 
-**No build step required** - No npm, webpack, or compilation. CSS/JS are served as-is from `/assets/`.
+## BODE Upstream Framework
 
-## Framework Relationship (BODE Upstream)
-
-This repo is a downstream fork of the BODE theme framework. Framework changes (sections, snippets, core JS/CSS) should be made in BODE-shopify first, then pulled here via the upstream remote.
-
-### Git Remotes
-
-```
-origin   → https://github.com/bodenburgc/keybar-2026.git      (KeyBar changes)
-upstream → https://github.com/bodenburgc/BODE-shopify.git     (Framework updates)
-```
-
-### Development Workflow
-
-| Change Type | Where to Make Change |
-|-------------|---------------------|
-| Bug fix in section/snippet | BODE-shopify → push → pull upstream here |
-| New reusable section | BODE-shopify → push → pull upstream here |
-| Improve JS/CSS framework | BODE-shopify → push → pull upstream here |
-| KeyBar colors/fonts/logos | HERE (keybar-2026) |
-| KeyBar homepage layout | HERE (keybar-2026) |
-| Brand guidelines | HERE (`.docs/brand/`) |
-
-### Pulling Framework Updates
+This repo is a downstream fork of BODE. **Framework changes (sections, snippets, core JS/CSS) should be made in BODE-shopify first**, then pulled here.
 
 ```bash
-git fetch upstream
-git merge upstream/main
-# Resolve any conflicts in brand-specific files (.gitattributes protects key files)
-git push origin main
+# Pull framework updates
+git fetch upstream && git merge upstream/main && git push origin main
 ```
 
-**Protected files (merge=ours via .gitattributes):** `config/settings_data.json`, `.shopify/*`, `templates/index.json`, `sections/header-group.json`, `sections/footer-group.json`, `sections/overlay-group.json`, `.docs/brand/*`
+| Change Type | Where |
+|-------------|-------|
+| Section/snippet bug fixes, new reusable sections, JS/CSS framework | BODE-shopify first |
+| KeyBar brand (colors, fonts, logos, homepage, `.docs/brand/`) | This repo |
+
+**Protected files (merge=ours):** `config/settings_data.json`, `.shopify/*`, `templates/index.json`, `sections/*-group.json`, `.docs/brand/*`
 
 ## Theme Architecture
 
@@ -95,53 +70,26 @@ theme.css + theme.js (consume variables)
 
 ### Section Color Schemes
 
-Sections support three color schemes via `snippets/color-scheme.liquid`:
+Sections support `light` (default), `dark` (gunmetal/white/gold), and `accent` (gold/dark) color schemes.
 
-| Scheme | Description |
-|--------|-------------|
-| `light` | Default - uses global theme colors (no CSS overrides) |
-| `dark` | Gunmetal background, white text, gold accents |
-| `accent` | Gold background, dark text |
-
-**Usage in sections:**
 ```liquid
 {%- render 'color-scheme', scheme: section.settings.color_scheme -%}
 ```
 
-**Related snippets:**
-- `snippets/color-scheme.liquid` - Main color scheme switcher (preferred)
-- `snippets/color-scheme-dark.liquid` - Legacy dark-only snippet
-- `snippets/section-variables.liquid` - Per-section spacing/layout overrides
+See `.docs/COLOR-SCHEMES.md` for implementation details.
 
-### Asset Loading (in layout/theme.liquid)
+### Asset Loading
 
-**Always loaded:** `fonts.css` → `css-variables` → `theme.css` → `vendor.js` → `theme.js`
+**Always loaded:** `fonts.css` → `css-variables.liquid` → `theme.css` → `vendor.js` → `theme.js`
 
-**Conditionally loaded based on page type:**
-- Customer pages: `shopify_common.js`
-- RTL languages: `rtl.css`
-- Tab attention feature: `tab-attention.js`
-- Preload links: `instant-page.js`
-
-**Template-specific assets** (loaded in individual sections):
-- `cart.js/css`, `collection.js/css`, `product-bundle.js/css`, `dealer-locator.js/css`, etc.
+**Template-specific:** Assets like `cart.js/css`, `collection.js/css`, `product-bundle.js/css` are loaded in their respective sections.
 
 ### Web Components
 
-Interactive features use custom elements (70+ total in `theme.js`). Key ones:
-- `<product-bundle>` - Bundle builder interface
-- `<product-addon>` - Add-on product selector (clips, etc.)
-- `<variant-picker>` - Product variant selection
-- `<product-info>` - Main product data container
-- `<media-gallery>` - Product image gallery with zoom
-- `<motion-list>` - Animated product grids
-- `<sticky-element>` - Sticky sidebars
-- `<carousel-element>` - Product/content carousels
-- `<slider-element>` - Slideshows and sliders
-- `<modal-element>` - Modals and drawers
-- `<accordion-details>` - Expandable FAQ/details
-- `<countdown-timer>` - Sale countdown timers
-- `<g-map>` - Google Maps integration (dealer locator)
+Interactive features use custom elements (70+ in `theme.js`). Key ones:
+- **Product:** `<product-bundle>`, `<product-addon>`, `<variant-picker>`, `<product-info>`, `<media-gallery>`
+- **UI:** `<modal-element>`, `<accordion-details>`, `<carousel-element>`, `<slider-element>`, `<motion-list>`
+- **Other:** `<sticky-element>`, `<countdown-timer>`, `<g-map>` (dealer locator)
 
 ### Key Files
 
@@ -150,16 +98,15 @@ Interactive features use custom elements (70+ total in `theme.js`). Key ones:
 | `snippets/css-variables.liquid` | Theme settings → CSS custom properties (`:root`) |
 | `snippets/js-variables.liquid` | Routes, feature flags → `window.theme` object |
 | `config/settings_schema.json` | Theme settings definitions (from BODE) |
-| `config/settings_data.json` | Current values (DO NOT edit manually) |
+| `config/settings_data.json` | Current values (**DO NOT edit manually**) |
 | `locales/en.default.json` | Translation strings |
 
 ## KeyBar-Specific Sections
 
 - `product-bundle.liquid` + `product-bundle.js` - Bundle KeyBar + inserts
+- `product-addon-picker.liquid` - Pocket clip add-on selector (see `.docs/FEATURE-CLIP-ADDON.md`)
 - `product-comparison.liquid` - Compare KeyBar sizes/materials
 - `dealer-locator.liquid` + `dealer-locator.js` - Find retailers (Maps API)
-- `compact-product-bundle.liquid` - Simplified bundle UI
-- `product-addon-picker.liquid` - Pocket clip add-on selector (see Pocket Clip section below)
 
 ## Development Notes
 
@@ -171,30 +118,16 @@ Interactive features use custom elements (70+ total in `theme.js`). Key ones:
 -%}
 <!-- HTML content -->
 {% schema %}
-{
-  "name": "Section Name",
-  "settings": [...],
-  "blocks": [...],
-  "presets": [...]
-}
+{ "name": "Section Name", "settings": [...], "blocks": [...], "presets": [...] }
 {% endschema %}
 ```
 
-**Liquid Syntax:**
-- Logic: `{%- liquid ... -%}` (whitespace-trimmed)
-- Output: `{{ variable }}`
-- Include: `{% render 'snippet-name', param: value %}`
-- Translations: `{{ 'key.path' | t }}`
-- Assets: `{{ 'filename' | asset_url }}`
+**Liquid Syntax:** `{%- liquid ... -%}` (logic), `{{ variable }}` (output), `{% render 'snippet' %}` (include), `{{ 'key' | t }}` (translations)
 
-**Snippet Documentation Pattern:**
+**Snippet Documentation:**
 ```liquid
 {%- doc -%}
-  Description of what the snippet does.
-
-  @param {type} name - Parameter description
-  @example
-  {%- render 'snippet-name', param: value -%}
+  @param {type} name - Description
 {%- enddoc -%}
 ```
 
@@ -202,83 +135,34 @@ Interactive features use custom elements (70+ total in `theme.js`). Key ones:
 
 | Color | Hex | Usage |
 |-------|-----|-------|
-| KeyBar Gold | #FFD700 | Primary accent, buttons, highlights |
-| Dark Teal | #16323e | Text, headings, section headers |
-| Light Gray | #EBEEF1 | Alternate section backgrounds |
-| White | #FFFFFF | Primary background |
-| Gunmetal | #1c1f22 | Footer background, dark sections |
-
-**Color Scheme System:** Sections support `light`, `dark`, and `accent` color schemes. See `.docs/COLOR-SCHEMES.md` for implementation details.
+| KeyBar Gold | #FFD700 | Primary accent, buttons |
+| Dark Teal | #16323e | Text, headings |
+| Gunmetal | #1c1f22 | Footer, dark sections |
+| Light Gray | #EBEEF1 | Alternate backgrounds |
 
 ## SEO Implementation
 
-### Structured Data (JSON-LD)
+**Structured Data (JSON-LD):** All schemas use `https://schema.org` (not http)
+- `Product` in `main-product.liquid` (images, price, SKU, shipping, returns)
+- `BreadcrumbList` in `product-breadcrumb.liquid`
+- `FAQPage` in `faq.liquid`
+- `CollectionPage`, `BlogPosting`, `Organization` in respective sections
 
-| Schema Type | Location | Status |
-|-------------|----------|--------|
-| Product | `sections/main-product.liquid` | Full schema with images, price, shipping, returns |
-| BreadcrumbList | `snippets/product-breadcrumb.liquid` | Dynamic based on collection |
-| CollectionPage | `sections/main-collection.liquid` | Basic schema |
-| BlogPosting | `sections/main-article*.liquid` | With author (Person schema) |
-| FAQPage | `sections/faq.liquid` | Question/Answer pairs |
-| Organization | `snippets/header-logo.liquid` | Logo microdata |
+**Best Practices:** One H1 per page, all images need alt text, canonical URLs handled by Shopify.
 
-**All schemas use `https://schema.org`** (not http)
+## Cart & Page Configuration
 
-### Product Schema Includes
-- All product images (not just first)
-- Price with currency
-- SKU from selected variant
-- Availability (InStock/OutOfStock)
-- Shipping details (1-2 day handling, 2-5 day transit)
-- Return policy (30 days, free returns)
-- Ready for AggregateRating when reviews are added
+**Cart:** Free shipping threshold $75, cart drawer enabled with recommendations. Vendor hidden (KeyBar is sole brand).
 
-### SEO Best Practices
-- One H1 per page (product title on product pages)
-- Section headings configurable but default to H2
-- All images should have descriptive alt text
-- Canonical URLs handled by Shopify
-
-## Cart Configuration
-
-| Setting | Value | Location |
-|---------|-------|----------|
-| Free Shipping Threshold | $75 | `templates/cart.json`, `sections/overlay-group.json` |
-| Show Vendor | Disabled | KeyBar is sole brand |
-| Cart Drawer | Enabled | With recommendations, recently viewed |
-| Empty Cart Collections | keybars, inserts | Suggested when cart empty |
-
-## Page Templates
-
-| Template | Purpose |
-|----------|---------|
-| `page.about.json` | About page with gallery |
-| `page.faqs.json` | FAQ categories with accordion |
-| `page.setup-care.json` | Assembly & care instructions |
-| `page.dealer-info.json` | Become a Dealer information |
-| `page.style-guide.json` | Internal style reference |
+**Page Templates:** `page.about.json`, `page.faqs.json`, `page.setup-care.json`, `page.dealer-info.json`, `page.style-guide.json`
 
 ## Product Add-On System
 
-A reusable add-on picker allowing customers to select optional products (like pocket clips) when purchasing KeyBars.
+Add-on picker for optional products (pocket clips) when purchasing KeyBars. **Full spec:** `.docs/FEATURE-CLIP-ADDON.md`
 
-**Full spec:** `.docs/FEATURE-CLIP-ADDON.md`
+**Files:** `snippets/product-addon-picker.liquid`, `assets/product-addon.js`, `assets/product-addon.css`
 
-**Files:**
-- `snippets/product-addon-picker.liquid` - UI component
-- `assets/product-addon.js` - `<product-addon>` web component
-- `assets/product-addon.css` - Styles
-
-**Metafields per product:**
-| Metafield | Type |
-|-----------|------|
-| `custom.enable_clip_add_on` | Boolean |
-| `custom.clip_addon_products` | List of products |
-| `custom.clip_addon_title` | Single line text (optional) |
-| `custom.clip_addon_description` | Multi-line text (optional) |
-
-**Theme Editor:** Add "Add-on picker" block to product page template.
+**Required Metafields:** `custom.enable_clip_add_on` (boolean), `custom.clip_addon_products` (product list)
 
 ## Important Constraints
 
