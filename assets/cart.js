@@ -135,6 +135,29 @@ if (!customElements.get('cart-remove-button')) {
           event.preventDefault();
 
           const cartItems = this.closest('cart-items');
+          const lineItem = this.closest('[data-bundle-group]');
+
+          // Check if this item has an addon that needs to be removed too
+          if (lineItem && lineItem.dataset.hasAddon === 'true') {
+            const bundleGroup = lineItem.dataset.bundleGroup;
+            // Find the linked addon item by bundle group
+            const addonItem = document.querySelector(`[data-bundle-group="${bundleGroup}"][data-is-addon="true"]`);
+
+            if (addonItem) {
+              // Get the addon's key from its ID (format: CartItem-{key} or CartDrawer-Item-{key})
+              const addonId = addonItem.id;
+              const addonKey = addonId.replace('CartItem-', '').replace('CartDrawer-Item-', '');
+
+              // Remove both items - addon first, then the main product
+              cartItems.updateQuantityMultiple([
+                { line: addonKey, quantity: 0 },
+                { line: this.getAttribute('data-index'), quantity: 0 }
+              ]);
+              return;
+            }
+          }
+
+          // Standard single item removal
           cartItems.updateQuantity(this.getAttribute('data-index'), 0);
         });
       }
@@ -279,6 +302,39 @@ if (!customElements.get('cart-items')) {
             theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cart: parsedState, target, line, name });
           })
           .catch(() => {});
+      }
+
+      /**
+       * Update multiple items at once (e.g., removing bundled items together)
+       * Uses the cart/update.js endpoint with the updates object
+       */
+      async updateQuantityMultiple(updates) {
+        if (!updates || updates.length === 0) return;
+
+        // Show loading for all items being updated
+        updates.forEach(update => this.enableLoading(update.line));
+
+        let sectionsToBundle = [];
+        document.documentElement.dispatchEvent(new CustomEvent('cart:bundled-sections', { bubbles: true, detail: { sections: sectionsToBundle } }));
+
+        // Build the updates object for cart/update.js
+        const updatesObj = {};
+        updates.forEach(update => {
+          updatesObj[update.line] = update.quantity;
+        });
+
+        const body = JSON.stringify({
+          updates: updatesObj,
+          sections: sectionsToBundle
+        });
+
+        try {
+          const response = await fetch(theme.routes.cart_update_url, { ...theme.utils.fetchConfig(), ...{ body } });
+          const parsedState = await response.json();
+          theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.cartUpdate, { source: 'cart-items', cart: parsedState });
+        } catch (e) {
+          // Silent fail - cart will refresh on next interaction
+        }
       }
 
       enableLoading(line) {

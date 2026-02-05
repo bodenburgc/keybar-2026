@@ -5335,20 +5335,39 @@ class ProductForm extends HTMLFormElement {
   prepareFormData(formData) {
     const bundlesLength = this.bundles.length;
     const itemsArray = new Array(bundlesLength + 1);
-    
+
+    // Generate a unique bundle group ID for linking items
+    const bundleGroupId = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
+
+    // Check if any bundle is an addon (marked by product-addon component)
+    const hasAddon = this.bundles.some(bundle => bundle.value && document.querySelector(`input[data-is-addon-bundle][value="${bundle.value}"]`));
+
     for (let i = 0; i < bundlesLength; i++) {
       const reverseIndex = bundlesLength - 1 - i;
-      itemsArray[i] = {
+      const bundleItem = {
         id: this.bundles[reverseIndex].value,
         quantity: 1
       };
+
+      // If this is an addon item, mark it with properties
+      if (hasAddon) {
+        const isAddonInput = document.querySelector(`input[data-is-addon-bundle][value="${this.bundles[reverseIndex].value}"]`);
+        if (isAddonInput) {
+          bundleItem.properties = {
+            '_bundle_group': bundleGroupId,
+            '_is_addon': 'true'
+          };
+        }
+      }
+
+      itemsArray[i] = bundleItem;
     }
-    
+
     const allFormData = { items: itemsArray.slice(0, bundlesLength) };
-    
+
     const json = {};
     const formEntries = Array.from(formData.entries());
-    
+
     for (const [name, value] of formEntries) {
       if (name === 'id' || name === 'quantity' || name.includes('properties')) {
         if (name === 'id' || name === 'quantity') {
@@ -5363,7 +5382,14 @@ class ProductForm extends HTMLFormElement {
         allFormData[name] = value;
       }
     }
-    
+
+    // If we have addon bundles, mark the main product as having an addon
+    if (hasAddon) {
+      json.properties = json.properties || {};
+      json.properties['_bundle_group'] = bundleGroupId;
+      json.properties['_has_addon'] = 'true';
+    }
+
     allFormData.items.push(json);
     return allFormData;
   }

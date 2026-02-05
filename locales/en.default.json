@@ -524,7 +524,8 @@
       "includes_clip": "Includes Titanium Pocket Clip",
       "customize": "Customize",
       "change": "Change",
-      "done": "Done"
+      "done": "Done",
+      "included_with_keybar": "Included with your KeyBar - remove the KeyBar to remove this item"
     },
     "product": {
       "product_variants": "Product variants",

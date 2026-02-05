@@ -140,9 +140,14 @@
                       if gift_wrap_variant != nil and item.id == gift_wrap_variant.id
                         assign is_gift_wrap_item = true
                       endif
+
+                      assign is_addon_item = false
+                      if item.properties['_is_addon'] == 'true'
+                        assign is_addon_item = true
+                      endif
                     -%}
                     {%- capture cart_item -%}
-                      <li id="CartDrawer-Item-{{ item.key }}" class="horizontal-product flex items-start gap-4 md:gap-6" data-variant-id="{{ item.variant_id }}" data-handle="{{ item.product.handle }}" data-quantity="{{ item.quantity }}" data-price="{{ item.original_price }}">
+                      <li id="CartDrawer-Item-{{ item.key }}" class="horizontal-product flex items-start gap-4 md:gap-6" data-variant-id="{{ item.variant_id }}" data-handle="{{ item.product.handle }}" data-quantity="{{ item.quantity }}" data-price="{{ item.original_price }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] == 'true' %} data-has-addon="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
                         {%- if item.image -%}
                           <a class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0" href="{{ item.url }}" tabindex="-1">
                             {{- item.image | image_url: width: item.image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
@@ -321,7 +326,7 @@
                             {%- endcapture -%}
                           {%- endif -%}
                           <div class="flex flex-col justify-between gap-3 h-full">
-                            {%- unless is_gift_wrap_item -%}
+                            {%- unless is_gift_wrap_item or is_addon_item -%}
                               <div class="cart-quantity__info flex items-center gap-3">
                                 {%- if has_qty_rules or has_vol_pricing -%}
                                   <hover-element class="hotspot hidden md:flex items-center justify-end relative cursor-pointer">
@@ -434,7 +439,11 @@
                               <div id="Loader-{{ section.id }}-{{ item.key }}" class="loader absolute right-0" hidden>
                                 {%- render 'icon', icon: 'rotator', size: 'xs', class: 'animate-rotator' -%}
                               </div>
-                              <a class="link" href="{{ item.url_to_remove }}"{% unless is_gift_wrap_item %} is="cart-remove-button"{% else %} is="remove-gift-wrap"{% endunless %} data-index="{{ item.key }}" data-no-instant>{{ 'cart.general.remove' | t }}</a>
+                              {%- if is_addon_item -%}
+                                <span class="text-opacity cursor-help" title="{{ 'products.addon.included_with_keybar' | t }}">{{ 'products.addon.included' | t }}</span>
+                              {%- else -%}
+                                <a class="link" href="{{ item.url_to_remove }}"{% unless is_gift_wrap_item %} is="cart-remove-button"{% else %} is="remove-gift-wrap"{% endunless %} data-index="{{ item.key }}" data-no-instant>{{ 'cart.general.remove' | t }}</a>
+                              {%- endif -%}
                             </div>
                           </div>
                         </div>

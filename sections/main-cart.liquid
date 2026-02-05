@@ -89,9 +89,14 @@
                       if gift_wrap_variant != nil and item.id == gift_wrap_variant.id
                         assign is_gift_wrap_item = true
                       endif
+
+                      assign is_addon_item = false
+                      if item.properties['_is_addon'] == 'true'
+                        assign is_addon_item = true
+                      endif
                     -%}
                     {%- capture cart_item -%}
-                      <tr class="cart-item" id="CartItem-{{ item.key }}">
+                      <tr class="cart-item" id="CartItem-{{ item.key }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] == 'true' %} data-has-addon="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
                         <td>
                           <div class="flex items-start md:items-center gap-4d5 md:gap-10">
                             {%- if item.image -%}
@@ -293,7 +298,7 @@
                                 </div>
                               </hover-element>
                             {%- endif -%}
-                            {%- unless is_gift_wrap_item -%}
+                            {%- unless is_gift_wrap_item or is_addon_item -%}
                               <div class="flex gap-3">
                                 {%- if has_qty_rules or has_vol_pricing -%}
                                   <button type="button" class="md:hidden flex items-center justify-center" aria-controls="VolumePricing-{{ section.id }}-{{ item.key }}" aria-expanded="false">
@@ -400,7 +405,11 @@
                               <div id="Loader-{{ section.id }}-{{ item.key }}" class="loader absolute right-0 md:left-0" hidden>
                                 {%- render 'icon', icon: 'rotator', size: 'xs', class: 'animate-rotator' -%}
                               </div>
-                              <a class="link" href="{{ item.url_to_remove }}"{% unless is_gift_wrap_item %} is="cart-remove-button"{% else %} is="remove-gift-wrap"{% endunless %} data-index="{{ item.key }}" data-no-instant>{{ 'cart.general.remove' | t }}</a>
+                              {%- if is_addon_item -%}
+                                <span class="text-opacity cursor-help" title="{{ 'products.addon.included_with_keybar' | t }}">{{ 'products.addon.included' | t }}</span>
+                              {%- else -%}
+                                <a class="link" href="{{ item.url_to_remove }}"{% unless is_gift_wrap_item %} is="cart-remove-button"{% else %} is="remove-gift-wrap"{% endunless %} data-index="{{ item.key }}" data-no-instant>{{ 'cart.general.remove' | t }}</a>
+                              {%- endif -%}
                             </div>
                           </div>
                         </td>
