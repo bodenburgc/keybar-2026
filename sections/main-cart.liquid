@@ -91,13 +91,13 @@
                       endif
 
                       assign is_addon_item = false
-                      if item.properties['_is_addon'] == 'true'
+                      if item.properties['_is_addon']
                         assign is_addon_item = true
                         continue
                       endif
                     -%}
                     {%- capture cart_item -%}
-                      <tr class="cart-item" id="CartItem-{{ item.key }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] == 'true' %} data-has-addon="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
+                      <tr class="cart-item" id="CartItem-{{ item.key }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] %} data-has-addon="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
                         <td>
                           <div class="flex items-start md:items-center gap-4d5 md:gap-10">
                             {%- if item.image -%}
@@ -230,11 +230,11 @@
                               </div>
                             </div>
                           </div>
-                          {%- if item.properties['_has_addon'] == 'true' -%}
+                          {%- if item.properties['_has_addon'] -%}
                             {%- assign bundle_group = item.properties['_bundle_group'] -%}
                             {%- for addon_check in cart.items -%}
-                              {%- if addon_check.properties['_is_addon'] == 'true' and addon_check.properties['_bundle_group'] == bundle_group -%}
-                                <div class="cart-addon-nested" data-bundle-group="{{ bundle_group }}" data-is-addon="true">
+                              {%- if addon_check.properties['_is_addon'] and addon_check.properties['_bundle_group'] == bundle_group -%}
+                                <div class="cart-addon-nested" id="CartItem-{{ addon_check.key }}" data-bundle-group="{{ bundle_group }}" data-is-addon="true">
                                   {%- render 'cart-addon-item', item: addon_check -%}
                                 </div>
                                 {%- break -%}
@@ -430,10 +430,10 @@
                           <span class="price fluid-xl">
                             {%- liquid
                               assign line_total = item.final_line_price
-                              if item.properties['_has_addon'] == 'true'
+                              if item.properties['_has_addon']
                                 assign bundle_group = item.properties['_bundle_group']
                                 for addon_item in cart.items
-                                  if addon_item.properties['_is_addon'] == 'true' and addon_item.properties['_bundle_group'] == bundle_group
+                                  if addon_item.properties['_is_addon'] and addon_item.properties['_bundle_group'] == bundle_group
                                     assign line_total = line_total | plus: addon_item.final_line_price
                                     break
                                   endif

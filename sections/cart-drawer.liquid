@@ -1,4 +1,5 @@
 {%- if request.page_type != 'cart' and settings.cart_type == 'drawer' -%}
+  {{ 'cart.css' | asset_url | stylesheet_tag }}
   <script src="{{ 'cart.js' | asset_url }}" defer></script>
   {%- if settings.gift_wrap_product != blank and settings.gift_wrap_product.available -%}
     <script src="{{ 'gift-wrapping.js' | asset_url }}" defer="defer"></script>
@@ -142,13 +143,13 @@
                       endif
 
                       assign is_addon_item = false
-                      if item.properties['_is_addon'] == 'true'
+                      if item.properties['_is_addon']
                         assign is_addon_item = true
                         continue
                       endif
                     -%}
                     {%- capture cart_item -%}
-                      <li id="CartDrawer-Item-{{ item.key }}" class="horizontal-product flex items-start gap-4 md:gap-6" data-variant-id="{{ item.variant_id }}" data-handle="{{ item.product.handle }}" data-quantity="{{ item.quantity }}" data-price="{{ item.original_price }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] == 'true' %} data-has-addon="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
+                      <li id="CartDrawer-Item-{{ item.key }}" class="horizontal-product flex items-start gap-4 md:gap-6" data-variant-id="{{ item.variant_id }}" data-handle="{{ item.product.handle }}" data-quantity="{{ item.quantity }}" data-price="{{ item.original_price }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] %} data-has-addon="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
                         {%- if item.image -%}
                           <a class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0" href="{{ item.url }}" tabindex="-1">
                             {{- item.image | image_url: width: item.image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
@@ -449,11 +450,11 @@
                           </div>
                         </div>
                       </li>
-                      {%- if item.properties['_has_addon'] == 'true' -%}
+                      {%- if item.properties['_has_addon'] -%}
                         {%- assign bundle_group = item.properties['_bundle_group'] -%}
                         {%- for addon_check in cart.items -%}
-                          {%- if addon_check.properties['_is_addon'] == 'true' and addon_check.properties['_bundle_group'] == bundle_group -%}
-                            <li class="horizontal-product horizontal-product--nested" data-bundle-group="{{ bundle_group }}" data-is-addon="true">
+                          {%- if addon_check.properties['_is_addon'] and addon_check.properties['_bundle_group'] == bundle_group -%}
+                            <li class="horizontal-product horizontal-product--nested" id="CartDrawer-Item-{{ addon_check.key }}" data-bundle-group="{{ bundle_group }}" data-is-addon="true">
                               {%- render 'cart-addon-item', item: addon_check -%}
                             </li>
                             {%- break -%}
