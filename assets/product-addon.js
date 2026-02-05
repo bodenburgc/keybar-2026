@@ -145,54 +145,13 @@ if (!customElements.get('product-addon')) {
       // Store reference to form
       this.form = form;
 
-      // Rename our input to avoid the native form property shadowing issue
-      // The form auto-creates form.bundles when there's an input named "bundles"
+      // Mark input as addon bundle for identification in prepareFormData
+      // Keep name as "bundles" so the querySelectorAll in theme.js finds it
+      // Also ensure the input is checked (default clip should always be included)
       if (this.variantInput) {
-        this.variantInput.setAttribute('name', 'addon_bundle');
         this.variantInput.setAttribute('data-is-addon-bundle', 'true');
+        this.variantInput.checked = true;
       }
-
-      // Override the form's bundles getter to include our addon input
-      this.patchFormBundles(form);
-    }
-
-    /**
-     * Patch the form's bundles property to return an array including our addon
-     */
-    patchFormBundles(form) {
-      const self = this;
-      const originalDescriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(form), 'bundles');
-
-      // Define a new bundles property on this specific form instance
-      Object.defineProperty(form, 'bundles', {
-        get: function() {
-          // Get the original bundles from the prototype getter if it exists
-          let bundles = [];
-          if (originalDescriptor && originalDescriptor.get) {
-            try {
-              const original = originalDescriptor.get.call(this);
-              if (Array.isArray(original)) {
-                bundles = [...original];
-              }
-            } catch (e) {
-              // Ignore errors from original getter
-            }
-          }
-
-          // Add our addon input if it's checked and has a value
-          if (self.variantInput && self.variantInput.checked && self.variantInput.value) {
-            // Create a proxy object that looks like the input for the bundles mechanism
-            bundles.push({
-              value: self.variantInput.value,
-              checked: true,
-              disabled: false
-            });
-          }
-
-          return bundles;
-        },
-        configurable: true
-      });
     }
 
     /**

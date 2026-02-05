@@ -93,6 +93,7 @@
                       assign is_addon_item = false
                       if item.properties['_is_addon'] == 'true'
                         assign is_addon_item = true
+                        continue
                       endif
                     -%}
                     {%- capture cart_item -%}
@@ -229,6 +230,17 @@
                               </div>
                             </div>
                           </div>
+                          {%- if item.properties['_has_addon'] == 'true' -%}
+                            {%- assign bundle_group = item.properties['_bundle_group'] -%}
+                            {%- for addon_check in cart.items -%}
+                              {%- if addon_check.properties['_is_addon'] == 'true' and addon_check.properties['_bundle_group'] == bundle_group -%}
+                                <div class="cart-addon-nested" data-bundle-group="{{ bundle_group }}" data-is-addon="true">
+                                  {%- render 'cart-addon-item', item: addon_check -%}
+                                </div>
+                                {%- break -%}
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- endif -%}
                         </td>
 
                         <td class="cart-item__quantity text-sm text-right md:text-left">
@@ -417,10 +429,20 @@
                         <td class="text-right hidden md:table-cell">
                           <span class="price fluid-xl">
                             {%- liquid
+                              assign line_total = item.final_line_price
+                              if item.properties['_has_addon'] == 'true'
+                                assign bundle_group = item.properties['_bundle_group']
+                                for addon_item in cart.items
+                                  if addon_item.properties['_is_addon'] == 'true' and addon_item.properties['_bundle_group'] == bundle_group
+                                    assign line_total = line_total | plus: addon_item.final_line_price
+                                    break
+                                  endif
+                                endfor
+                              endif
                               if settings.currency_code_enabled
-                                echo item.final_line_price | money_with_currency
+                                echo line_total | money_with_currency
                               else
-                                echo item.final_line_price | money
+                                echo line_total | money
                               endif
                             -%}
                           </span>

@@ -144,6 +144,7 @@
                       assign is_addon_item = false
                       if item.properties['_is_addon'] == 'true'
                         assign is_addon_item = true
+                        continue
                       endif
                     -%}
                     {%- capture cart_item -%}
@@ -448,6 +449,17 @@
                           </div>
                         </div>
                       </li>
+                      {%- if item.properties['_has_addon'] == 'true' -%}
+                        {%- assign bundle_group = item.properties['_bundle_group'] -%}
+                        {%- for addon_check in cart.items -%}
+                          {%- if addon_check.properties['_is_addon'] == 'true' and addon_check.properties['_bundle_group'] == bundle_group -%}
+                            <li class="horizontal-product horizontal-product--nested" data-bundle-group="{{ bundle_group }}" data-is-addon="true">
+                              {%- render 'cart-addon-item', item: addon_check -%}
+                            </li>
+                            {%- break -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      {%- endif -%}
                     {%- endcapture -%}
 
                     {%- liquid

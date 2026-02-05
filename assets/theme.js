@@ -5328,30 +5328,33 @@ class ProductForm extends HTMLFormElement {
     return this.querySelector('[name="id"]');
   }
 
-  get bundles() {
-    return Array.from(document.querySelectorAll(`[form="${this.getAttribute('id')}"] input[name="bundles"]:checked`));
+  getBundleInputs() {
+    const formId = this.getAttribute('id');
+    // Find bundles inside elements with form attribute OR inputs with form attribute directly
+    return Array.from(document.querySelectorAll(`[form="${formId}"] input[name="bundles"]:checked, input[form="${formId}"][name="bundles"]:checked`));
   }
 
   prepareFormData(formData) {
-    const bundlesLength = this.bundles.length;
+    const bundleInputs = this.getBundleInputs();
+    const bundlesLength = bundleInputs.length;
     const itemsArray = new Array(bundlesLength + 1);
 
     // Generate a unique bundle group ID for linking items
     const bundleGroupId = Date.now().toString(36) + Math.random().toString(36).substr(2, 5);
 
     // Check if any bundle is an addon (marked by product-addon component)
-    const hasAddon = this.bundles.some(bundle => bundle.value && document.querySelector(`input[data-is-addon-bundle][value="${bundle.value}"]`));
+    const hasAddon = bundleInputs.some(bundle => bundle.value && document.querySelector(`input[data-is-addon-bundle][value="${bundle.value}"]`));
 
     for (let i = 0; i < bundlesLength; i++) {
       const reverseIndex = bundlesLength - 1 - i;
       const bundleItem = {
-        id: this.bundles[reverseIndex].value,
+        id: bundleInputs[reverseIndex].value,
         quantity: 1
       };
 
       // If this is an addon item, mark it with properties
       if (hasAddon) {
-        const isAddonInput = document.querySelector(`input[data-is-addon-bundle][value="${this.bundles[reverseIndex].value}"]`);
+        const isAddonInput = document.querySelector(`input[data-is-addon-bundle][value="${bundleInputs[reverseIndex].value}"]`);
         if (isAddonInput) {
           bundleItem.properties = {
             '_bundle_group': bundleGroupId,
@@ -5395,7 +5398,7 @@ class ProductForm extends HTMLFormElement {
   }
 
   onSubmitHandler(event) {
-    const hasBundles = this.bundles.length > 0;
+    const hasBundles = this.getBundleInputs().length > 0;
 
     if (!Shopify.designMode) {
       if (document.body.classList.contains('template-cart') || theme.settings.cartType === 'page') {
@@ -5431,8 +5434,7 @@ class ProductForm extends HTMLFormElement {
     config.body = formData;
 
     if (hasBundles) {
-      const allFormData = this.prepareFormData(formData);
-      config.body = JSON.stringify(allFormData);
+      config.body = JSON.stringify(this.prepareFormData(formData));
       config.headers['Content-Type'] = 'application/json';
     }
 

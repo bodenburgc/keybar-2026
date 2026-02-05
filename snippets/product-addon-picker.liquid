@@ -40,9 +40,13 @@
   assign addon_title = product.metafields.custom.clip_addon_title.value | default: 'Pocket Clip'
   assign addon_description = product.metafields.custom.clip_addon_description.value | default: 'Choose your clip style. The standard clip is included free in Plain finish. Upgrade to colored finishes or the Deep Carry 3.0 for a lower profile in your pocket.'
 
-  # First product is the default
-  assign default_addon = addon_products.first
-  assign default_variant = default_addon.selected_or_first_available_variant
+  # First product is the default - use for loop to ensure proper object access
+  assign default_addon = nil
+  assign default_variant = nil
+  for addon in addon_products limit:1
+    assign default_addon = addon
+    assign default_variant = addon.selected_or_first_available_variant | default: addon.first_available_variant
+  endfor
 
   # Calculate if default is "free" (included)
   assign is_included = false
@@ -134,8 +138,8 @@
       <div class="product-addon__cards" data-addon-product-cards>
         {%- for addon_product in addon_products -%}
           {%- liquid
-            assign first_variant = addon_product.selected_or_first_available_variant
-            assign base_price = addon_products.first.selected_or_first_available_variant.price
+            assign first_variant = addon_product.selected_or_first_available_variant | default: addon_product.first_available_variant
+            assign base_price = default_variant.price | default: 0
             assign price_diff = first_variant.price | minus: base_price
             assign featured_image = first_variant.featured_image | default: addon_product.featured_image
           -%}
@@ -352,7 +356,6 @@
     value="{{ default_variant.id }}"
     form="{{ product_form_id }}"
     checked
-    hidden
     data-addon-variant-input
   />
 
