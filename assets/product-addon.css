@@ -631,16 +631,16 @@
 }
 
 .product-addon__price-breakdown {
-  display: block;
-  font-size: 1.25rem;
+  display: inline;
+  font-size: 0.875rem;
   font-weight: 500;
-  color: rgba(var(--color-foreground), 0.7);
-  margin-top: 6px;
+  color: rgba(var(--color-foreground), 0.55);
+  margin-left: 0.5em;
 }
 
 @media screen and (min-width: 1024px) {
   .product-addon__price-breakdown {
-    font-size: 1.5rem;
+    font-size: 1rem;
   }
 }
 
