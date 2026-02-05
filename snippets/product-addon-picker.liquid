@@ -95,7 +95,15 @@
       assign variant_display = default_variant.option1 | default: 'Plain'
     endif
   -%}
-  <div class="product-addon__main-card" data-addon-main-card>
+  <div
+    class="product-addon__main-card"
+    data-addon-main-card
+    data-addon-toggle
+    role="button"
+    tabindex="0"
+    aria-expanded="false"
+    aria-controls="AddonDetails-{{ section_id }}"
+  >
     <div class="product-addon__main-card-inner">
       {%- # Content -%}
       <div class="product-addon__main-content">
@@ -105,17 +113,11 @@
         </div>
       </div>
 
-      {%- # Customize Button -%}
-      <button
-        type="button"
-        class="product-addon__customize-btn"
-        data-addon-toggle
-        aria-expanded="false"
-        aria-controls="AddonDetails-{{ section_id }}"
-      >
+      {%- # Customize indicator -%}
+      <span class="product-addon__customize-indicator" aria-hidden="true">
         <span class="product-addon__customize-text">{{ 'products.addon.customize' | t | default: 'Customize' }}</span>
         {%- render 'icon', icon: 'chevron-down', size: 'sm' -%}
-      </button>
+      </span>
     </div>
 
     {%- # Checkmark indicator -%}

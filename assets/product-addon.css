@@ -87,10 +87,16 @@
   padding: var(--sp-3);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   transition: box-shadow var(--animation-short, 0.2s);
+  cursor: pointer;
 }
 
 .product-addon__main-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-addon__main-card:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
 }
 
 .product-addon__main-card-inner {
@@ -125,8 +131,8 @@
   color: rgba(var(--color-foreground), 0.6);
 }
 
-/* Customize Button */
-.product-addon__customize-btn {
+/* Customize Indicator (visual only, card handles clicks) */
+.product-addon__customize-indicator {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -135,26 +141,24 @@
   font-weight: 600;
   color: rgb(var(--color-foreground));
   background: rgba(var(--color-foreground), 0.06);
-  border: none;
   border-radius: 8px;
-  cursor: pointer;
   transition: background var(--animation-short, 0.2s);
   white-space: nowrap;
   flex-shrink: 0;
 }
 
-.product-addon__customize-btn:hover {
+.product-addon__main-card:hover .product-addon__customize-indicator {
   background: rgba(var(--color-foreground), 0.1);
 }
 
-.product-addon__customize-btn svg {
+.product-addon__customize-indicator svg {
   width: 16px;
   height: 16px;
   opacity: 0.6;
   transition: transform var(--animation-short, 0.2s);
 }
 
-.product-addon__customize-btn[aria-expanded="true"] svg {
+.product-addon__main-card[aria-expanded="true"] .product-addon__customize-indicator svg {
   transform: rotate(180deg);
 }
 

@@ -25,7 +25,6 @@ if (!customElements.get('product-addon')) {
 
       // Progressive disclosure elements
       this.detailsPanel = this.querySelector('[data-addon-details]');
-      this.toggleBtn = this.querySelector('[data-addon-toggle]');
       this.doneBtn = this.querySelector('[data-addon-done]');
 
       // Price elements
@@ -54,9 +53,16 @@ if (!customElements.get('product-addon')) {
         input.addEventListener('change', this.onVariantChange.bind(this));
       });
 
-      // Progressive disclosure toggle
-      if (this.toggleBtn) {
-        this.toggleBtn.addEventListener('click', this.toggleDetails.bind(this));
+      // Make entire main card clickable to toggle details
+      if (this.mainCard) {
+        this.mainCard.addEventListener('click', this.toggleDetails.bind(this));
+        // Handle keyboard activation (Enter/Space)
+        this.mainCard.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            this.toggleDetails();
+          }
+        });
       }
       if (this.doneBtn) {
         this.doneBtn.addEventListener('click', this.collapseDetails.bind(this));
@@ -67,7 +73,7 @@ if (!customElements.get('product-addon')) {
      * Toggle the expanded/collapsed state
      */
     toggleDetails() {
-      const isExpanded = this.toggleBtn.getAttribute('aria-expanded') === 'true';
+      const isExpanded = this.mainCard?.getAttribute('aria-expanded') === 'true';
       if (isExpanded) {
         this.collapseDetails();
       } else {
@@ -81,7 +87,7 @@ if (!customElements.get('product-addon')) {
     expandDetails() {
       this.classList.add('is-expanded');
       this.detailsPanel?.removeAttribute('hidden');
-      this.toggleBtn?.setAttribute('aria-expanded', 'true');
+      this.mainCard?.setAttribute('aria-expanded', 'true');
     }
 
     /**
@@ -90,7 +96,7 @@ if (!customElements.get('product-addon')) {
     collapseDetails() {
       this.classList.remove('is-expanded');
       this.detailsPanel?.setAttribute('hidden', '');
-      this.toggleBtn?.setAttribute('aria-expanded', 'false');
+      this.mainCard?.setAttribute('aria-expanded', 'false');
       this.updateCollapsedDisplay();
     }
 
