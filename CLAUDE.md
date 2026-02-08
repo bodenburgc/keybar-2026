@@ -9,6 +9,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | Key Info | Value |
 |----------|-------|
 | Store URL | keybarus.myshopify.com |
+| Live Theme ID | 186764001563 |
 | Theme Framework | BODE 1.0.0 |
 | Shopify API | 2024-01 |
 
@@ -48,6 +49,11 @@ git fetch upstream && git merge upstream/main && git push origin main
 |-------------|-------|
 | Section/snippet bug fixes, new reusable sections, JS/CSS framework | BODE-shopify first |
 | KeyBar brand (colors, fonts, logos, homepage, `.docs/brand/`) | This repo |
+
+When making framework-level fixes directly in this repo (e.g. bug fixes that should go upstream), add a comment:
+```js
+// TODO(BODE): backport to BODE-shopify
+```
 
 **Protected files (merge=ours):** `config/settings_data.json`, `.shopify/*`, `templates/index.json`, `sections/*-group.json`, `.docs/brand/*`
 
@@ -121,7 +127,9 @@ Interactive features use custom elements (70+ in `theme.js`). Key ones:
 
 **Section Schema Pattern:**
 ```liquid
-<style>/* section-scoped styles */</style>
+<style>
+  #shopify-section-{{ section.id }} { /* scoped CSS */ }
+</style>
 {%- liquid
   # Liquid logic here
 -%}
@@ -130,6 +138,8 @@ Interactive features use custom elements (70+ in `theme.js`). Key ones:
 { "name": "Section Name", "settings": [...], "blocks": [...], "presets": [...] }
 {% endschema %}
 ```
+
+All section styles must be scoped to `#shopify-section-{{ section.id }}` to avoid conflicts.
 
 **Liquid Syntax:** `{%- liquid ... -%}` (logic), `{{ variable }}` (output), `{% render 'snippet' %}` (include), `{{ 'key' | t }}` (translations)
 
@@ -172,6 +182,21 @@ Add-on picker for optional products (pocket clips) when purchasing KeyBars. **Fu
 **Files:** `snippets/product-addon-picker.liquid`, `assets/product-addon.js`, `assets/product-addon.css`
 
 **Required Metafields:** `custom.enable_clip_add_on` (boolean), `custom.clip_addon_products` (product list)
+
+## Code Patterns
+
+**Error handling in fetch chains:** Never use silent `.catch(() => {})`. Use:
+```js
+.catch((e) => { if (e.name !== 'AbortError') console.error(e); })
+```
+
+**Web component cleanup:** All custom elements with observers, listeners, or AbortControllers must implement `disconnectedCallback()` to prevent memory leaks.
+
+**CSS containment:** Use `contain: content` on isolated sections, `contain: layout style` on fixed-position elements (e.g. mobile-dock).
+
+**Reduced motion:** Add a single `@media (prefers-reduced-motion: reduce)` block at the end of each CSS file, setting `transition-duration: 0s` and `animation-duration: 0s`.
+
+**DOM queries in loops:** Hoist `querySelectorAll` calls before loops when the selector is loop-invariant.
 
 ## Important Constraints
 
