@@ -23,7 +23,7 @@ if (!customElements.get('facet-form')) {
       getAnimationParams() {
         return {
           distance: this.isMobile ? 30 : 50,
-          duration: this.motionReduced ? 0 : (this.isMobile ? 0.3 : 0.5),
+          duration: this.motionReduced ? 0.001 : (this.isMobile ? 0.3 : 0.5),
           staggerDelay: this.motionReduced ? 0 : (this.isMobile ? 0.05 : 0.1)
         };
       }
@@ -32,18 +32,18 @@ if (!customElements.get('facet-form')) {
         const viewportHeight = window.innerHeight + window.scrollY;
         const visible = [];
         const invisible = [];
-        
+
         items.forEach(item => {
           const rect = item.getBoundingClientRect();
           const isVisible = rect.top < viewportHeight && rect.bottom > 0;
-          
+
           if (isVisible) {
             visible.push(item);
           } else {
             invisible.push(item);
           }
         });
-        
+
         return { visible, invisible };
       }
 
@@ -97,10 +97,9 @@ if (!customElements.get('facet-form')) {
         ]);
         items.forEach(item => item.style.removeProperty('transform'));
 
-        let headerHeight = 0;
-        if (!theme.config.mqlSmall && document.querySelector('header.header')) {
-          headerHeight = Math.round(document.querySelector('header.header').clientHeight);
-        }
+        const header = !theme.config.mqlSmall ? document.querySelector('header.header') : null;
+        const headerHeight = header ? Math.round(header.clientHeight) : 0;
+
         setTimeout(() => {
           const target = document.querySelector('.collection');
           window.scrollTo({
@@ -130,29 +129,7 @@ if (!customElements.get('facet-form')) {
         const drawer = document.getElementById('FacetDrawer');
         if (drawer) drawer.classList.remove('loading');
 
-        // Announce to screen readers that products have been updated
-        this.announceUpdate(items.length);
-
         document.dispatchEvent(new CustomEvent('collection:reloaded'));
-      }
-
-      announceUpdate(count) {
-        let announcer = document.getElementById('FacetAnnouncer');
-        if (!announcer) {
-          announcer = document.createElement('div');
-          announcer.id = 'FacetAnnouncer';
-          announcer.className = 'sr-only';
-          announcer.setAttribute('aria-live', 'polite');
-          announcer.setAttribute('aria-atomic', 'true');
-          document.body.appendChild(announcer);
-        }
-        // Clear and set after short delay to ensure announcement
-        announcer.textContent = '';
-        setTimeout(() => {
-          announcer.textContent = theme.strings.productsLoaded ?
-            theme.strings.productsLoaded.replace('{{ count }}', count) :
-            `${count} products loaded`;
-        }, 100);
       }
 
       renderSection(url, event) {
@@ -168,27 +145,33 @@ if (!customElements.get('facet-form')) {
       renderSectionFromFetch(url, event) {
         this.abortController?.abort();
         this.abortController = new AbortController();
-        
+
         this.beforeRenderSection();
         const start = performance.now();
 
         fetch(url, { signal: this.abortController.signal })
           .then((response) => response.text())
           .then((responseText) => {
-            const execution = (performance.now() - start);
+            const elapsed = performance.now() - start;
 
             setTimeout(() => {
-              this.renderFilters(responseText, event);
-              this.renderFiltersActive(responseText);
-              this.renderProductGridContainer(responseText);
-              this.renderProductCount(responseText);
-              this.renderSortBy(responseText);
+              const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
 
-              theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.facetUpdate, { responseText: responseText });
-              this.cachedMap.set(url, responseText);
+              try {
+                this.renderFilters(parsedHTML, event);
+                this.renderFiltersActive(parsedHTML);
+                this.renderProductGridContainer(parsedHTML);
+                this.renderProductCount(parsedHTML);
+                this.renderSortBy(parsedHTML);
+
+                theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.facetUpdate, { parsedHTML: parsedHTML });
+                this.cachedMap.set(url, responseText);
+              } catch (e) {
+                console.error(e);
+              }
 
               this.afterRenderSection();
-            }, execution > 500 ? 0 : 500);
+            }, Math.max(0, 500 - elapsed));
           })
           .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
@@ -198,20 +181,25 @@ if (!customElements.get('facet-form')) {
 
         setTimeout(() => {
           const responseText = this.cachedMap.get(url);
-          this.renderFilters(responseText, event);
-          this.renderFiltersActive(responseText);
-          this.renderProductGridContainer(responseText);
-          this.renderProductCount(responseText);
-          this.renderSortBy(responseText);
+          const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
 
-          theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.facetUpdate, { responseText: responseText });
+          try {
+            this.renderFilters(parsedHTML, event);
+            this.renderFiltersActive(parsedHTML);
+            this.renderProductGridContainer(parsedHTML);
+            this.renderProductCount(parsedHTML);
+            this.renderSortBy(parsedHTML);
+
+            theme.pubsub.publish(theme.pubsub.PUB_SUB_EVENTS.facetUpdate, { parsedHTML: parsedHTML });
+          } catch (e) {
+            console.error(e);
+          }
 
           this.afterRenderSection();
         }, 500);
       }
 
-      renderFilters(responseText, event) {
-        const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
+      renderFilters(parsedHTML, event) {
         const facetElements = parsedHTML.querySelectorAll(
           '#FacetFiltersContainer [data-filter], #MobileFacetFiltersContainer [data-filter]'
         );
@@ -235,37 +223,43 @@ if (!customElements.get('facet-form')) {
         });
       }
 
-      renderFiltersActive(responseText) {
-        const id = 'FacetFiltersActive';
-        if (document.getElementById(id) === null) return;
-        const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
+      _updateSection(parsedHTML, sectionId, modifier = null) {
+        const container = document.getElementById(sectionId);
+        if (!container) return false;
 
-        document.getElementById(id).innerHTML = parsedHTML.getElementById(id).innerHTML;
+        const newContent = parsedHTML.getElementById(sectionId);
+        if (!newContent) return false;
+
+        modifier?.(newContent, container);
+
+        container.innerHTML = newContent.innerHTML;
+        return true;
       }
 
-      renderProductGridContainer(responseText) {
-        const id = 'ProductGridContainer';
-        if (document.getElementById(id) === null) return;
-        const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
-        parsedHTML.querySelector('motion-list').setAttribute('motion-reduced', '');
-
-        document.getElementById(id).innerHTML = parsedHTML.getElementById(id).innerHTML;
+      renderFiltersActive(parsedHTML) {
+        this._updateSection(parsedHTML, 'FacetFiltersActive');
       }
 
-      renderProductCount(responseText) {
-        const id = 'ProductCount';
-        if (document.getElementById(id) === null) return;
-        const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
-
-        document.getElementById(id).innerHTML = parsedHTML.getElementById(id).innerHTML;
+      renderProductGridContainer(parsedHTML) {
+        this._updateSection(parsedHTML, 'ProductGridContainer', (newContent) => {
+          newContent.querySelector('motion-list')?.setAttribute('motion-reduced', '');
+        });
       }
 
-      renderSortBy(responseText) {
-        const id = 'SortByContainer';
-        if (document.getElementById(id) === null) return;
-        const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
+      renderProductCount(parsedHTML) {
+        this._updateSection(parsedHTML, 'ProductCount');
+      }
 
-        document.getElementById(id).innerHTML = parsedHTML.getElementById(id).innerHTML;
+      renderSortBy(parsedHTML) {
+        this._updateSection(parsedHTML, 'SortByContainer', (newContent, oldContainer) => {
+          const oldFacetSort = oldContainer.querySelector('facet-sort');
+          const newFacetSort = newContent.querySelector('facet-sort');
+          if (!oldFacetSort || !newFacetSort) return;
+
+          if (oldFacetSort.hasAttribute('style')) {
+            newFacetSort.setAttribute('style', oldFacetSort.getAttribute('style'));
+          }
+        });
       }
     }, { extends: 'form' }
   );
@@ -296,9 +290,8 @@ if (!customElements.get('facet-count')) {
       }
 
       onFacetUpdate(event) {
-        const parsedHTML = new DOMParser().parseFromString(event.responseText, 'text/html');
-        const facetCount = parsedHTML.querySelector('facet-count');
-        this.innerText = facetCount.innerHTML;
+        const facetCount = event.parsedHTML.querySelector('facet-count');
+        if (facetCount) this.innerText = facetCount.innerHTML;
         this.hidden = this.itemCount === 0;
       }
     }
@@ -326,9 +319,8 @@ if (!customElements.get('results-count')) {
       }
 
       onFacetUpdate(event) {
-        const parsedHTML = new DOMParser().parseFromString(event.responseText, 'text/html');
-        const resultsCount = parsedHTML.querySelector('results-count');
-        this.innerText = resultsCount.innerHTML;
+        const resultsCount = event.parsedHTML.querySelector('results-count');
+        if (resultsCount) this.innerText = resultsCount.innerHTML;
       }
     }
   );
@@ -368,10 +360,15 @@ if (!customElements.get('facet-sort')) {
 
         Motion.inView(this, this.init.bind(this), { margin: '200px 0px 200px 0px' });
 
+        this._onWindowClick = this.onWindowClick.bind(this);
         this.addEventListener('change', this.onChange);
         this.button.addEventListener('click', this.show.bind(this));
         this.close.addEventListener('click', this.hide.bind(this));
-        document.addEventListener('click', this.onWindowClick.bind(this));
+        document.addEventListener('click', this._onWindowClick);
+      }
+
+      disconnectedCallback() {
+        document.removeEventListener('click', this._onWindowClick);
       }
 
       get listbox() {
@@ -428,7 +425,7 @@ if (!customElements.get('facet-sort')) {
           }, 100);
 
           if (theme.config.isTouch || document.body.getAttribute('data-button-hover') === 'none') return;
-          
+
           const btnFill = this.button.querySelector('[data-fill');
           Motion.animate(btnFill, { y: ['0%', immediate ? '0%' : '-76%'] }, { duration: 0.6, delay: immediate ? 0 : 0.2 });
         }
@@ -569,17 +566,17 @@ if (!customElements.get('infinite-button')) {
         fetch(url, { signal: this.abortController.signal })
           .then((response) => response.text())
           .then((responseText) => {
-            this.renderPagination(responseText);
-            this.renderProductGridContainer(responseText);
+            const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
+            this.renderPagination(parsedHTML);
+            this.renderProductGridContainer(parsedHTML);
           })
           .catch((e) => { if (e.name !== 'AbortError') console.error(e); });
       }
 
-      renderPagination(responseText) {
+      renderPagination(parsedHTML) {
         const productGridContainer = document.getElementById('ProductGridContainer');
         if (productGridContainer === null) return;
 
-        const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
         const destination = productGridContainer.querySelector('.pagination');
         const source = parsedHTML.querySelector('.pagination');
 
@@ -591,11 +588,10 @@ if (!customElements.get('infinite-button')) {
         }
       }
 
-      renderProductGridContainer(responseText) {
+      renderProductGridContainer(parsedHTML) {
         const productGridContainer = document.getElementById('ProductGridContainer');
         if (productGridContainer === null) return;
 
-        const parsedHTML = new DOMParser().parseFromString(responseText, 'text/html');
         const destination = productGridContainer.querySelector('motion-list');
         const source = parsedHTML.querySelector('motion-list');
 
@@ -607,7 +603,7 @@ if (!customElements.get('infinite-button')) {
           destination.reload();
         }
       }
-      
+
       buildUrl() {
         const url = new URL(this.getAttribute('action'));
         url.searchParams.set('section_id', theme.utils.sectionId(this));
