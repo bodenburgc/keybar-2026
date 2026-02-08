@@ -27,11 +27,18 @@ if (!customElements.get('product-addon')) {
       this.detailsPanel = this.querySelector('[data-addon-details]');
       this.doneBtn = this.querySelector('[data-addon-done]');
 
+      // Customize text element
+      this.customizeText = this.querySelector('[data-addon-customize-text]');
+
       // Price elements
       this.basePrice = parseInt(this.dataset.basePrice, 10) || 0;
       this.currentAddonPrice = parseInt(this.dataset.defaultAddonPrice, 10) || 0;
       this.currencySymbol = this.dataset.currencySymbol || '$';
       this.sectionId = this.dataset.sectionId;
+
+      // Optional addon state
+      this.isOptional = this.dataset.addonOptional === 'true';
+      this.isActive = !this.isOptional;
 
       // Find the main price display element
       this.mainPriceContainer = document.querySelector(`[id^="Price-${this.sectionId}"]`);
@@ -39,7 +46,10 @@ if (!customElements.get('product-addon')) {
 
       this.bindEvents();
       this.setupFormIntegration();
-      this.updateMainPriceDisplay();
+
+      if (this.isActive) {
+        this.updateMainPriceDisplay();
+      }
     }
 
     bindEvents() {
@@ -71,9 +81,23 @@ if (!customElements.get('product-addon')) {
 
     /**
      * Toggle the expanded/collapsed state
+     * When optional + inactive: activate and expand
+     * When optional + active + expanded: deactivate
      */
     toggleDetails() {
       const isExpanded = this.mainCard?.getAttribute('aria-expanded') === 'true';
+
+      if (this.isOptional && !this.isActive) {
+        this.activateAddon();
+        this.expandDetails();
+        return;
+      }
+
+      if (this.isOptional && isExpanded) {
+        this.deactivateAddon();
+        return;
+      }
+
       if (isExpanded) {
         this.collapseDetails();
       } else {
@@ -98,12 +122,24 @@ if (!customElements.get('product-addon')) {
       this.detailsPanel?.setAttribute('hidden', '');
       this.mainCard?.setAttribute('aria-expanded', 'false');
       this.updateCollapsedDisplay();
+
+      if (this.isOptional && this.isActive && this.customizeText) {
+        this.customizeText.textContent = 'Change';
+      }
     }
 
     /**
      * Update the main card to show current selection
      */
     updateCollapsedDisplay() {
+      // When optional and inactive, show "No Clip"
+      if (this.isOptional && !this.isActive) {
+        if (this.collapsedTitle) this.collapsedTitle.textContent = 'No Clip';
+        if (this.collapsedValue) this.collapsedValue.textContent = '';
+        if (this.priceBadge) this.priceBadge.textContent = '$0';
+        return;
+      }
+
       // Get selected product info
       const selectedProductRadio = this.querySelector('[data-addon-product-radio]:checked');
       if (!selectedProductRadio) return;
@@ -128,6 +164,48 @@ if (!customElements.get('product-addon')) {
     }
 
     /**
+     * Activate the optional addon (user opts in)
+     */
+    activateAddon() {
+      this.isActive = true;
+      this.classList.remove('product-addon--inactive');
+      this.classList.add('is-active');
+
+      if (this.variantInput) this.variantInput.checked = true;
+      if (this.customizeText) this.customizeText.textContent = 'Change';
+
+      this.updateCollapsedDisplay();
+
+      // Use the currently selected variant's price
+      const selectedProductRadio = this.querySelector('[data-addon-product-radio]:checked');
+      const selectedProductId = selectedProductRadio?.value;
+      const variantContainer = selectedProductId ? this.querySelector(`[data-addon-variants="${selectedProductId}"]`) : null;
+      const selectedVariantRadio = variantContainer?.querySelector('input[type="radio"]:checked');
+      const price = selectedVariantRadio?.dataset?.variantPrice || selectedProductRadio?.dataset?.firstVariantPrice || this.dataset.defaultAddonPrice;
+      this.updatePriceDisplay(price);
+    }
+
+    /**
+     * Deactivate the optional addon (user opts out)
+     */
+    deactivateAddon() {
+      this.isActive = false;
+      this.classList.add('product-addon--inactive');
+      this.classList.remove('is-active');
+      this.classList.remove('is-expanded');
+
+      if (this.variantInput) this.variantInput.checked = false;
+      if (this.customizeText) this.customizeText.textContent = 'Add';
+
+      this.detailsPanel?.setAttribute('hidden', '');
+      this.mainCard?.setAttribute('aria-expanded', 'false');
+
+      this.currentAddonPrice = 0;
+      this.updateCollapsedDisplay();
+      this.updateMainPriceDisplay();
+    }
+
+    /**
      * Setup integration with the main product form
      * Patches the form's bundles property to work correctly with our addon input
      */
@@ -147,10 +225,9 @@ if (!customElements.get('product-addon')) {
 
       // Mark input as addon bundle for identification in prepareFormData
       // Keep name as "bundles" so the querySelectorAll in theme.js finds it
-      // Also ensure the input is checked (default clip should always be included)
       if (this.variantInput) {
         this.variantInput.setAttribute('data-is-addon-bundle', 'true');
-        this.variantInput.checked = true;
+        if (!this.isOptional) this.variantInput.checked = true;
       }
     }
 

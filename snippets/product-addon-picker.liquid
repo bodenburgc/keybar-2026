@@ -36,6 +36,9 @@
     break
   endif
 
+  # Check if add-on is optional (user must opt in)
+  assign addon_optional = product.metafields.custom.clip_addon_optional.value | default: false
+
   # Get customizable text
   assign addon_title = product.metafields.custom.clip_addon_title.value | default: 'Pocket Clip'
   assign addon_description = product.metafields.custom.clip_addon_description.value | default: 'Choose your clip style. The standard clip is included free in Plain finish. Upgrade to colored finishes or the Deep Carry 3.0 for a lower profile in your pocket.'
@@ -59,7 +62,7 @@
 <script src="{{ 'product-addon.js' | asset_url }}" defer="defer"></script>
 
 <product-addon
-  class="product-addon block"
+  class="product-addon block{% if addon_optional %} product-addon--inactive{% endif %}"
   id="ProductAddon-{{ section_id }}"
   data-section-id="{{ section_id }}"
   data-default-variant-id="{{ default_variant.id }}"
@@ -67,6 +70,7 @@
   data-base-price="{{ product.selected_or_first_available_variant.price }}"
   data-form-id="{{ product_form_id }}"
   data-currency-symbol="{{ cart.currency.symbol }}"
+  data-addon-optional="{{ addon_optional }}"
   {{ block.shopify_attributes }}
 >
   {%- # Section Header -%}
@@ -83,7 +87,9 @@
       {%- endif -%}
     </div>
     <span class="product-addon__badge" data-addon-badge>
-      {%- if is_included -%}
+      {%- if addon_optional -%}
+        $0
+      {%- elsif is_included -%}
         $0
       {%- else -%}
         +{{ default_variant.price | money_without_trailing_zeros }}
@@ -112,14 +118,22 @@
       {%- # Content -%}
       <div class="product-addon__main-content">
         <div class="product-addon__main-info">
-          <span class="product-addon__main-title" data-addon-collapsed-title>{{ clip_title }}</span>
+          <span class="product-addon__main-title" data-addon-collapsed-title>
+            {%- if addon_optional -%}No Clip{%- else -%}{{ clip_title }}{%- endif -%}
+          </span>
           <span class="product-addon__main-variant" data-addon-collapsed-value>{{ variant_display }}</span>
         </div>
       </div>
 
       {%- # Customize indicator -%}
       <span class="product-addon__customize-indicator" aria-hidden="true">
-        <span class="product-addon__customize-text">{{ 'products.addon.customize' | t | default: 'Customize' }}</span>
+        <span class="product-addon__customize-text" data-addon-customize-text>
+          {%- if addon_optional -%}
+            {{ 'products.addon.add' | t | default: 'Add' }}
+          {%- else -%}
+            {{ 'products.addon.customize' | t | default: 'Customize' }}
+          {%- endif -%}
+        </span>
         {%- render 'icon', icon: 'chevron-down', size: 'sm' -%}
       </span>
     </div>
@@ -355,7 +369,7 @@
     name="bundles"
     value="{{ default_variant.id }}"
     form="{{ product_form_id }}"
-    checked
+    {% unless addon_optional %}checked{% endunless %}
     data-addon-variant-input
   />
 

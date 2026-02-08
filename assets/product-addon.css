@@ -740,6 +740,28 @@
 }
 
 /* ============================================
+   Inactive/Optional State - No Clip Selected
+   ============================================ */
+
+.product-addon--inactive .product-addon__main-card {
+  border-color: var(--addon-border-color);
+  border-style: dashed;
+}
+
+.product-addon--inactive .product-addon__main-check {
+  display: none;
+}
+
+.product-addon--inactive .product-addon__badge {
+  background: rgba(var(--color-foreground), 0.12);
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.product-addon--inactive .product-addon__main-variant {
+  display: none;
+}
+
+/* ============================================
    Reduced Motion
    ============================================ */
 

@@ -94,6 +94,17 @@
       </div>
       {%- capture swatchs_content -%}
         {%- for value in option.values -%}
+          {%- liquid
+            assign variant_for_value = nil
+            if product.price_varies
+              for variant in product.variants
+                if variant.option1 == value or variant.option2 == value or variant.option3 == value
+                  assign variant_for_value = variant
+                  break
+                endif
+              endfor
+            endif
+          -%}
           <li>
             <magnet-element class="block">
               <input
@@ -164,6 +175,12 @@
                     <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ value | escape }}</span>
                   {%- endunless -%}
                 </label>
+                {%- if variant_for_value -%}
+                  {%- assign price_diff = variant_for_value.price | minus: product.price_min -%}
+                  {%- if price_diff > 0 -%}
+                    <span class="swatch-price">+{{ price_diff | money_without_trailing_zeros }}</span>
+                  {%- endif -%}
+                {%- endif -%}
               {%- else -%}
                 <label
                   for="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
@@ -172,6 +189,12 @@
                 >
                   {{- value -}}
                 </label>
+                {%- if variant_for_value -%}
+                  {%- assign price_diff = variant_for_value.price | minus: product.price_min -%}
+                  {%- if price_diff > 0 -%}
+                    <span class="swatch-price">+{{ price_diff | money_without_trailing_zeros }}</span>
+                  {%- endif -%}
+                {%- endif -%}
               {%- endif -%}
             </magnet-element>
           </li>

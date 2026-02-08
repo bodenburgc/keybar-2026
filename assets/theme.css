@@ -4656,6 +4656,27 @@ input[type=checkbox].switch:is(:disabled, .disabled):not(:checked)::after {
   }
 }
 
+/* Swatch price label */
+.swatch-price {
+  display: block;
+  font-size: 0.6875rem;
+  line-height: 1;
+  color: rgba(var(--color-foreground), 0.5);
+  text-align: center;
+  margin-top: var(--sp-1d5);
+}
+
+.swatches li:has(.swatch-price) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.swatches:has(.swatch-price) {
+  row-gap: var(--sp-5);
+  column-gap: var(--sp-5);
+}
+
 .swatches--round .color-swatch {
   --swatch-radius: 9999px
 }
