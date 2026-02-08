@@ -78,7 +78,7 @@
     "card_shadow_horizontal_offset": 0,
     "card_shadow_vertical_offset": 0,
     "currency_code_enabled": true,
-    "swatch_config": "",
+    "swatch_config": "None:#878681\nBlue:#3a5f8a\nBronze:#cd7f32\nFuchsia:#ff00ff\nMulti-color:multi-color.png\nMidnight:#191970",
     "product_image_ratio": "square",
     "product_image_fill": true,
     "product_vendor": true,
