@@ -9939,7 +9939,8 @@ details.active .drawer__promotions .mega-menu__item,
 
 .product-card__top {
   padding-block-start: var(--sp-3);
-  padding-block-end: 0
+  padding-block-end: 0;
+  gap: var(--sp-2);
 }
 
 .product-card__top .caption {
@@ -9949,6 +9950,7 @@ details.active .drawer__promotions .mega-menu__item,
 
 .product-card__title {
   font-size: clamp(1.25rem, 2.5vw, 1.875rem);
+  line-height: 1.1;
   color: rgb(var(--color-card-title, 44, 69, 84));
 }
 
@@ -9961,7 +9963,8 @@ details.active .drawer__promotions .mega-menu__item,
 
 .product-card__description {
   font-size: clamp(0.8125rem, 1.5vw, 0.9375rem);
-  line-height: 1.4;
+  line-height: 1.5;
+  color: rgb(var(--color-foreground) / 0.75);
 }
 
 .product-card__content.text-center .product-card__details {

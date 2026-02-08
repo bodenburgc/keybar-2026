@@ -320,25 +320,27 @@
       </div>
     {%- endif -%}
     <div class="product-card__content grow flex flex-col{% if featured_media %} justify-start text-{{ settings.card_text_alignment }} w-full{% else %} justify-center items-center absolute top-0 left-0 w-full h-full{% endif %}">
-      {%- if show_vendor -%}
-        <div class="product-card__top w-full">
-          <span class="sr-only">{{ 'general.accessibility.vendor' | t }}</span>
-          {{- product.vendor | link_to_vendor : class: "caption reversed-link uppercase leading-none tracking-widest" -}}
-        </div>
-      {%- endif -%}
-
-      <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
-        <p class="grow">
-          <a class="product-card__title reversed-link fluid-xl font-medium leading-tight" href="{{ product_url }}">
-            {{- product.title | escape -}}
-          </a>
-        </p>
+      <div class="product-card__top flex items-baseline justify-between w-full">
         <div class="flex flex-col gap-2">
-          {%- render 'product-price', product: product, class: 'flex flex-wrap lg:flex-col lg:items-end gap-2 md:gap-1d5' -%}
+          {%- render 'product-price', product: product, class: 'flex flex-wrap items-end gap-2 md:gap-1d5' -%}
           {%- if product.quantity_price_breaks_configured? -%}
             <div class="text-sm font-medium leading-tight">{{ 'products.volume_pricing.note' | t }}</div>
           {%- endif -%}
         </div>
+        {%- if show_vendor -%}
+          <div>
+            <span class="sr-only">{{ 'general.accessibility.vendor' | t }}</span>
+            {{- product.vendor | link_to_vendor : class: "caption reversed-link uppercase leading-none tracking-widest" -}}
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="product-card__details w-full">
+        <p>
+          <a class="product-card__title reversed-link fluid-xl font-medium leading-tight" href="{{ product_url }}">
+            {{- product.title | escape -}}
+          </a>
+        </p>
       </div>
 
       {%- if show_card_description and product.metafields.custom.card_description != blank -%}
