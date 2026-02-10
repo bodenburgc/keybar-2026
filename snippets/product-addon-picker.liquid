@@ -236,7 +236,8 @@
                       {%- liquid
                         # Swatch background logic
                         assign swatch_image = blank
-                        assign swatch_fallback = value | split: ' ' | last | handle
+                        assign swatch_value_clean = value | downcase | remove: ' 1.0' | remove: ' 2.0' | remove: ' 3.0' | remove: ' 4.0' | remove: ' 5.0' | strip
+                        assign swatch_fallback = swatch_value_clean | split: ' ' | last | handle
 
                         if value.swatch != blank
                           if value.swatch.image
@@ -244,8 +245,6 @@
                           elsif value.swatch.color
                             assign swatch_fallback = value.swatch.color
                           endif
-                        elsif variant_for_value.featured_image
-                          assign swatch_image = variant_for_value.featured_image | image_url: width: 150
                         endif
 
                         # Check settings for custom swatch colors
@@ -266,7 +265,8 @@
                         endif
 
                         # Hardcoded color mappings for common clip colors
-                        assign value_lower = value | downcase
+                        # Strip version suffixes (e.g. "Plain 3.0" → "plain")
+                        assign value_lower = value | downcase | remove: ' 1.0' | remove: ' 2.0' | remove: ' 3.0' | remove: ' 4.0' | remove: ' 5.0' | strip
                         case value_lower
                           when 'plain'
                             assign swatch_fallback = '#a8a9ad'
@@ -284,13 +284,17 @@
                             assign swatch_fallback = '#704214'
                           when 'midnight blue'
                             assign swatch_fallback = '#191970'
+                          when 'blue'
+                            assign swatch_fallback = '#2a5ba8'
+                          when 'fuchsia'
+                            assign swatch_fallback = '#c4297d'
                         endcase
                       -%}
                       <label
                         for="Addon-{{ section_id }}-{{ addon_product.id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
-                        class="product-addon__color-swatch{% if swatch_image != blank %} with-image{% endif %}{% unless variant_for_value.available %} unavailable{% endunless %}"
+                        class="product-addon__color-swatch{% unless variant_for_value.available %} unavailable{% endunless %}"
                         title="{{ value | escape }}"
-                        style="--swatch-background: {{ swatch_fallback }};{% if swatch_image != blank %}--swatch-background-image: url({{ swatch_image }});{% endif %}"
+                        style="--swatch-background: {{ swatch_fallback }};"
                       >
                         <span class="sr-only">{{ value | escape }}</span>
                         <span class="product-addon__swatch-tooltip">{{ value | escape }}</span>

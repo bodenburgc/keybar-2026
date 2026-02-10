@@ -292,6 +292,18 @@ if (!customElements.get('product-addon')) {
         selectedLabel.textContent = optionValue;
       }
 
+      // Update the selected clip type card image to reflect the chosen color
+      const variantImageUrl = input.dataset.variantImage;
+      if (variantImageUrl) {
+        const selectedProductRadio = this.querySelector('[data-addon-product-radio]:checked');
+        const cardImg = selectedProductRadio?.closest('.product-addon__card')?.querySelector('.product-addon__card-img');
+        if (cardImg) {
+          cardImg.srcset = '';
+          cardImg.src = variantImageUrl;
+          cardImg.alt = `${selectedProductRadio.dataset.productTitle || ''} - ${optionValue}`;
+        }
+      }
+
       this.updateCollapsedDisplay();
 
       this.dispatchEvent(new CustomEvent('addon:variant-changed', {

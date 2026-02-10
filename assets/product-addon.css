@@ -12,8 +12,7 @@
   --addon-accent-rgb: var(--color-accent-rgb, 255, 215, 0);
   --addon-success-color: #d4af37;
   --addon-card-radius: 12px;
-  --addon-swatch-size: 28px;
-  --addon-swatch-height: 64px;
+  --addon-swatch-size: 32px;
 
   margin-block-start: var(--sp-3) !important;
 }
@@ -323,10 +322,10 @@
 .product-addon__swatches {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--sp-3);
+  gap: var(--sp-2);
   list-style: none;
-  padding: 6px;
-  margin: -6px;
+  padding: 4px;
+  margin: -4px;
 }
 
 .product-addon__swatch-item {
@@ -334,7 +333,7 @@
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  padding: 6px;
+  padding: 4px;
   border-radius: 8px;
   transition: outline var(--animation-short, 0.2s), background var(--animation-short, 0.2s);
 }
@@ -348,23 +347,15 @@
 /* Color Swatches */
 .product-addon__color-swatch {
   position: relative;
-  width: 44px;
-  height: 68px;
-  border-radius: 6px;
+  width: var(--addon-swatch-size);
+  height: var(--addon-swatch-size);
+  border-radius: 50%;
   border: 2px solid var(--addon-border-color);
   background: var(--swatch-background);
-  background-image: var(--swatch-background-image);
-  background-size: contain;
-  background-position: center;
-  background-repeat: no-repeat;
   cursor: pointer;
   transition:
     border-color var(--animation-short, 0.2s),
     transform var(--animation-short, 0.2s);
-}
-
-.product-addon__color-swatch.with-image {
-  background-color: transparent;
 }
 
 .product-addon__color-swatch:hover {
@@ -375,11 +366,11 @@
 .product-addon__color-swatch::after {
   content: '';
   position: absolute;
-  top: -6px;
-  right: -6px;
-  width: 20px;
-  height: 20px;
-  background: var(--addon-success-color) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15' fill='none' stroke='%2316323e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.83 8.08L5.75 11L12.17 4'/%3E%3C/svg%3E") center/10px no-repeat;
+  top: -5px;
+  right: -5px;
+  width: 16px;
+  height: 16px;
+  background: var(--addon-success-color) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 15 15' fill='none' stroke='%2316323e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M2.83 8.08L5.75 11L12.17 4'/%3E%3C/svg%3E") center/8px no-repeat;
   border-radius: 50%;
   opacity: 0;
   transform: scale(0.8);
