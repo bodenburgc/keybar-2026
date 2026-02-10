@@ -5334,6 +5334,7 @@ class ProductForm extends HTMLFormElement {
     return Array.from(document.querySelectorAll(`[form="${formId}"] input[name="bundles"]:checked, input[form="${formId}"][name="bundles"]:checked`));
   }
 
+  // TODO(BODE): backport to BODE-shopify
   prepareFormData(formData) {
     const bundleInputs = this.getBundleInputs();
     const bundlesLength = bundleInputs.length;
@@ -5345,22 +5346,33 @@ class ProductForm extends HTMLFormElement {
     // Check if any bundle is an addon (marked by product-addon component)
     const hasAddon = bundleInputs.some(bundle => bundle.value && document.querySelector(`input[data-is-addon-bundle][value="${bundle.value}"]`));
 
+    // Check if any bundle is an insert (marked by product-insert-picker component)
+    const hasInsert = bundleInputs.some(bundle => bundle.value && bundle.hasAttribute('data-is-insert-bundle'));
+
     for (let i = 0; i < bundlesLength; i++) {
       const reverseIndex = bundlesLength - 1 - i;
+      const bundleInput = bundleInputs[reverseIndex];
       const bundleItem = {
-        id: bundleInputs[reverseIndex].value,
+        id: bundleInput.value,
         quantity: 1
       };
 
       // If this is an addon item, mark it with properties
       if (hasAddon) {
-        const isAddonInput = document.querySelector(`input[data-is-addon-bundle][value="${bundleInputs[reverseIndex].value}"]`);
+        const isAddonInput = document.querySelector(`input[data-is-addon-bundle][value="${bundleInput.value}"]`);
         if (isAddonInput) {
           bundleItem.properties = {
             '_bundle_group': bundleGroupId,
             '_is_addon': 'true'
           };
         }
+      }
+
+      // If this is an insert item, mark it with properties
+      if (hasInsert && bundleInput.hasAttribute('data-is-insert-bundle')) {
+        bundleItem.properties = bundleItem.properties || {};
+        bundleItem.properties['_bundle_group'] = bundleGroupId;
+        bundleItem.properties['_is_insert'] = 'true';
       }
 
       itemsArray[i] = bundleItem;
@@ -5391,6 +5403,13 @@ class ProductForm extends HTMLFormElement {
       json.properties = json.properties || {};
       json.properties['_bundle_group'] = bundleGroupId;
       json.properties['_has_addon'] = 'true';
+    }
+
+    // If we have insert bundles, mark the main product as having inserts
+    if (hasInsert) {
+      json.properties = json.properties || {};
+      json.properties['_bundle_group'] = bundleGroupId;
+      json.properties['_has_insert'] = 'true';
     }
 
     allFormData.items.push(json);

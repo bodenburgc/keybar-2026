@@ -95,9 +95,13 @@
                         assign is_addon_item = true
                         continue
                       endif
+
+                      if item.properties['_is_insert']
+                        continue
+                      endif
                     -%}
                     {%- capture cart_item -%}
-                      <tr class="cart-item" id="CartItem-{{ item.key }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] %} data-has-addon="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
+                      <tr class="cart-item" id="CartItem-{{ item.key }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] %} data-has-addon="true"{% endif %}{% if item.properties['_has_insert'] %} data-has-insert="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
                         <td>
                           <div class="flex items-start md:items-center gap-4d5 md:gap-10">
                             {%- if item.image -%}
@@ -238,6 +242,16 @@
                                   {%- render 'cart-addon-item', item: addon_check -%}
                                 </div>
                                 {%- break -%}
+                              {%- endif -%}
+                            {%- endfor -%}
+                          {%- endif -%}
+                          {%- if item.properties['_has_insert'] -%}
+                            {%- assign bundle_group = item.properties['_bundle_group'] -%}
+                            {%- for insert_check in cart.items -%}
+                              {%- if insert_check.properties['_is_insert'] and insert_check.properties['_bundle_group'] == bundle_group -%}
+                                <div class="cart-addon-nested" id="CartItem-{{ insert_check.key }}" data-bundle-group="{{ bundle_group }}" data-is-insert="true">
+                                  {%- render 'cart-insert-item', item: insert_check -%}
+                                </div>
                               {%- endif -%}
                             {%- endfor -%}
                           {%- endif -%}
@@ -436,6 +450,14 @@
                                   if addon_item.properties['_is_addon'] and addon_item.properties['_bundle_group'] == bundle_group
                                     assign line_total = line_total | plus: addon_item.final_line_price
                                     break
+                                  endif
+                                endfor
+                              endif
+                              if item.properties['_has_insert']
+                                assign bundle_group = item.properties['_bundle_group']
+                                for insert_item in cart.items
+                                  if insert_item.properties['_is_insert'] and insert_item.properties['_bundle_group'] == bundle_group
+                                    assign line_total = line_total | plus: insert_item.final_line_price
                                   endif
                                 endfor
                               endif

@@ -147,9 +147,13 @@
                         assign is_addon_item = true
                         continue
                       endif
+
+                      if item.properties['_is_insert']
+                        continue
+                      endif
                     -%}
                     {%- capture cart_item -%}
-                      <li id="CartDrawer-Item-{{ item.key }}" class="horizontal-product flex items-start gap-4 md:gap-6" data-variant-id="{{ item.variant_id }}" data-handle="{{ item.product.handle }}" data-quantity="{{ item.quantity }}" data-price="{{ item.original_price }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] %} data-has-addon="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
+                      <li id="CartDrawer-Item-{{ item.key }}" class="horizontal-product flex items-start gap-4 md:gap-6" data-variant-id="{{ item.variant_id }}" data-handle="{{ item.product.handle }}" data-quantity="{{ item.quantity }}" data-price="{{ item.original_price }}"{% if item.properties['_bundle_group'] %} data-bundle-group="{{ item.properties['_bundle_group'] }}"{% endif %}{% if item.properties['_has_addon'] %} data-has-addon="true"{% endif %}{% if item.properties['_has_insert'] %} data-has-insert="true"{% endif %}{% if is_addon_item %} data-is-addon="true"{% endif %}>
                         {%- if item.image -%}
                           <a class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0" href="{{ item.url }}" tabindex="-1">
                             {{- item.image | image_url: width: item.image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
@@ -458,6 +462,16 @@
                               {%- render 'cart-addon-item', item: addon_check -%}
                             </li>
                             {%- break -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      {%- endif -%}
+                      {%- if item.properties['_has_insert'] -%}
+                        {%- assign bundle_group = item.properties['_bundle_group'] -%}
+                        {%- for insert_check in cart.items -%}
+                          {%- if insert_check.properties['_is_insert'] and insert_check.properties['_bundle_group'] == bundle_group -%}
+                            <li class="horizontal-product horizontal-product--nested" id="CartDrawer-Item-{{ insert_check.key }}" data-bundle-group="{{ bundle_group }}" data-is-insert="true">
+                              {%- render 'cart-insert-item', item: insert_check -%}
+                            </li>
                           {%- endif -%}
                         {%- endfor -%}
                       {%- endif -%}

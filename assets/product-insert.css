@@ -1,0 +1,505 @@
+/**
+ * Product Insert Picker Styles
+ *
+ * Compact row-based insert picker. Collapsed state is a single tight line.
+ * Expands to show checkbox cards with variant popovers.
+ */
+
+.product-insert {
+  contain: content;
+  --insert-border-color: rgba(var(--color-foreground), 0.12);
+  --insert-accent-color: rgb(var(--color-accent, 255 215 0));
+  --insert-accent-rgb: var(--color-accent-rgb, 255, 215, 0);
+  --insert-success-color: #d4af37;
+  --insert-card-radius: 12px;
+
+  margin-block-start: var(--sp-3) !important;
+}
+
+/* ============================================
+   Compact Collapsed Row
+   ============================================ */
+
+.product-insert__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2d5) var(--sp-3);
+  border: 1px solid var(--insert-border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color var(--animation-short, 0.2s);
+}
+
+.product-insert__row:hover {
+  border-color: rgba(var(--color-foreground), 0.25);
+}
+
+.product-insert__row:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+.product-insert.has-selection .product-insert__row {
+  border-color: var(--insert-success-color);
+}
+
+.product-insert__row-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.product-insert__row-value {
+  flex: 1;
+  min-width: 0;
+  font-size: 0.8125rem;
+  color: rgba(var(--color-foreground), 0.55);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.product-insert__row-price {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--insert-success-color);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.product-insert__row-price:empty {
+  display: none;
+}
+
+.product-insert__row-action {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgba(var(--color-foreground), 0.5);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.product-insert__row-action svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.5;
+  transition: transform var(--animation-short, 0.2s);
+}
+
+.product-insert__row[aria-expanded="true"] .product-insert__row-action svg {
+  transform: rotate(180deg);
+}
+
+/* ============================================
+   Expanded Details Panel
+   ============================================ */
+
+.product-insert__details {
+  padding: var(--sp-3);
+  margin-top: var(--sp-2);
+  background: #f3f4f6;
+  border-radius: 10px;
+  animation: insertSlideIn var(--animation-short, 0.2s) ease;
+}
+
+.product-insert__details[hidden] {
+  display: none;
+}
+
+@keyframes insertSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Insert Product Cards - Checkbox Cards
+   ============================================ */
+
+.product-insert__cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.product-insert__card {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-2d5) var(--sp-3);
+  background: rgb(var(--color-background));
+  border: 1px solid var(--insert-border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color var(--animation-short, 0.2s);
+}
+
+.product-insert__card:hover {
+  border-color: rgba(var(--color-foreground), 0.3);
+}
+
+.product-insert__card.is-selected {
+  border-color: var(--insert-success-color);
+}
+
+/* Focus state */
+.product-insert__card:has(input:focus-visible) {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+/* Checkbox */
+.product-insert__checkbox {
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(var(--color-foreground), 0.25);
+  border-radius: 4px;
+  flex-shrink: 0;
+  transition: border-color var(--animation-short, 0.2s), background var(--animation-short, 0.2s);
+}
+
+.product-insert__card.is-selected .product-insert__checkbox {
+  background: var(--insert-success-color);
+  border-color: var(--insert-success-color);
+}
+
+.product-insert__checkbox::after {
+  content: '';
+  position: absolute;
+  top: 1px;
+  left: 4px;
+  width: 5px;
+  height: 8px;
+  border: solid #16323e;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+}
+
+.product-insert__card.is-selected .product-insert__checkbox::after {
+  opacity: 1;
+}
+
+/* Card media */
+.product-insert__card-media {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.product-insert__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-insert__card-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: rgba(var(--color-foreground), 0.2);
+}
+
+/* Card text */
+.product-insert__card-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.product-insert__card-title {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgb(var(--color-foreground));
+  line-height: 1.3;
+}
+
+.product-insert__card-price {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.product-insert__card.is-selected .product-insert__card-price {
+  color: #16323e;
+  font-weight: 600;
+}
+
+/* Card variant trigger */
+.product-insert__card-variant {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  margin-top: 1px;
+}
+
+.product-insert__card-variant-value {
+  font-size: 0.6875rem;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.product-insert__card-variant-sep {
+  font-size: 0.6875rem;
+  color: rgba(var(--color-foreground), 0.3);
+}
+
+.product-insert__change-link {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.product-insert__change-link:hover {
+  text-decoration-thickness: 2px;
+}
+
+.product-insert__change-link:focus-visible {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ============================================
+   Inline Mini Color Swatches
+   ============================================ */
+
+.product-insert__mini-swatches {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 3px;
+  margin-top: 4px;
+  overflow: hidden;
+}
+
+.product-insert__mini-swatch {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--mini-swatch-bg);
+  border: 1.5px solid rgba(var(--color-foreground), 0.15);
+  cursor: pointer;
+  transition: border-color var(--animation-short, 0.2s), transform var(--animation-short, 0.2s);
+  flex-shrink: 0;
+}
+
+.product-insert__mini-swatch:hover {
+  border-color: rgba(var(--color-foreground), 0.4);
+  transform: scale(1.15);
+}
+
+.product-insert__mini-swatch.is-active {
+  border-color: var(--insert-success-color);
+  box-shadow: 0 0 0 1.5px var(--insert-success-color);
+}
+
+/* ============================================
+   Variant Popover
+   ============================================ */
+
+.product-insert__popover {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  z-index: 10;
+  background: rgb(var(--color-background));
+  border: 1px solid var(--insert-border-color);
+  border-radius: 8px;
+  padding: var(--sp-3);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  animation: insertPopoverIn var(--animation-short, 0.2s) ease;
+}
+
+.product-insert__popover[hidden] {
+  display: none;
+}
+
+@keyframes insertPopoverIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.product-insert__popover-label {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--sp-2);
+}
+
+.product-insert__popover-option-name {
+  color: rgba(var(--color-foreground), 0.5);
+  font-weight: 600;
+}
+
+.product-insert__popover-option-value {
+  font-weight: 600;
+  color: rgb(var(--color-foreground));
+}
+
+.product-insert__popover-swatches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--sp-3);
+}
+
+.product-insert__popover-swatch-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.product-insert__popover-color-swatch {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  border: 2px solid var(--insert-border-color);
+  background: var(--swatch-background);
+  background-image: var(--swatch-background-image);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  transition: border-color var(--animation-short, 0.2s);
+}
+
+.product-insert__popover-color-swatch:hover {
+  border-color: rgba(var(--color-foreground), 0.4);
+}
+
+.product-insert__popover-swatch-item input:checked + .product-insert__popover-color-swatch {
+  border-color: var(--insert-success-color);
+}
+
+.product-insert__popover-swatch-item input:focus-visible + .product-insert__popover-color-swatch {
+  outline: 2px solid rgb(var(--color-foreground));
+  outline-offset: 2px;
+}
+
+.product-insert__popover-label-swatch {
+  display: block;
+  padding: 5px 10px;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: rgb(var(--color-foreground));
+  background: rgb(var(--color-background));
+  border: 1px solid var(--insert-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--animation-short, 0.2s);
+}
+
+.product-insert__popover-label-swatch:hover {
+  border-color: rgba(var(--color-foreground), 0.3);
+}
+
+.product-insert__popover-swatch-item input:checked + .product-insert__popover-label-swatch {
+  border-color: var(--insert-success-color);
+  background: rgba(var(--insert-accent-rgb), 0.08);
+}
+
+.product-insert__popover-swatch-price {
+  font-size: 0.5625rem;
+  color: rgba(var(--color-foreground), 0.5);
+}
+
+.product-insert__popover-done {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 7px 14px;
+  min-height: 32px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: rgb(var(--color-background));
+  background: rgb(var(--color-foreground));
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background var(--animation-short, 0.2s);
+}
+
+.product-insert__popover-done:hover {
+  background: rgba(var(--color-foreground), 0.9);
+}
+
+/* Done button removed — accordion auto-collapses */
+
+/* ============================================
+   Print
+   ============================================ */
+
+@media print {
+  .product-insert {
+    break-inside: avoid;
+  }
+
+  .product-insert__details {
+    display: block !important;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .product-insert__row,
+  .product-insert__row-action svg,
+  .product-insert__card,
+  .product-insert__checkbox,
+  .product-insert__change-link,
+  .product-insert__mini-swatch,
+  .product-insert__popover-color-swatch,
+  .product-insert__popover-label-swatch {
+    transition-duration: 0s !important;
+  }
+
+  .product-insert__details,
+  .product-insert__popover {
+    animation-duration: 0s !important;
+  }
+}

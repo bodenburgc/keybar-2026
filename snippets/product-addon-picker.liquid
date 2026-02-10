@@ -41,7 +41,6 @@
 
   # Get customizable text
   assign addon_title = product.metafields.custom.clip_addon_title.value | default: 'Pocket Clip'
-  assign addon_description = product.metafields.custom.clip_addon_description.value | default: 'Choose your clip style. The standard clip is included free in Plain finish. Upgrade to colored finishes or the Deep Carry 3.0 for a lower profile in your pocket.'
 
   # First product is the default - use for loop to ensure proper object access
   assign default_addon = nil
@@ -71,42 +70,24 @@
   data-form-id="{{ product_form_id }}"
   data-currency-symbol="{{ cart.currency.symbol }}"
   data-addon-optional="{{ addon_optional }}"
+  data-product-id="{{ product.id }}"
   {{ block.shopify_attributes }}
 >
-  {%- # Section Header -%}
-  <div class="product-addon__section-header">
-    <div class="product-addon__section-header-content">
-      <h3 class="product-addon__section-title">
-        {%- render 'icon', icon: 'check-circle', size: 'sm' -%}
-        {{ addon_title }}
-      </h3>
-      {%- if addon_description != blank -%}
-        <p class="product-addon__section-desc">
-          {{ addon_description }}
-        </p>
-      {%- endif -%}
-    </div>
-    <span class="product-addon__badge" data-addon-badge>
-      {%- if addon_optional -%}
-        $0
-      {%- elsif is_included -%}
-        $0
-      {%- else -%}
-        +{{ default_variant.price | money_without_trailing_zeros }}
-      {%- endif -%}
-    </span>
-  </div>
-
-  {%- # Main Checkbox Card - Always Visible -%}
+  {%- # Compact Collapsed Row (matches insert picker pattern) -%}
   {%- liquid
     assign clip_title = default_addon.title | default: 'Standard Pocket Clip'
     assign variant_display = default_variant.title
     if variant_display == 'Default Title' or variant_display == blank
       assign variant_display = default_variant.option1 | default: 'Plain'
     endif
+
+    assign row_value = clip_title | append: ' · ' | append: variant_display
+    if addon_optional
+      assign row_value = 'No Clip'
+    endif
   -%}
   <div
-    class="product-addon__main-card"
+    class="product-addon__row"
     data-addon-main-card
     data-addon-toggle
     role="button"
@@ -114,34 +95,26 @@
     aria-expanded="false"
     aria-controls="AddonDetails-{{ section_id }}"
   >
-    <div class="product-addon__main-card-inner">
-      {%- # Content -%}
-      <div class="product-addon__main-content">
-        <div class="product-addon__main-info">
-          <span class="product-addon__main-title" data-addon-collapsed-title>
-            {%- if addon_optional -%}No Clip{%- else -%}{{ clip_title }}{%- endif -%}
-          </span>
-          <span class="product-addon__main-variant" data-addon-collapsed-value>{{ variant_display }}</span>
-        </div>
-      </div>
-
-      {%- # Customize indicator -%}
-      <span class="product-addon__customize-indicator" aria-hidden="true">
-        <span class="product-addon__customize-text" data-addon-customize-text>
-          {%- if addon_optional -%}
-            {{ 'products.addon.add' | t | default: 'Add' }}
-          {%- else -%}
-            {{ 'products.addon.customize' | t | default: 'Customize' }}
-          {%- endif -%}
-        </span>
-        {%- render 'icon', icon: 'chevron-down', size: 'sm' -%}
+    <span class="product-addon__row-label">{{ addon_title }}</span>
+    <span class="product-addon__row-value" data-addon-collapsed-title>{{ row_value }}</span>
+    <span class="product-addon__row-price" data-addon-badge>
+      {%- if addon_optional -%}
+      {%- elsif is_included -%}
+        Incl.
+      {%- else -%}
+        +{{ default_variant.price | money_without_trailing_zeros }}
+      {%- endif -%}
+    </span>
+    <span class="product-addon__row-action" aria-hidden="true">
+      <span data-addon-customize-text>
+        {%- if addon_optional -%}
+          {{ 'products.addon.add' | t | default: 'Add' }}
+        {%- else -%}
+          {{ 'products.addon.customize' | t | default: 'Customize' }}
+        {%- endif -%}
       </span>
-    </div>
-
-    {%- # Checkmark indicator -%}
-    <div class="product-addon__main-check">
-      {%- render 'icon', icon: 'accept', size: 'sm' -%}
-    </div>
+      {%- render 'icon', icon: 'chevron-down', size: 'sm' -%}
+    </span>
   </div>
 
   {%- # Expanded Details Panel -%}
@@ -354,12 +327,6 @@
       </div>
     {%- endfor -%}
 
-    {%- # Done link -%}
-    <div class="product-addon__done">
-      <button type="button" class="product-addon__done-btn" data-addon-done>
-        Done
-      </button>
-    </div>
   </div>
 
   {%- # Hidden input for form submission -%}

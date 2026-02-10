@@ -132,30 +132,44 @@ if (!customElements.get('cart-remove-button')) {
       constructor() {
         super();
 
+        // TODO(BODE): backport to BODE-shopify
         this.addEventListener('click', (event) => {
           event.preventDefault();
 
           const cartItems = this.closest('cart-items');
           const lineItem = this.closest('[data-bundle-group]');
 
-          // Check if this item has an addon that needs to be removed too
-          if (lineItem && lineItem.dataset.hasAddon === 'true') {
+          // Individual insert removal — remove just this insert item
+          if (lineItem && lineItem.dataset.isInsert === 'true') {
+            cartItems.updateQuantity(this.getAttribute('data-index'), 0);
+            return;
+          }
+
+          // Parent removal — find ALL linked items (addon + inserts) and remove atomically
+          if (lineItem && (lineItem.dataset.hasAddon === 'true' || lineItem.dataset.hasInsert === 'true')) {
             const bundleGroup = lineItem.dataset.bundleGroup;
-            // Find the linked addon item by bundle group
-            const addonItem = document.querySelector(`[data-bundle-group="${bundleGroup}"][data-is-addon="true"]`);
+            const removals = [{ line: this.getAttribute('data-index'), quantity: 0 }];
 
-            if (addonItem) {
-              // Get the addon's key from its ID (format: CartItem-{key} or CartDrawer-Item-{key})
-              const addonId = addonItem.id;
-              const addonKey = addonId.replace('CartItem-', '').replace('CartDrawer-Item-', '');
-
-              // Remove both items - addon first, then the main product
-              cartItems.updateQuantityMultiple([
-                { line: addonKey, quantity: 0 },
-                { line: this.getAttribute('data-index'), quantity: 0 }
-              ]);
-              return;
+            // Find linked addon
+            if (lineItem.dataset.hasAddon === 'true') {
+              const addonItem = document.querySelector(`[data-bundle-group="${bundleGroup}"][data-is-addon="true"]`);
+              if (addonItem) {
+                const addonKey = addonItem.id.replace('CartItem-', '').replace('CartDrawer-Item-', '');
+                removals.unshift({ line: addonKey, quantity: 0 });
+              }
             }
+
+            // Find linked inserts (may be multiple)
+            if (lineItem.dataset.hasInsert === 'true') {
+              const insertItems = document.querySelectorAll(`[data-bundle-group="${bundleGroup}"][data-is-insert="true"]`);
+              insertItems.forEach(insertItem => {
+                const insertKey = insertItem.id.replace('CartItem-', '').replace('CartDrawer-Item-', '');
+                removals.unshift({ line: insertKey, quantity: 0 });
+              });
+            }
+
+            cartItems.updateQuantityMultiple(removals);
+            return;
           }
 
           // Standard single item removal

@@ -75,6 +75,14 @@
           "type": "addon_picker",
           "settings": {}
         },
+        "insert_picker_Kx9mTv": {
+          "type": "insert_picker",
+          "settings": {
+            "insert_products": [],
+            "insert_title": "Tool Inserts",
+            "insert_description": "Add tool inserts to your KeyBar. Select any combination below."
+          }
+        },
         "inventory": {
           "type": "inventory",
           "settings": {
@@ -147,6 +155,7 @@
         "countdown",
         "variant_picker",
         "addon_picker_D8xdAc",
+        "insert_picker_Kx9mTv",
         "inventory",
         "text_TM4nxD",
         "buy_buttons",

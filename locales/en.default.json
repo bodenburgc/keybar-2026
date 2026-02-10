@@ -515,6 +515,16 @@
       "sale": "Sale",
       "show_more": "Show more"
     },
+    "insert": {
+      "section_title": "Tool Inserts",
+      "no_inserts": "No inserts selected",
+      "inserts_selected": "{{ count }} inserts selected",
+      "add": "Add",
+      "change": "Change",
+      "remove": "Remove",
+      "done": "Done",
+      "select_inserts": "Add Inserts"
+    },
     "addon": {
       "available_options": "Available options",
       "choose": "Choose a",
