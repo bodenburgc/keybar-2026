@@ -154,7 +154,7 @@
                   assign display_color_name = color_selected_value | escape
                   assign color_check = color_selected_value | downcase
                   if color_check == 'none'
-                    assign display_color_name = 'Plain'
+                    assign display_color_name = 'Standard'
                   endif
                 -%}
                 <span class="product-insert__card-color-name" data-insert-color-name data-for-product="{{ insert_product.id }}">
@@ -250,7 +250,7 @@
                       {%- liquid
                         assign swatch_label = value | escape
                         if is_plain_variant
-                          assign swatch_label = 'Plain'
+                          assign swatch_label = 'Standard'
                         endif
                       -%}
                       <span

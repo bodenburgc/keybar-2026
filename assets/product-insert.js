@@ -174,6 +174,15 @@ if (!customElements.get('product-insert-picker')) {
       const variantId = swatch.dataset.variantId;
       const variantPrice = parseInt(swatch.dataset.variantPrice, 10) || 0;
 
+      // Auto-select card if not already selected
+      if (!card.classList.contains('is-selected')) {
+        const checkbox = card.querySelector('[data-insert-checkbox]');
+        if (checkbox) {
+          checkbox.checked = true;
+          this.onInsertToggle(card, checkbox);
+        }
+      }
+
       // Update active swatch visual
       const container = swatch.closest('[data-insert-mini-swatches]');
       container?.querySelectorAll('[data-insert-mini-swatch]').forEach(s => s.classList.remove('is-active'));
@@ -200,7 +209,7 @@ if (!customElements.get('product-insert-picker')) {
       // Update inline color name
       const colorNameEl = card.querySelector('[data-insert-color-name]');
       if (colorNameEl) {
-        const colorLabel = swatch.dataset.swatchValue.toLowerCase() === 'none' ? 'Plain' : swatch.dataset.swatchValue;
+        const colorLabel = swatch.dataset.swatchValue.toLowerCase() === 'none' ? 'Standard' : swatch.dataset.swatchValue;
         colorNameEl.textContent = '· ' + colorLabel;
       }
 
