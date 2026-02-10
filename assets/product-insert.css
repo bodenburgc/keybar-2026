@@ -181,7 +181,7 @@
 .product-insert__checkbox::after {
   content: '';
   position: absolute;
-  top: 1px;
+  top: 2px;
   left: 4px;
   width: 5px;
   height: 8px;
@@ -226,14 +226,26 @@
 .product-insert__card-info {
   flex: 1;
   min-width: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto auto;
+  align-items: center;
+  column-gap: var(--sp-2);
 }
 
 .product-insert__card-title {
+  grid-column: 1;
+  grid-row: 1;
   display: block;
   font-size: 0.8125rem;
   font-weight: 500;
   color: rgb(var(--color-foreground));
   line-height: 1.3;
+}
+
+.product-insert__card-meta {
+  grid-column: 1;
+  grid-row: 2;
 }
 
 .product-insert__card-price {
@@ -242,17 +254,25 @@
   color: rgba(var(--color-foreground), 0.5);
 }
 
-.product-insert__card.is-selected .product-insert__card-price {
+.product-insert__card.is-selected .product-insert__card-meta .product-insert__card-price {
   color: #16323e;
   font-weight: 600;
 }
 
+.product-insert__card-color-name {
+  font-size: 0.6875rem;
+  color: rgba(var(--color-foreground), 0.45);
+}
+
 /* Card variant trigger */
 .product-insert__card-variant {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  justify-self: end;
   display: flex;
   align-items: center;
   gap: 2px;
-  margin-top: 1px;
+  margin-top: 0;
 }
 
 .product-insert__card-variant-value {
@@ -292,19 +312,30 @@
    ============================================ */
 
 .product-insert__mini-swatches {
+  grid-column: 2;
+  grid-row: 1 / -1;
+  justify-self: end;
+  align-self: center;
   display: flex;
-  flex-wrap: nowrap;
-  gap: 3px;
-  margin-top: 4px;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 0;
+  padding: 6px;
+  margin-inline: -6px;
+  margin-bottom: -6px;
   overflow: hidden;
 }
 
 .product-insert__mini-swatch {
-  width: 16px;
-  height: 16px;
+  position: relative;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: var(--mini-swatch-bg);
-  border: 1.5px solid rgba(var(--color-foreground), 0.15);
+  background-image: var(--mini-swatch-image, none);
+  background-size: cover;
+  background-position: center;
+  border: 2px solid rgba(var(--color-foreground), 0.15);
   cursor: pointer;
   transition: border-color var(--animation-short, 0.2s), transform var(--animation-short, 0.2s);
   flex-shrink: 0;
@@ -312,12 +343,44 @@
 
 .product-insert__mini-swatch:hover {
   border-color: rgba(var(--color-foreground), 0.4);
-  transform: scale(1.15);
+  transform: scale(1.1);
 }
 
 .product-insert__mini-swatch.is-active {
   border-color: var(--insert-success-color);
-  box-shadow: 0 0 0 1.5px var(--insert-success-color);
+  outline: 2px solid var(--insert-success-color);
+  outline-offset: 2px;
+}
+
+/* Tooltip */
+.product-insert__mini-swatch-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgb(var(--color-foreground));
+  color: rgb(var(--color-background));
+  padding: 4px 10px;
+  font-size: 0.6875rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--animation-short, 0.2s);
+}
+
+.product-insert__mini-swatch-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 4px solid transparent;
+  border-top-color: rgb(var(--color-foreground));
+}
+
+.product-insert__mini-swatch:hover .product-insert__mini-swatch-tooltip {
+  opacity: 1;
 }
 
 /* ============================================
@@ -493,6 +556,7 @@
   .product-insert__checkbox,
   .product-insert__change-link,
   .product-insert__mini-swatch,
+  .product-insert__mini-swatch-tooltip,
   .product-insert__popover-color-swatch,
   .product-insert__popover-label-swatch {
     transition-duration: 0s !important;

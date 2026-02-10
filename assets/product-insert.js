@@ -197,6 +197,12 @@ if (!customElements.get('product-insert-picker')) {
         priceEl.textContent = '+' + this.formatMoney(variantPrice);
       }
 
+      // Update inline color name
+      const colorNameEl = card.querySelector('[data-insert-color-name]');
+      if (colorNameEl) {
+        colorNameEl.textContent = '· ' + swatch.dataset.swatchValue;
+      }
+
       this.updateState();
     }
 

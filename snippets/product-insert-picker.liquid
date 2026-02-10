@@ -96,6 +96,7 @@
           endif
 
           # Detect color option for inline mini swatches
+          assign color_selected_value = ''
           if has_variants
             for option in insert_product.options_with_values
               assign swatch_trigger_list = 'products.general.color_swatch_trigger' | t | downcase | split: ','
@@ -104,6 +105,7 @@
                 assign swatch_trigger = trigger | strip
                 if downcased_option contains swatch_trigger
                   assign has_color_option = true
+                  assign color_selected_value = option.selected_value
                   break
                 endif
               endfor
@@ -144,7 +146,14 @@
           {%- # Info -%}
           <div class="product-insert__card-info">
             <span class="product-insert__card-title">{{ insert_product.title | escape }}</span>
-            <span class="product-insert__card-price">+{{ first_variant.price | money_without_trailing_zeros }}</span>
+            <span class="product-insert__card-meta">
+              <span class="product-insert__card-price">+{{ first_variant.price | money_without_trailing_zeros }}</span>
+              {%- if has_color_option -%}
+                <span class="product-insert__card-color-name" data-insert-color-name data-for-product="{{ insert_product.id }}">
+                  · {{ color_selected_value | escape }}
+                </span>
+              {%- endif -%}
+            </span>
 
             {%- # Inline mini color swatches (shown directly on card) -%}
             {%- if has_color_option -%}
@@ -180,9 +189,11 @@
                         endfor
 
                         assign mini_swatch_bg = value | split: ' ' | last | handle
+                        assign mini_swatch_image = blank
 
                         if value.swatch != blank
                           if value.swatch.image
+                            assign mini_swatch_image = value.swatch.image | image_url: width: 150
                             assign mini_swatch_bg = 'transparent'
                           elsif value.swatch.color
                             assign mini_swatch_bg = value.swatch.color
@@ -199,6 +210,8 @@
                               assign swatch_value = swatch_parts.last | strip
                               if swatch_value contains '#'
                                 assign mini_swatch_bg = swatch_value
+                              elsif swatch_value contains '.png' or swatch_value contains '.jpg' or swatch_value contains '.svg'
+                                assign mini_swatch_image = swatch_value | file_url
                               endif
                               break
                             endif
@@ -233,8 +246,8 @@
                         data-variant-price="{{ variant_for_value.price }}"
                         data-swatch-value="{{ value | escape }}"
                         title="{{ value | escape }}"
-                        style="--mini-swatch-bg: {{ mini_swatch_bg }};"
-                      ></span>
+                        style="--mini-swatch-bg: {{ mini_swatch_bg }};{% if mini_swatch_image != blank %} --mini-swatch-image: url({{ mini_swatch_image }});{% endif %}"
+                      ><span class="product-insert__mini-swatch-tooltip">{{ value | escape }}</span></span>
                     {%- endfor -%}
                   </div>
                 {%- endif -%}
