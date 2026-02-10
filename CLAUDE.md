@@ -29,6 +29,8 @@ shopify theme share -s keybarus.myshopify.com   # Generate preview link
 
 **No build step required** - CSS/JS are served as-is from `/assets/`.
 
+**Slash command:** `/build <description>` runs a structured multi-feature workflow (analysis → planning → execution → verification).
+
 ## BODE Upstream Framework
 
 This repo is a downstream fork of BODE (migrated from WordPress). **Framework changes (sections, snippets, core JS/CSS) should be made in BODE-shopify first**, then pulled here.
@@ -55,7 +57,7 @@ When making framework-level fixes directly in this repo (e.g. bug fixes that sho
 // TODO(BODE): backport to BODE-shopify
 ```
 
-**Protected files (merge=ours):** `config/settings_data.json`, `.shopify/*`, `templates/index.json`, `sections/*-group.json`, `.docs/brand/*`
+**Protected files (merge=ours):** `config/settings_data.json`, `.shopify/*`, `templates/index.json`, `sections/header-group.json`, `sections/footer-group.json`, `sections/overlay-group.json`, `.docs/brand/*`
 
 ## Theme Architecture
 
@@ -66,6 +68,7 @@ layout/theme.liquid
 ├── sections 'header-group'     → sections/header-group.json
 ├── sections 'overlay-group'    → sections/overlay-group.json
 ├── content_for_layout          → templates/*.json → sections/*.liquid
+│                                  sections can contain blocks/ components
 └── sections 'footer-group'     → sections/footer-group.json
 ```
 
@@ -95,7 +98,7 @@ See `.docs/COLOR-SCHEMES.md` for implementation details.
 
 ### Asset Loading
 
-**Always loaded:** `fonts.css` → `css-variables.liquid` → `theme.css` → `vendor.js` → `theme.js`
+**Always loaded:** `fonts.css` → `css-variables.liquid` → `theme.css` (16K lines) → `vendor.js` → `theme.js` (8K lines, 70+ web components)
 
 **Template-specific:** Assets like `cart.js/css`, `collection.js/css`, `product-bundle.js/css` are loaded in their respective sections.
 
@@ -181,7 +184,17 @@ Add-on picker for optional products (pocket clips) when purchasing KeyBars. **Fu
 
 **Files:** `snippets/product-addon-picker.liquid`, `assets/product-addon.js`, `assets/product-addon.css`
 
-**Required Metafields:** `custom.enable_clip_add_on` (boolean), `custom.clip_addon_products` (product list)
+**Product Metafields** (defined in `.shopify/metafields.json`):
+
+| Metafield | Type | Purpose |
+|-----------|------|---------|
+| `custom.enable_clip_add_on` | boolean | Enable add-on picker on product |
+| `custom.clip_addon_optional` | boolean | Start deselected (user must opt in) |
+| `custom.clip_addon_products` | product list | Which clips to offer |
+| `custom.clip_addon_title` | text | Optional custom heading |
+| `custom.clip_addon_description` | multiline text | Optional custom description |
+| `custom.description_short` | multiline text | Short description for product cards |
+| `custom.card_description` | text | One-line card description override |
 
 ## Code Patterns
 
