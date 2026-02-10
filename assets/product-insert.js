@@ -200,7 +200,8 @@ if (!customElements.get('product-insert-picker')) {
       // Update inline color name
       const colorNameEl = card.querySelector('[data-insert-color-name]');
       if (colorNameEl) {
-        colorNameEl.textContent = '· ' + swatch.dataset.swatchValue;
+        const colorLabel = swatch.dataset.swatchValue.toLowerCase() === 'none' ? 'Plain' : swatch.dataset.swatchValue;
+        colorNameEl.textContent = '· ' + colorLabel;
       }
 
       this.updateState();

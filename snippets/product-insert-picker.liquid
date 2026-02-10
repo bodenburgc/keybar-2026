@@ -131,6 +131,7 @@
             aria-label="{{ insert_product.title | escape }}"
           />
           <span class="product-insert__checkbox" aria-hidden="true"></span>
+          <span class="product-insert__card-status" aria-hidden="true">Added</span>
 
           {%- # Image -%}
           <div class="product-insert__card-media">
@@ -149,8 +150,15 @@
             <span class="product-insert__card-meta">
               <span class="product-insert__card-price">+{{ first_variant.price | money_without_trailing_zeros }}</span>
               {%- if has_color_option -%}
+                {%- liquid
+                  assign display_color_name = color_selected_value | escape
+                  assign color_check = color_selected_value | downcase
+                  if color_check == 'none'
+                    assign display_color_name = 'Plain'
+                  endif
+                -%}
                 <span class="product-insert__card-color-name" data-insert-color-name data-for-product="{{ insert_product.id }}">
-                  · {{ color_selected_value | escape }}
+                  · {{ display_color_name }}
                 </span>
               {%- endif -%}
             </span>
@@ -174,10 +182,10 @@
                   <div class="product-insert__mini-swatches" data-insert-mini-swatches data-for-product="{{ insert_product.id }}">
                     {%- for value in option.values -%}
                       {%- liquid
-                        # Skip "None" variant — not a real color
                         assign value_lower_check = value | downcase
+                        assign is_plain_variant = false
                         if value_lower_check == 'none'
-                          continue
+                          assign is_plain_variant = true
                         endif
 
                         assign variant_for_value = nil
@@ -239,15 +247,21 @@
                             assign mini_swatch_bg = '#ea580c'
                         endcase
                       -%}
+                      {%- liquid
+                        assign swatch_label = value | escape
+                        if is_plain_variant
+                          assign swatch_label = 'Plain'
+                        endif
+                      -%}
                       <span
-                        class="product-insert__mini-swatch{% if option.selected_value == value %} is-active{% endif %}"
+                        class="product-insert__mini-swatch{% if option.selected_value == value %} is-active{% endif %}{% if is_plain_variant %} is-plain{% endif %}"
                         data-insert-mini-swatch
                         data-variant-id="{{ variant_for_value.id }}"
                         data-variant-price="{{ variant_for_value.price }}"
                         data-swatch-value="{{ value | escape }}"
-                        title="{{ value | escape }}"
+                        title="{{ swatch_label }}"
                         style="--mini-swatch-bg: {{ mini_swatch_bg }};{% if mini_swatch_image != blank %} --mini-swatch-image: url({{ mini_swatch_image }});{% endif %}"
-                      ><span class="product-insert__mini-swatch-tooltip">{{ value | escape }}</span></span>
+                      ><span class="product-insert__mini-swatch-tooltip">{{ swatch_label }}</span></span>
                     {%- endfor -%}
                   </div>
                 {%- endif -%}

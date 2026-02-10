@@ -28,7 +28,7 @@
   border: 1px solid var(--insert-border-color);
   border-radius: 8px;
   cursor: pointer;
-  transition: border-color var(--animation-short, 0.2s);
+  transition: border-color var(--animation-short, 0.2s), background var(--animation-short, 0.2s);
 }
 
 .product-insert__row:hover {
@@ -42,6 +42,16 @@
 
 .product-insert.has-selection .product-insert__row {
   border-color: var(--insert-success-color);
+  background: rgba(var(--insert-accent-rgb), 0.04);
+}
+
+.product-insert.has-selection .product-insert__row-value {
+  color: rgb(var(--color-foreground));
+  font-weight: 500;
+}
+
+.product-insert.has-selection .product-insert__row-price {
+  font-weight: 700;
 }
 
 .product-insert__row-label {
@@ -125,6 +135,12 @@
   }
 }
 
+@keyframes insertCheckBounce {
+  0% { transform: rotate(45deg) scale(0); }
+  60% { transform: rotate(45deg) scale(1.2); }
+  100% { transform: rotate(45deg) scale(1); }
+}
+
 /* ============================================
    Insert Product Cards - Checkbox Cards
    ============================================ */
@@ -145,7 +161,7 @@
   border: 1px solid var(--insert-border-color);
   border-radius: 8px;
   cursor: pointer;
-  transition: border-color var(--animation-short, 0.2s);
+  transition: border-color var(--animation-short, 0.2s), background var(--animation-short, 0.2s);
 }
 
 .product-insert__card:hover {
@@ -154,6 +170,32 @@
 
 .product-insert__card.is-selected {
   border-color: var(--insert-success-color);
+  background: rgba(var(--insert-accent-rgb), 0.04);
+}
+
+/* "ADDED" badge */
+.product-insert__card-status {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  padding: 2px 8px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #16323e;
+  background: var(--insert-success-color);
+  border-radius: 10px;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: opacity var(--animation-short, 0.2s), transform var(--animation-short, 0.2s);
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.product-insert__card.is-selected .product-insert__card-status {
+  opacity: 1;
+  transform: scale(1);
 }
 
 /* Focus state */
@@ -165,10 +207,11 @@
 /* Checkbox */
 .product-insert__checkbox {
   position: relative;
-  width: 18px;
-  height: 18px;
-  border: 2px solid rgba(var(--color-foreground), 0.25);
-  border-radius: 4px;
+  width: 22px;
+  height: 22px;
+  border: 2px solid rgba(var(--color-foreground), 0.35);
+  border-radius: 5px;
+  background: rgba(var(--color-foreground), 0.04);
   flex-shrink: 0;
   transition: border-color var(--animation-short, 0.2s), background var(--animation-short, 0.2s);
 }
@@ -181,18 +224,21 @@
 .product-insert__checkbox::after {
   content: '';
   position: absolute;
-  top: 2px;
-  left: 4px;
-  width: 5px;
-  height: 8px;
+  top: 3px;
+  left: 6px;
+  width: 6px;
+  height: 10px;
   border: solid #16323e;
   border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
+  transform: rotate(45deg) scale(0);
   opacity: 0;
+  transition: opacity var(--animation-short, 0.2s), transform var(--animation-short, 0.2s);
 }
 
 .product-insert__card.is-selected .product-insert__checkbox::after {
   opacity: 1;
+  transform: rotate(45deg) scale(1);
+  animation: insertCheckBounce 0.3s ease;
 }
 
 /* Card media */
@@ -350,6 +396,12 @@
   border-color: var(--insert-success-color);
   outline: 2px solid var(--insert-success-color);
   outline-offset: 2px;
+}
+
+/* "Plain" (no-color) swatch */
+.product-insert__mini-swatch.is-plain {
+  background: #b0b0b0 !important;
+  background-image: none !important;
 }
 
 /* Tooltip */
@@ -554,6 +606,8 @@
   .product-insert__row-action svg,
   .product-insert__card,
   .product-insert__checkbox,
+  .product-insert__checkbox::after,
+  .product-insert__card-status,
   .product-insert__change-link,
   .product-insert__mini-swatch,
   .product-insert__mini-swatch-tooltip,
@@ -564,6 +618,10 @@
 
   .product-insert__details,
   .product-insert__popover {
+    animation-duration: 0s !important;
+  }
+
+  .product-insert__card.is-selected .product-insert__checkbox::after {
     animation-duration: 0s !important;
   }
 }
