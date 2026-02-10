@@ -34,6 +34,19 @@ if (!customElements.get('product-insert-picker')) {
         });
       });
 
+      // Build variant → image map for thumbnail swaps
+      this.variantImages = new Map();
+      this.querySelectorAll('[data-insert-variants-json]').forEach(script => {
+        try {
+          const variants = JSON.parse(script.textContent);
+          for (const v of variants) {
+            if (v.featured_image?.src) {
+              this.variantImages.set(String(v.id), v.featured_image.src);
+            }
+          }
+        } catch (e) { /* ignore malformed JSON */ }
+      });
+
       this.abortController = new AbortController();
       this.bindEvents();
       this.setupFormIntegration();
@@ -106,6 +119,7 @@ if (!customElements.get('product-insert-picker')) {
     }
 
     disconnectedCallback() {
+      this.cancelAutoCollapse();
       this.abortController.abort();
     }
 
@@ -158,12 +172,34 @@ if (!customElements.get('product-insert-picker')) {
       if (checkbox.checked) {
         card.classList.add('is-selected');
         if (hiddenInput) hiddenInput.checked = true;
+        this.scheduleAutoCollapse();
       } else {
         card.classList.remove('is-selected');
         if (hiddenInput) hiddenInput.checked = false;
+        this.cancelAutoCollapse();
       }
 
       this.updateState();
+    }
+
+    /**
+     * Auto-collapse panel after selection so user sees the summary row
+     * as confirmation. Cancelled if user deselects or interacts again.
+     */
+    scheduleAutoCollapse() {
+      this.cancelAutoCollapse();
+      this._collapseTimer = setTimeout(() => {
+        if (this.getSelectedInserts().length > 0) {
+          this.collapseDetails();
+        }
+      }, 1500);
+    }
+
+    cancelAutoCollapse() {
+      if (this._collapseTimer) {
+        clearTimeout(this._collapseTimer);
+        this._collapseTimer = null;
+      }
     }
 
     /**
@@ -181,6 +217,9 @@ if (!customElements.get('product-insert-picker')) {
           checkbox.checked = true;
           this.onInsertToggle(card, checkbox);
         }
+      } else {
+        // Already selected — reset auto-collapse while user picks colors
+        this.scheduleAutoCollapse();
       }
 
       // Update active swatch visual
@@ -211,6 +250,14 @@ if (!customElements.get('product-insert-picker')) {
       if (colorNameEl) {
         const colorLabel = swatch.dataset.swatchValue.toLowerCase() === 'none' ? 'Standard' : swatch.dataset.swatchValue;
         colorNameEl.textContent = '· ' + colorLabel;
+      }
+
+      // Swap card thumbnail to variant image
+      const imgEl = card.querySelector('.product-insert__card-img');
+      const newSrc = this.variantImages.get(variantId);
+      if (imgEl && newSrc) {
+        imgEl.src = newSrc.replace(/width=\d+/, 'width=96');
+        imgEl.srcset = newSrc.replace(/width=\d+/, 'width=48') + ' 48w, ' + newSrc.replace(/width=\d+/, 'width=96') + ' 96w';
       }
 
       this.updateState();

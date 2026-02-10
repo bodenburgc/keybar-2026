@@ -172,10 +172,10 @@
   display: flex;
   align-items: center;
   gap: var(--sp-3);
-  padding: var(--sp-2d5) var(--sp-3);
+  padding: var(--sp-3);
   background: rgb(var(--color-background));
   border: 1px solid var(--insert-border-color);
-  border-radius: 8px;
+  border-radius: 10px;
   cursor: pointer;
   transition: border-color var(--animation-short, 0.2s), background var(--animation-short, 0.2s);
 }
@@ -213,6 +213,29 @@
 .product-insert__card.is-selected .product-insert__card-status {
   opacity: 1;
   transform: scale(1);
+}
+
+/* "Popular" badge — visible by default, hidden when selected (ADDED takes over) */
+.product-insert__card-popular {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  padding: 2px 8px;
+  font-size: 0.625rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: rgb(var(--color-background));
+  background: rgb(var(--color-foreground));
+  border-radius: 10px;
+  z-index: 1;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition: opacity var(--animation-short, 0.2s);
+}
+
+.product-insert__card.is-selected .product-insert__card-popular {
+  opacity: 0;
+  pointer-events: none;
 }
 
 /* Focus state */
@@ -260,14 +283,14 @@
 
 /* Card media */
 .product-insert__card-media {
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
   flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 
 .product-insert__card-img {
@@ -300,8 +323,8 @@
   grid-column: 1;
   grid-row: 1;
   display: block;
-  font-size: 0.8125rem;
-  font-weight: 500;
+  font-size: 0.875rem;
+  font-weight: 600;
   color: rgb(var(--color-foreground));
   line-height: 1.3;
 }
@@ -391,8 +414,8 @@
 
 .product-insert__mini-swatch {
   position: relative;
-  width: 32px;
-  height: 32px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
   background: var(--mini-swatch-bg);
   background-image: var(--mini-swatch-image, none);
@@ -400,8 +423,15 @@
   background-position: center;
   border: 2px solid rgba(var(--color-foreground), 0.15);
   cursor: pointer;
-  transition: border-color var(--animation-short, 0.2s), transform var(--animation-short, 0.2s);
+  opacity: 0.5;
+  transition: border-color var(--animation-short, 0.2s), transform var(--animation-short, 0.2s), width var(--animation-short, 0.2s), height var(--animation-short, 0.2s), opacity var(--animation-short, 0.2s);
   flex-shrink: 0;
+}
+
+.product-insert__card.is-selected .product-insert__mini-swatch {
+  width: 32px;
+  height: 32px;
+  opacity: 1;
 }
 
 .product-insert__mini-swatch:hover {
@@ -625,6 +655,7 @@
   .product-insert__checkbox,
   .product-insert__checkbox::after,
   .product-insert__card-status,
+  .product-insert__card-popular,
   .product-insert__change-link,
   .product-insert__mini-swatch,
   .product-insert__mini-swatch-tooltip,
