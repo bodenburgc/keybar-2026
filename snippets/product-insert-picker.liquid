@@ -21,29 +21,22 @@
 
 {%- liquid
   # Check if insert addon is enabled for this product
-  assign insert_enabled = product.metafields.custom.enable_insert_addon.value
-
+  assign insert_enabled = product.metafields.custom.enable_insert.value
   unless insert_enabled
     break
   endunless
 
-  # Get insert products — per-product metafield overrides block default
-  assign insert_products = product.metafields.custom.insert_addon_products.value
-  if insert_products == blank or insert_products.size == 0
-    assign insert_products = block.settings.insert_products
-  endif
-
+  # Get insert products from product metafield
+  assign insert_products = product.metafields.custom.insert_add_on_product.value
   if insert_products == blank or insert_products.size == 0
     break
   endif
 
-  # Customizable text
-  assign insert_title = block.settings.insert_title
+  # Customizable text from metafields
+  assign insert_title = product.metafields.custom.insert_addon_title.value
   if insert_title == blank
     assign insert_title = 'products.insert.section_title' | t | default: 'Tool Inserts'
   endif
-
-  assign popular_product = block.settings.insert_popular_product
 -%}
 
 {{ 'product-insert.css' | asset_url | stylesheet_tag }}
@@ -134,9 +127,6 @@
           />
           <span class="product-insert__checkbox" aria-hidden="true"></span>
           <span class="product-insert__card-status" aria-hidden="true">Added</span>
-          {%- if popular_product and popular_product.id == insert_product.id -%}
-            <span class="product-insert__card-popular" aria-hidden="true">Popular</span>
-          {%- endif -%}
 
           {%- # Image -%}
           <div class="product-insert__card-media">

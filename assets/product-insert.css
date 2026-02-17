@@ -439,7 +439,7 @@
   transform: scale(1.1);
 }
 
-.product-insert__mini-swatch.is-active {
+.product-insert__card.is-selected .product-insert__mini-swatch.is-active {
   border-color: var(--insert-success-color);
   outline: 2px solid var(--insert-success-color);
   outline-offset: 2px;
@@ -629,6 +629,19 @@
 }
 
 /* Done button removed — accordion auto-collapses */
+
+/* ============================================
+   Optional Mode — Inactive State
+   ============================================ */
+
+.product-insert.product-insert--inactive .product-insert__row {
+  border-style: dashed;
+  border-color: rgba(var(--color-foreground), 0.2);
+}
+
+.product-insert.product-insert--inactive .product-insert__row-value {
+  color: rgba(var(--color-foreground), 0.4);
+}
 
 /* ============================================
    Print

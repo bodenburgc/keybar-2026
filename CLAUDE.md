@@ -193,6 +193,10 @@ Add-on picker for optional products (pocket clips) when purchasing KeyBars. **Fu
 | `custom.clip_addon_products` | product list | Which clips to offer |
 | `custom.clip_addon_title` | text | Optional custom heading |
 | `custom.clip_addon_description` | multiline text | Optional custom description |
+| `custom.enable_insert` | boolean | Enable insert picker on product |
+| `custom.insert_add_on_product` | product list | Which inserts to offer |
+| `custom.insert_addon_title` | text | Optional custom heading (default: Tool Inserts) |
+| `custom.insert_addon_description` | multiline text | Optional custom description |
 | `custom.description_short` | multiline text | Short description for product cards |
 | `custom.card_description` | text | One-line card description override |
 

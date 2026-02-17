@@ -25,6 +25,10 @@ if (!customElements.get('product-insert-picker')) {
       this.currencySymbol = this.dataset.currencySymbol || '$';
       this.formId = this.dataset.formId;
 
+      // Optional mode state
+      this.isOptional = this.dataset.insertOptional === 'true';
+      this.isActive = !this.isOptional;
+
       // Store product data for summary
       this.productData = new Map();
       this.cards.forEach(card => {
@@ -119,7 +123,6 @@ if (!customElements.get('product-insert-picker')) {
     }
 
     disconnectedCallback() {
-      this.cancelAutoCollapse();
       this.abortController.abort();
     }
 
@@ -135,12 +138,56 @@ if (!customElements.get('product-insert-picker')) {
      * Toggle expanded/collapsed state
      */
     toggleDetails() {
+      // Optional mode: first click activates the picker
+      if (this.isOptional && !this.isActive) {
+        this.activateInserts();
+        this.expandDetails();
+        return;
+      }
+
       const isExpanded = this.mainCard?.getAttribute('aria-expanded') === 'true';
       if (isExpanded) {
         this.collapseDetails();
       } else {
         this.expandDetails();
       }
+    }
+
+    /**
+     * Activate the optional insert picker (user opts in)
+     */
+    activateInserts() {
+      this.isActive = true;
+      this.classList.remove('product-insert--inactive');
+      if (this.customizeText) this.customizeText.textContent = 'Add';
+    }
+
+    /**
+     * Deactivate the optional insert picker (user opts out)
+     */
+    deactivateInserts() {
+      this.isActive = false;
+      this.classList.add('product-insert--inactive');
+      this.classList.remove('is-expanded', 'has-selection');
+
+      // Uncheck all inserts
+      this.cards.forEach(card => {
+        card.classList.remove('is-selected');
+        const checkbox = card.querySelector('[data-insert-checkbox]');
+        if (checkbox) checkbox.checked = false;
+      });
+      this.hiddenInputs.forEach(input => { input.checked = false; });
+
+      this.detailsPanel?.setAttribute('hidden', '');
+      this.mainCard?.setAttribute('aria-expanded', 'false');
+      if (this.customizeText) this.customizeText.textContent = 'Add';
+      if (this.summaryEl) this.summaryEl.textContent = this.dataset.noInsertsText || 'None';
+      if (this.priceBadge) this.priceBadge.textContent = '';
+
+      this.dispatchEvent(new CustomEvent('insert:changed', {
+        bubbles: true,
+        detail: { selected: [], totalPrice: 0 }
+      }));
     }
 
     /**
@@ -172,34 +219,12 @@ if (!customElements.get('product-insert-picker')) {
       if (checkbox.checked) {
         card.classList.add('is-selected');
         if (hiddenInput) hiddenInput.checked = true;
-        this.scheduleAutoCollapse();
       } else {
         card.classList.remove('is-selected');
         if (hiddenInput) hiddenInput.checked = false;
-        this.cancelAutoCollapse();
       }
 
       this.updateState();
-    }
-
-    /**
-     * Auto-collapse panel after selection so user sees the summary row
-     * as confirmation. Cancelled if user deselects or interacts again.
-     */
-    scheduleAutoCollapse() {
-      this.cancelAutoCollapse();
-      this._collapseTimer = setTimeout(() => {
-        if (this.getSelectedInserts().length > 0) {
-          this.collapseDetails();
-        }
-      }, 1500);
-    }
-
-    cancelAutoCollapse() {
-      if (this._collapseTimer) {
-        clearTimeout(this._collapseTimer);
-        this._collapseTimer = null;
-      }
     }
 
     /**
@@ -217,9 +242,6 @@ if (!customElements.get('product-insert-picker')) {
           checkbox.checked = true;
           this.onInsertToggle(card, checkbox);
         }
-      } else {
-        // Already selected — reset auto-collapse while user picks colors
-        this.scheduleAutoCollapse();
       }
 
       // Update active swatch visual
