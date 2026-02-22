@@ -79,15 +79,6 @@
           "type": "insert_picker",
           "settings": {}
         },
-        "inventory": {
-          "type": "inventory",
-          "settings": {
-            "inventory_threshold": 15,
-            "show_inventory_transfer": true,
-            "show_inventory_quantity": "none",
-            "color_scheme": "accent-1"
-          }
-        },
         "text_TM4nxD": {
           "type": "text",
           "disabled": true,
@@ -152,7 +143,6 @@
         "variant_picker",
         "addon_picker_D8xdAc",
         "insert_picker_Kx9mTv",
-        "inventory",
         "text_TM4nxD",
         "buy_buttons",
         "pickup_availability",
