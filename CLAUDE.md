@@ -15,6 +15,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Task List:** `TODO.md` | **Feature Specs:** `.docs/` | **Brand Guidelines:** `.docs/brand/`
 
+**Key Docs:** `.docs/FEATURE-CLIP-ADDON.md` (add-on system), `.docs/COLOR-SCHEMES.md` (color scheme impl), `.docs/LAUNCH-CHECKLIST.md` (pre-launch), `.docs/SITEMAP-MIGRATION.md` (WooCommerce → Shopify URLs), `.docs/COMPONENT-AUDIT.md` (section/block inventory)
+
 ## Shopify CLI Commands
 
 ```bash
@@ -29,7 +31,10 @@ shopify theme share -s keybarus.myshopify.com   # Generate preview link
 
 **No build step required** - CSS/JS are served as-is from `/assets/`.
 
-**Slash command:** `/build <description>` runs a structured multi-feature workflow (analysis → planning → execution → verification).
+**Slash Commands:**
+- `/build <description>` - Structured multi-feature workflow (analysis → planning → execution → verification)
+- `/bode-audit` - Pre-build expert panel audit... stress-tests the plan before implementation
+- `/bode-verify` - Post-build expert panel verification... checks execution against the plan
 
 ## BODE Upstream Framework
 
@@ -61,6 +66,10 @@ When making framework-level fixes directly in this repo (e.g. bug fixes that sho
 
 ## Theme Architecture
 
+### Scale
+
+102 sections, 22 blocks, 101 snippets, 21 templates, 55+ asset files.
+
 ### Component Hierarchy
 
 ```
@@ -68,9 +77,11 @@ layout/theme.liquid
 ├── sections 'header-group'     → sections/header-group.json
 ├── sections 'overlay-group'    → sections/overlay-group.json
 ├── content_for_layout          → templates/*.json → sections/*.liquid
-│                                  sections can contain blocks/ components
+│                                  sections use blocks/ for reusable components
 └── sections 'footer-group'     → sections/footer-group.json
 ```
+
+**Blocks** (`blocks/`) are reusable components that can be added to any section via the theme editor. Sections reference blocks in their `{% schema %}` definition.
 
 ### Settings → CSS → Components Flow
 
@@ -184,7 +195,7 @@ Add-on picker for optional products (pocket clips) when purchasing KeyBars. **Fu
 
 **Files:** `snippets/product-addon-picker.liquid`, `assets/product-addon.js`, `assets/product-addon.css`
 
-**Product Metafields** (defined in `.shopify/metafields.json`):
+**Product Metafields** (defined in Shopify admin, referenced by Liquid templates):
 
 | Metafield | Type | Purpose |
 |-----------|------|---------|
